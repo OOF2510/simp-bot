@@ -5,14 +5,23 @@ A simp bot for discord
 
 # Commands
 s!ping - Pings the bot
+
 s!simp <user mention> - Simps for the mentioned user
+
 s!flirt <user mention> - Flirts with the mentioned user
+
 s!frick <user mention> - I think we all know what that does...
+
 s!help - Sends a help embed
+
 s!pp [optional user mention] - Pp size
+
 s!prefix <new prefix> - Sets your guild's prefix to specified prefix
+
 s!suggest - Sends a suggestion to me
+
 s!bugreport - Sends a bug report to me
+
 s!invite - sends the bot's invite link
 
 
