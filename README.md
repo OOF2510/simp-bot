@@ -24,6 +24,13 @@ s!bugreport - Sends a bug report to me
 
 s!invite - sends the bot's invite link
 
+# Self-hosting the bot
+
+* Install node & npm
+* Clone the git repository
+* `cd simp-bot-rewritten`
+* `npm install`
+* `npm start`
 
 # The original simp bot
 I reworte [Simp bot 1000](https://discordbotlist.com/bots/simp-bot-10000) because it was in too many servers and not verified, I tried hosting it myself, but it
