@@ -117,7 +117,7 @@
     "start": "nodemon --inspect index.js"
   },
   "author": "Gk01234",
-  "license": "ISC",
+  "license": "WTFPL",
   "keywords": [],
   "description": ""
 }
