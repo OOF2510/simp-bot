@@ -26,11 +26,17 @@ s!invite - sends the bot's invite link
 
 # Self-hosting the bot
 
-* Install node & npm
-* Clone the git repository
-* `cd simp-bot-rewritten`
-* `npm install`
-* `npm start`
+* Install git, node & npm
+ ```bash
+ git clone https://github.com/OOF2510/simp-bot-rewritten.git
+ cd simp-bot-rewritten
+ npm install
+ mv config.json.example config.json
+ ```
+ * edit config.json to have your bot token
+ ```bash
+ npm start
+ ```
 
 # The original simp bot
 I reworte [Simp bot 1000](https://discordbotlist.com/bots/simp-bot-10000) because it was in too many servers and not verified, I tried hosting it myself, but it
