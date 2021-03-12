@@ -44,7 +44,7 @@ client.on('message', async msg => {
       const args = msg.content.slice(prefix.length).trim().split(' ');
 
     if (msg.content === `${prefix}ping`) {
-      msg.reply(`Pong UwU, (${client.ws.ping}ms)`);
+      msg.reply(`Pong UwU, (${client.ws.ping}ms)`)
     } else if (msg.content.startsWith(`${prefix}simp`)) {
         let response;
         let sender = msg.author;
