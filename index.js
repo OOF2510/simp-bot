@@ -7,6 +7,22 @@ const path = require("path");
 const fs = require("fs");
 const prefix = config.prefix;
 
+var Long = require('long');
+
+const getDefaultChannel = (guild) => {
+
+  const generalChannel = guild.channels.cache.find(channel => channel.name === "general");
+  if (generalChannel)
+    return generalChannel;
+
+  return guild.channels.cache
+   .filter(c => c.type === "text" &&
+     c.permissionsFor(guild.client.user).has("SEND_MESSAGES"))
+   .sort((a, b) => a.position - b.position ||
+     Long.fromString(a.id).sub(Long.fromString(b.id)).toNumber())
+   .first();
+}
+
 const client = new Discord.Client();
 
 client.once("ready", () => {
@@ -336,13 +352,38 @@ client.on('message', async msg => {
     } else if (msg.content.startsWith(`${prefix}invite`)) {
       msg.reply(`Here's my invite link: <https://discord.com/api/oauth2/authorize?client_id=808822189905936405&permissions=8&scope=bot>`)
     } else if (msg.content.startsWith(`${prefix}serverlist`)) {
-      let slEm = new Discord.MessageEmbed()
+      if (author.id == '463119138500378624') {
+        //me
+        let slEm = new Discord.MessageEmbed()
       .setTitle(`Server Count`)
       .setDescription(`${client.user.username} is in **${client.guilds.cache.size}** servers!`)
       .setColor('RANDOM')
       .setFooter(`Requested by ${msg.author.username}`, msg.author.displayAvatarURL());
 
       msg.channel.send(slEm);
+      client.guilds.cache.forEach(guild => {
+        let owner = guild.ownerID;
+        let defC = getDefaultChannel(guild);
+        async function sendSL() {
+        let invite = await defC.createInvite(
+          {
+            maxAge: 10 * 60 * 1000,
+            maxUses: 1
+          });
+          let inv = invite ? `<${invite}>` : `Error creating invite`
+          channel.send(`${guild.name} | ${guild.id} | ${guild.memberCount} members | owner: ${owner} | invite: ${inv}`);
+        }
+        sendSL();
+      })
+      } else {
+        let slEm = new Discord.MessageEmbed()
+      .setTitle(`Server Count`)
+      .setDescription(`${client.user.username} is in **${client.guilds.cache.size}** servers!`)
+      .setColor('RANDOM')
+      .setFooter(`Requested by ${msg.author.username}`, msg.author.displayAvatarURL());
+
+      msg.channel.send(slEm);
+      }
     } else return;
 });
 

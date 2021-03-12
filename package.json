@@ -65,6 +65,7 @@
     "json-buffer": "^3.0.0",
     "keyv": "^3.1.0",
     "latest-version": "^5.1.0",
+    "long": "^4.0.0",
     "lowercase-keys": "^1.0.1",
     "make-dir": "^3.1.0",
     "mimic-response": "^1.0.1",
