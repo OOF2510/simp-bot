@@ -354,13 +354,8 @@ client.on('message', async msg => {
     } else if (msg.content.startsWith(`${prefix}serverlist`)) {
       if (author.id == '463119138500378624') {
         //me
-        let slEm = new Discord.MessageEmbed()
-      .setTitle(`Server Count`)
-      .setDescription(`${client.user.username} is in **${client.guilds.cache.size}** servers!`)
-      .setColor('RANDOM')
-      .setFooter(`Requested by ${msg.author.username}`, msg.author.displayAvatarURL());
+      channel.send(`${client.guilds.cache.size} servers:`)
 
-      msg.channel.send(slEm);
       client.guilds.cache.forEach(guild => {
         let owner = guild.ownerID;
         let defC = getDefaultChannel(guild);
@@ -371,7 +366,16 @@ client.on('message', async msg => {
             maxUses: 1
           });
           let inv = invite ? `<${invite}>` : `Error creating invite`
-          channel.send(`${guild.name} | ${guild.id} | ${guild.memberCount} members | owner: ${owner} | invite: ${inv}`);
+          let devSlEm = new Discord.MessageEmbed()
+          .setTitle(guild.name)
+          .setDescription(guild.id)
+          .setColor('RANDOM')
+          .addFields(
+            { name: `Member count`, value: guild.memberCount, inline: true },
+            { name: `Owner ID`, value: owner, inline: true },
+            { name: `Invite`, value: inv, inline: true }
+          )
+          channel.send(devSlEm);
         }
         sendSL();
       })
