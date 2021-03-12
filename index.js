@@ -28,6 +28,10 @@ client.once("disconnect", () => {
 client.on('message', async msg => {
       let channel = msg.channel;
       let author = msg.author;
+      let server = msg.guild;
+      let botMem = server.member(client.user);
+      let bot = client.user;
+      let botNick = botMem ? botMem.displayName : client.user.username;
 
       if (channel.type === "dm") return;
       if (author.bot) return;
@@ -133,8 +137,8 @@ client.on('message', async msg => {
     } else if (msg.content.startsWith(`${prefix}help`)) {
         const helpEmbed = new Discord.MessageEmbed()
   .setColor('#0099CC')
-  .setTitle('Simp Bot Rewritten Help')
-  .setAuthor("Simp Bot Rewritten", "https://cdn.discordapp.com/avatars/808822189905936405/d9af9c0316733d2a186ef2d81c3a5154.png?size=128")
+  .setTitle(`${botNick} Help`)
+  .setAuthor(botNick, client.user.avatarURL())
   .addFields(
     { name: 'Ping', value: `${prefix}ping - Pings the bot` },
     { name: 'Simp', value: `${prefix}simp <user mention> - Sends a random simp image/message/gif` },
