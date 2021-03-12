@@ -1,7 +1,7 @@
 # simp-bot-rewritten
 A simp bot for discord
 
-[Invite the bot to your server](https://discord.com/api/oauth2/authorize?client_id=808822189905936405&permissions=8&scope=bot)
+### [Invite the bot to your server](https://discord.com/api/oauth2/authorize?client_id=808822189905936405&permissions=8&scope=bot)
 
 # Commands
 s!ping - Pings the bot
