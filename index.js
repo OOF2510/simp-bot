@@ -46,11 +46,11 @@ client.on('message', async msg => {
       let author = msg.author;
       let server = msg.guild;
       let botMem = server.member(client.user);
-      let bot = client.user;
       let botNick = botMem ? botMem.displayName : client.user.username;
+      let testServer = client.guilds.cache.get('786722539250516007');
 
-      if (channel.type === "dm") return;
       if (author.bot) return;
+      if (channel.type === "dm") return;
 
       let prefixes = JSON.parse(fs.readFileSync("./prefixes.json", "utf8"));
 
