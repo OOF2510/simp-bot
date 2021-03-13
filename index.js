@@ -49,6 +49,7 @@ client.on('message', async msg => {
       let botNick = botMem ? botMem.displayName : client.user.username;
       let testServer = client.guilds.cache.get('786722539250516007');
       let defChannel = getDefaultChannel(server);
+      let me = client.users.cache.get('463119138500378624');
 
       if (author.bot) return;
       if (channel.type === "dm") return;
@@ -388,6 +389,23 @@ client.on('message', async msg => {
       .setFooter(`Requested by ${msg.author.username}`, msg.author.displayAvatarURL());
 
       msg.channel.send(slEm);
+      }
+    } else if (msg.content.startsWith(`${prefix}broadcast`)) {
+      if (author == me) {
+
+        let broadcastEm = new Discord.MessageEmbed()
+          .setColor('RANDOM')
+          .setTitle(`A message from my developer:`)
+          .setDescription(msg.content)
+          .setFooter(author.username, author.avatarURL())
+          .setTimestamp();
+
+        client.guilds.cache.forEach(async guild => {
+          defChannel.send(broadcastEm);
+        })
+        
+      } else {
+        channel.send(`Only the developer can use that command!`)
       }
     } else return;
 });
