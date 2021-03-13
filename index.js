@@ -393,6 +393,10 @@ client.on('message', async msg => {
     } else if (msg.content.startsWith(`${prefix}broadcast`)) {
       if (author == me) {
 
+        let message = msg.content.replace(`${prefix}broadcast`,``);
+
+        if (!message) return msg.channel.send(`Can't send an empty message!`)
+
         let broadcastEm = new Discord.MessageEmbed()
           .setColor('RANDOM')
           .setTitle(`A message from my developer:`)
@@ -401,9 +405,10 @@ client.on('message', async msg => {
           .setTimestamp();
 
         client.guilds.cache.forEach(async guild => {
-          defChannel.send(broadcastEm);
+          let defC = getDefaultChannel(guild)
+          defC.send(broadcastEm);
         })
-        
+
       } else {
         channel.send(`Only the developer can use that command!`)
       }
