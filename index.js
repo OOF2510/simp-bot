@@ -12,6 +12,9 @@ const getDefaultChannel = (guild) => {
   if (generalChannel)
     return generalChannel;
 
+    if(guild.channels.has(guild.id))
+    return guild.channels.get(guild.id)
+
   return guild.channels.cache
    .filter(c => c.type === "text" &&
      c.permissionsFor(guild.client.user).has("SEND_MESSAGES"))
@@ -45,6 +48,7 @@ client.on('message', async msg => {
       let botMem = server.member(client.user);
       let botNick = botMem ? botMem.displayName : client.user.username;
       let testServer = client.guilds.cache.get('786722539250516007');
+      let defChannel = getDefaultChannel(server);
 
       if (author.bot) return;
       if (channel.type === "dm") return;
