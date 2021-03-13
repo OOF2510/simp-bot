@@ -12,8 +12,8 @@ const getDefaultChannel = (guild) => {
   if (generalChannel)
     return generalChannel;
 
-    if(guild.channels.has(guild.id))
-    return guild.channels.get(guild.id)
+    if(guild.channels.cache.has(guild.id))
+    return guild.channels.cache.get(guild.id)
 
   return guild.channels.cache
    .filter(c => c.type === "text" &&
