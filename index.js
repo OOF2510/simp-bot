@@ -400,7 +400,7 @@ client.on('message', async msg => {
         let broadcastEm = new Discord.MessageEmbed()
           .setColor('RANDOM')
           .setTitle(`A message from my developer:`)
-          .setDescription(msg.content)
+          .setDescription(message)
           .setFooter(author.username, author.avatarURL())
           .setTimestamp();
 
