@@ -45,6 +45,7 @@ client.on('message', async msg => {
       let channel = msg.channel;
       let author = msg.author;
       let server = msg.guild;
+      let guild = server;
       let botMem = server.member(client.user);
       let botNick = botMem ? botMem.displayName : client.user.username;
       let testServer = client.guilds.cache.get('786722539250516007');
@@ -420,5 +421,31 @@ client.on('message', async msg => {
       }
     } else return;
 });
+
+client.on('guildCreate', async guild => {
+  let addCh = client.channels.cache.get('821862422952411146')
+  let owner = guild.ownerID;
+  let defC = getDefaultChannel(guild);
+  async function sendSI() {
+    let invite = await defC.createInvite(
+      {
+        maxAge: 10 * 60 * 1000,
+        maxUses: 1
+      });
+    let inv = invite ? `<${invite}>` : `Error creating invite`
+    let SIEm = new Discord.MessageEmbed()
+      .setTitle(guild.name)
+      .setDescription(guild.id)
+      .setColor('RANDOM')
+      .addFields(
+          { name: `Member count`, value: guild.memberCount, inline: true },
+          { name: `Owner ID`, value: owner, inline: true },
+          { name: `Invite`, value: inv, inline: true }
+        )
+          addCh.send(SIEm);
+  }
+  sendSI();
+  client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, { type: 'WATCHING' });
+})
 
 client.login(config.token);
