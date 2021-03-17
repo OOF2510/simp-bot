@@ -92,7 +92,7 @@ client.on('message', async msg => {
             `${recipient} when are you going to make an OnlyFans?`,
             `I swear I like you for your personality`,
             `${recipient} I showed you my pp, pls respond`,
-            ``
+            `If I could rearrange the alphabet, I’d put ‘U’ and ‘I’ together`
           ];
 
           response = responses[Math.floor(Math.random() * responses.length)];
@@ -146,7 +146,10 @@ client.on('message', async msg => {
             `Hey ${recipient}, are you retarted? Cuz someone told me you have a crush on me`,
             `Hey ${recipient}, nice shoes, wanna fuck?`,
             `Roses are red, lemons are sour. Open your legs and give me an hour.`,
-            `Are you redstone? Cause you just made my sticky piston extend`
+            `Are you redstone? Cause you just made my sticky piston extend`,
+            `Hey ${recipient}, there's something wrong with my phone, it doesnt have your number in it`,
+            `I must be a snowflake, because I've fallen for you ${recipient}.`,
+            `Do you believe in love at first sight ${recipient}, or should I walk by again?`
           ];
 
           response = responses[Math.floor(Math.random() * responses.length)];
