@@ -205,7 +205,6 @@ client.on('message', async msg => {
 
       const recipient = msg.mentions.users.first();
       const recMem = msg.mentions.members.first();
-      let recNick = recMem ? recMem.displayName : recipient.username;
 
         if (!recipient) {
           const recipient = sender;
@@ -249,6 +248,7 @@ client.on('message', async msg => {
           msg.channel.send(ppEm);
         }
         } else {
+        let recNick = recMem ? recMem.displayName : recipient.username;
         
         let responses = [
           '8D',
