@@ -208,7 +208,7 @@ client.on('message', async msg => {
 
         if (!recipient) {
           const recipient = sender;
-          const recMem = msg.author;
+          const recMem = msg.member;
           let recNick = recMem ? recMem.displayName : recipient.username;
           let responses = [
             '8D',
@@ -249,7 +249,7 @@ client.on('message', async msg => {
         }
         } else {
         let recNick = recMem ? recMem.displayName : recipient.username;
-        
+
         let responses = [
           '8D',
           '8=D',
