@@ -201,12 +201,16 @@ client.on('message', async msg => {
           msg.channel.send(response);
     } else if (msg.content.startsWith(`${prefix}pp`)) {
       let response;
-        let sender = msg.author;
+      let sender = msg.author;
 
-        const recipient = msg.mentions.users.first();
+      const recipient = msg.mentions.users.first();
+      const recMem = msg.mentions.members.first();
+      let recNick = recMem ? recMem.displayName : recipient.username;
 
         if (!recipient) {
           const recipient = sender;
+          const recMem = msg.author;
+          let recNick = recMem ? recMem.displayName : recipient.username;
           let responses = [
             '8D',
             '8=D',
@@ -228,7 +232,7 @@ client.on('message', async msg => {
             const ppEm = new Discord.MessageEmbed()
           .setColor('RANDOM')
           .addFields (
-            {name: `${recipient.username}'s pp`, value: `${response}`}
+            {name: `${recNick}'s pp`, value: `${response}`}
           )
   
             msg.channel.send(ppEm);
@@ -239,7 +243,7 @@ client.on('message', async msg => {
           const ppEm = new Discord.MessageEmbed()
         .setColor('RANDOM')
         .addFields (
-          {name: `${recipient.username}'s pp`, value: `${response}`}
+          {name: `${recNick}'s pp`, value: `${response}`}
         )
 
           msg.channel.send(ppEm);
@@ -263,11 +267,10 @@ client.on('message', async msg => {
 
         if (recipient.id === '463119138500378624') {
           response = '8======================================================D';
-          let avatar = recipient.avatarURL();
           const ppEm = new Discord.MessageEmbed()
         .setColor('RANDOM')
         .addFields (
-          {name: `${recipient.username}'s pp`, value: `${response}`}
+          {name: `${recNick}'s pp`, value: `${response}`}
         )
 
           msg.channel.send(ppEm);
@@ -278,7 +281,7 @@ client.on('message', async msg => {
         const ppEm = new Discord.MessageEmbed()
         .setColor('RANDOM')
         .addFields (
-          {name: `${recipient.username}'s pp`, value: `${response}`}
+          {name: `${recNick}'s pp`, value: `${response}`}
         )
 
           msg.channel.send(ppEm);
