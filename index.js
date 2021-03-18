@@ -460,5 +460,3 @@ client.on('guildCreate', async guild => {
 })
 
 client.login(config.token);
-
-app.listen(8000, null, null, () => console.log("The web server is up and running!"));
