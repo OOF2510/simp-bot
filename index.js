@@ -1,10 +1,21 @@
 const Discord = require("discord.js");
 const config = require("./config.json");
+const express = require('express');
+const url = require('url');
 const path = require("path");
 const fs = require("fs");
+const passport = require("passport");
+const disPassport = require('passport-discord');
+const Strategy = disPassport.Strategy;
+const ejs = require("ejs");
+const session = require("express-session");
+const MemoryStore = require("memorystore");
+const memStore = MemoryStore(session);
+
 const prefix = config.prefix;
 
 var Long = require('long');
+var bodyParser = require("body-parser");
 
 const getDefaultChannel = (guild) => {
 
@@ -449,3 +460,5 @@ client.on('guildCreate', async guild => {
 })
 
 client.login(config.token);
+
+app.listen(8000, null, null, () => console.log("The web server is up and running!"));

@@ -1,4 +1,7 @@
 {
     "prefix": "s!",
-    "token": "YOUR_TOKEN_HERE"
+    "token": "YOUR_BOT_TOKEN_HERE",
+    "clientID": "YOUR_BOT'S_CLIENT_ID_HERE",
+    "clientSecret": "YOUR_BOT'S_CLIENT_SECRET_HERE",
+    "sessionSecret": "YOUR_SESSION_SECRET_HERE"
 }
