@@ -457,6 +457,7 @@ client.on('guildCreate', async guild => {
   }
   sendSI();
   client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, { type: 'WATCHING' });
+  defC.send("Thanks for adding me UwU, you can see my commands by doing `s!help`");
 })
 
 client.login(config.token);
