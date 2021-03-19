@@ -12,6 +12,7 @@ const session = require("express-session");
 const MemoryStore = require("memorystore");
 const memStore = MemoryStore(session);
 const os = require('os');
+const mongoose = require('mongoose');
 
 const prefix = config.prefix;
 
@@ -307,7 +308,7 @@ client.on('message', async msg => {
       if(!args[1]) return msg.reply(`Usage: ${prefix}prefix <new prefix>`)
 
       let prefixes = JSON.parse(fs.readFileSync("./prefixes.json", "utf8"));
-      
+    
       prefixes[msg.guild.id] = {
         prefixes: args[1]
       };
@@ -433,6 +434,8 @@ client.on('message', async msg => {
         channel.send(`Only the developer can use that command!`)
       }
     } else if (msg.content.startsWith(`${prefix}info`)) {
+      var uptime = os.uptime() / 60
+      var up = Math.round(uptime);
       let infoEm = new Discord.MessageEmbed()
         .setTitle('Info')
         .addFields(
@@ -440,11 +443,13 @@ client.on('message', async msg => {
           { name:'Members', value:guild.memberCount, inline:true },
           { name:'Server ID', value:guild.id, inline:true },
           { name:'Server Owner', value:guild.owner, inline:true },
+          { name:'Default Channel', value:defChannel, inline:true },
           { name:'OS Info', value:`Information about the bot's OS`, inline:false },
           { name:'Type', value:'`' + os.type() + '`', inline:true },
           { name:'Arch', value:'`' + os.arch() + '`', inline:true },
           { name:'Release', value:'`' + os.release() + '`', inline:true },
-          { name:'Version', value:'`' + os.version() + '`', inline:true }
+          { name:'Version', value:'`' + os.version() + '`', inline:true }, 
+          { name: `Uptime`, value:'`' + up + 'mins`', inline:true  }
         )
         .setColor('RANDOM')
         
