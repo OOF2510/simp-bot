@@ -11,6 +11,7 @@ const ejs = require("ejs");
 const session = require("express-session");
 const MemoryStore = require("memorystore");
 const memStore = MemoryStore(session);
+const os = require('os');
 
 const prefix = config.prefix;
 
@@ -182,7 +183,8 @@ client.on('message', async msg => {
     { name: 'Prefix', value: `${prefix}prefix <new prefix> - Sets new prefix` },
     { name: `Suggest`, value: `${prefix}suggest <suggestion> - Sends your suggestion to my devoloper` },
     { name: `Bug report`, value: `${prefix}bugreport <report> - Sends a bug report to my devoloper` },
-    { name: `Invite`, value: `${prefix}Invite - Sends my invite link` }
+    { name: `Invite`, value: `${prefix}Invite - Sends my invite link` },
+    { name: 'Info', value: `${prefix}info - Info about the bot and server` }
   )
   .setTimestamp();
   msg.channel.send(helpEmbed);
@@ -430,6 +432,23 @@ client.on('message', async msg => {
       } else {
         channel.send(`Only the developer can use that command!`)
       }
+    } else if (msg.content.startsWith(`${prefix}info`)) {
+      let infoEm = new Discord.MessageEmbed()
+        .setTitle('Info')
+        .addFields(
+          { name:'Server Info', value:'Information about the server'},
+          { name:'Members', value:guild.memberCount, inline:true },
+          { name:'Server ID', value:guild.id, inline:true },
+          { name:'Server Owner', value:guild.owner, inline:true },
+          { name:'OS Info', value:`Information about the bot's OS`, inline:false },
+          { name:'Type', value:'`' + os.type() + '`', inline:true },
+          { name:'Arch', value:'`' + os.arch() + '`', inline:true },
+          { name:'Release', value:'`' + os.release() + '`', inline:true },
+          { name:'Version', value:'`' + os.version() + '`', inline:true }
+        )
+        .setColor('RANDOM')
+        
+      channel.send(infoEm)
     } else return;
 });
 
