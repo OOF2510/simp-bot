@@ -16,6 +16,12 @@ const mongoose = require('mongoose');
 
 const prefix = config.prefix;
 
+var allowed = [
+  '463119138500378624', //me
+  '760473112613093436', //gavin
+  '793910661293801524', //robbie
+  '463119267832004620' //noah
+]
 var Long = require('long');
 var bodyParser = require("body-parser");
 
@@ -344,7 +350,7 @@ client.on('message', async msg => {
       msg.reply(`I have sent your suggestion, queen!`);
 
     } else if (msg.content.startsWith(`${prefix}restart`)) {
-      if (author.id === '463119138500378624') {
+      if (allowed.includes(author.id)) {
         msg.reply(`Restarting UwU!`);
         client.destroy();
         client.login(config.token);
@@ -352,7 +358,7 @@ client.on('message', async msg => {
         console.log(`Restarted because ${msg.author.username} told me to!`);
         setTimeout(() => { msg.channel.send(`Successfully restarted!`); }, 2000);
       } else {
-        msg.reply(`Only the developer can do that!`)
+        msg.reply(`Only the developer & certian whitelisted users can do that!`)
       }
     } else if (msg.content.startsWith(`${prefix}bugreport`)) {
       const repCh = client.channels.cache.get('817885616791355404');
@@ -375,8 +381,7 @@ client.on('message', async msg => {
     } else if (msg.content.startsWith(`${prefix}invite`)) {
       msg.reply(`Here's my invite link: <https://discord.com/api/oauth2/authorize?client_id=808822189905936405&permissions=8&scope=bot>`)
     } else if (msg.content.startsWith(`${prefix}serverlist`)) {
-      if (author.id == '463119138500378624') {
-        //me
+      if (allowed.includes(author.id)) {
       channel.send(`${client.guilds.cache.size} servers:`)
 
       client.guilds.cache.forEach(guild => {
@@ -412,7 +417,7 @@ client.on('message', async msg => {
       msg.channel.send(slEm);
       }
     } else if (msg.content.startsWith(`${prefix}broadcast`)) {
-      if (author == me) {
+      if (allowed.includes(author.id)) {
 
         let message = msg.content.replace(`${prefix}broadcast`,``);
 
@@ -431,7 +436,7 @@ client.on('message', async msg => {
         })
 
       } else {
-        channel.send(`Only the developer can use that command!`)
+        channel.send(`Only the developer & certian whitelisted users can use that command!`)
       }
     } else if (msg.content.startsWith(`${prefix}info`)) {
       var uptime = os.uptime() / 60
