@@ -194,7 +194,8 @@ client.on('message', async msg => {
     { name: `Suggest`, value: `${prefix}suggest <suggestion> - Sends your suggestion to my devoloper` },
     { name: `Bug report`, value: `${prefix}bugreport <report> - Sends a bug report to my devoloper` },
     { name: `Invite`, value: `${prefix}Invite - Sends my invite link` },
-    { name: 'Info', value: `${prefix}info - Info about the bot and server` }
+    { name: 'Info', value: `${prefix}info - Info about the bot and server` },
+    { name: `No Broadcast`, value: `${prefix}nobroadcast - Disables broadcasts for your server` }
   )
   .setTimestamp();
   msg.channel.send(helpEmbed);
