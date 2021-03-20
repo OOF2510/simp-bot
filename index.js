@@ -77,6 +77,7 @@ client.on('message', async msg => {
       if (channel.type === "dm") return;
 
       let prefixes = JSON.parse(fs.readFileSync("./prefixes.json", "utf8"));
+      let nobroad = JSON.parse(fs.readFileSync("./nobroad.json", "utf8"));
 
       if (!prefixes[msg.guild.id]) {
         prefixes[msg.guild.id] = {
@@ -429,10 +430,11 @@ client.on('message', async msg => {
           .setColor('RANDOM')
           .setTitle(`A message from my developer:`)
           .setDescription(message)
-          .setFooter(author.username, author.avatarURL())
+          .setFooter(author.username + `| You can disable broadcasts for your server by using the` + '`' + prefix + 'nobroadcast` command', author.avatarURL())
           .setTimestamp();
 
         client.guilds.cache.forEach(async guild => {
+          if (nobroad[guild.id]) return;
           let defC = getDefaultChannel(guild)
           defC.send(broadcastEm);
         })
@@ -472,6 +474,27 @@ client.on('message', async msg => {
       channel.send('```bash' + `
       ${out}` + '```')
       }
+    } else if (msg.content.startsWith(`${prefix}nobroadcast`)) {
+      if(!msg.member.hasPermission("MANAGE_GUILD")) return msg.reply("You don't have permissions to do that!")
+
+      let nobroad = JSON.parse(fs.readFileSync("./nobroad.json", "utf8"));
+      
+      nobroad[guild.id] = {
+        nobroadcast: true
+      };
+
+      fs.writeFile('./prefixes.json', JSON.stringify(nobroad), (err) => {
+        if (err) console.log(err)
+      });
+
+      const nobEm = new Discord.MessageEmbed()
+        .setAuthor(botNick, client.user.avatarURL())
+        .setColor('RANDOM')
+        .setTitle(`Broadcasts disabled!`)
+        .setDescription(`Simp bot broadcasts have been successfully disabled for this server!`);
+
+      channel.send(nobEm);
+
     } else return;
 });
 
