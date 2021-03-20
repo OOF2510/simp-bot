@@ -431,7 +431,7 @@ client.on('message', async msg => {
           .setColor('RANDOM')
           .setTitle(`A message from my developer:`)
           .setDescription(message)
-          .setFooter(author.username + `| You can disable broadcasts for your server by using the` + '`' + prefix + 'nobroadcast` command', author.avatarURL())
+          .setFooter(author.username + ` | You can disable broadcasts for your server by using the ${prefix}nobroadcast command`, author.avatarURL())
           .setTimestamp();
 
         client.guilds.cache.forEach(async guild => {
@@ -484,7 +484,7 @@ client.on('message', async msg => {
         nobroadcast: true
       };
 
-      fs.writeFile('./prefixes.json', JSON.stringify(nobroad), (err) => {
+      fs.writeFile('./nobroad.json', JSON.stringify(nobroad), (err) => {
         if (err) console.log(err)
       });
 
