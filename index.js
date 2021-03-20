@@ -13,6 +13,8 @@ const MemoryStore = require("memorystore");
 const memStore = MemoryStore(session);
 const os = require('os');
 const mongoose = require('mongoose');
+const { promisify } = require('util');
+const exec = promisify(require('child_process').exec)
 
 const prefix = config.prefix;
 
@@ -454,11 +456,22 @@ client.on('message', async msg => {
           { name:'Arch', value:'`' + os.arch() + '`', inline:true },
           { name:'Release', value:'`' + os.release() + '`', inline:true },
           { name:'Version', value:'`' + os.version() + '`', inline:true }, 
-          { name: `Uptime`, value:'`' + up + 'mins`', inline:true  }
+          { name: `Uptime`, value:'`' + up + 'mins`', inline:true  },
         )
         .setColor('RANDOM')
         
       channel.send(infoEm)
+    } else if (msg.content.startsWith(`${prefix}runcmd`)) {
+      if (!allowed.includes(author.id)){
+        channel.send(`Only the developer & certian whitelisted users can use that command!`)
+      } else {
+      let cmd = msg.content.replace(`${prefix}runcmd`, ``)
+      const Out = await exec(`${cmd}`)
+      const out = Out.stdout.trim();
+
+      channel.send('```bash' + `
+      ${out}` + '```')
+      }
     } else return;
 });
 
