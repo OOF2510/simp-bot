@@ -14,7 +14,8 @@ const memStore = MemoryStore(session);
 const os = require('os');
 const mongoose = require('mongoose');
 const { promisify } = require('util');
-const exec = promisify(require('child_process').exec)
+const exec = promisify(require('child_process').exec);
+const Keyv = require('keyv');
 
 const prefix = config.prefix;
 
@@ -45,6 +46,9 @@ const getDefaultChannel = (guild) => {
 }
 
 const client = new Discord.Client();
+const preDB = new Keyv('sqlite://./prefixes.sqlite')
+
+preDB.on('error', err => console.error('Keyv error:', err));
 
 client.once("ready", () => {
     console.log("Ready!");
@@ -76,15 +80,11 @@ client.on('message', async msg => {
       if (author.bot) return;
       if (channel.type === "dm") return;
 
-      let prefixes = JSON.parse(fs.readFileSync("./prefixes.json", "utf8"));
       let nobroad = JSON.parse(fs.readFileSync("./nobroad.json", "utf8"));
 
-      if (!prefixes[msg.guild.id]) {
-        prefixes[msg.guild.id] = {
-          prefixes: config.prefix
-        };
-      }
-      let prefix = prefixes[msg.guild.id].prefixes;
+      let prefix = await preDB.get(guild.id);
+
+      if (!prefix) prefix = 's!'
 
       const args = msg.content.slice(prefix.length).trim().split(' ');
 
@@ -317,15 +317,7 @@ client.on('message', async msg => {
       if(!msg.member.hasPermission("MANAGE_GUILD")) return msg.reply("You don't have permissions to do that!")
       if(!args[1]) return msg.reply(`Usage: ${prefix}prefix <new prefix>`)
 
-      let prefixes = JSON.parse(fs.readFileSync("./prefixes.json", "utf8"));
-    
-      prefixes[msg.guild.id] = {
-        prefixes: args[1]
-      };
-
-      fs.writeFile("./prefixes.json", JSON.stringify(prefixes), (err) => {
-        if (err) console.log(err)
-      });
+      await preDB.set(guild.id, args[1])
 
       let prefixEm = new Discord.MessageEmbed()
       .setColor("RANDOM")
