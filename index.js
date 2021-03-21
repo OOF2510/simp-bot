@@ -312,7 +312,7 @@ client.on('message', async msg => {
           msg.channel.send(ppEm);
         } else if (recipient.id == '463119267832004620') {
           //noah
-          response = ' ';
+          response = '.';
           const ppEm = new Discord.MessageEmbed()
         .setColor('RANDOM')
         .addFields (
