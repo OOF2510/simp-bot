@@ -50,6 +50,7 @@ const preDB = new Keyv('sqlite://./prefixes.sqlite')
 const nbDB = new Keyv('sqlite://./nobroad.sqlite')
 
 preDB.on('error', err => console.error('Keyv error:', err));
+nbDB.on('error', err => console.error('Keyv error:', err));
 
 client.once("ready", () => {
     console.log("Ready!");
