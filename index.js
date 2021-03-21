@@ -47,6 +47,7 @@ const getDefaultChannel = (guild) => {
 
 const client = new Discord.Client();
 const preDB = new Keyv('sqlite://./prefixes.sqlite')
+const nbDB = new Keyv('sqlite://./nobroad.sqlite')
 
 preDB.on('error', err => console.error('Keyv error:', err));
 
@@ -80,11 +81,9 @@ client.on('message', async msg => {
       if (author.bot) return;
       if (channel.type === "dm") return;
 
-      let nobroad = JSON.parse(fs.readFileSync("./nobroad.json", "utf8"));
-
       let prefix = await preDB.get(guild.id);
 
-      if (!prefix) prefix = 's!'
+      if (!prefix) prefix = config.prefix;
 
       const args = msg.content.slice(prefix.length).trim().split(' ');
 
@@ -195,7 +194,8 @@ client.on('message', async msg => {
     { name: `Bug report`, value: `${prefix}bugreport <report> - Sends a bug report to my devoloper` },
     { name: `Invite`, value: `${prefix}Invite - Sends my invite link` },
     { name: 'Info', value: `${prefix}info - Info about the bot and server` },
-    { name: `No Broadcast`, value: `${prefix}nobroadcast - Disables broadcasts for your server` }
+    { name: `No Broadcast`, value: `${prefix}nobroadcast - Disables broadcasts for your server` },
+    { name: `Yes Broadcast`, value: `${prefix}yesbroadcast - Re-enables broacasts for your server` }
   )
   .setTimestamp();
   msg.channel.send(helpEmbed);
@@ -444,11 +444,12 @@ client.on('message', async msg => {
           .setColor('RANDOM')
           .setTitle(`A message from my developer:`)
           .setDescription(message)
-          .setFooter(author.username + ` | You can disable broadcasts for your server by using the ${prefix}nobroadcast command`, author.avatarURL())
+          .setFooter(author.username, author.avatarURL())
           .setTimestamp();
 
         client.guilds.cache.forEach(async guild => {
-          if (nobroad[guild.id]) return;
+          let disabled = await nbDB.get(guild.id)
+          if (disabled) return;
           let defC = getDefaultChannel(guild)
           defC.send(broadcastEm);
         })
@@ -491,24 +492,38 @@ ${out}` + '```')
     } else if (msg.content.startsWith(`${prefix}nobroadcast`)) {
       if(!msg.member.hasPermission("MANAGE_GUILD")) return msg.reply("You don't have permissions to do that!")
 
-      let nobroad = JSON.parse(fs.readFileSync("./nobroad.json", "utf8"));
-      
-      nobroad[guild.id] = {
-        nobroadcast: true
-      };
+      let disabled = await nbDB.get(guild.id)
 
-      fs.writeFile('./nobroad.json', JSON.stringify(nobroad), (err) => {
-        if (err) console.log(err)
-      });
+      if (disabled) return channel.send('Broadcasts are already disabled for this server!')
+
+      await nbDB.set(guild.id, 'true')
 
       const nobEm = new Discord.MessageEmbed()
         .setAuthor(botNick, client.user.avatarURL())
         .setColor('RANDOM')
         .setTitle(`Broadcasts disabled!`)
-        .setDescription(`Simp bot broadcasts have been successfully disabled for this server!`);
+        .setDescription(`Broadcasts have been successfully disabled for this server!`)
+        .setTimestamp();
 
       channel.send(nobEm);
 
+    } else if (msg.content.startsWith(`${prefix}yesbroadcast`)) {
+      if(!msg.member.hasPermission("MANAGE_GUILD")) return msg.reply("You don't have permissions to do that!")
+
+      let disabled = await nbDB.get(guild.id)
+
+      if (!disabled) return channel.send(`Broadcasts aren't disabled for this server!`)
+
+      await nbDB.delete(guild.id, 'true')
+
+      const nobEm = new Discord.MessageEmbed()
+        .setAuthor(botNick, client.user.avatarURL())
+        .setColor('RANDOM')
+        .setTitle(`Broadcasts enabled!`)
+        .setDescription(`Broadcasts have been successfully re-enabled for this server!`)
+        .setTimestamp();
+
+      channel.send(nobEm);
     } else return;
 });
 
