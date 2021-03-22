@@ -306,9 +306,39 @@ client.on('message', async msg => {
             '8===========D'
           ];
 
-          if (recipient.id === '463119138500378624')  {
+          if (recipient.id == '463119138500378624') {
             //me
             response = '8======================================================D';
+            const ppEm = new Discord.MessageEmbed()
+          .setColor('RANDOM')
+          .addFields (
+            {name: `${recNick}'s pp`, value: `${response}`}
+          )
+  
+            msg.channel.send(ppEm);
+          } else if (recipient.id == '793910661293801524') {
+            //robbie
+            response = '8=====================================================D';
+            const ppEm = new Discord.MessageEmbed()
+          .setColor('RANDOM')
+          .addFields (
+            {name: `${recNick}'s pp`, value: `${response}`}
+          )
+  
+            msg.channel.send(ppEm);
+          } else if (recipient.id == '463119267832004620') {
+            //noah
+            response = '.';
+            const ppEm = new Discord.MessageEmbed()
+          .setColor('RANDOM')
+          .addFields (
+            {name: `${recNick}'s pp`, value: `${response}`}
+          )
+  
+            msg.channel.send(ppEm);
+          } else if (recipient.id == '763480802511945789') {
+            //gerrardo
+            response = '8===================================================D';
             const ppEm = new Discord.MessageEmbed()
           .setColor('RANDOM')
           .addFields (
@@ -369,6 +399,16 @@ client.on('message', async msg => {
         } else if (recipient.id == '463119267832004620') {
           //noah
           response = '.';
+          const ppEm = new Discord.MessageEmbed()
+        .setColor('RANDOM')
+        .addFields (
+          {name: `${recNick}'s pp`, value: `${response}`}
+        )
+
+          msg.channel.send(ppEm);
+        } else if (recipient.id == '763480802511945789') {
+          //gerrardo
+          response = '8===================================================D';
           const ppEm = new Discord.MessageEmbed()
         .setColor('RANDOM')
         .addFields (
