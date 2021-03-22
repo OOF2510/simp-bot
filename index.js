@@ -179,27 +179,82 @@ client.on('message', async msg => {
 
           msg.channel.send(response);
     } else if (msg.content.startsWith(`${prefix}help`)) {
-        const helpEmbed = new Discord.MessageEmbed()
-  .setColor('#0099CC')
-  .setTitle(`${botNick} Help`)
-  .setAuthor(botNick, client.user.avatarURL())
-  .addFields(
-    { name: 'Ping', value: `${prefix}ping - Pings the bot` },
-    { name: 'Simp', value: `${prefix}simp <user mention> - Sends a random simp image/message/gif` },
-    { name: 'Flirt', value: `${prefix}flirt <user mention> - Sends a random pick-up line.`},
-    { name: 'Frick', value: `${prefix}frick <user mention> - I think we all know what that does...` },
-    { name: 'Help', value: `${prefix}help - Brings up this menu` },
-    { name: 'Pp', value: `${prefix}pp [optional user mention] - Pp size` },
-    { name: 'Prefix', value: `${prefix}prefix <new prefix> - Sets new prefix` },
-    { name: `Suggest`, value: `${prefix}suggest <suggestion> - Sends your suggestion to my devoloper` },
-    { name: `Bug report`, value: `${prefix}bugreport <report> - Sends a bug report to my devoloper` },
-    { name: `Invite`, value: `${prefix}Invite - Sends my invite link` },
-    { name: 'Info', value: `${prefix}info - Info about the bot and server` },
-    { name: `No Broadcast`, value: `${prefix}nobroadcast - Disables broadcasts for your server` },
-    { name: `Yes Broadcast`, value: `${prefix}yesbroadcast - Re-enables broacasts for your server` }
-  )
-  .setTimestamp();
-  msg.channel.send(helpEmbed);
+
+      if (!args[1]) {
+        const hIEm = new Discord.MessageEmbed()
+          .setAuthor(botNick, client.user.avatarURL())
+          .setColor('RANDOM')
+          .setTitle('Help')
+          .setDescription(`Use ${prefix}help <module> for more info`)
+          .addFields(
+            { name: `List of modules`, value: `\`Fun\`
+            \`Settings\`
+            \`Info\`
+            \`Feedback\`
+            \`Misc\`` },
+          )
+          .setTimestamp();
+
+          channel.send(hIEm)
+      } else if (args[1].toLowerCase() == 'settings') {
+        let setEm = new Discord.MessageEmbed()
+          .setAuthor(botNick, client.user.avatarURL())
+          .setTitle('Help - Settings')
+          .addFields(
+            { name: 'Prefix', value: `${prefix}prefix <new prefix> - Sets new prefix` },
+            { name: `No Broadcast`, value: `${prefix}nobroadcast - Disables broadcasts for your server` },
+            { name: `Yes Broadcast`, value: `${prefix}yesbroadcast - Re-enables broacasts for your server` }
+          )
+          .setColor('RANDOM')
+
+          channel.send(setEm)
+      } else if (args[1].toLowerCase() == 'info') {
+        let inEm = new Discord.MessageEmbed()
+        .setAuthor(botNick, client.user.avatarURL())
+        .setTitle('Help - Info')
+        .addFields(
+          { name: 'Ping', value: `${prefix}ping - Pings the bot` },
+          { name: 'Help', value: `${prefix}help <module> - Sends help embed` },
+          { name: 'Info', value: `${prefix}info - Info about the bot and server` }
+        )
+        .setColor('RANDOM')
+
+        channel.send(inEm)
+      } else if (args[1].toLowerCase() == 'feedback') {
+        let fbEm = new Discord.MessageEmbed()
+        .setAuthor(botNick, client.user.avatarURL())
+        .setTitle('Help - Feedback')
+        .addFields(
+          { name: `Suggest`, value: `${prefix}suggest <suggestion> - Sends your suggestion to my devoloper` },
+          { name: `Bug report`, value: `${prefix}bugreport <report> - Sends a bug report to my devoloper` },
+        )
+        .setColor('RANDOM')
+
+        channel.send(fbEm)
+      } else if (args[1].toLowerCase() == 'fun') {
+        let funEm = new Discord.MessageEmbed()
+        .setAuthor(botNick, client.user.avatarURL())
+        .setTitle('Help - Fun')
+        .addFields(
+          { name: 'Simp', value: `${prefix}simp <user mention> - Sends a random simp image/message/gif` },
+          { name: 'Flirt', value: `${prefix}flirt <user mention> - Sends a random pick-up line.`},
+          { name: 'Frick', value: `${prefix}frick <user mention> - I think we all know what that does...` },
+          { name: 'Pp', value: `${prefix}pp [optional user mention] - Pp size` }
+        )
+        .setColor('RANDOM')
+
+        channel.send(funEm)
+      } else if (args[1].toLowerCase() == 'misc') {
+        let miEm = new Discord.MessageEmbed()
+        .setAuthor(botNick, client.user.avatarURL())
+        .setTitle('Help - Misc')
+        .addFields(
+          { name: `Invite`, value: `${prefix}Invite - Sends my invite link` }
+        )
+        .setColor('RANDOM')
+
+        channel.send(miEm)
+      } else return;
     } else if (msg.content.startsWith(`${prefix}frick`)) {
         let response;
         let sender = msg.author;
