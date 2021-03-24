@@ -621,11 +621,11 @@ ${out}` + '```')
         .setTimestamp();
 
       channel.send(nobEm);
-    } else if (msg.content.startsWith(`${prefix}avatar` || `${prefix}av`)) {
-      const user = msg.mentions.user.first();
-      let mem = msg.mentions.members.first();
-      if (!user) user = author;
-      if (!mem) mem = msg.member;
+    } else if (msg.content.startsWith(`${prefix}avatar`)) {
+      let user = author;
+      let mem = msg.member;
+      if (!user) user = msg.mentions.user.first();
+      if (!mem) mem = msg.mentions.members.first();
 
       let userNick = mem ? mem.displayName : user.username;
 
