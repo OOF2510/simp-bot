@@ -216,7 +216,8 @@ client.on('message', async msg => {
         .addFields(
           { name: 'Ping', value: `${prefix}ping - Pings the bot` },
           { name: 'Help', value: `${prefix}help <module> - Sends help embed` },
-          { name: 'Info', value: `${prefix}info - Info about the bot and server` }
+          { name: 'Info', value: `${prefix}info - Info about the bot and server` },
+          { name: `Avatar`, value: `${prefix}avatar [optional user mention] - Sends user's avatar` }
         )
         .setColor('RANDOM')
 
