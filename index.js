@@ -7,15 +7,14 @@ const fs = require("fs");
 const passport = require("passport");
 const disPassport = require('passport-discord');
 const Strategy = disPassport.Strategy;
-const ejs = require("ejs");
 const session = require("express-session");
 const MemoryStore = require("memorystore");
 const memStore = MemoryStore(session);
 const os = require('os');
-const mongoose = require('mongoose');
 const { promisify } = require('util');
 const exec = promisify(require('child_process').exec);
 const Keyv = require('keyv');
+var weather = require('weather-js');
 
 const prefix = config.prefix;
 
@@ -83,19 +82,21 @@ client.on('message', async msg => {
       if (channel.type === "dm") return;
 
       let prefix = await preDB.get(guild.id);
-
       if (!prefix) prefix = config.prefix;
+     
+      if (!msg.content.startsWith(prefix)) return;
 
-      const args = msg.content.slice(prefix.length).trim().split(' ');
+      const args = msg.content.slice(prefix.length).trim().split(/  +/);
+      const cmd = args.shift().toLowerCase();
 
     if (msg.content === `${prefix}ping`) {
       msg.reply(`Pong UwU, (${client.ws.ping}ms)`)
     } else if (msg.content.startsWith(`${prefix}simp`)) {
         let response;
         let sender = msg.author;
-        
+
         const recipient = msg.mentions.users.first();
-        
+
           let responses = [
             `${recipient} damn you thicc`,
             `I paid 15 dollars for you to read my name on Twitch! `,
@@ -180,7 +181,7 @@ client.on('message', async msg => {
           msg.channel.send(response);
     } else if (msg.content.startsWith(`${prefix}help`)) {
 
-      if (!args[1]) {
+      if (!args[0]) {
         const hIEm = new Discord.MessageEmbed()
           .setAuthor(botNick, client.user.avatarURL())
           .setColor('RANDOM')
@@ -196,7 +197,7 @@ client.on('message', async msg => {
           .setTimestamp();
 
           channel.send(hIEm)
-      } else if (args[1].toLowerCase() == 'settings') {
+      } else if (args[0].toLowerCase() == 'settings') {
         let setEm = new Discord.MessageEmbed()
           .setAuthor(botNick, client.user.avatarURL())
           .setTitle('Help - Settings')
@@ -208,7 +209,7 @@ client.on('message', async msg => {
           .setColor('RANDOM')
 
           channel.send(setEm)
-      } else if (args[1].toLowerCase() == 'info') {
+      } else if (args[0].toLowerCase() == 'info') {
         let inEm = new Discord.MessageEmbed()
         .setAuthor(botNick, client.user.avatarURL())
         .setTitle('Help - Info')
@@ -220,7 +221,7 @@ client.on('message', async msg => {
         .setColor('RANDOM')
 
         channel.send(inEm)
-      } else if (args[1].toLowerCase() == 'feedback') {
+      } else if (args[0].toLowerCase() == 'feedback') {
         let fbEm = new Discord.MessageEmbed()
         .setAuthor(botNick, client.user.avatarURL())
         .setTitle('Help - Feedback')
@@ -231,7 +232,7 @@ client.on('message', async msg => {
         .setColor('RANDOM')
 
         channel.send(fbEm)
-      } else if (args[1].toLowerCase() == 'fun') {
+      } else if (args[0].toLowerCase() == 'fun') {
         let funEm = new Discord.MessageEmbed()
         .setAuthor(botNick, client.user.avatarURL())
         .setTitle('Help - Fun')
@@ -244,7 +245,7 @@ client.on('message', async msg => {
         .setColor('RANDOM')
 
         channel.send(funEm)
-      } else if (args[1].toLowerCase() == 'misc') {
+      } else if (args[0].toLowerCase() == 'misc') {
         let miEm = new Discord.MessageEmbed()
         .setAuthor(botNick, client.user.avatarURL())
         .setTitle('Help - Misc')
@@ -314,7 +315,7 @@ client.on('message', async msg => {
           .addFields (
             {name: `${recNick}'s pp`, value: `${response}`}
           )
-  
+
             msg.channel.send(ppEm);
           } else if (recipient.id == '793910661293801524') {
             //robbie
@@ -324,7 +325,7 @@ client.on('message', async msg => {
           .addFields (
             {name: `${recNick}'s pp`, value: `${response}`}
           )
-  
+
             msg.channel.send(ppEm);
           } else if (recipient.id == '463119267832004620') {
             //noah
@@ -334,7 +335,7 @@ client.on('message', async msg => {
           .addFields (
             {name: `${recNick}'s pp`, value: `${response}`}
           )
-  
+
             msg.channel.send(ppEm);
           } else if (recipient.id == '763480802511945789') {
             //gerrardo
@@ -344,7 +345,7 @@ client.on('message', async msg => {
           .addFields (
             {name: `${recNick}'s pp`, value: `${response}`}
           )
-  
+
             msg.channel.send(ppEm);
           } else {
 
@@ -432,14 +433,14 @@ client.on('message', async msg => {
     } else if (msg.content.startsWith(`${prefix}prefix`)) {
 
       if(!msg.member.hasPermission("MANAGE_GUILD")) return msg.reply("You don't have permissions to do that!")
-      if(!args[1]) return msg.reply(`Usage: ${prefix}prefix <new prefix>`)
+      if(!args[0]) return msg.reply(`Usage: ${prefix}prefix <new prefix>`)
 
-      await preDB.set(guild.id, args[1])
+      await preDB.set(guild.id, args[0])
 
       let prefixEm = new Discord.MessageEmbed()
       .setColor("RANDOM")
       .setTitle("Prefix Set!")
-      .setDescription(`Prefix set to ${args[1]}`);
+      .setDescription(`Prefix set to ${args[0]}`);
 
       channel.send(prefixEm);
 
@@ -456,7 +457,7 @@ client.on('message', async msg => {
         .setFooter(`Suggested by: ${msg.author.tag}`, msg.author.avatarURL())
         .setColor('RANDOM')
         .setTimestamp()
-      
+
       sugCh.send(sugEm);
       sugCh2.send(sugEm);
 
@@ -486,7 +487,7 @@ client.on('message', async msg => {
         .setFooter(`Reported by: ${msg.author.tag}`, msg.author.avatarURL())
         .setColor('RANDOM')
         .setTimestamp()
-      
+
       repCh.send(repEm);
       repCh2.send(repEm);
 
@@ -568,11 +569,11 @@ client.on('message', async msg => {
           { name:'Type', value:'`' + os.type() + '`', inline:true },
           { name:'Arch', value:'`' + os.arch() + '`', inline:true },
           { name:'Release', value:'`' + os.release() + '`', inline:true },
-          { name:'Version', value:'`' + os.version() + '`', inline:true }, 
+          { name:'Version', value:'`' + os.version() + '`', inline:true },
           { name: `Uptime`, value:'`' + up + 'mins`', inline:true  },
         )
         .setColor('RANDOM')
-        
+
       channel.send(infoEm)
     } else if (msg.content.startsWith(`${prefix}runcmd`)) {
       if (!allowed.includes(author.id)){
@@ -620,6 +621,23 @@ ${out}` + '```')
         .setTimestamp();
 
       channel.send(nobEm);
+    } else if (msg.content.startsWith(`${prefix}avatar` || `${prefix}av`)) {
+      const user = msg.mentions.user.first();
+      let mem = msg.mentions.members.first();
+      if (!user) user = author;
+      if (!mem) mem = msg.member;
+
+      let userNick = mem ? mem.displayName : user.username;
+
+      let av = user.avatarURL();
+
+      let avEm = new Discord.MessageEmbed()
+        .setTitle(`${userNick}'s Avatar`)
+        .setImage(av)
+        .setColor('RANDOM')
+        .setTimestamp();
+
+      channel.send(avEm);
     } else return;
 });
 
