@@ -86,7 +86,7 @@ client.on('message', async msg => {
      
       if (!msg.content.startsWith(prefix)) return;
 
-      const args = msg.content.slice(prefix.length).trim().split(/  +/);
+      const args = msg.content.slice(prefix.length).trim().split(' ');
       const cmd = args.shift().toLowerCase();
 
     if (msg.content === `${prefix}ping`) {
