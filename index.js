@@ -624,8 +624,8 @@ ${out}` + '```')
     } else if (msg.content.startsWith(`${prefix}avatar`)) {
       let user = author;
       let mem = msg.member;
-      if (!user) user = msg.mentions.user.first();
-      if (!mem) mem = msg.mentions.members.first();
+      if (msg.mentions.users) user = msg.mentions.users.first();
+      if (msg.mentions.users) mem = msg.mentions.members.first();
 
       let userNick = mem ? mem.displayName : user.username;
 
