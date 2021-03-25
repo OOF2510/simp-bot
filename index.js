@@ -93,6 +93,7 @@ client.on('message', async msg => {
       let pEm = new Discord.MessageEmbed()
         .setTitle(`Pong!`)
         .setDescription(client.ws.ping + `ms`)
+        .setColor('RANDOM')
       channel.send(pEm)
     } else if (msg.content.startsWith(`${prefix}simp`)) {
         let response;
