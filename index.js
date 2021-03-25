@@ -90,7 +90,10 @@ client.on('message', async msg => {
       const cmd = args.shift().toLowerCase();
 
     if (msg.content === `${prefix}ping`) {
-      msg.reply(`Pong UwU, (${client.ws.ping}ms)`)
+      let pEm = new Discord.MessageEmbed()
+        .setTitle(`Pong!`)
+        .setDescription(client.ws.ping + `ms`)
+      channel.send(pEm)
     } else if (msg.content.startsWith(`${prefix}simp`)) {
         let response;
         let sender = msg.author;
