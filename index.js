@@ -542,7 +542,7 @@ client.on('message', async msg => {
           .setColor('RANDOM')
           .setTitle(`A message from my developer:`)
           .setDescription(message)
-          .setFooter(author.username, author.avatarURL())
+          .setFooter(author.username, author.avatarURL({ dynamic: true }))
           .setTimestamp();
 
         client.guilds.cache.forEach(async guild => {
@@ -612,7 +612,7 @@ ${out}` + '```')
 
       if (!disabled) return channel.send(`Broadcasts aren't disabled for this server!`)
 
-      await nbDB.delete(guild.id, 'true')
+      await nbDB.delete(guild.id)
 
       const nobEm = new Discord.MessageEmbed()
         .setAuthor(botNick, client.user.avatarURL())
@@ -630,7 +630,7 @@ ${out}` + '```')
 
       let userNick = mem ? mem.displayName : user.username;
 
-      let av = user.avatarURL();
+      let av = user.avatarURL({ dynamic: true });
 
       let avEm = new Discord.MessageEmbed()
         .setTitle(`${userNick}'s Avatar`)
