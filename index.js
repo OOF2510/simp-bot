@@ -14,7 +14,6 @@ const os = require('os');
 const { promisify } = require('util');
 const exec = promisify(require('child_process').exec);
 const Keyv = require('keyv');
-var weather = require('weather-js');
 
 const prefix = config.prefix;
 
@@ -45,11 +44,13 @@ const getDefaultChannel = (guild) => {
 }
 
 const client = new Discord.Client();
-const preDB = new Keyv('sqlite://./prefixes.sqlite')
-const nbDB = new Keyv('sqlite://./nobroad.sqlite')
+const preDB = new Keyv('sqlite://./prefixes.sqlite');
+const nbDB = new Keyv('sqlite://./nobroad.sqlite');
+const bchDB = new Keyv('sqlite://./broadchs.db');
 
 preDB.on('error', err => console.error('Keyv error:', err));
 nbDB.on('error', err => console.error('Keyv error:', err));
+bchDB.on('error', err => console.error('Keyv error:', err));
 
 client.once("ready", () => {
     console.log("Ready!");
@@ -188,7 +189,8 @@ client.on('message', async msg => {
           .setTitle('Help')
           .setDescription(`Use ${prefix}help <module> for more info`)
           .addFields(
-            { name: `List of modules`, value: `\`Fun\`
+            { name: `List of modules`, value: `
+            \`Fun\`
             \`Settings\`
             \`Info\`
             \`Feedback\`
@@ -204,7 +206,8 @@ client.on('message', async msg => {
           .addFields(
             { name: 'Prefix', value: `${prefix}prefix <new prefix> - Sets new prefix` },
             { name: `No Broadcast`, value: `${prefix}nobroadcast - Disables broadcasts for your server` },
-            { name: `Yes Broadcast`, value: `${prefix}yesbroadcast - Re-enables broacasts for your server` }
+            { name: `Yes Broadcast`, value: `${prefix}yesbroadcast - Re-enables broacasts for your server` },
+            { name: `Set Broadcast Channel`, value: `${prefix}setbroadcastchannel <channel mention> - Sets the channel that annoucements go to in your server!` }
           )
           .setColor('RANDOM')
 
@@ -548,7 +551,12 @@ client.on('message', async msg => {
         client.guilds.cache.forEach(async guild => {
           let disabled = await nbDB.get(guild.id)
           if (disabled) return;
-          let defC = getDefaultChannel(guild)
+          let defC;
+          let hasBrCh = await bchDB.get(guild.id)
+
+          if (hasBrCh) defC = client.channels.cache.get(hasBrCh);
+          else defC = getDefaultChannel(guild);
+
           defC.send(broadcastEm);
         })
 
@@ -639,6 +647,22 @@ ${out}` + '```')
         .setTimestamp();
 
       channel.send(avEm);
+    } else if (msg.content.startsWith(`${prefix}setbroadcastchannel`)) {
+      if (!msg.member.hasPermission('MANAGE_MESSAGES')) return msg.channel.send(`You don't have permissions to do that!`);
+      if (!msg.mentions.channels) return msg.channel.send(`Please mention a channel for broadcasts to go to!`);
+      let ch = msg.mentions.channels.first();
+      if (!ch.permissionsFor(botMem).has('SEND_MESSAGES')) msg.channel.send(`I don't have permissions to send messages in that channel!`)
+      let chID = ch.id;
+
+      await bchDB.set(guild.id, chID);
+
+      let brChEm = new Discord.MessageEmbed()
+        .setTitle('Success!')
+        .setDescription(`New broadcast channel is ${ch}`)
+        .setTimestamp()
+        .setColor('RANDOM');
+
+      channel.send(brChEm);
     } else return;
 });
 
