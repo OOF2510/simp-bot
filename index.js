@@ -22,8 +22,11 @@ var allowed = [
   '793910661293801524', //robbie
   '463119267832004620' //noah
 ]
+
 var Long = require('long');
 var bodyParser = require("body-parser");
+var Distro = require('linus');
+const { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } = require("node:constants");
 
 const getDefaultChannel = (guild) => {
 
@@ -576,6 +579,13 @@ client.on('message', async msg => {
     } else if (msg.content.startsWith(`${prefix}info`)) {
       var uptime = os.uptime() / 60
       var up = Math.round(uptime);
+
+      let name = Distro.name;
+      if (!name) name = 'N/A';
+      let ver = Distro.version;
+      if (!ver) ver = 'N/A'
+      let distro = name + ver;
+
       let infoEm = new Discord.MessageEmbed()
         .setTitle('Info')
         .addFields(
@@ -590,9 +600,12 @@ client.on('message', async msg => {
           { name:'Arch', value:'`' + os.arch() + '`', inline:true },
           { name:'Release', value:'`' + os.release() + '`', inline:true },
           { name:'Version', value:'`' + os.version() + '`', inline:true },
+          { name: 'Linux Distro', value:'`' + distro + '`' },
           { name: `Uptime`, value:'`' + up + 'mins`', inline:true  },
         )
         .setColor('RANDOM')
+
+        if (os.type() === 'Linux') infoEm.addField('Linux Distro', '' , true)
 
       channel.send(infoEm)
     } else if (msg.content.startsWith(`${prefix}runcmd`)) {
