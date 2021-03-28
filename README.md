@@ -37,6 +37,7 @@ s!invite - sends the bot's invite link
  ```bash
  npm start
  ```
+Note: you may have to replace some server and channel ids in index.js
 
 # The original simp bot
 I reworte [Simp bot 1000](https://discordbotlist.com/bots/simp-bot-10000) because it was in too many servers and not verified, I tried hosting it myself, but it
