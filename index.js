@@ -690,6 +690,25 @@ client.on('guildCreate', async guild => {
   sendSI();
   client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, { type: 'WATCHING' });
   defC.send("Thanks for adding me UwU, you can see my commands by doing `s!help`");
-})
+});
+
+client.on('guildDelete', guild => {
+  let rmCh = client.channels.cache.get('821862422952411146')
+  let owner = guild.ownerID;
+  async function sendSI() {
+    let SIEm = new Discord.MessageEmbed()
+      .setTitle(guild.name)
+      .setDescription(guild.id)
+      .setColor('RANDOM')
+      .addFields(
+          { name: `Member count`, value: guild.memberCount, inline: true },
+          { name: `Owner ID`, value: owner, inline: true },
+          { name: `Invite`, value: inv, inline: true }
+        )
+          rmCh.send(SIEm);
+  }
+  sendSI();
+  client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, { type: 'WATCHING' });
+});
 
 client.login(config.token);
