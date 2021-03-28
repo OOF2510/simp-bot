@@ -579,6 +579,12 @@ client.on('message', async msg => {
       var uptime = os.uptime() / 60
       var up = Math.round(uptime);
 
+      let name = Distro.name;
+      if (!name) name = 'N/A';
+      let ver = Distro.version;
+      if (!ver) ver = 'N/A'
+      let distro = name + ver;
+
       let infoEm = new Discord.MessageEmbed()
         .setTitle('Info')
         .addFields(
