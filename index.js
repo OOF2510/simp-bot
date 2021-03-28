@@ -599,11 +599,10 @@ client.on('message', async msg => {
           { name:'Arch', value:'`' + os.arch() + '`', inline:true },
           { name:'Release', value:'`' + os.release() + '`', inline:true },
           { name:'Version', value:'`' + os.version() + '`', inline:true },
-          { name: 'Linux Distro', value:'`' + distro + '`' },
           { name: `Uptime`, value:'`' + up + 'mins`', inline:true  },
         )
         .setColor('RANDOM')
-        
+
       channel.send(infoEm)
     } else if (msg.content.startsWith(`${prefix}runcmd`)) {
       if (!allowed.includes(author.id)){
