@@ -221,7 +221,8 @@ client.on('message', async msg => {
           { name: 'Ping', value: `${prefix}ping - Pings the bot` },
           { name: 'Help', value: `${prefix}help <module> - Sends help embed` },
           { name: 'Info', value: `${prefix}info - Info about the bot and server` },
-          { name: `Avatar`, value: `${prefix}avatar [optional user mention] - Sends user's avatar` }
+          { name: `Avatar`, value: `${prefix}avatar [optional user mention] - Sends user's avatar` },
+          { name: `Support`, value: `${prefix}support - Join the support server!` }
         )
         .setColor('RANDOM')
 
@@ -233,6 +234,7 @@ client.on('message', async msg => {
         .addFields(
           { name: `Suggest`, value: `${prefix}suggest <suggestion> - Sends your suggestion to my devoloper` },
           { name: `Bug report`, value: `${prefix}bugreport <report> - Sends a bug report to my devoloper` },
+          { name: `Support`, value: `${prefix}support - Join the support server!` }
         )
         .setColor('RANDOM')
 
@@ -453,6 +455,7 @@ client.on('message', async msg => {
     } else if (msg.content.startsWith(`${prefix}suggest`)) {
       const sugCh = client.channels.cache.get('816823026384633887');
       const sugCh2 = client.channels.cache.get('816828453110022166');
+      const sugCh3 = client.channels.cache.get('825840766769299527');
       const sug = msg.content.replace(`${prefix}suggest`,``);
 
       const sugEm = new Discord.MessageEmbed()
@@ -466,6 +469,7 @@ client.on('message', async msg => {
 
       sugCh.send(sugEm);
       sugCh2.send(sugEm);
+      sugCh3.send(sugEm);
 
       msg.reply(`I have sent your suggestion, queen!`);
 
@@ -483,6 +487,7 @@ client.on('message', async msg => {
     } else if (msg.content.startsWith(`${prefix}bugreport`)) {
       const repCh = client.channels.cache.get('817885616791355404');
       const repCh2 = client.channels.cache.get('817885785637257216');
+      const repCh3 = client.channels.cache.get('825841694712004669');
       const rep = msg.content.replace(`${prefix}bugreport`,``);
 
       const repEm = new Discord.MessageEmbed()
@@ -496,6 +501,7 @@ client.on('message', async msg => {
 
       repCh.send(repEm);
       repCh2.send(repEm);
+      repCh3.send(repEm);
 
       msg.reply(`I have sent your bug report, queen!`);
     } else if (msg.content.startsWith(`${prefix}invite`)) {
@@ -665,6 +671,14 @@ ${out}` + '```')
         .setColor('RANDOM');
 
       channel.send(brChEm);
+    } else if (msg.content.startsWith(`${prefix}support`)) {
+      let supEm = new Discord.MessageEmbed()
+        .setAuthor(botNick, client.user.avatarURL)
+        .setTitle(`Join Simp Bot Support!`)
+        .setURL('https://discord.gg/zHtfa8GdPx')
+        .setTimestamp();
+
+      channel.send(supEm)
     } else return;
 });
 
