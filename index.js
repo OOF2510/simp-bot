@@ -95,7 +95,8 @@ client.on('message', async msg => {
         let response;
         let sender = msg.author;
 
-        const recipient = msg.mentions.users.first();
+        let recipient = msg.mentions.users.first();
+        if (!recipient) recipient = sender;
 
           let responses = [
             `${recipient} damn you thicc`,
@@ -126,7 +127,8 @@ client.on('message', async msg => {
         let response;
         let sender = msg.author;
 
-        const recipient = msg.mentions.users.first();
+        let recipient = msg.mentions.users.first();
+        if (!recipient) recipient = sender;
 
         let responses = [
             `${recipient} do- do you wanna go to the movies or something?`,
@@ -240,9 +242,9 @@ client.on('message', async msg => {
         .setAuthor(botNick, client.user.avatarURL())
         .setTitle('Help - Fun')
         .addFields(
-          { name: 'Simp', value: `${prefix}simp <user mention> - Sends a random simp image/message/gif` },
-          { name: 'Flirt', value: `${prefix}flirt <user mention> - Sends a random pick-up line.`},
-          { name: 'Frick', value: `${prefix}frick <user mention> - I think we all know what that does...` },
+          { name: 'Simp', value: `${prefix}simp [optional user mention] - Sends a random simp image/message/gif` },
+          { name: 'Flirt', value: `${prefix}flirt [optional user mention] - Sends a random pick-up line.`},
+          { name: 'Frick', value: `${prefix}frick [optional user mention] - I think we all know what that does...` },
           { name: 'Pp', value: `${prefix}pp [optional user mention] - Pp size` }
         )
         .setColor('RANDOM')
@@ -263,7 +265,8 @@ client.on('message', async msg => {
         let response;
         let sender = msg.author;
 
-        const recipient = msg.mentions.users.first();
+        let recipient = msg.mentions.users.first();
+        if (!recipient) recipient = guild.members.cache.random().user;
 
         let responses = [
             `${recipient} gets fricked by ${sender}... *How lewd...*`,

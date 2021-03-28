@@ -4,6 +4,7 @@
   "main": "index.js",
   "dependencies": {
     "@keyv/sqlite": "^2.0.2",
+    "@tomdev/discord.js-command-handler": "^1.3.8",
     "abbrev": "^1.1.1",
     "ansi-align": "^3.0.0",
     "ansi-regex": "^5.0.0",
