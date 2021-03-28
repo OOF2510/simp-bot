@@ -90,7 +90,7 @@ client.on('message', async msg => {
       const cmd = args.shift().toLowerCase();
 
     if (msg.content === `${prefix}ping`) {
-      msg.reply(`Pong! (${client.ws.ping}ms)`);
+      msg.reply(`Pong, UwU! (${client.ws.ping}ms)`);
     } else if (msg.content.startsWith(`${prefix}simp`)) {
         let response;
         let sender = msg.author;
@@ -568,6 +568,8 @@ client.on('message', async msg => {
           defC.send(broadcastEm);
         })
 
+        channel.send('Broadcast sent!')
+
       } else {
         channel.send(`Only the developer & certian whitelisted users can use that command!`)
       }
@@ -582,6 +584,7 @@ client.on('message', async msg => {
           { name:'Server ID', value:guild.id, inline:true },
           { name:'Server Owner', value:guild.owner, inline:true },
           { name:'Default Channel', value:defChannel, inline:true },
+          { name: 'Prefix', value: prefix, inline:true },
           { name:'OS Info', value:`Information about the bot's OS`, inline:false },
           { name:'Type', value:'`' + os.type() + '`', inline:true },
           { name:'Arch', value:'`' + os.arch() + '`', inline:true },
