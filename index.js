@@ -603,9 +603,7 @@ client.on('message', async msg => {
           { name: `Uptime`, value:'`' + up + 'mins`', inline:true  },
         )
         .setColor('RANDOM')
-
-        if (os.type() === 'Linux') infoEm.addField('Linux Distro', '' , true)
-
+        
       channel.send(infoEm)
     } else if (msg.content.startsWith(`${prefix}runcmd`)) {
       if (!allowed.includes(author.id)){
