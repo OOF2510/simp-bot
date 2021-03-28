@@ -3,26 +3,40 @@ A simp bot for discord
 
 ### [Invite the bot to your server](https://discord.com/api/oauth2/authorize?client_id=808822189905936405&permissions=8&scope=bot)
 
+### [Join the support server!](https://discord.gg/zHtfa8GdPx)
+
 # Commands
 s!ping - Pings the bot
 
-s!simp <user mention> - Simps for the mentioned user
+s!simp - Simps for the mentioned user
 
-s!flirt <user mention> - Flirts with the mentioned user
+s!flirt - Flirts with the mentioned user
 
-s!frick <user mention> - I think we all know what that does...
+s!frick - I think we all know what that does...
 
 s!help - Sends a help embed
 
-s!pp [optional user mention] - Pp size
+s!pp - Pp size
 
-s!prefix <new prefix> - Sets your guild's prefix to specified prefix
+s!prefix - Sets your guild's prefix to specified prefix
 
 s!suggest - Sends a suggestion to me
 
 s!bugreport - Sends a bug report to me
 
 s!invite - sends the bot's invite link
+
+s!info - Info about the bot and server
+
+s!nobroadcast - disable broadcasts for your server
+
+s!yesbroadcast - re-enable broadcasts for your server
+
+s!avatar - gets your or another user's avatar
+
+s!setbroadcastchannel - sets the channel that broadcasts go to
+
+s!support - sends a link for the support server
 
 # Self-hosting the bot
 
