@@ -83,9 +83,6 @@ client.on('message', async msg => {
       let me = client.users.cache.get('463119138500378624');
 
       if (author.bot) return;
-      
-      let blacklisted = blDB.get(author.id);
-      if (blacklisted) return channel.send(`You have been banned from using simp bot!`);
 
       if (channel.type === "dm") return;
 
@@ -93,6 +90,9 @@ client.on('message', async msg => {
       if (!prefix) prefix = config.prefix;
      
       if (!msg.content.startsWith(prefix)) return;
+      
+      let blacklisted = blDB.get(author.id);
+      if (blacklisted) return channel.send(`You have been banned from using simp bot!`);
 
       const args = msg.content.slice(prefix.length).trim().split(' ');
       const cmd = args.shift().toLowerCase();
