@@ -270,6 +270,20 @@ client.on('message', async msg => {
         .setColor('RANDOM')
 
         channel.send(miEm)
+      } else if (args[0].toLowerCase() == 'dev' || 'whitelisted') {
+        let deEm = new Discord.MessageEmbed()
+        .setAuthor(botNick, client.user.avatarURL())
+        .setTitle('Help - Dev-level/Whitelist-level commands')
+        .addFields(
+          { name: 'Restart', value: `${prefix}restart - Restarts the bot` },
+          { name: 'Serverlist', value: `${prefix}serverlist - Will show info about every server the bot is in. dont use in public channels!` },
+          { name: 'Run Command', value: `${prefix}runcmd <terminal command> - Will run the specified command and return the output` },
+          { name: 'Blacklist', value: `${prefix}broadcast <user mention> - Stops specified user from using the bot` },
+          { name: 'Un-Blacklist', value: `${prefix}unblacklist <user mention> - Un-blacklists the specified user` }
+        )
+        .setColor('RANDOM')
+
+        channel.send(deEm)
       } else return;
     } else if (msg.content.startsWith(`${prefix}frick`)) {
         let response;
@@ -723,7 +737,7 @@ ${out}` + '```')
       await blDB.delete(uID)
 
       msg.channel.send(`Unblacklisted ${u}`)
-     } else return;
+    } else return;
 });
 
 client.on('guildCreate', async guild => {
