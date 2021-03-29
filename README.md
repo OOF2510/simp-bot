@@ -1,4 +1,4 @@
-# simp-bot-rewritten
+# Simp Bot
 A simp bot for discord
 
 ### [Invite the bot to your server](https://discord.com/api/oauth2/authorize?client_id=808822189905936405&permissions=8&scope=bot)
