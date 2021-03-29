@@ -48,10 +48,12 @@ const client = new Discord.Client();
 const preDB = new Keyv('sqlite://./prefixes.sqlite');
 const nbDB = new Keyv('sqlite://./nobroad.sqlite');
 const bchDB = new Keyv('sqlite://./broadchs.db');
+const blDB = new Keyv('sqlite://./blacklist.db')
 
 preDB.on('error', err => console.error('Keyv error:', err));
 nbDB.on('error', err => console.error('Keyv error:', err));
 bchDB.on('error', err => console.error('Keyv error:', err));
+blDB.on('error', err => console.error('Keyv error', err));
 
 client.once("ready", () => {
     console.log("Ready!");
@@ -691,7 +693,33 @@ ${out}` + '```')
         .setTimestamp();
 
       channel.send(supEm)
-    } else return;
+    } else if (msg.content.startsWith(`${prefix}blacklist`)) {
+      if (!allowed.includes(author.id)) return msg.channel.send(`nononononononononono`)
+
+      let u = msg.mentions.users.first();
+      if (!u) return channel.send(`Mention a user!`)
+      let uID = u.id
+
+      let blacklisted = blDB.get(uID)
+      if (blacklisted) return channel.send(`${u} is already blacklisted!`)
+
+      await blDB.set(uID, 'true')
+
+      msg.channel.send(`Blacklisted ${u}`)
+    } else if (msg.content.startsWith(`${prefix}unblacklist`)) {
+      if (!allowed.includes(author.id)) return msg.channel.send(`nononononononononono`)
+
+      let u = msg.mentions.users.first();
+      if (!u) return channel.send(`Mention a user!`)
+      let uID = u.id
+
+      let blacklisted = blDB.get(uID)
+      if (!blacklisted) return channel.send(`${u} isn't blacklisted!`)
+
+      await blDB.delete(uID)
+
+      msg.channel.send(`Unblacklisted ${u}`)
+     } else return;
 });
 
 client.on('guildCreate', async guild => {
