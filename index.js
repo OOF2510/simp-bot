@@ -83,6 +83,10 @@ client.on('message', async msg => {
       let me = client.users.cache.get('463119138500378624');
 
       if (author.bot) return;
+      
+      let blacklisted = blDB.get(author.id);
+      if (blacklisted) return channel.send(`You have been banned from using simp bot!`);
+
       if (channel.type === "dm") return;
 
       let prefix = await preDB.get(guild.id);
