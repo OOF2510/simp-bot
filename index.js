@@ -14,6 +14,7 @@ const os = require('os');
 const { promisify } = require('util');
 const exec = promisify(require('child_process').exec);
 const Keyv = require('keyv');
+
 const prefix = config.prefix;
 
 var allowed = [
@@ -25,7 +26,6 @@ var allowed = [
 
 var Long = require('long');
 var bodyParser = require("body-parser");
-var Distro = require('linus');
 
 const getDefaultChannel = (guild) => {
 
@@ -599,17 +599,16 @@ client.on('message', async msg => {
       var uptime = os.uptime() / 60
       var up = Math.round(uptime);
 
-      let name = Distro.name;
-      if (!name) name = 'N/A';
-      let ver = Distro.version;
-      if (!ver) ver = 'N/A'
-      let distro = name + ver;
+      let Distro = await exec('hostnamectl | grep -i "operating system"');
+      if (!Distro) Distro = 'Error getting distro - Probably Windows';
+      let distro = Distro.stdout.trim().replace('Operating System: ', ``);
 
       let infoEm = new Discord.MessageEmbed()
         .setTitle('Info')
         .addFields(
           { name:'Server Info', value:'Information about the server'},
           { name:'Members', value:guild.memberCount, inline:true },
+          { name: 'Roles', value: guild.roles.cache.size, inline: true },
           { name:'Server ID', value:guild.id, inline:true },
           { name:'Server Owner', value:guild.owner, inline:true },
           { name:'Default Channel', value:defChannel, inline:true },
@@ -619,6 +618,7 @@ client.on('message', async msg => {
           { name:'Arch', value:'`' + os.arch() + '`', inline:true },
           { name:'Release', value:'`' + os.release() + '`', inline:true },
           { name:'Version', value:'`' + os.version() + '`', inline:true },
+          { name: 'Linux Distro', value: '`' + distro + '`', inline:true },
           { name: `Uptime`, value:'`' + up + 'mins`', inline:true  },
         )
         .setColor('RANDOM')
