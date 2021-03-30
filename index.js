@@ -768,7 +768,7 @@ client.on('guildCreate', async guild => {
 });
 
 client.on('guildDelete', guild => {
-  let rmCh = client.channels.cache.get('821862422952411146')
+  let rmCh = client.channels.cache.get('825803669688680488')
   let owner = guild.ownerID;
   async function sendSI() {
     let SIEm = new Discord.MessageEmbed()
