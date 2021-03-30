@@ -11,7 +11,7 @@ const session = require("express-session");
 const MemoryStore = require("memorystore");
 const memStore = MemoryStore(session);
 const os = require('os');
-const { promisify } = require('util');
+import { promisify } from "util";
 const exec = promisify(require('child_process').exec);
 const Keyv = require('keyv');
 
