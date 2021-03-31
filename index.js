@@ -530,6 +530,34 @@ client.on('message', async msg => {
       msg.reply(`Here's my invite link: <https://discord.com/api/oauth2/authorize?client_id=808822189905936405&permissions=8&scope=bot>`)
     } else if (msg.content.startsWith(`${prefix}serverlist`)) {
       if (allowed.includes(author.id)) {
+        if (args[0]) {
+          let user = client.users.cache.get(args[0])
+          if (!user) return channel.send('That is not a valid user id!')
+          client.guilds.cache.forEach(guild => {
+            let owner = guild.ownerID;
+            let defC = getDefaultChannel(guild);
+            if (!guild.owner == user) return;
+            async function sendSL() {
+            let invite = await defC.createInvite(
+              {
+                maxAge: 10 * 60 * 1000,
+                maxUses: 1
+              });
+              let inv = invite ? `<${invite}>` : `Error creating invite`
+              let devSlEm = new Discord.MessageEmbed()
+              .setTitle(guild.name)
+              .setDescription(guild.id)
+              .setColor('RANDOM')
+              .addFields(
+                { name: `Member count`, value: guild.memberCount, inline: true },
+                { name: `Owner ID`, value: owner, inline: true },
+                { name: `Invite`, value: inv, inline: true }
+              )
+              channel.send(devSlEm);
+            }
+            sendSL();
+          })
+        } else {
       channel.send(`${client.guilds.cache.size} servers:`)
 
       client.guilds.cache.forEach(guild => {
@@ -555,6 +583,7 @@ client.on('message', async msg => {
         }
         sendSL();
       })
+    }
       } else {
         let slEm = new Discord.MessageEmbed()
       .setTitle(`Server Count`)
