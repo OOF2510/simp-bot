@@ -573,7 +573,7 @@ client.on('message', async msg => {
 
         let broadcastEm = new Discord.MessageEmbed()
           .setColor('RANDOM')
-          .setTitle(`A message from my developer:`)
+          .setTitle(`A message from my team:`)
           .setDescription(message)
           .setFooter(author.username, author.avatarURL({ dynamic: true }))
           .setTimestamp();
