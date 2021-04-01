@@ -718,7 +718,7 @@ ${out}` + '```')
       if (!u) return channel.send(`Mention a user!`)
       let uID = u.id
 
-      let blacklisted = blDB.get(uID)
+      let blacklisted = await blDB.get(uID)
       if (blacklisted) return channel.send(`${u} is already blacklisted!`)
 
       await blDB.set(uID, 'true')
