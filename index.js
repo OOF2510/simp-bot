@@ -778,7 +778,6 @@ client.on('guildDelete', guild => {
       .addFields(
           { name: `Member count`, value: guild.memberCount, inline: true },
           { name: `Owner ID`, value: owner, inline: true },
-          { name: `Invite`, value: inv, inline: true }
         )
           rmCh.send(SIEm);
   }
