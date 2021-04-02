@@ -746,8 +746,15 @@ ${out}` + '```')
     } else if (msg.content.startsWith(`${prefix}noinfo`)) {
       if (msg.member.hasPermission('MANAGE_GUILD')) return channel.send('You dont have permission to do that!');
       let noInfo = await niDB.get(guild.id)
-      if (noInfo) return channel.send('You have already opted out of info!') 
+      if (noInfo) return channel.send('You have already opted out of info!')
+      let addCh = client.channels.cache.get('821862422952411146')
       await niDB.set(guild.id, 'true')
+      addCh.messages.fetch()
+        .then(messages => messages.filter(m => m.embeds.forEach((embed) => {
+          if (!embed.description == guild.id) return;
+          m.delete();
+        })))
+        .catch(console.error);
       channel.send('Done!')
     } else return;
 });
