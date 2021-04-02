@@ -1,4 +1,4 @@
 ## note: not in any particular order
 * Add something similar to [Dad bot's](https://github.com/AlekEagle/dadbot) d!embarrass command
 * Add web dashboard
-* Add command handler
+* Move to command handler

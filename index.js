@@ -27,6 +27,7 @@ var allowed = [
 
 var Long = require('long');
 var bodyParser = require("body-parser");
+const { valueOf } = require("is-ci");
 
 const getDefaultChannel = (guild) => {
 
@@ -206,6 +207,7 @@ client.on('message', async msg => {
             \`Fun\`
             \`Settings\`
             \`Info\`
+            \'Moderation\'
             \`Feedback\`
             \`Misc\`` },
           )
@@ -288,6 +290,16 @@ client.on('message', async msg => {
         .setColor('RANDOM')
 
         channel.send(deEm)
+      } else if (args[0].toLowerCase() == 'moderation' || 'mod') {
+        let modEm = new Discord.MessageEmbed()
+        .setAuthor(botNick, client.user.avatarURL())
+        .setTitle('Help - Moderation')
+        .addFields(
+          { name: `Purge`, value: `${prefix}purge <number of messages to delete> - Deletes specified number of messages` }
+        )
+        .setColor('RANDOM')
+
+        channel.send(modEm)
       } else return;
     } else if (msg.content.startsWith(`${prefix}frick`)) {
         let response;
@@ -757,6 +769,15 @@ ${out}` + '```')
         .catch(console.error);
       channel.send('Done!')
       addCh.send('Server requested info deletion!')
+    } else if (msg.content.startsWith(`${prefix}purge`)) {
+      if (!msg.member.hasPermission('MANAGE_MESSAGES')) return msg.channel.send('You dont have permissions to do that!')
+      if (!args[0]) return msg.channel.send(`Usage: ${prefix}purge <number of messages to purge>`)
+      var Num = args[0]
+      var num = Number(Num)
+      if (isNaN(num)) return msg.channel.send('Please provide a valid number!')
+      if (num > 1000) return msg.channel.send('Cannot delete more than 1000 messages at a time!')
+      channel.bulkDelete(num)
+        .then(msgs => channel.send(`Deleted ${msgs.size} messages!`))
     } else return;
 });
 
