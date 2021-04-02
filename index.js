@@ -14,6 +14,7 @@ const os = require('os');
 const { promisify } = require('util');
 const exec = promisify(require('child_process').exec);
 const Keyv = require('keyv');
+const { ReactionCollector } = require('discord.js-collector')
 
 const prefix = config.prefix;
 
@@ -48,12 +49,15 @@ const client = new Discord.Client();
 const preDB = new Keyv('sqlite://./prefixes.sqlite');
 const nbDB = new Keyv('sqlite://./nobroad.sqlite');
 const bchDB = new Keyv('sqlite://./broadchs.db');
-const blDB = new Keyv('sqlite://./blacklist.db')
+const blDB = new Keyv('sqlite://./blacklist.db');
+const niDB = new Keyv('sqlite://./noserverinfo.db')
 
 preDB.on('error', err => console.error('Keyv error:', err));
 nbDB.on('error', err => console.error('Keyv error:', err));
 bchDB.on('error', err => console.error('Keyv error:', err));
 blDB.on('error', err => console.error('Keyv error', err));
+niDB.on('error', err => console.error('Keyv error', err));
+
 
 client.once("ready", () => {
     console.log("Ready!");
@@ -533,6 +537,8 @@ client.on('message', async msg => {
       channel.send(`${client.guilds.cache.size} servers:`)
 
       client.guilds.cache.forEach(guild => {
+        let noInfo = await niDB.get(guild.id)
+        if (noInfo) return msg.channel.send("This server requested for info to not be shared!")
         let owner = guild.ownerID;
         let defC = getDefaultChannel(guild);
         async function sendSL() {
@@ -743,6 +749,7 @@ ${out}` + '```')
 client.on('guildCreate', async guild => {
   let addCh = client.channels.cache.get('821862422952411146')
   let owner = guild.ownerID;
+  let own = guild.owner
   let defC = getDefaultChannel(guild);
   async function sendSI() {
     let invite = await defC.createInvite(
@@ -760,7 +767,23 @@ client.on('guildCreate', async guild => {
           { name: `Owner ID`, value: owner, inline: true },
           { name: `Invite`, value: inv, inline: true }
         )
-          addCh.send(SIEm);
+          let em = await addCh.send(SIEm);
+
+          let delEm = new Discord.MessageEmbed()
+            .setTitle('Thanks for adding me to your server!')
+            .setDescription('Info about your server, including invite link gets sent to my team when you add me to your server, would you like this to be deleted?')
+            .setFooter('React with ✅ to delete this info, and with ❌ to keep the info, Note: the owner of the server must react.')
+            .setTimestamp();
+
+         const botMsg = defC.send(delEm);
+
+         if (await ReactionCollector.yesNoQuestion({ botMessage, user: own })) {
+           await await niDB.set(guild.id, 'true');
+           await em.delete();
+           await botMsg.channel.send('Done!');
+         } else {
+           await botMsg.channel.send('Ok!');
+      }
   }
   sendSI();
   client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, { type: 'WATCHING' });
