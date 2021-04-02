@@ -744,7 +744,7 @@ ${out}` + '```')
 
       msg.channel.send(`Unblacklisted ${u}`)
     } else if (msg.content.startsWith(`${prefix}noinfo`)) {
-      if (msg.member.hasPermission('MANAGE_GUILD')) return channel.send('You dont have permission to do that!');
+      if (!msg.member.hasPermission('MANAGE_GUILD')) return channel.send('You dont have permission to do that!');
       let noInfo = await niDB.get(guild.id)
       if (noInfo) return channel.send('You have already opted out of info!')
       let addCh = client.channels.cache.get('821862422952411146')
