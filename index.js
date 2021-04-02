@@ -536,7 +536,7 @@ client.on('message', async msg => {
       if (allowed.includes(author.id)) {
       channel.send(`${client.guilds.cache.size} servers:`)
 
-      client.guilds.cache.forEach(guild => {
+      client.guilds.cache.forEach(async guild => {
         let noInfo = await niDB.get(guild.id)
         if (noInfo) return msg.channel.send("This server requested for info to not be shared!")
         let owner = guild.ownerID;
