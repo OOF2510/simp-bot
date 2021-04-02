@@ -743,6 +743,12 @@ ${out}` + '```')
       await blDB.delete(uID)
 
       msg.channel.send(`Unblacklisted ${u}`)
+    } else if (msg.content.startsWith(`${prefix}noinfo`)) {
+      if (msg.member.hasPermission('MANAGE_GUILD')) return channel.send('You dont have permission to do that!');
+      let noInfo = await niDB.get(guild.id)
+      if (noInfo) return channel.send('You have already opted out of info!') 
+      await niDB.set(guild.id, 'true')
+      channel.send('Done!')
     } else return;
 });
 
@@ -772,18 +778,10 @@ client.on('guildCreate', async guild => {
           let delEm = new Discord.MessageEmbed()
             .setTitle('Thanks for adding me to your server!')
             .setDescription('Info about your server, including invite link gets sent to my team when you add me to your server, would you like this to be deleted?')
-            .setFooter('React with ✅ to delete this info, and with ❌ to keep the info, Note: the owner of the server must react.')
+            .setFooter('You can use the `noinfo` command to have this data deleted')
             .setTimestamp();
 
-         const botMsg = defC.send(delEm);
-
-         if (await ReactionCollector.yesNoQuestion({ botMessage, user: own })) {
-           await await niDB.set(guild.id, 'true');
-           await em.delete();
-           await botMsg.channel.send('Done!');
-         } else {
-           await botMsg.channel.send('Ok!');
-      }
+         defC.send(delEm);
   }
   sendSI();
   client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, { type: 'WATCHING' });
