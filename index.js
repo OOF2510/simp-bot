@@ -756,6 +756,7 @@ ${out}` + '```')
         })))
         .catch(console.error);
       channel.send('Done!')
+      addCh.send('Server requested info deletion!')
     } else return;
 });
 
