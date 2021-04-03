@@ -85,7 +85,7 @@ module.exports = {
         let distro = Distro.stdout.trim().replace('Operating System: ', ``);
 
         let NodeV = await exec('node -v');
-        let nodeV = NodeV.stdout.trim(); 
+        let nodeV = NodeV.stdout.trim();
 
         let DjsV = await exec('npm view discord.js version');
         let djsV = DjsV.stdout.trim()
