@@ -60,6 +60,7 @@ blDB.on('error', err => console.error('Keyv error', err));
 niDB.on('error', err => console.error('Keyv error', err));
 
 client.commands = new Discord.Collection();
+
 const cmdFiles = fs.readdirSync('./cmds').filter(file => file.endsWith('.js'));
 
 for (const file of cmdFiles) {
