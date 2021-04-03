@@ -6,9 +6,9 @@ A simp bot for discord
 ### [Join the support server!](https://discord.gg/zHtfa8GdPx)
 
 # Commands
-s!ping - Pings the bot
+s!avatar - gets your or another user's avatar
 
-s!simp - Simps for the mentioned user
+s!bugreport - Sends a bug report to the simp bot team
 
 s!flirt - Flirts with the mentioned user
 
@@ -16,27 +16,29 @@ s!frick - I think we all know what that does...
 
 s!help - Sends a help embed
 
-s!pp - Pp size
-
-s!prefix - Sets your guild's prefix to specified prefix
-
-s!suggest - Sends a suggestion to me
-
-s!bugreport - Sends a bug report to me
+s!info - Info about the bot and server
 
 s!invite - sends the bot's invite link
 
-s!info - Info about the bot and server
-
 s!nobroadcast - disable broadcasts for your server
 
-s!yesbroadcast - re-enable broadcasts for your server
+s!ping - Pings the bot
 
-s!avatar - gets your or another user's avatar
+s!pp - Pp size
+
+s!prefix - Sets your guild's prefix to specified prefi
+
+s!purge - Bulk deletes the specified number of messages
 
 s!setbroadcastchannel - sets the channel that broadcasts go to
 
+s!simp - Simps for the mentioned user
+
+s!suggest - Sends a suggestion to me
+
 s!support - sends a link for the support server
+
+s!yesbroadcast - re-enable broadcasts for your server
 
 # Self-hosting the bot
 
