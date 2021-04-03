@@ -73,6 +73,9 @@ client.once("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
   console.log(client);
   client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, { type: 'WATCHING' });
+  client.commands.forEach(cmd => {
+    console.log(`🗸 Loaded ${cmd.name}`)
+  })
   console.log(client.user.tag);
 });
 
