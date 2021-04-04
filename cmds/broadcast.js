@@ -72,10 +72,10 @@ module.exports = {
         if (hasBrCh) defC = client.channels.cache.get(hasBrCh);
         else defC = getDefaultChannel(guild);
 
-        if (!defC.permissionsFor(botMem).has('SEND_MESSAGES')) return;
-        if (defC.type == 'text' || 'news') continue;
-        else return;
-        defC.send(broadcastEm);
+        if (!defC.permissionsFor(botMem).has("SEND_MESSAGES")) return;
+        if (defC.type == "text" || "news") {
+          defC.send(broadcastEm);
+        } else return;
       });
 
       channel.send("Broadcast sent!");
