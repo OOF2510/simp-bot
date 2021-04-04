@@ -56,5 +56,5 @@ s!yesbroadcast - re-enable broadcasts for your server
 Note: you may have to replace some server and channel ids in index.js
 
 # The original simp bot
-I reworte [Simp bot 10000](https://discordbotlist.com/bots/simp-bot-10000) because it was in too many servers and not verified, I tried hosting it myself, but it
+I reworte [Simp bot 10000](https://discordbotlist.com/bots/simp-bot-10000) because it wouldn't let me add it to my server, I tried hosting it myself, but it
 kept crashing, so I rewrote the code and added a bunch of stuff of my own onto it. Simp bot 10000 seems to be abonded now and is never online.
