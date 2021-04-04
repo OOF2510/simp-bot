@@ -51,7 +51,8 @@ const getDefaultChannel = (guild) => {
     .first();
 };
 
-const client = new Discord.Client();
+const intents = new Discord.Intents(Discord.Intents.NON_PRIVILEGED)
+const client = new Discord.Client({ intents: intents });
 
 const preDB = new Keyv("sqlite://./prefixes.sqlite");
 const nbDB = new Keyv("sqlite://./nobroad.sqlite");
@@ -94,7 +95,7 @@ client.on("message", async (msg) => {
   let author = msg.author;
   let server = msg.guild;
   let guild = server;
-  let botMem = server.member(client.user);
+  let botMem = server.members.cache.get(client.user.id);
   let botNick = botMem ? botMem.displayName : client.user.username;
   let testServer = client.guilds.cache.get("786722539250516007");
   let defChannel = getDefaultChannel(server);
