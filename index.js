@@ -1,22 +1,11 @@
 const Discord = require("discord.js");
 const config = require("./config.json");
-const express = require("express");
-const url = require("url");
-const path = require("path");
 const fs = require("fs");
-const passport = require("passport");
-const disPassport = require("passport-discord");
-const Strategy = disPassport.Strategy;
-const session = require("express-session");
-const MemoryStore = require("memorystore");
-const memStore = MemoryStore(session);
 const os = require("os");
 const { promisify } = require("util");
 const exec = promisify(require("child_process").exec);
 const Keyv = require("keyv");
 const { ReactionCollector } = require("discord.js-collector");
-
-let prefix = config.prefix;
 
 var allowed = [
   "463119138500378624", //me
@@ -26,7 +15,6 @@ var allowed = [
 ];
 
 var Long = require("long");
-var bodyParser = require("body-parser");
 
 const getDefaultChannel = (guild) => {
   const generalChannel = guild.channels.cache.find(
@@ -51,7 +39,7 @@ const getDefaultChannel = (guild) => {
     .first();
 };
 
-const intents = new Discord.Intents(Discord.Intents.NON_PRIVILEGED)
+const intents = new Discord.Intents(Discord.Intents.NON_PRIVILEGED);
 const client = new Discord.Client({ intents: intents });
 
 const preDB = new Keyv("sqlite://./prefixes.sqlite");
@@ -155,26 +143,12 @@ client.on("message", async (msg) => {
 });
 
 client.on("guildCreate", async (guild) => {
-  let addCh = client.channels.cache.get("821862422952411146");
-  let owner = guild.ownerID;
-  let own = guild.owner;
   let defC = getDefaultChannel(guild);
   async function sendSI() {
     let invite = await defC.createInvite({
       maxAge: 10 * 60 * 1000,
       maxUses: 1,
     });
-    let inv = invite ? `<${invite}>` : `Error creating invite`;
-    let SIEm = new Discord.MessageEmbed()
-      .setTitle(guild.name)
-      .setDescription(guild.id)
-      .setColor("RANDOM")
-      .addFields(
-        { name: `Member count`, value: guild.memberCount, inline: true },
-        { name: `Owner ID`, value: owner, inline: true },
-        { name: `Invite`, value: inv, inline: true }
-      );
-    let em = await addCh.send(SIEm);
 
     let delEm = new Discord.MessageEmbed()
       .setTitle("Thanks for adding me to your server!")
