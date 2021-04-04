@@ -28,7 +28,7 @@ module.exports = {
     const repCh = client.channels.cache.get("817885616791355404");
     const repCh2 = client.channels.cache.get("817885785637257216");
     const repCh3 = client.channels.cache.get("825841694712004669");
-    const rep = msg.content.replace(`${prefix}bugreport`, ``);
+    const rep = args.join(" ");
 
     const repEm = new Discord.MessageEmbed()
       .setTitle(`New bug report`)

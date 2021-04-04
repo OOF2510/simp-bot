@@ -25,7 +25,7 @@ const getDefaultChannel = (guild) => {
 
 module.exports = {
   name: "broadcast",
-  aliases: ['br', 'broad', 'brc'],
+  aliases: ["br", "broad", "brc"],
   execute(
     msg,
     args,
@@ -52,7 +52,7 @@ module.exports = {
     blDB
   ) {
     if (allowed.includes(author.id)) {
-      let message = args.join(" ")
+      let message = args.join(" ");
 
       if (!message) return msg.channel.send(`Can't send an empty message!`);
 
@@ -72,6 +72,9 @@ module.exports = {
         if (hasBrCh) defC = client.channels.cache.get(hasBrCh);
         else defC = getDefaultChannel(guild);
 
+        if (!defC.permissionsFor(botMem).has('SEND_MESSAGES')) return;
+        if (defC.type == 'text' || 'news') continue;
+        else return;
         defC.send(broadcastEm);
       });
 
