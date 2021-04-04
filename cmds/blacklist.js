@@ -1,5 +1,6 @@
 module.exports = {
   name: "blacklist",
+  aliases: ['bl'],
   async execute(
     msg,
     args,

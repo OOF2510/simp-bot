@@ -1,5 +1,6 @@
 module.exports = {
   name: "nobroadcast",
+  aliases: ["nbr"],
   async execute(
     msg,
     args,

@@ -1,5 +1,6 @@
 module.exports = {
   name: "setbroadcastchannel",
+  aliases: ["brch", "broadch", "broadcastchannel", "setbrch", "sbrch"],
   async execute(
     msg,
     args,

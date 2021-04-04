@@ -1,5 +1,6 @@
 module.exports = {
   name: "unblacklist",
+  aliases: ["ubl", "unbl"],
   async execute(
     msg,
     args,

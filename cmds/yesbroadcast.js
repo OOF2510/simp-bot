@@ -1,5 +1,6 @@
 module.exports = {
   name: "yesbroadcast",
+  aliases: ["ybr", "yesbr"],
   async execute(
     msg,
     args,

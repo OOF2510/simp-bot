@@ -55,6 +55,7 @@ blDB.on("error", (err) => console.error("Keyv error", err));
 niDB.on("error", (err) => console.error("Keyv error", err));
 
 client.commands = new Discord.Collection();
+client.aliases = new Discord.Collection();
 
 const cmdFiles = fs
   .readdirSync("./cmds")
@@ -63,6 +64,11 @@ const cmdFiles = fs
 for (const file of cmdFiles) {
   const cmd = require(`./cmds/${file}`);
   client.commands.set(cmd.name, cmd);
+  if (cmd.aliases) {
+    cmd.aliases.forEach((alias) => {
+      client.aliases.set(alias, cmd.name);
+    });
+  } else continue;
 }
 
 client.once("ready", () => {
@@ -103,8 +109,9 @@ client.on("message", async (msg) => {
     return channel.send(`You have been banned from using simp bot!`);
 
   const args = msg.content.slice(prefix.length).trim().split(" ");
-  const cmd = args.shift().toLowerCase();
+  let cmd = args.shift().toLowerCase();
 
+  if (client.aliases.has(cmd)) cmd = client.aliases.get(cmd);
   if (!client.commands.has(cmd)) return;
   try {
     client.commands

@@ -1,5 +1,6 @@
 module.exports = {
   name: "avatar",
+  aliases: ["av"],
   execute(
     msg,
     args,

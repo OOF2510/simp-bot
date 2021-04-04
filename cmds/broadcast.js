@@ -25,6 +25,7 @@ const getDefaultChannel = (guild) => {
 
 module.exports = {
   name: "broadcast",
+  aliases: ['br', 'broad', 'brc'],
   execute(
     msg,
     args,
