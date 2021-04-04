@@ -1,3 +1,5 @@
+var Long = require('long');
+
 const getDefaultChannel = (guild) => {
 
     const generalChannel = guild.channels.cache.find(channel => channel.name === "general");
