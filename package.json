@@ -4,7 +4,8 @@
   "description": "A discord bot that is a simp",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -18,20 +19,14 @@
   "homepage": "https://github.com/OOF2510/simp-bot-rewritten#readme",
   "dependencies": {
     "@keyv/sqlite": "^2.0.2",
-    "body-parser": "^1.19.0",
     "child_process": "^1.0.2",
     "discord.js-collector": "^1.8.9",
-    "express": "^4.17.1",
-    "express-session": "^1.17.1",
     "fs": "*",
     "keyv": "^4.0.3",
     "long": "^4.0.0",
-    "memorystore": "^1.6.6",
+    "nodemon": "^2.0.7",
     "os": "^0.1.1",
-    "passport": "^0.4.1",
-    "passport-discord": "^0.1.4",
     "path": "^0.12.7",
-    "url": "^0.11.0",
     "util": "^0.12.3"
   },
   "devDependencies": {
