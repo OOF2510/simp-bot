@@ -1,94 +1,104 @@
 const Discord = require("discord.js");
 const config = require("./config.json");
-const express = require('express');
-const url = require('url');
+const express = require("express");
+const url = require("url");
 const path = require("path");
 const fs = require("fs");
 const passport = require("passport");
-const disPassport = require('passport-discord');
+const disPassport = require("passport-discord");
 const Strategy = disPassport.Strategy;
 const session = require("express-session");
 const MemoryStore = require("memorystore");
 const memStore = MemoryStore(session);
-const os = require('os');
-const { promisify } = require('util');
-const exec = promisify(require('child_process').exec);
-const Keyv = require('keyv');
-const { ReactionCollector } = require('discord.js-collector')
+const os = require("os");
+const { promisify } = require("util");
+const exec = promisify(require("child_process").exec);
+const Keyv = require("keyv");
+const { ReactionCollector } = require("discord.js-collector");
 
 let prefix = config.prefix;
 
 var allowed = [
-  '463119138500378624', //me
-  '760473112613093436', //gavin
-  '793910661293801524', //robbie
-  '463119267832004620' //noah
-]
+  "463119138500378624", //me
+  "760473112613093436", //gavin
+  "793910661293801524", //robbie
+  "463119267832004620", //noah
+];
 
-var Long = require('long');
+var Long = require("long");
 var bodyParser = require("body-parser");
 
 const getDefaultChannel = (guild) => {
-
-  const generalChannel = guild.channels.cache.find(channel => channel.name === "general");
-  if (generalChannel)
-    return generalChannel;
+  const generalChannel = guild.channels.cache.find(
+    (channel) => channel.name === "general"
+  );
+  if (generalChannel) return generalChannel;
 
   if (guild.channels.cache.has(guild.id))
-    return guild.channels.cache.get(guild.id)
+    return guild.channels.cache.get(guild.id);
 
   return guild.channels.cache
-    .filter(c => c.type === "text" &&
-      c.permissionsFor(guild.client.user).has("SEND_MESSAGES"))
-    .sort((a, b) => a.position - b.position ||
-      Long.fromString(a.id).sub(Long.fromString(b.id)).toNumber())
+    .filter(
+      (c) =>
+        c.type === "text" &&
+        c.permissionsFor(guild.client.user).has("SEND_MESSAGES")
+    )
+    .sort(
+      (a, b) =>
+        a.position - b.position ||
+        Long.fromString(a.id).sub(Long.fromString(b.id)).toNumber()
+    )
     .first();
-}
+};
 
 const client = new Discord.Client();
 
-const preDB = new Keyv('sqlite://./prefixes.sqlite');
-const nbDB = new Keyv('sqlite://./nobroad.sqlite');
-const bchDB = new Keyv('sqlite://./broadchs.db');
-const blDB = new Keyv('sqlite://./blacklist.db');
-const niDB = new Keyv('sqlite://./noserverinfo.db');
+const preDB = new Keyv("sqlite://./prefixes.sqlite");
+const nbDB = new Keyv("sqlite://./nobroad.sqlite");
+const bchDB = new Keyv("sqlite://./broadchs.db");
+const blDB = new Keyv("sqlite://./blacklist.db");
+const niDB = new Keyv("sqlite://./noserverinfo.db");
 
-preDB.on('error', err => console.error('Keyv error:', err));
-nbDB.on('error', err => console.error('Keyv error:', err));
-bchDB.on('error', err => console.error('Keyv error:', err));
-blDB.on('error', err => console.error('Keyv error', err));
-niDB.on('error', err => console.error('Keyv error', err));
+preDB.on("error", (err) => console.error("Keyv error:", err));
+nbDB.on("error", (err) => console.error("Keyv error:", err));
+bchDB.on("error", (err) => console.error("Keyv error:", err));
+blDB.on("error", (err) => console.error("Keyv error", err));
+niDB.on("error", (err) => console.error("Keyv error", err));
 
 client.commands = new Discord.Collection();
 
-const cmdFiles = fs.readdirSync('./cmds').filter(file => file.endsWith('.js'));
+const cmdFiles = fs
+  .readdirSync("./cmds")
+  .filter((file) => file.endsWith(".js"));
 
 for (const file of cmdFiles) {
-  const cmd = require(`./cmds/${file}`)
-  client.commands.set(cmd.name, cmd)
+  const cmd = require(`./cmds/${file}`);
+  client.commands.set(cmd.name, cmd);
 }
 
 client.once("ready", () => {
   console.log("Ready!");
   console.log(`Logged in as ${client.user.tag}!`);
+  client.commands.forEach((cmd) => {
+    console.log(`🗸 Loaded ${cmd.name}`);
+  });
   console.log(client);
-  client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, { type: 'WATCHING' });
-  client.commands.forEach(cmd => {
-    console.log(`🗸 Loaded ${cmd.name}`)
-  })
+  client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, {
+    type: "WATCHING",
+  });
   console.log(client.user.tag);
 });
 
-client.on('message', async msg => {
+client.on("message", async (msg) => {
   let channel = msg.channel;
   let author = msg.author;
   let server = msg.guild;
   let guild = server;
   let botMem = server.member(client.user);
   let botNick = botMem ? botMem.displayName : client.user.username;
-  let testServer = client.guilds.cache.get('786722539250516007');
+  let testServer = client.guilds.cache.get("786722539250516007");
   let defChannel = getDefaultChannel(server);
-  let me = client.users.cache.get('463119138500378624');
+  let me = client.users.cache.get("463119138500378624");
 
   if (author.bot) return;
 
@@ -100,96 +110,108 @@ client.on('message', async msg => {
   if (!msg.content.startsWith(prefix)) return;
 
   let blacklisted = await blDB.get(author.id);
-  if (blacklisted) return channel.send(`You have been banned from using simp bot!`);
+  if (blacklisted)
+    return channel.send(`You have been banned from using simp bot!`);
 
-  const args = msg.content.slice(prefix.length).trim().split(' ');
+  const args = msg.content.slice(prefix.length).trim().split(" ");
   const cmd = args.shift().toLowerCase();
 
   if (!client.commands.has(cmd)) return;
   try {
-    client.commands.get(cmd).execute(
-      msg,
-      args,
-      client,
-      channel,
-      author,
-      server,
-      guild,
-      botMem,
-      botNick,
-      testServer,
-      defChannel,
-      me,
-      allowed,
-      prefix,
-      config,
-      exec,
-      os,
-      Discord,
-      preDB,
-      nbDB,
-      niDB,
-      bchDB,
-      blDB
-    );
+    client.commands
+      .get(cmd)
+      .execute(
+        msg,
+        args,
+        client,
+        channel,
+        author,
+        server,
+        guild,
+        botMem,
+        botNick,
+        testServer,
+        defChannel,
+        me,
+        allowed,
+        prefix,
+        config,
+        exec,
+        os,
+        Discord,
+        preDB,
+        nbDB,
+        niDB,
+        bchDB,
+        blDB
+      );
   } catch (error) {
     console.error(error);
-    msg.reply(`An error occured executing that command! Try again! (\`${error}\`)`)
+    msg.reply(
+      `An error occured executing that command! Try again! (\`${error}\`)`
+    );
   }
 });
 
-client.on('guildCreate', async guild => {
-  let addCh = client.channels.cache.get('821862422952411146')
+client.on("guildCreate", async (guild) => {
+  let addCh = client.channels.cache.get("821862422952411146");
   let owner = guild.ownerID;
-  let own = guild.owner
+  let own = guild.owner;
   let defC = getDefaultChannel(guild);
   async function sendSI() {
-    let invite = await defC.createInvite(
-      {
-        maxAge: 10 * 60 * 1000,
-        maxUses: 1
-      });
-    let inv = invite ? `<${invite}>` : `Error creating invite`
+    let invite = await defC.createInvite({
+      maxAge: 10 * 60 * 1000,
+      maxUses: 1,
+    });
+    let inv = invite ? `<${invite}>` : `Error creating invite`;
     let SIEm = new Discord.MessageEmbed()
       .setTitle(guild.name)
       .setDescription(guild.id)
-      .setColor('RANDOM')
+      .setColor("RANDOM")
       .addFields(
         { name: `Member count`, value: guild.memberCount, inline: true },
         { name: `Owner ID`, value: owner, inline: true },
         { name: `Invite`, value: inv, inline: true }
-      )
+      );
     let em = await addCh.send(SIEm);
 
     let delEm = new Discord.MessageEmbed()
-      .setTitle('Thanks for adding me to your server!')
-      .setDescription('Info about your server, including invite link gets sent to my team when you add me to your server, would you like this to be deleted?')
-      .setFooter('You can use the `noinfo` command to have this data deleted')
+      .setTitle("Thanks for adding me to your server!")
+      .setDescription(
+        "Info about your server, including invite link gets sent to my team when you add me to your server, would you like this to be deleted?"
+      )
+      .setFooter("You can use the `noinfo` command to have this data deleted")
       .setTimestamp();
 
     defC.send(delEm);
   }
   sendSI();
-  client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, { type: 'WATCHING' });
-  defC.send("Thanks for adding me UwU, you can see my commands by doing `s!help`");
+  client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, {
+    type: "WATCHING",
+  });
+  defC.send(
+    "Thanks for adding me UwU, you can see my commands by doing `s!help`"
+  );
 });
 
-client.on('guildDelete', guild => {
-  let rmCh = client.channels.cache.get('825803669688680488')
+client.on("guildDelete", (guild) => {
+  let rmCh = client.channels.cache.get("825803669688680488");
   let owner = guild.ownerID;
   async function sendSI() {
     let SIEm = new Discord.MessageEmbed()
       .setTitle(guild.name)
       .setDescription(guild.id)
-      .setColor('RANDOM')
+      .setColor("RANDOM")
       .addFields(
         { name: `Member count`, value: guild.memberCount, inline: true },
-        { name: `Owner ID`, value: owner, inline: true },
-      )
+        { name: `Owner ID`, value: owner, inline: true }
+      );
     rmCh.send(SIEm);
   }
   sendSI();
-  client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, { type: 'WATCHING' });
+  client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, {
+    type: "WATCHING",
+  });
 });
 
 client.login(config.token);
