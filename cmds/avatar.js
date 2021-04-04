@@ -25,10 +25,9 @@ module.exports = {
     bchDB,
     blDB
   ) {
-    let user = author;
-    let mem = msg.member;
-    if (msg.mentions.users) user = msg.mentions.users.first();
-    if (msg.mentions.users) mem = msg.mentions.members.first();
+    let user = msg.mentions.users.first();
+    if (!user) user = author;
+    let mem = guild.members.cache.get(user.id);
 
     let userNick = mem ? mem.displayName : user.username;
 
