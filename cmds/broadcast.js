@@ -1,3 +1,20 @@
+const getDefaultChannel = (guild) => {
+
+    const generalChannel = guild.channels.cache.find(channel => channel.name === "general");
+    if (generalChannel)
+        return generalChannel;
+
+    if (guild.channels.cache.has(guild.id))
+        return guild.channels.cache.get(guild.id)
+
+    return guild.channels.cache
+        .filter(c => c.type === "text" &&
+            c.permissionsFor(guild.client.user).has("SEND_MESSAGES"))
+        .sort((a, b) => a.position - b.position ||
+            Long.fromString(a.id).sub(Long.fromString(b.id)).toNumber())
+        .first();
+}
+
 module.exports = {
     name: 'broadcast',
     execute(
