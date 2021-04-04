@@ -52,7 +52,7 @@ module.exports = {
     blDB
   ) {
     if (allowed.includes(author.id)) {
-      let message = msg.content.replace(`${prefix}broadcast`, ``);
+      let message = args.join(" ")
 
       if (!message) return msg.channel.send(`Can't send an empty message!`);
 

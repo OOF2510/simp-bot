@@ -108,7 +108,7 @@ client.on("message", async (msg) => {
   if (blacklisted)
     return channel.send(`You have been banned from using simp bot!`);
 
-  const args = msg.content.slice(prefix.length).trim().split(" ");
+  const args = msg.content.slice(prefix.length).trim().split(/ +/g);
   let cmd = args.shift().toLowerCase();
 
   if (client.aliases.has(cmd)) cmd = client.aliases.get(cmd);
