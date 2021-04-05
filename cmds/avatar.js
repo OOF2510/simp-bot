@@ -32,7 +32,7 @@ module.exports = {
 
     let userNick = mem ? mem.displayName : user.username;
 
-    let av = user.avatarURL({ dynamic: true, size: 64 });
+    let av = user.avatarURL({ dynamic: true, size: 2048 });
 
     let avEm = new Discord.MessageEmbed()
       .setTitle(`${userNick}'s Avatar`)
