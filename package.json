@@ -30,6 +30,6 @@
     "util": "^0.12.3"
   },
   "devDependencies": {
-    "discord.js": "github:discordjs/discord.js#pull/5448/head"
+    "discord.js": "https://github.com/discordjs/discord.js/tarball/master"
   }
 }
