@@ -25,7 +25,7 @@ module.exports = {
     bchDB,
     blDB
   ) {
-    if (!msg.member.hasPermission("MANAGE_GUILD"))
+    if (!msg.member.permissions.has("MANAGE_GUILD"))
       return msg.reply("You don't have permissions to do that!");
     if (!args[0]) return msg.reply(`Usage: ${prefix}prefix <new prefix>`);
 
