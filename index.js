@@ -93,6 +93,8 @@ client.on("message", async (msg) => {
   let defChannel = getDefaultChannel(server);
   let me = client.users.cache.get("463119138500378624");
 
+  let niDB = 'removed'
+
   if (author.bot) return;
 
   if (channel.type === "dm") return;
