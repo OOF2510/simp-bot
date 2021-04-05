@@ -151,23 +151,6 @@ client.on("message", async (msg) => {
 
 client.on("guildCreate", async (guild) => {
   let defC = getDefaultChannel(guild);
-  async function sendSI() {
-    let invite = await defC.createInvite({
-      maxAge: 10 * 60 * 1000,
-      maxUses: 1,
-    });
-
-    let delEm = new Discord.MessageEmbed()
-      .setTitle("Thanks for adding me to your server!")
-      .setDescription(
-        "Info about your server, including invite link gets sent to my team when you add me to your server, would you like this to be deleted?"
-      )
-      .setFooter("You can use the `noinfo` command to have this data deleted")
-      .setTimestamp();
-
-    defC.send(delEm);
-  }
-  sendSI();
   client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, {
     type: "WATCHING",
   });
@@ -177,20 +160,6 @@ client.on("guildCreate", async (guild) => {
 });
 
 client.on("guildDelete", (guild) => {
-  let rmCh = client.channels.cache.get("825803669688680488");
-  let owner = guild.ownerID;
-  async function sendSI() {
-    let SIEm = new Discord.MessageEmbed()
-      .setTitle(guild.name)
-      .setDescription(guild.id)
-      .setColor("RANDOM")
-      .addFields(
-        { name: `Member count`, value: guild.memberCount, inline: true },
-        { name: `Owner ID`, value: owner, inline: true }
-      );
-    rmCh.send(SIEm);
-  }
-  sendSI();
   client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, {
     type: "WATCHING",
   });
