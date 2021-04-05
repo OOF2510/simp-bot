@@ -25,7 +25,7 @@ module.exports = {
     bchDB,
     blDB
   ) {
-    if (!msg.member.hasPermission("MANAGE_GUILD"))
+    if (!msg.member.permissions.has("MANAGE_GUILD"))
       return channel.send("You dont have permission to do that!");
     let noInfo = await niDB.get(guild.id);
     if (noInfo) return channel.send("You have already opted out of info!");
