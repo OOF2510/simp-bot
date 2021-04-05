@@ -29,9 +29,12 @@ module.exports = {
       msg.reply(`Restarting UwU!`);
       client.destroy();
       client.login(config.token);
-      client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, {
-        type: "WATCHING",
-      });
+      client.user.setActivity(
+        `${client.guilds.cache.size} servers & ${client.users.cache.size} users! | s!help`,
+        {
+          type: "WATCHING",
+        }
+      );
       console.log(`Restarted because ${msg.author.username} told me to!`);
       setTimeout(() => {
         msg.channel.send(`Successfully restarted!`);

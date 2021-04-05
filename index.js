@@ -76,9 +76,12 @@ client.once("ready", () => {
     console.log(`🗸 Loaded ${cmd.name}`);
   });
   console.log(client);
-  client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, {
-    type: "WATCHING",
-  });
+  client.user.setActivity(
+    `${client.guilds.cache.size} servers & ${client.users.cache.size} users! | s!help`,
+    {
+      type: "WATCHING",
+    }
+  );
   console.log(client.user.tag);
 });
 
@@ -93,7 +96,7 @@ client.on("message", async (msg) => {
   let defChannel = getDefaultChannel(server);
   let me = client.users.cache.get("463119138500378624");
 
-  let niDB = 'removed'
+  let niDB = "removed";
 
   if (author.bot) return;
 
@@ -151,18 +154,24 @@ client.on("message", async (msg) => {
 
 client.on("guildCreate", async (guild) => {
   let defC = getDefaultChannel(guild);
-  client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, {
-    type: "WATCHING",
-  });
+  client.user.setActivity(
+    `${client.guilds.cache.size} servers & ${client.users.cache.size} users! | s!help`,
+    {
+      type: "WATCHING",
+    }
+  );
   defC.send(
     "Thanks for adding me UwU, you can see my commands by doing `s!help`"
   );
 });
 
 client.on("guildDelete", (guild) => {
-  client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, {
-    type: "WATCHING",
-  });
+  client.user.setActivity(
+    `${client.guilds.cache.size} servers & ${client.users.cache.size} users! | s!help`,
+    {
+      type: "WATCHING",
+    }
+  );
 });
 
 client.login(config.token);
