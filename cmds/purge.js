@@ -25,7 +25,7 @@ module.exports = {
     bchDB,
     blDB
   ) {
-    if (!msg.member.hasPermission("MANAGE_MESSAGES"))
+    if (!msg.member.permissions.has("MANAGE_MESSAGES"))
       return msg.channel.send("You dont have permissions to do that!");
     if (!args[0])
       return msg.channel.send(
