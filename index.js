@@ -46,13 +46,11 @@ const preDB = new Keyv("sqlite://./prefixes.sqlite");
 const nbDB = new Keyv("sqlite://./nobroad.sqlite");
 const bchDB = new Keyv("sqlite://./broadchs.db");
 const blDB = new Keyv("sqlite://./blacklist.db");
-const niDB = new Keyv("sqlite://./noserverinfo.db");
 
 preDB.on("error", (err) => console.error("Keyv error:", err));
 nbDB.on("error", (err) => console.error("Keyv error:", err));
 bchDB.on("error", (err) => console.error("Keyv error:", err));
 blDB.on("error", (err) => console.error("Keyv error", err));
-niDB.on("error", (err) => console.error("Keyv error", err));
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
