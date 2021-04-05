@@ -26,7 +26,7 @@ module.exports = {
     bchDB,
     blDB
   ) {
-    if (!msg.member.hasPermission("MANAGE_GUILD"))
+    if (!msg.member.permissions.has("MANAGE_GUILD"))
       return msg.reply("You don't have permissions to do that!");
 
     let disabled = await nbDB.get(guild.id);
