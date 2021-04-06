@@ -144,7 +144,7 @@ module.exports = {
         .setColor("RANDOM");
 
       channel.send(miEm);
-    } else if (args[0].toLowerCase() == "dev" || "whitelisted") {
+    } else if (args[0].toLowerCase() == "dev") {
       let deEm = new Discord.MessageEmbed()
         .setAuthor(botNick, client.user.avatarURL())
         .setTitle("Help - Dev-level/Whitelist-level commands")
@@ -170,7 +170,7 @@ module.exports = {
         .setColor("RANDOM");
 
       channel.send(deEm);
-    } else if (args[0].toLowerCase() == "moderation" || "mod") {
+    } else if (args[0].toLowerCase() == "moderation") {
       let modEm = new Discord.MessageEmbed()
         .setAuthor(botNick, client.user.avatarURL())
         .setTitle("Help - Moderation")
