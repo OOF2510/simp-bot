@@ -1,5 +1,5 @@
 # Simp Bot
-A simp bot for discord
+A discord bot that is a simp
 
 ### [Invite the bot to your server](https://discord.com/api/oauth2/authorize?client_id=808822189905936405&permissions=8&scope=bot)
 
