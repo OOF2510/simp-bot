@@ -137,10 +137,16 @@ module.exports = {
       let miEm = new Discord.MessageEmbed()
         .setAuthor(botNick, client.user.avatarURL())
         .setTitle("Help - Misc")
-        .addFields({
-          name: `Invite`,
-          value: `${prefix}Invite - Sends my invite link`,
-        })
+        .addFields(
+          {
+            name: `Invite`,
+            value: `${prefix}Invite - Sends my invite link`,
+          },
+          {
+            name: "Email",
+            value: `${prefix}email <recipent email> <message> - Sends an email to the specified email address`,
+          }
+        )
         .setColor("RANDOM");
 
       channel.send(miEm);
