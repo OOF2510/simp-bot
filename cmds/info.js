@@ -87,7 +87,7 @@ module.exports = {
     let NodeV = await exec("node -v");
     let nodeV = NodeV.stdout.trim();
 
-    let DjsV = "master";
+    let djsV = "master";
 
     let infoEm = new Discord.MessageEmbed()
       .setTitle("Info")
