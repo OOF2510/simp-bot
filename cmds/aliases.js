@@ -30,7 +30,7 @@ module.exports = {
     let cmd = client.commands.get(args[0]);
 
     var Aliases = cmd.aliases;
-    let aliases = Aliases.join(" ").replaceAll(" ", ", ");
+    let aLiases = Aliases.join(", ");
     if (!aliases) aliases = "No aliases!";
 
     let alisEm = new Discord.MessageEmbed()
