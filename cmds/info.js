@@ -97,6 +97,7 @@ module.exports = {
         { name: "Roles", value: guild.roles.cache.size, inline: true },
         { name: "Server ID", value: guild.id, inline: true },
         { name: "Server Owner", value: guild.owner, inline: true },
+        { name: `Region`, value: guild.region, inline: true },
         { name: "Default Channel", value: defChannel, inline: true },
         { name: "Prefix", value: prefix, inline: true },
         {
