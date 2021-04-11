@@ -85,7 +85,8 @@ module.exports = {
           {
             name: `Support`,
             value: `${prefix}support - Join the support server!`,
-          }
+          },
+          { name: `Aliases`, value: `${prefix}aliases <command>` }
         )
         .setColor("RANDOM");
 
