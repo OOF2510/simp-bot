@@ -10,6 +10,8 @@ s!avatar - gets your or another user's avatar
 
 s!bugreport - Sends a bug report to the simp bot team
 
+s!email - Sends an email
+
 s!flirt - Flirts with the mentioned user
 
 s!frick - I think we all know what that does...
