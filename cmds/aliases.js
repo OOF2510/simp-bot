@@ -32,8 +32,8 @@ module.exports = {
     if (!cmd) msg.reply('Invalid command name!')
 
     var Aliases = cmd.aliases;
+    if (!Aliases) aliases = "No aliases!";
     let aliases = Aliases.join(", ");
-    if (!aliases) aliases = "No aliases!";
 
     let alisEm = new Discord.MessageEmbed()
       .setTitle(`Aliases for ${cmd.name}`)
