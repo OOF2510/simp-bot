@@ -87,8 +87,12 @@ module.exports = {
     let NodeV = await exec("node -v");
     let nodeV = NodeV.stdout.trim();
 
-    let DjsV = await exec("npm view discord.js version");
-    let djsV = DjsV.stdout.trim();
+    let DjsV = await exec('cat package.json | grep ""discord.js""');
+    let djsV = DjsV.stdout.trim().replace(
+      `"discord.js-collector": "^1.8.9",
+    "discord.js": `,
+      ``
+    );
 
     let infoEm = new Discord.MessageEmbed()
       .setTitle("Info")
