@@ -80,9 +80,10 @@ module.exports = {
     var usedSysMem = totalSysMem - freeSysMem;
     var sysMemUsage = formatBytes(usedSysMem);
 
+    let distro;
     let Distro = await exec('hostnamectl | grep -i "operating system"');
-    if (!Distro) Distro = "Error getting distro - Probably Windows";
-    let distro = Distro.stdout.trim().replace("Operating System: ", ``);
+    if (!Distro) distro = "Error getting distro - Probably Windows";
+    else distro = Distro.stdout.trim().replace("Operating System: ", ``);
 
     let NodeV = await exec("node -v");
     let nodeV = NodeV.stdout.trim();
