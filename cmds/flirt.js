@@ -47,7 +47,6 @@ module.exports = {
       `https://preview.redd.it/tox1ttd414441.jpg?width=640&crop=smart&auto=webp&s=94c51a816162fa1e13ec2050c76c88496a367317`,
       `Hey ${recipient}, are you a dental product?, Cause i'm wanting some oral, B`,
       `Hey ${recipient}, are you retarted? Cuz someone told me you have a crush on me`,
-      `Hey ${recipient}, nice shoes, wanna fuck?`,
       `Roses are red, lemons are sour. Open your legs and give me an hour.`,
       `Are you redstone? Cause you just made my sticky piston extend`,
       `Hey ${recipient}, there's something wrong with my phone, it doesnt have your number in it`,
