@@ -23,128 +23,67 @@ module.exports = {
     let response;
     let sender = msg.author;
 
-    const recipient = msg.mentions.users.first();
-    const recMem = msg.mentions.members.first();
+    let recipient = msg.mentions.users.first();
+    if (!recipient) recipient = author;
+    let recMem = guild.members.cache.get(recipient.id);
 
-    if (!recipient) {
-      const recipient = sender;
-      const recMem = msg.member;
-      let recNick = recMem ? recMem.displayName : recipient.username;
-      let responses = [
-        "8D",
-        "8=D",
-        "8==D",
-        "8===D",
-        "8====D",
-        "8=====D",
-        "8======D",
-        "8=======D",
-        "8========D",
-        "8=========D",
-        "8==========D",
-        "8===========D",
-      ];
+    let recNick = recMem ? recMem.displayName : recipient.username;
 
-      if (recipient.id == "463119138500378624") {
-        //me
-        response = "8======================================================D";
-        const ppEm = new Discord.MessageEmbed()
-          .setColor("RANDOM")
-          .addFields({ name: `${recNick}'s pp`, value: `${response}` });
+    let responses = [
+      "8D",
+      "8=D",
+      "8==D",
+      "8===D",
+      "8====D",
+      "8=====D",
+      "8======D",
+      "8=======D",
+      "8========D",
+      "8=========D",
+      "8==========D",
+      "8===========D",
+    ];
 
-        msg.channel.send(ppEm);
-      } else if (recipient.id == "793910661293801524") {
-        //robbie
-        response = "8=====================================================D";
-        const ppEm = new Discord.MessageEmbed()
-          .setColor("RANDOM")
-          .addFields({ name: `${recNick}'s pp`, value: `${response}` });
+    if (recipient.id == "463119138500378624") {
+      //me
+      response = "8======================================================D";
+      const ppEm = new Discord.MessageEmbed()
+        .setColor("RANDOM")
+        .addFields({ name: `${recNick}'s pp`, value: `${response}` });
 
-        msg.channel.send(ppEm);
-      } else if (recipient.id == "463119267832004620") {
-        //noah
-        response = ".";
-        const ppEm = new Discord.MessageEmbed()
-          .setColor("RANDOM")
-          .addFields({ name: `${recNick}'s pp`, value: `${response}` });
+      msg.channel.send(ppEm);
+    } else if (recipient.id == "793910661293801524") {
+      //robbie
+      response = "8=====================================================D";
+      const ppEm = new Discord.MessageEmbed()
+        .setColor("RANDOM")
+        .addFields({ name: `${recNick}'s pp`, value: `${response}` });
 
-        msg.channel.send(ppEm);
-      } else if (recipient.id == "763480802511945789") {
-        //gerrardo
-        response = "8===================================================D";
-        const ppEm = new Discord.MessageEmbed()
-          .setColor("RANDOM")
-          .addFields({ name: `${recNick}'s pp`, value: `${response}` });
+      msg.channel.send(ppEm);
+    } else if (recipient.id == "463119267832004620") {
+      //noah
+      response = ".";
+      const ppEm = new Discord.MessageEmbed()
+        .setColor("RANDOM")
+        .addFields({ name: `${recNick}'s pp`, value: `${response}` });
 
-        msg.channel.send(ppEm);
-      } else {
-        response = responses[Math.floor(Math.random() * responses.length)];
+      msg.channel.send(ppEm);
+    } else if (recipient.id == "763480802511945789") {
+      //gerrardo
+      response = "8===================================================D";
+      const ppEm = new Discord.MessageEmbed()
+        .setColor("RANDOM")
+        .addFields({ name: `${recNick}'s pp`, value: `${response}` });
 
-        const ppEm = new Discord.MessageEmbed()
-          .setColor("RANDOM")
-          .addFields({ name: `${recNick}'s pp`, value: `${response}` });
-
-        msg.channel.send(ppEm);
-      }
+      msg.channel.send(ppEm);
     } else {
-      let recNick = recMem ? recMem.displayName : recipient.username;
+      response = responses[Math.floor(Math.random() * responses.length)];
 
-      let responses = [
-        "8D",
-        "8=D",
-        "8==D",
-        "8===D",
-        "8====D",
-        "8=====D",
-        "8======D",
-        "8=======D",
-        "8========D",
-        "8=========D",
-        "8==========D",
-        "8===========D",
-      ];
+      const ppEm = new Discord.MessageEmbed()
+        .setColor("RANDOM")
+        .addFields({ name: `${recNick}'s pp`, value: `${response}` });
 
-      if (recipient.id == "463119138500378624") {
-        //me
-        response = "8======================================================D";
-        const ppEm = new Discord.MessageEmbed()
-          .setColor("RANDOM")
-          .addFields({ name: `${recNick}'s pp`, value: `${response}` });
-
-        msg.channel.send(ppEm);
-      } else if (recipient.id == "793910661293801524") {
-        //robbie
-        response = "8=====================================================D";
-        const ppEm = new Discord.MessageEmbed()
-          .setColor("RANDOM")
-          .addFields({ name: `${recNick}'s pp`, value: `${response}` });
-
-        msg.channel.send(ppEm);
-      } else if (recipient.id == "463119267832004620") {
-        //noah
-        response = ".";
-        const ppEm = new Discord.MessageEmbed()
-          .setColor("RANDOM")
-          .addFields({ name: `${recNick}'s pp`, value: `${response}` });
-
-        msg.channel.send(ppEm);
-      } else if (recipient.id == "763480802511945789") {
-        //gerrardo
-        response = "8===================================================D";
-        const ppEm = new Discord.MessageEmbed()
-          .setColor("RANDOM")
-          .addFields({ name: `${recNick}'s pp`, value: `${response}` });
-
-        msg.channel.send(ppEm);
-      } else {
-        response = responses[Math.floor(Math.random() * responses.length)];
-
-        const ppEm = new Discord.MessageEmbed()
-          .setColor("RANDOM")
-          .addFields({ name: `${recNick}'s pp`, value: `${response}` });
-
-        msg.channel.send(ppEm);
-      }
+      msg.channel.send(ppEm);
     }
   },
 };
