@@ -97,8 +97,6 @@ client.on("message", async (msg) => {
 
   if (author.bot) return;
 
-  if (channel.type === "dm") return;
-
   let prefix = await preDB.get(guild.id);
   if (!prefix) prefix = config.prefix;
 
