@@ -6,6 +6,9 @@
   "repository": "https://github.com/OOF2510/simp-bot-rewritten.git",
   "author": "OOF2510 <64423517+OOF2510@users.noreply.github.com>",
   "license": "WTFPL",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
   "devDependencies": {
     "@mapbox/node-pre-gyp": "^1.0.3",
     "discord.js": "https://github.com/discordjs/discord.js/tarball/master",
