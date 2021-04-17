@@ -3,25 +3,18 @@
   "version": "1.0.0",
   "description": "A discord bot that is a simp",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/OOF2510/simp-bot-rewritten.git"
-  },
-  "author": "Gk01234",
+  "repository": "https://github.com/OOF2510/simp-bot-rewritten.git",
+  "author": "OOF2510 <64423517+OOF2510@users.noreply.github.com>",
   "license": "WTFPL",
-  "bugs": {
-    "url": "https://github.com/OOF2510/simp-bot-rewritten/issues"
+  "devDependencies": {
+    "@mapbox/node-pre-gyp": "^1.0.3",
+    "discord.js": "https://github.com/discordjs/discord.js/tarball/master",
+    "node-gyp": "^8.0.0"
   },
-  "homepage": "https://github.com/OOF2510/simp-bot-rewritten#readme",
   "dependencies": {
     "@keyv/sqlite": "^2.0.2",
     "child_process": "^1.0.2",
-    "discord.js-collector": "^1.8.9",
-    "fs": "*",
+    "fs": "^0.0.1-security",
     "keyv": "^4.0.3",
     "long": "^4.0.0",
     "nodemailer": "^6.5.0",
@@ -29,8 +22,5 @@
     "os": "^0.1.1",
     "path": "^0.12.7",
     "util": "^0.12.3"
-  },
-  "devDependencies": {
-    "discord.js": "https://github.com/discordjs/discord.js/tarball/master"
   }
 }

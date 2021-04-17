@@ -5,7 +5,6 @@ const os = require("os");
 const { promisify } = require("util");
 const exec = promisify(require("child_process").exec);
 const Keyv = require("keyv");
-const { ReactionCollector } = require("discord.js-collector");
 
 var allowed = [
   "463119138500378624", //me
@@ -96,6 +95,8 @@ client.on("message", async (msg) => {
   let niDB = "removed";
 
   if (author.bot) return;
+
+  if (channel.type == "dm") return;
 
   let prefix = await preDB.get(guild.id);
   if (!prefix) prefix = config.prefix;
