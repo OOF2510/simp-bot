@@ -28,7 +28,7 @@ s!ping - Pings the bot
 
 s!pp - Pp size
 
-s!prefix - Sets your guild's prefix to specified prefi
+s!prefix - Sets your guild's prefix to specified prefix
 
 s!purge - Bulk deletes the specified number of messages
 
@@ -44,16 +44,16 @@ s!yesbroadcast - re-enable broadcasts for your server
 
 # Self-hosting the bot
 
-* Install git, node & npm
+* Install git, node, yarn & npm
  ```bash
  git clone https://github.com/OOF2510/simp-bot-rewritten.git
  cd simp-bot-rewritten
- npm install
+ yarn install
  mv config.json.example config.json
  ```
  * edit config.json to have your bot token
  ```bash
- npm start
+ yarn run start
  ```
 Note: you may have to replace some server and channel ids in index.js
 
