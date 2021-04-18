@@ -1,4 +1,3 @@
 ## note: not in any particular order
 * Add something similar to [Dad bot's](https://github.com/AlekEagle/dadbot) d!embarrass command
 * Add web dashboard
-* Add setup script for windows
