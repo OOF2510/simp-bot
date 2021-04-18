@@ -87,6 +87,7 @@ module.exports = {
 
     let Distro;
     let distro;
+    console.log(isLinux())
     if (isLinux())
       Distro = await exec('hostnamectl | grep -i "operating system"');
     if (!Distro) distro = "Error getting distro - Probably Windows";
