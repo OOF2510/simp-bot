@@ -7,7 +7,8 @@
   "author": "OOF2510 <64423517+OOF2510@users.noreply.github.com>",
   "license": "WTFPL",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "setup:linux": "chmod +x setup/setup.sh && ./setup/setup.sh"
   },
   "devDependencies": {
     "@mapbox/node-pre-gyp": "^1.0.3",
