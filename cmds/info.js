@@ -68,6 +68,11 @@ module.exports = {
       }
       return "less than a second"; //'just now' //or other string you like;
     }
+    function isLinux() {
+      let osType = os.type();
+      if (osType == "Linux") return true;
+      else return false;
+    }
 
     var uptimeMilsec = os.uptime() * 1000;
     var uptime = millisecondsToStr(uptimeMilsec);
@@ -80,8 +85,10 @@ module.exports = {
     var usedSysMem = totalSysMem - freeSysMem;
     var sysMemUsage = formatBytes(usedSysMem);
 
+    let Distro;
     let distro;
-    let Distro = await exec('hostnamectl | grep -i "operating system"');
+    if (isLinux())
+      Distro = await exec('hostnamectl | grep -i "operating system"');
     if (!Distro) distro = "Error getting distro - Probably Windows";
     else distro = Distro.stdout.trim().replace("Operating System: ", ``);
 
