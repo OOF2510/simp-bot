@@ -113,7 +113,7 @@ module.exports = {
           value: `Information about the bot's OS`,
           inline: false,
         },
-        { name: "Type", value: "`" + os.type() + "`", inline: true },
+        { name: "Platform", value: "`" + os.platform() + "`", inline: true },
         { name: "Arch", value: "`" + os.arch() + "`", inline: true },
         { name: "Release", value: "`" + os.release() + "`", inline: true },
         { name: "Version", value: "`" + os.version() + "`", inline: true },
