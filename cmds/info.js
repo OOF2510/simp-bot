@@ -89,7 +89,7 @@ module.exports = {
     let distro;
     if (isLinux())
       Distro = await exec('hostnamectl | grep -i "operating system"');
-    if (!Distro) distro = "Error getting distro - Probably Windows";
+    if (!Distro) distro = "Error getting distro";
     else distro = Distro.stdout.trim().replace("Operating System: ", ``);
 
     let NodeV = await exec("node -v");
