@@ -88,7 +88,7 @@ client.on("ready", () => {
   );
   console.log(client.user.tag);
 
-  const clientDetails = {
+  let clientDetails = {
     guilds: client.guilds.cache.size,
     users: client.users.cache.size,
     channels: client.channels.cache.size,
@@ -110,6 +110,14 @@ client.on("ready", () => {
   app.get("/info", (req, res) => {
     res.status(200).send(clientDetails);
   });
+
+  app.get("/invite", (req, res) => {
+    res.status(302).redirect("https://discord.com/api/oauth2/authorize?client_id=808822189905936405&permissions=8&scope=bot")
+  })
+
+  app.get("/support", (req, res) => {
+    res.status(302).redirect("https://discord.gg/zHtfa8GdPx")
+  })
 });
 
 client.on("message", async (msg) => {
