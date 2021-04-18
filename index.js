@@ -75,7 +75,7 @@ client.once("ready", () => {
     console.log(`🗸 Loaded ${cmd.name}`);
   });
   console.log(client);
-  client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, {
+  client.user.setActivity(`${client.guilds.cache.size} servers! | ${config.prefix}help`, {
     type: "WATCHING",
   });
   console.log(client.user.tag);
