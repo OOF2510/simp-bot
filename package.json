@@ -8,7 +8,8 @@
   "license": "WTFPL",
   "scripts": {
     "start": "nodemon index.js",
-    "setup:linux": "chmod +x setup/setup.sh && ./setup/setup.sh"
+    "setup:linux": "chmod +x setup/setup.sh && ./setup/setup.sh",
+    "setup:win": ".\setup\setup.bat"
   },
   "devDependencies": {
     "@mapbox/node-pre-gyp": "^1.0.3",
