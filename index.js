@@ -7,7 +7,6 @@ const exec = promisify(require("child_process").exec);
 const Keyv = require("keyv");
 const express = require("express");
 const path = require("path");
-const { getCommands } = require('./utils')
 
 var allowed = [
   "463119138500378624", //me
@@ -87,37 +86,6 @@ client.on("ready", () => {
     }
   );
   console.log(client.user.tag);
-
-  let clientDetails = {
-    guilds: client.guilds.cache.size,
-    users: client.users.cache.size,
-    channels: client.channels.cache.size,
-  };
-
-  app.set('view engine', 'ejs')
-
-  app.get("/", (req, res) => {
-    res
-      .status(200)
-      .sendFile(path.join(__dirname, ".", "pages", "landingPage.html"));
-  });
-
-  app.get("/commands", (req, res) => {
-    const commands = getCommands();
-    res.status(200).send('Coming Soon!')
-  })
-
-  app.get("/info", (req, res) => {
-    res.status(200).send(clientDetails);
-  });
-
-  app.get("/invite", (req, res) => {
-    res.status(302).redirect("https://discord.com/api/oauth2/authorize?client_id=808822189905936405&permissions=8&scope=bot")
-  })
-
-  app.get("/support", (req, res) => {
-    res.status(302).redirect("https://discord.gg/zHtfa8GdPx")
-  })
 });
 
 client.on("message", async (msg) => {
