@@ -45,7 +45,7 @@ s!yesbroadcast - re-enable broadcasts for your server
 # Self-hosting the bot
 
 ## Linux
-* Install git, node, yarn & npm
+* Install git, nodejs & yarn
  ```bash
  git clone https://github.com/OOF2510/simp-bot-rewritten.git
  cd simp-bot-rewritten
@@ -54,18 +54,22 @@ s!yesbroadcast - re-enable broadcasts for your server
  ```
 
 ## Windows
-* Install git, node, yarn & npm
+* Install git, nodejs & yarn
  ```bash
  git clone https://github.com/OOF2510/simp-bot-rewritten.git
  cd simp-bot-rewritten
- yarn install
- mv config.json.example config.json
- ```
- * edit config.json to have your bot token
- ```bash
+ yarn run setup:win
  yarn run start
  ```
-Note: you may have to replace some server and channel ids in index.js
+
+## Universial
+* Install git, nodejs, python & yarn
+```bash
+ git clone https://github.com/OOF2510/simp-bot-rewritten.git
+ cd simp-bot-rewritten
+ yarn run setup
+ yarn run start
+```
 
 # The original simp bot
 I reworte [Simp bot 10000](https://discordbotlist.com/bots/simp-bot-10000) because it wouldn't let me add it to my server, I tried hosting it myself, but it
