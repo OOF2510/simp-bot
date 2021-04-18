@@ -6,6 +6,7 @@ read -p "Client Secret: " clientSecret
 read -p "Random String (session secret): " sessionSecret
 read -p "Bot Email: " email
 read -p "Bot Email Password: " emailPass
+read -p "WebServer Port: " port
 
 touch config.json
 
@@ -16,7 +17,8 @@ echo "{
   \"clientSecret\": \"$clientSecret\",
   \"sessionSecret\": \"$sessionSecret\",
   \"email\": \"$email\",
-  \"emailPass\": \"$emailPass\"
+  \"emailPass\": \"$emailPass\",
+  \"port\": \"$port\"
 }" > ./config.json
 
 echo "config.json:"

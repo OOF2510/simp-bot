@@ -5,6 +5,9 @@ const os = require("os");
 const { promisify } = require("util");
 const exec = promisify(require("child_process").exec);
 const Keyv = require("keyv");
+const express = require("express");
+const path = require("path");
+const { getCommands } = require('./utils')
 
 var allowed = [
   "463119138500378624", //me
@@ -41,6 +44,8 @@ const getDefaultChannel = (guild) => {
 const intents = new Discord.Intents(Discord.Intents.NON_PRIVILEGED);
 const client = new Discord.Client({ intents: intents });
 
+const app = express();
+
 const preDB = new Keyv("sqlite://./prefixes.sqlite");
 const nbDB = new Keyv("sqlite://./nobroad.sqlite");
 const bchDB = new Keyv("sqlite://./broadchs.db");
@@ -68,17 +73,43 @@ for (const file of cmdFiles) {
   } else continue;
 }
 
-client.once("ready", () => {
+client.on("ready", () => {
   console.log("Ready!");
   console.log(`Logged in as ${client.user.tag}!`);
   client.commands.forEach((cmd) => {
     console.log(`🗸 Loaded ${cmd.name}`);
   });
   console.log(client);
-  client.user.setActivity(`${client.guilds.cache.size} servers! | ${config.prefix}help`, {
-    type: "WATCHING",
-  });
+  client.user.setActivity(
+    `${client.guilds.cache.size} servers! | ${config.prefix}help`,
+    {
+      type: "WATCHING",
+    }
+  );
   console.log(client.user.tag);
+
+  const clientDetails = {
+    guilds: client.guilds.cache.size,
+    users: client.users.cache.size,
+    channels: client.channels.cache.size,
+  };
+
+  app.set('view engine', 'ejs')
+
+  app.get("/", (req, res) => {
+    res
+      .status(200)
+      .sendFile(path.join(__dirname, ".", "pages", "landingPage.html"));
+  });
+
+  app.get("/commands", (req, res) => {
+    const commands = getCommands();
+    res.status(200).send('Coming Soon!')
+  })
+
+  app.get("/info", (req, res) => {
+    res.status(200).send(clientDetails);
+  });
 });
 
 client.on("message", async (msg) => {
@@ -165,3 +196,4 @@ client.on("guildDelete", (guild) => {
 });
 
 client.login(config.token);
+app.listen(config.port);

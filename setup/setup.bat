@@ -7,6 +7,7 @@ set /P clientSecret="Client Secret: "
 set /P sessionSecret="Random String (session secret): "
 set /P email="Bot Email: "
 set /P emailPass="Bot Email Password: "
+set /P port="WebServer Port: "
 type nul > config.json
 (
 echo {
@@ -16,7 +17,8 @@ echo "clientID": "%clientID%",
 echo "clientSecret": "%clientSecret%",
 echo "sessionSecret": "%sessionSecret%",
 echo "email": "%email%",
-echo "emailPass": "%emailPass%"
+echo "emailPass": "%emailPass%",
+echo "port": "%port%"
 echo }
 ) > config.json
 echo config.json:

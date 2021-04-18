@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Simp Bot - Commnads</title>
+  </head>
+  <body>
+    <a href="/"
+      ><img
+        src="https://cdn.discordapp.com/avatars/808822189905936405/d9af9c0316733d2a186ef2d81c3a5154.webp?size=128"
+        alt="avatar"
+        class="avatar"
+    /></a>
+    <section class="main-content">
+      <p>
+        To get a look of the commands in discord, use <code>s!help</code> to
+        view the commands!
+      </p>
+      <% commands.forEach((command) => { %>
+      <table style="width: 100%">
+        <h1 style="text-align: center"><%= command.name %></h1>
+        <tr>
+          <th>Command Name</th>
+          <th>Aliases</th>
+        </tr>
+        <% command.value.forEach(({ name, aliases }) => { %>
+        <tr>
+          <td><%= name%></td>
+          <td>
+            <%= typeof aliases === 'string' ? aliases : aliases.join(', ')%>
+          </td>
+        </tr>
+        <% }) %>
+      </table>
+      <%}) %>
+    </section>
+  </body>
+</html>

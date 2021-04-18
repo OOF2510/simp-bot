@@ -7,6 +7,7 @@ clientSecret = input("Client Secret: ")
 sessionSecret = input("Random String (session secret): ")
 email = input("Bot Email: ")
 emailPass = input("Bot Email Password: ")
+port = input("WebServer Port: ")
 
 configJson = "{" + f"""
   \"prefix\": \"{prefix}\",
@@ -15,7 +16,8 @@ configJson = "{" + f"""
   \"clientSecret\": \"{clientSecret}\",
   \"sessionSecret\": \"{sessionSecret}\",
   \"email\": \"{email}\",
-  \"emailPass\": \"{emailPass}\" 
+  \"emailPass\": \"{emailPass}\",
+  \"port\": \"{port}\"
 """ + "}"
 
 config = open("config.json", "w")

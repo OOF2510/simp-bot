@@ -1,9 +1,0 @@
-{
-    "prefix": "s!",
-    "token": "YOUR_BOT_TOKEN_HERE",
-    "clientID": "YOUR_BOT'S_CLIENT_ID_HERE",
-    "clientSecret": "YOUR_BOT'S_CLIENT_SECRET_HERE",
-    "sessionSecret": "RANDOM_STRING_HERE",
-    "email": "BOT_EMAIL_HERE",
-    "emailPass": "BOT_EMAIL_PASSWORD_HERE"
-}
