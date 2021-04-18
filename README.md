@@ -44,6 +44,16 @@ s!yesbroadcast - re-enable broadcasts for your server
 
 # Self-hosting the bot
 
+## Linux
+* Install git, node, yarn & npm
+ ```bash
+ git clone https://github.com/OOF2510/simp-bot-rewritten.git
+ cd simp-bot-rewritten
+ yarn run setup:linux
+ yarn run start
+ ```
+
+## Windows
 * Install git, node, yarn & npm
  ```bash
  git clone https://github.com/OOF2510/simp-bot-rewritten.git
