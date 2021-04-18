@@ -9,7 +9,8 @@
   "scripts": {
     "start": "nodemon index.js",
     "setup:linux": "chmod +x setup/setup.sh && ./setup/setup.sh",
-    "setup:win": "./setup/setup.bat"
+    "setup:win": "./setup/setup.bat",
+    "setup": "python setup/setup.py"
   },
   "devDependencies": {
     "@mapbox/node-pre-gyp": "^1.0.3",
