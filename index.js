@@ -172,4 +172,4 @@ client.on("guildDelete", (guild) => {
 });
 
 client.login(config.token);
-app.listen(config.port);
+require("./dash/server");

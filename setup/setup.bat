@@ -18,7 +18,7 @@ echo "clientSecret": "%clientSecret%",
 echo "sessionSecret": "%sessionSecret%",
 echo "email": "%email%",
 echo "emailPass": "%emailPass%",
-echo "port": "%port%"
+echo "port": %port%
 echo }
 ) > config.json
 echo config.json:

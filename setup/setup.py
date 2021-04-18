@@ -17,7 +17,7 @@ configJson = "{" + f"""
   \"sessionSecret\": \"{sessionSecret}\",
   \"email\": \"{email}\",
   \"emailPass\": \"{emailPass}\",
-  \"port\": \"{port}\"
+  \"port\": {port}
 """ + "}"
 
 config = open("config.json", "w")

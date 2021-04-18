@@ -18,7 +18,7 @@ echo "{
   \"sessionSecret\": \"$sessionSecret\",
   \"email\": \"$email\",
   \"emailPass\": \"$emailPass\",
-  \"port\": \"$port\"
+  \"port\": $port
 }" > ./config.json
 
 echo "config.json:"

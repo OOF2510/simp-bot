@@ -15,7 +15,8 @@
   "devDependencies": {
     "@mapbox/node-pre-gyp": "^1.0.3",
     "discord.js": "https://github.com/discordjs/discord.js/tarball/master",
-    "node-gyp": "^8.0.0"
+    "node-gyp": "^8.0.0",
+    "pug": "^3.0.2"
   },
   "dependencies": {
     "@keyv/sqlite": "^2.0.2",
