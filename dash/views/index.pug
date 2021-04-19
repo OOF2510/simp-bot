@@ -1,8 +1,9 @@
 include includes/head.pug
 header 
     include includes/navbar.pug
+    link(rel='stylesheet', href='/css/index.css')
 body 
-    .jumbotron.text-center.bg-light
-        h1.display-3 Simp Bot
-        p.lead A bot that is a simp
-        button.btn.btn-dark Invite
+    .jumbotron.text-center.bg-transparent
+      h1.display-3 Simp Bot
+      p.lead A bot that is a simp
+      a.btn.btn-dark(href='/invite') Invite
