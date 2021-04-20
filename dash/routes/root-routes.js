@@ -1,5 +1,4 @@
 const express = require("express");
-const { commands } = require("../../handlers/command-handler");
 
 const router = express.Router();
 
