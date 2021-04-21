@@ -8,6 +8,7 @@ sessionSecret = input("Random String (session secret): ")
 email = input("Bot Email: ")
 emailPass = input("Bot Email Password: ")
 port = input("WebServer Port: ")
+dashboardURL = input("Dashboard URL: ")
 
 configJson = "{" + f"""
   \"prefix\": \"{prefix}\",
@@ -17,7 +18,8 @@ configJson = "{" + f"""
   \"sessionSecret\": \"{sessionSecret}\",
   \"email\": \"{email}\",
   \"emailPass\": \"{emailPass}\",
-  \"port\": {port}
+  \"port\": {port},
+  \"dashboardURL\": \"{dashboardURL}\"
 """ + "}"
 
 config = open("config.json", "w")
