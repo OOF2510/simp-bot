@@ -5,7 +5,7 @@ const sessions = require("../modules/sessions");
 
 const router = express.Router();
 
-let dashboardURL = "http://localhost:8080"
+let dashboardURL = config.dashboardURL
 
 router.get("/invite", (req, res) =>
   res.redirect(
