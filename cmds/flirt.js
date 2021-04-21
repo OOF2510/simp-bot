@@ -31,7 +31,6 @@ module.exports = {
       `Are you from Tennessee? Because you're the only Ten I See.`,
       `Did it hurt when you fell from heaven?`,
       `Are you water? Because you're making me wet!`,
-      `Are you the brown M&M? Cause I wanna fuck you`,
       `____, shoulders, knees, and toes. Now the only thing you have to do is give me head`,
       `Hey ${recipient}, if COVID-19 doesn't take you out, can I?`,
       `Are you a library book? Cause I'm checking you out`,
