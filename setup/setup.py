@@ -9,6 +9,7 @@ email = input("Bot Email: ")
 emailPass = input("Bot Email Password: ")
 port = input("WebServer Port: ")
 dashboardURL = input("Dashboard URL: ")
+mongoURI = input("MongoDB URI: ")
 
 configJson = "{" + f"""
   \"prefix\": \"{prefix}\",
@@ -19,7 +20,8 @@ configJson = "{" + f"""
   \"email\": \"{email}\",
   \"emailPass\": \"{emailPass}\",
   \"port\": {port},
-  \"dashboardURL\": \"{dashboardURL}\"
+  \"dashboardURL\": \"{dashboardURL}\",
+  \"mongoURI\": \"{mongoURI}\"
 """ + "}"
 
 config = open("config.json", "w")

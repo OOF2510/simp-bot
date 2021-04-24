@@ -8,6 +8,7 @@ read -p "Bot Email: " email
 read -p "Bot Email Password: " emailPass
 read -p "WebServer Port: " port
 read -p "Dashboard URL: " dashboardURL
+read -p "MongoDB URI: " mongoURI
 
 touch config.json
 
@@ -20,7 +21,8 @@ echo "{
   \"email\": \"$email\",
   \"emailPass\": \"$emailPass\",
   \"port\": $port,
-  \"dashboardURL\": $dashboardURL
+  \"dashboardURL\": \"$dashboardURL\",
+  \"mongoURI\": \"$mongoURI\"
 }" > ./config.json
 
 echo "config.json:"

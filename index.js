@@ -13,7 +13,7 @@ var allowed = [
   "760473112613093436", //gavin
   "793910661293801524", //robbie
   "463119267832004620", //noah
-  "686680792348622856" //ryan
+  "686680792348622856", //ryan
 ];
 
 var Long = require("long");
@@ -46,10 +46,19 @@ const client = new Discord.Client({ intents: intents });
 
 const app = express();
 
-const preDB = new Keyv("sqlite://./prefixes.sqlite");
-const nbDB = new Keyv("sqlite://./nobroad.sqlite");
-const bchDB = new Keyv("sqlite://./broadchs.db");
-const blDB = new Keyv("sqlite://./blacklist.db");
+const preDB = new Keyv(`mongodb://${config.mongoURI}`, {
+  collection: "prefixes",
+});
+const nbDB = new Keyv(`mongodb://${config.mongoURI}`, {
+  collection: "nobroadcast",
+});
+const bchDB = new Keyv(`mongodb://${config.mongoURI}`, {
+  collection: "broadchs",
+});
+const blDB = new Keyv(`mongodb://${config.mongoURI}`, {
+  collection: "blacklist",
+});
+console.log("Connected to DBs");
 
 preDB.on("error", (err) => console.error("Keyv error:", err));
 nbDB.on("error", (err) => console.error("Keyv error:", err));

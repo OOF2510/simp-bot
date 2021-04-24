@@ -9,6 +9,7 @@ set /P email="Bot Email: "
 set /P emailPass="Bot Email Password: "
 set /P port="WebServer Port: "
 set /P dashboardURL="Dashboard URL: "
+set /P mongoURI="MongoDB URI: "
 type nul > config.json
 (
 echo {
@@ -20,7 +21,8 @@ echo "sessionSecret": "%sessionSecret%",
 echo "email": "%email%",
 echo "emailPass": "%emailPass%",
 echo "port": %port%,
-echo "dashboardURL": "%dashboardURL%"
+echo "dashboardURL": "%dashboardURL%",
+echo "mongoURI": "%mongoURI%"
 echo }
 ) > config.json
 echo config.json:
