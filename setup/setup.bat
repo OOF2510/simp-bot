@@ -10,7 +10,9 @@ set /P emailPass="Bot Email Password: "
 set /P port="WebServer Port: "
 set /P dashboardURL="Dashboard URL: "
 set /P mongoURI="MongoDB URI: "
+
 type nul > config.json
+
 (
 echo {
 echo "prefix": "%prefix%",
@@ -25,7 +27,9 @@ echo "dashboardURL": "%dashboardURL%",
 echo "mongoURI": "%mongoURI%"
 echo }
 ) > config.json
+
 echo config.json:
 type config.json
+
 yarn install
 exit
