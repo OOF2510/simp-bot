@@ -166,6 +166,7 @@ client.on("message", async (msg) => {
 });
 
 client.on("guildCreate", async (guild) => {
+  nbDB.set(guild.id, "true");
   let defC = getDefaultChannel(guild);
   client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, {
     type: "WATCHING",
