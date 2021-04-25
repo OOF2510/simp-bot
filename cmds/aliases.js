@@ -28,6 +28,7 @@ module.exports = {
   ) {
     if (!args[0]) return msg.reply(`Usage: ${prefix}aliases <command>`);
     let cmd = client.commands.get(args[0]);
+    if (!cmd && client.aliases.has(args[0])) cmd = client.commands.get(client.aliases.get(args[0]))
 
     if (!cmd) msg.reply("Invalid command name!");
 
