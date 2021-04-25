@@ -9,6 +9,9 @@ read -p "Bot Email Password: " emailPass
 read -p "WebServer Port: " port
 read -p "Dashboard URL: " dashboardURL
 read -p "MongoDB URI: " mongoURI
+read -p "First MongoDB Shard Domain: " mongoShard0
+read -p "Second MongoDB Shard Domain: " mongoShard1
+read -p "Third MongoDB Shard Domain: " mongoShard2
 
 touch config.json
 
@@ -22,7 +25,12 @@ echo "{
   \"emailPass\": \"$emailPass\",
   \"port\": $port,
   \"dashboardURL\": \"$dashboardURL\",
-  \"mongoURI\": \"$mongoURI\"
+  \"mongoURI\": \"$mongoURI\",
+  \"mongoShards\": [
+    \"$mongoShard0\",
+    \"$mongoShard1\",
+    \"$mongoShard2\"
+  ]
 }" > ./config.json
 
 echo "config.json:"

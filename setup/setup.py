@@ -10,6 +10,9 @@ emailPass = input("Bot Email Password: ")
 port = input("WebServer Port: ")
 dashboardURL = input("Dashboard URL: ")
 mongoURI = input("MongoDB URI: ")
+mongoShard0 = input("First MongoDB Shard Domain: ")
+mongoShard1 = input("Second MongoDB Shard Domain: ")
+mongoShard2 = input("Third MongoDB Shard Domain: ")
 
 configJson = "{" + f"""
   \"prefix\": \"{prefix}\",
@@ -21,7 +24,12 @@ configJson = "{" + f"""
   \"emailPass\": \"{emailPass}\",
   \"port\": {port},
   \"dashboardURL\": \"{dashboardURL}\",
-  \"mongoURI\": \"{mongoURI}\"
+  \"mongoURI\": \"{mongoURI}\",
+  \"mongoShards\": [
+    \"{mongoShard0}\",
+    \"{mongoShard1}\",
+    \"{mongoShard2}\"
+  ]
 """ + "}"
 
 config = open("config.json", "w")
