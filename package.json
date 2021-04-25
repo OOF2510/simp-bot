@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@keyv/mongo": "^1.1.0",
+    "ajax": "^0.0.4",
     "child_process": "^1.0.2",
     "cookies": "^0.8.0",
     "disco-oauth": "^5.0.1",
