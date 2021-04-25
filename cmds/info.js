@@ -95,6 +95,12 @@ module.exports = {
     let NodeV = await exec("node -v");
     let nodeV = NodeV.stdout.trim();
 
+    let NpmV = await exec("npm -v");
+    let npmV = "v" + NpmV.stdout.trim();
+
+    let YarnV = await exec("yarn -v");
+    let yarnV = "v" + YarnV.stdout.trim();
+
     let djsV = "master";
 
     let infoEm = new Discord.MessageEmbed()
@@ -104,7 +110,11 @@ module.exports = {
         { name: "Members", value: guild.memberCount, inline: true },
         { name: "Roles", value: guild.roles.cache.size, inline: true },
         { name: "Server ID", value: guild.id, inline: true },
-        { name: "Server Owner", value: client.users.cache.get(msg.guild.ownerID), inline: true },
+        {
+          name: "Server Owner",
+          value: client.users.cache.get(msg.guild.ownerID),
+          inline: true,
+        },
         { name: `Region`, value: guild.region, inline: true },
         { name: "Default Channel", value: defChannel, inline: true },
         { name: "Prefix", value: prefix, inline: true },
@@ -125,6 +135,8 @@ module.exports = {
           inline: true,
         },
         { name: `NodeJS Version`, value: "`" + nodeV + "`", inline: true },
+        { name: `NPM Version`, value: "`" + npmV + "`", inline: true },
+        { name: `Yarn Version`, value: "`" + yarnV + "`", inline: true },
         { name: `Discord.js Version`, value: "`" + djsV + "`", inline: true },
         { name: `System Uptime`, value: "`" + uptime + "`", inline: true },
         { name: `Bot Uptime`, value: "`" + botUptime + "`", inline: true }

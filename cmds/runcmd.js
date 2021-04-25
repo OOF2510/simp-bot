@@ -30,7 +30,7 @@ module.exports = {
         `Only the developer & certian whitelisted users can use that command!`
       );
     } else {
-      let cmd = msg.content.replace(`${prefix}runcmd`, ``);
+      let cmd = args.join(" ");
       const Out = await exec(`${cmd}`);
       const out = Out.stdout.trim();
 

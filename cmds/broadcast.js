@@ -51,7 +51,7 @@ module.exports = {
     bchDB,
     blDB
   ) {
-    if (allowed.includes(author.id)) {
+    if (author == me) {
       let message = args.join(" ");
 
       if (!message) return msg.channel.send(`Can't send an empty message!`);
@@ -80,9 +80,7 @@ module.exports = {
 
       channel.send("Broadcast sent!");
     } else {
-      channel.send(
-        `Only the developer & certian whitelisted users can use that command!`
-      );
+      channel.send(`Only the developer can use that command!`);
     }
   },
 };
