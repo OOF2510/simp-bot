@@ -1,5 +1,6 @@
 module.exports = {
   name: "info",
+  aliases: ["in", "inf", "information", "stats"],
   async execute(
     msg,
     args,
