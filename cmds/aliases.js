@@ -30,7 +30,7 @@ module.exports = {
     let cmd = client.commands.get(args[0]);
     if (!cmd && client.aliases.has(args[0])) cmd = client.commands.get(client.aliases.get(args[0]))
 
-    if (!cmd) msg.reply("Invalid command name!");
+    if (!cmd) return msg.reply("Invalid command name!");
 
     let aliases;
     var Aliases = cmd.aliases;
