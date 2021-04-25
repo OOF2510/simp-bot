@@ -26,15 +26,31 @@ module.exports = {
     bchDB,
     blDB
   ) {
-    var MongoPing0 = await exec(
-      `ping -c 1 ${config.mongoShards[0]} | grep time=`
-    );
-    var MongoPing1 = await exec(
-      `ping -c 1 ${config.mongoShards[1]} | grep time=`
-    );
-    var MongoPing2 = await exec(
-      `ping -c 1 ${config.mongoShards[2]} | grep time=`
-    );
+    var MongoPing0;
+    var MongoPing1;
+    var MongoPing2;
+
+    if (os.platform() == "win32") {
+      MongoPing0 = await exec(
+        `ping -n 1 ${config.mongoShards[0]} | findstr time=`
+      );
+      MongoPing1 = await exec(
+        `ping -n 1 ${config.mongoShards[1]} | findstr time=`
+      );
+      MongoPing2 = await exec(
+        `ping -n 1 ${config.mongoShards[2]} | findstr time=`
+      );
+    } else {
+      MongoPing0 = await exec(
+        `ping -c 1 ${config.mongoShards[0]} | grep time=`
+      );
+      MongoPing1 = await exec(
+        `ping -c 1 ${config.mongoShards[1]} | grep time=`
+      );
+      MongoPing2 = await exec(
+        `ping -c 1 ${config.mongoShards[2]} | grep time=`
+      );
+    }
 
     var mongoping0 = MongoPing0.stdout.trim();
     var mongoping1 = MongoPing1.stdout.trim();
