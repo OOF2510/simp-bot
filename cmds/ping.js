@@ -56,9 +56,20 @@ module.exports = {
     var mongoping1 = MongoPing1.stdout.trim();
     var mongoping2 = MongoPing2.stdout.trim();
 
-    var mongoPing0 = Number(mongoping0.split("time=").pop().split('ms ')[0])
-    var mongoPing1 = Number(mongoping1.split("time=").pop().split('ms ')[0])
-    var mongoPing2 = Number(mongoping2.split("time=").pop().split('ms ')[0])
+    var mongoPing0;
+    var mongoPing1;
+    var mongoPing2;
+    if (os.platform == "win32")
+      mongoPing0 = Number(mongoping0.split("time=").pop().split("ms ")[0]);
+    else mongoPing0 = Number(mongoping0.split("time=").pop().split(" ms")[0]);
+
+    if (os.platform == "win32")
+      mongoPing1 = Number(mongoping1.split("time=").pop().split("ms ")[0]);
+    else mongoPing1 = Number(mongoping1.split("time=").pop().split(" ms")[0]);
+
+    if (os.platform == "win32")
+      mongoPing2 = Number(mongoping2.split("time=").pop().split("ms ")[0]);
+    else mongoPing2 = Number(mongoping2.split("time=").pop().split(" ms")[0]);
 
     var MongoPing = mongoPing0 + mongoPing1 + mongoPing2;
     var mongoPing = Math.round(MongoPing / 3);
