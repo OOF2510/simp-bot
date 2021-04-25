@@ -1,25 +1,26 @@
-// const ajax = require('ajax')
-// function ping(url) {
-//  var encodedURL = encodeURIComponent(url);
-//  var startDate = new Date();
-//  var endDate = null;
-//  ajax({
-//    url: "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22" + encodedURL + "%22&format=json",                                  type: "get",
-//    async: false,
-//    dataType: "json",                                     success: function(data) {
-//      if (data.query.results != null) {                         endDate = new Date();
-//      } else {
-//          endDate = null;
-//      }                                                   },
-//    error: function(){
-//      endDate = null;                                     }
-//  });
-//
-//  if (endDate == null) {
-//      throw "Not responsive...";
-//  }
-//
-// return endDate.getTime() - startDate.getTime();
+// var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+// function ping(host, port, pong) {
+//   var started = new Date().getTime();
+
+//   var http = new XMLHttpRequest();
+
+//   http.open("GET", "http://" + host + ":" + port, /*async*/ true);
+//   http.onreadystatechange = function () {
+//     if (http.readyState == 4) {
+//       var ended = new Date().getTime();
+
+//       var milliseconds = ended - started;
+
+//       if (pong != null) {
+//         pong(milliseconds);
+//       }
+//     }
+//   };
+//   try {
+//     http.send(null);
+//   } catch (exception) {
+//     // this is expected
+//   }
 // }
 
 module.exports = {
@@ -50,12 +51,31 @@ module.exports = {
     bchDB,
     blDB
   ) {
-    // var mongoPing0 = ping(config.mongoShards.zero)
-    // var mongoPing1 = ping(config.mongoShards.one)
-    // var mongoPing2 = ping(config.mongoShards.two)
+    // var mongoPings = [];
 
-    // var MongoPing = mongoPing0 + mongoPing1 + mongoPing2
-    // var mongoPing = mongoPing / 3
+    // var mongoPing0;
+    // ping(config.mongoShards.zero, 27017, function (p) {
+    //   mongoPing0 = Number(p);
+    //   mongoPings.push(mongoPing0);
+    // });
+    // var mongoPing1;
+    // ping(config.mongoShards.one, 27017, function (p) {
+    //   mongoPing0 = Number(p);
+    //   mongoPings.push(mongoPing1);
+    // });
+    // var mongoPing2;
+    // ping(config.mongoShards.two, 27017, function (p) {
+    //   mongoPing2 = Number(p);
+    //   mongoPings.push(mongoPing2);
+    // });
+
+    // console.log(mongoPings);
+    // mongoPing0 = mongoPings[0];
+    // mongoPing1 = mongoPings[1];
+    // mongoPing2 = mongoPings[2];
+
+    // var MongoPing = mongoPing0 + mongoPing1 + mongoPing2;
+    // var mongoPing = MongoPing / 3;
 
     const pingEm = new Discord.MessageEmbed()
       .setTitle(`Pong UwU!`)
