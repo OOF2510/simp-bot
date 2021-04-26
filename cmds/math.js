@@ -40,7 +40,7 @@ module.exports = {
       let awnser = math.calculate(num1, operation, num2);
 
       let awnsEm = new Discord.MessageEmbed()
-        .setTitle(`${num1} ${operation} ${num2}=`)
+        .setTitle(`${num1} ${operation} ${num2} =`)
         .setDescription(awnser)
         .setColor("RANDOM");
 
