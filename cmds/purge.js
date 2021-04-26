@@ -1,6 +1,7 @@
 module.exports = {
   name: "purge",
-  execute(
+  aliases: ["clear", "delete", "prune"],
+  async execute(
     msg,
     args,
     client,

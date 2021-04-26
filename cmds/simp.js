@@ -1,6 +1,7 @@
 module.exports = {
   name: "simp",
-  execute(msg) {
+  aliases: ["s"],
+  async execute(msg) {
     let response;
     let sender = msg.author;
 

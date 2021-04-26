@@ -1,6 +1,7 @@
 module.exports = {
   name: "flirt",
-  execute(msg) {
+  aliases: ["fl"],
+  async execute(msg) {
     let response;
     let sender = msg.author;
 

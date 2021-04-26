@@ -1,6 +1,7 @@
 module.exports = {
   name: "support",
-  execute(
+  aliases: ["supportserver"],
+  async execute(
     msg,
     args,
     client,

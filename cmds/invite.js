@@ -1,6 +1,7 @@
 module.exports = {
   name: "invite",
-  execute(
+  aliases: ["inv"],
+  async execute(
     msg,
     args,
     client,

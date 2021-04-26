@@ -1,6 +1,7 @@
 module.exports = {
   name: "suggest",
-  execute(
+  aliases: ["sug"],
+  async execute(
     msg,
     args,
     client,

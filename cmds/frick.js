@@ -1,6 +1,7 @@
 module.exports = {
   name: "frick",
-  execute(
+  aliases: ["fr"],
+  async execute(
     msg,
     args,
     client,

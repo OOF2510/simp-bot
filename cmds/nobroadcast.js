@@ -1,6 +1,6 @@
 module.exports = {
   name: "nobroadcast",
-  aliases: ["nbr"],
+  aliases: ["nbr", "nobr", "nbc", "nobc", "nobrc", "nbrc"],
   async execute(
     msg,
     args,

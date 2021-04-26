@@ -1,5 +1,6 @@
 module.exports = {
   name: "prefix",
+  aliases: ["pre"],
   async execute(
     msg,
     args,
