@@ -11,6 +11,12 @@ module.exports = {
     "brchan",
     "setbr",
     "setbroadchan",
+    "bch",
+    "sbch",
+    "setbrchan",
+    "broadchan",
+    "broadchannel",
+    "setbroadchan",
   ],
   async execute(
     msg,
