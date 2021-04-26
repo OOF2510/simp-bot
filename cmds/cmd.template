@@ -1,0 +1,31 @@
+module.exports = {
+  name: "cmd_name",
+  aliases: ["a1", "a2"],
+  async execute(
+    msg,
+    args,
+    client,
+    channel,
+    author,
+    server,
+    guild,
+    botMem,
+    botNick,
+    testServer,
+    defChannel,
+    me,
+    allowed,
+    prefix,
+    config,
+    exec,
+    os,
+    Discord,
+    preDB,
+    nbDB,
+    niDB,
+    bchDB,
+    blDB
+  ) {
+      
+  },
+};
