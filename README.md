@@ -22,9 +22,11 @@ s!help - Sends a help embed
 
 s!info - Info about the bot and server
 
-s!invite - sends the bot's invite link
+s!invite - Sends the bot's invite link
 
-s!nobroadcast - disable broadcasts for your server
+s!math - Does some math that you specify
+
+s!nobroadcast - Disable broadcasts for your server
 
 s!ping - Pings the bot
 

@@ -634,6 +634,11 @@ disco-oauth@^5.0.1:
     jsonwebtoken "^8.5.1"
     phin "^3.5.0"
 
+discord-math@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/discord-math/-/discord-math-1.0.5.tgz#a806c3466cf9fd881b0cc20f15bb9d7f017b2271"
+  integrity sha512-4xh44vYe1LkQ/UbC9yGrVHGfowXkxOnq8dKvVrA2hME3gHMZbckmFSLpzBS0dhTqnL4MQnGDqLgG1UFeLmhEDw==
+
 "discord.js@https://github.com/discordjs/discord.js/tarball/master":
   version "12.5.0"
   resolved "https://github.com/discordjs/discord.js/tarball/master#7869cafa80c88c6c375c2ffcc3a5875780e7e032"

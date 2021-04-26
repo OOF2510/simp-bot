@@ -146,6 +146,10 @@ module.exports = {
           {
             name: "Email",
             value: `${prefix}email <recipent email> <message> - Sends an email to the specified email address`,
+          },
+          {
+            name: `Math`,
+            value: `${prefix}math <num1> <operator> <num2> - Does the specified math equation`,
           }
         )
         .setColor("RANDOM");

@@ -23,6 +23,7 @@
     "child_process": "^1.0.2",
     "cookies": "^0.8.0",
     "disco-oauth": "^5.0.1",
+    "discord-math": "^1.0.5",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "fs": "^0.0.1-security",
