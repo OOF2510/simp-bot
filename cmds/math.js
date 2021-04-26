@@ -34,11 +34,17 @@ module.exports = {
       let num2 = Number(args[2]);
 
       if (!num1) return channel.send("Num1 needs to be specified!");
-      if (!operation)
-        return channel.send("An operation was not specified!");
+      if (!operation) return channel.send("An operation was not specified!");
       if (!num2) return channel.send("Num2 needs to be specified!");
 
-      channel.send(`Answer: ${math.calculate(num1, operation, num2)}`);
+      let awnser = math.calculate(num1, operation, num2);
+
+      let awnsEm = new Discord.MessageEmbed()
+        .setTitle(`${num1}${operation}${num2}=`)
+        .setDescription(awnser)
+        .setColor("RANDOM");
+
+      channel.send(awnsEm);
     } catch (e) {
       console.log(e);
     }
