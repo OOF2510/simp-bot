@@ -1,6 +1,17 @@
 module.exports = {
   name: "setbroadcastchannel",
-  aliases: ["brch", "broadch", "broadcastchannel", "setbrch", "sbrch"],
+  aliases: [
+    "brch",
+    "broadch",
+    "broadcastchannel",
+    "setbrch",
+    "sbrch",
+    "sbc",
+    "sbrc",
+    "brchan",
+    "setbr",
+    "setbroadchan",
+  ],
   async execute(
     msg,
     args,
