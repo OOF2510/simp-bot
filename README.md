@@ -6,7 +6,9 @@ A discord bot that is a simp
 ### [Join the support server!](https://discord.gg/zHtfa8GdPx)
 
 # Commands
-s!avatar - gets your or another user's avatar
+s!aliases- Lists aliases for specified command
+
+s!avatar - Gets your or another user's avatar
 
 s!bugreport - Sends a bug report to the simp bot team
 
