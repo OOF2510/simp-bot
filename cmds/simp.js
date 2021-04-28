@@ -1,7 +1,31 @@
 module.exports = {
   name: "simp",
   aliases: ["s"],
-  async execute(msg) {
+  async execute(
+    msg,
+    args,
+    client,
+    channel,
+    author,
+    server,
+    guild,
+    botMem,
+    botNick,
+    testServer,
+    defChannel,
+    me,
+    allowed,
+    prefix,
+    config,
+    exec,
+    os,
+    Discord,
+    preDB,
+    nbDB,
+    niDB,
+    bchDB,
+    blDB
+  ) {
     let response;
     let sender = msg.author;
     let sendMem = guild.members.cache.get(sender);
@@ -39,10 +63,10 @@ module.exports = {
     response = responses[Math.floor(Math.random() * responses.length)];
 
     const simpEm = new Discord.MessageEmbed()
-    .setTitle(response)
-    .setColor("RANDOM")
-    .setFooter(recNick, recipient.avatarURL({ dynamic: true }))
-    .setTimestamp();
+      .setTitle(response)
+      .setColor("RANDOM")
+      .setFooter(recNick, recipient.avatarURL({ dynamic: true }))
+      .setTimestamp();
 
     msg.channel.send(simpEm);
   },
