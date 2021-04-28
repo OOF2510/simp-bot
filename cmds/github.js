@@ -30,7 +30,6 @@ module.exports = {
       .setTitle("View the source code on GitHub!")
       .setURL("https://github.com/OOF2510/simp-bot-rewritten")
       .setColor("RANDOM")
-      .setTimestamp("RANDOM");
 
     channel.send(gitEm);
   },
