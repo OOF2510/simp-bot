@@ -86,7 +86,11 @@ module.exports = {
             name: `Support`,
             value: `${prefix}support - Join the support server!`,
           },
-          { name: `Aliases`, value: `${prefix}aliases <command>` }
+          { name: `Aliases`, value: `${prefix}aliases <command>` },
+          {
+            name: `Github`,
+            value: `${prefix}github - Sends link to Simp Bot's github page`,
+          }
         )
         .setColor("RANDOM");
 
