@@ -74,7 +74,7 @@ module.exports = {
           { name: "Help", value: `${prefix}help <module> - Sends help embed` },
           {
             name: "Info",
-            value: `${prefix}info - Info about the bot and server`,
+            value: `${prefix}info [-yayfetch] - Info about the bot and server`,
           },
           {
             name: `Avatar`,

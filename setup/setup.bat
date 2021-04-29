@@ -39,5 +39,7 @@ echo }
 echo config.json:
 type config.json
 
+yarn global add yayfetch
 yarn install
+
 exit

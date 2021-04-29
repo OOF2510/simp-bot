@@ -36,6 +36,7 @@ echo "{
 echo "config.json:"
 cat config.json
 
+sudo yarn global add yayfetch
 yarn install
 
 exit

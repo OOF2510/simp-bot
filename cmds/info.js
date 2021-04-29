@@ -103,6 +103,9 @@ module.exports = {
     // let YarnV = await exec("yarn -v");
     // let yarnV = "v" + YarnV.stdout.trim();
 
+    let YayFetch = await exec("yayfetch --hide-logo");
+    let yayFetch = YayFetch.stdout.trim();
+
     let djsV = "master";
 
     let infoEm = new Discord.MessageEmbed()
@@ -145,6 +148,18 @@ module.exports = {
       )
       .setColor("RANDOM");
 
-    channel.send(infoEm);
+    if (args[0] == "-yayfetch") {
+      infoEm.addFields({
+        name: `Yayfetch`,
+        value:
+          "```yaml" +
+          `
+          ${yayFetch}` +
+          "```",
+        inline: true,
+      });
+    } else {
+      channel.send(infoEm);
+    }
   },
 };
