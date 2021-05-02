@@ -1,6 +1,6 @@
 module.exports = {
   name: "pp",
-  execute(
+  async execute(
     msg,
     args,
     client,
