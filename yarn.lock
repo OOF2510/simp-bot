@@ -707,7 +707,7 @@ discord-math@^1.0.5:
 
 "discord.js@https://github.com/discordjs/discord.js/tarball/master":
   version "12.5.0"
-  resolved "https://github.com/discordjs/discord.js/tarball/master#7869cafa80c88c6c375c2ffcc3a5875780e7e032"
+  resolved "https://github.com/discordjs/discord.js/tarball/master#4a877479b01412cb63302cce41b5070bd6025510"
   dependencies:
     "@discordjs/collection" "^0.1.6"
     "@discordjs/form-data" "^3.0.1"

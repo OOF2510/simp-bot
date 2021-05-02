@@ -21,8 +21,7 @@ module.exports = {
     os,
     Discord,
     preDB,
-    nbDB,
-    niDB,
+    nbDB, 
     bchDB,
     blDB
   ) {
