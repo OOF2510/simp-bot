@@ -33,12 +33,12 @@ module.exports = {
       const Out = await exec(`${cmd}`);
       const out = Out.stdout.trim();
 
-      channel.send(
-        "```bash" +
-          `
-        ${out}` +
-          "```"
-      );
+      let response = "```bash" + `${out}` + "```";
+
+      if (response.length > 2000)
+        response = `Error: Message too long (${response.length}/2000)`;
+
+      channel.send(response);
     }
   },
 };
