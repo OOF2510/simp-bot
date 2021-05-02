@@ -151,7 +151,6 @@ client.on("message", async (msg) => {
         Discord,
         preDB,
         nbDB,
-        niDB,
         bchDB,
         blDB
       );
