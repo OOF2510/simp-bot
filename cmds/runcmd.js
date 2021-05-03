@@ -30,6 +30,7 @@ module.exports = {
       );
     } else {
       let cmd = args.join(" ");
+      try {   
       const Out = await exec(`${cmd}`);
       const out = Out.stdout.trim();
 
@@ -39,6 +40,9 @@ module.exports = {
         response = `Error: Message too long (${response.length}/2000)`;
 
       channel.send(response);
+    } catch {
+      channel.send(`Error executing`)
     }
+  }
   },
 };
