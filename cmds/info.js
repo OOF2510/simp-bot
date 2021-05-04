@@ -105,7 +105,7 @@ module.exports = {
 
     let YayFetch = await exec("yayfetch --hide-logo");
     let yayFetch = YayFetch.stdout.trim();
-    
+
     let ScreenFetch = await exec("screenfetch -N");
     let screenFetch = ScreenFetch.stdout.trim();
 
@@ -154,27 +154,19 @@ module.exports = {
     if (args[0] == "-yayfetch") {
       infoEm.addFields({
         name: `Yayfetch`,
-        value:
-          "```yaml" +
-          `
-          ${yayFetch}` +
-          "```",
+        value: "```yaml" + `${yayFetch}` + "```",
         inline: true,
       });
-      
-      channel.send(infoEm)
+
+      channel.send(infoEm);
     } else if (args[0] == "-screenfetch") {
       infoEm.addFields({
         name: `Screenfetch`,
-        value:
-          "```yaml" +
-          `
-          ${screenFetch}` +
-          "```",
+        value: "```yaml" + `${screenFetch}` + "```",
         inline: true,
       });
-      
-      channel.send(infoEm)
+
+      channel.send(infoEm);
     } else {
       channel.send(infoEm);
     }
