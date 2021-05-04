@@ -7,7 +7,7 @@
   "author": "OOF2510 <64423517+OOF2510@users.noreply.github.com>",
   "license": "WTFPL",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon -x 'node index.js || touch index.js'",
     "setup:linux": "chmod +x setup/setup.sh && ./setup/setup.sh",
     "setup:win": "./setup/setup.bat",
     "setup": "python setup/setup.py"
