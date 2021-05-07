@@ -63,7 +63,9 @@ async function ping(domain) {
 const intents = new Discord.Intents(Discord.Intents.NON_PRIVILEGED);
 const client = new Discord.Client({ intents: intents });
 
-const player = new Player(client);
+const player = new Player(client, {
+  quality: "low",
+});
 
 const app = express();
 
