@@ -27,5 +27,6 @@ module.exports = {
   ) {
     let message = msg;
     let song = await client.player.nowPlaying(message);
+    if (song) message.channel.send(`Current song: ${song.name}`);
   },
 };
