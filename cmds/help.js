@@ -35,7 +35,8 @@ module.exports = {
             \`Info\`
             \`Moderation\`
             \`Feedback\`
-            \`Misc\``,
+            \`Misc\`,
+            \`Music\``,
         })
         .setTimestamp();
 
@@ -194,6 +195,59 @@ module.exports = {
         .setColor("RANDOM");
 
       channel.send(modEm);
+    } else if (args[0].toLowerCase() == "music") {
+      let muEm = new Discord.MessageEmbed()
+        .setAuthor(botNick, client.user.avatarURL())
+        .setTitle("Help - Music")
+        .addFields(
+          {
+            name: "Play",
+            value: `${prefix}play <song name or url> - Plays specified song`,
+          },
+          {
+            name: "Playlist",
+            value: `${prefix}playlist <playlist url> - Adds specified playlist to queue`,
+          },
+          {
+            name: "Now Playing",
+            value: `${prefix}nowplaying - Shows the currently playing song`,
+          },
+          {
+            name: "Skip",
+            value: `${prefix}skip - Skips the currently playing song`,
+          },
+          {
+            name: "Remove",
+            value: `${prefix}remove <queue number> - Removes specified song from queue`,
+          },
+          {
+            name: "Pause",
+            value: `${prefix}pause - Pauses the current song`,
+          },
+          {
+            name: "Resume",
+            value: `${prefix}resume - Resumes paused song`,
+          },
+          {
+            name: "Stop",
+            value: `${prefix}stop - Stops playing music & leaves the VC`,
+          },
+          {
+            name: "Shuffle",
+            value: `${prefix}shuffle - Shuffles the queue`,
+          },
+          {
+            name: "Queue",
+            value: `${prefix}queue - Shows the queue`,
+          },
+          {
+            name: "Volume",
+            value: `${prefix}volume <number from 0 to 200> - Sets volume to specified percent`,
+          }
+        )
+        .setColor("RANDOM");
+
+      channel.send(deEm);
     } else return;
   },
 };
