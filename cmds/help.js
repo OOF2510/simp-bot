@@ -35,8 +35,8 @@ module.exports = {
             \`Info\`
             \`Moderation\`
             \`Feedback\`
-            \`Misc\`,
-            \`Music\``,
+            \`Misc\`
+            \`Music\``
         })
         .setTimestamp();
 
@@ -247,7 +247,7 @@ module.exports = {
         )
         .setColor("RANDOM");
 
-      channel.send(deEm);
+      channel.send(muEm);
     } else return;
   },
 };
