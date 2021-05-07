@@ -7,6 +7,7 @@ const exec = promisify(require("child_process").exec);
 const Keyv = require("keyv");
 const express = require("express");
 const path = require("path");
+const { Player } = require("discord-music-player");
 
 var allowed = [
   "463119138500378624", //me
@@ -62,6 +63,8 @@ async function ping(domain) {
 const intents = new Discord.Intents(Discord.Intents.NON_PRIVILEGED);
 const client = new Discord.Client({ intents: intents });
 
+const player = new Player(client);
+
 const app = express();
 
 const preDB = new Keyv(`mongodb://${config.mongoURI}`, {
@@ -85,6 +88,7 @@ blDB.on("error", (err) => console.error("Keyv error", err));
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
+client.player = player;
 
 const cmdFiles = fs
   .readdirSync("./cmds")
@@ -99,6 +103,78 @@ for (const file of cmdFiles) {
     });
   } else continue;
 }
+
+client.player
+  .on("channelEmpty", (message, queue) =>
+    message.channel.send(
+      `The **${queue.connection.channel}** was empty, music was removed!`
+    )
+  )
+  .on("songAdd", (message, queue, song) =>
+    message.channel.send(`**${song.name}** has been added to the queue!`)
+  )
+  .on("playlistAdd", (message, queue, playlist) =>
+    message.channel.send(
+      `${playlist.name} playlist with ${playlist.videoCount} songs has been added to the queue!`
+    )
+  )
+  .on("queueEnd", (message, queue) =>
+    message.channel.send(`The queue ended, nothing more to play!`)
+  )
+  .on("songChanged", (message, newSong, oldSong) =>
+    message.channel.send(`**${newSong.name}** is now playing!`)
+  )
+  .on("songFirst", (message, song) =>
+    message.channel.send(`**${song.name}** is now playing!`)
+  )
+  .on("clientDisconnect", (message, queue) =>
+    message.channel.send(
+      `I got disconnected from the channel, music was removed.`
+    )
+  )
+  .on("clientUndeafen", (message, queue) =>
+    message.channel.send(
+      `I got disconnected from the channel, music was removed.`
+    )
+  )
+  .on("error", (error, message) => {
+    switch (error) {
+      case "SearchIsNull":
+        message.channel.send(`No song with that query was found.`);
+        break;
+      case "InvalidPlaylist":
+        message.channel.send(`No Playlist was found with that link.`);
+        break;
+      case "InvalidSpotify":
+        message.channel.send(`No Spotify Song was found with that link.`);
+        break;
+      case "QueueIsNull":
+        message.channel.send(`There is no music playing right now.`);
+        break;
+      case "VoiceChannelTypeInvalid":
+        message.channel.send(
+          `You need to be in a Voice Channel to play music.`
+        );
+        break;
+      case "LiveUnsupported":
+        message.channel.send(`We do not support YouTube Livestreams.`);
+        break;
+      case "VideoUnavailable":
+        message.channel.send(
+          `Something went wrong while playing the current song, skipping...`
+        );
+        break;
+      case "NotANumber":
+        message.channel.send(`The provided argument was Not A Number.`);
+        break;
+      case "MessageTypeInvalid":
+        message.channel.send(`The Message object was not provided.`);
+        break;
+      default:
+        message.channel.send(`**Unknown Error Ocurred:** ${error}`);
+        break;
+    }
+  });
 
 client.on("ready", () => {
   console.log("Ready!");
