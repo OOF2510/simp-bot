@@ -8,7 +8,7 @@ A discord bot that is a simp
 # Commands
 s!aliases- Lists aliases for specified command
 
-s!avatar - Gets your or another user's avatar
+s!avatar - gets your or another user's avatar
 
 s!bugreport - Sends a bug report to the simp bot team
 
@@ -24,27 +24,49 @@ s!help - Sends a help embed
 
 s!info - Info about the bot and server
 
-s!invite - Sends the bot's invite link
+s!invite - sends the bot's invite link
 
-s!math - Does some math that you specify
+s!nobroadcast - disable broadcasts for your server
 
-s!nobroadcast - Disable broadcasts for your server
+s!nowplaying - Shows the currently playing song
+
+s!pause - Pauses the current song
 
 s!ping - Pings the bot
 
+s!play - Plays specified song
+
+s!playlist - Adds specified playlist to queue
+
 s!pp - Pp size
 
-s!prefix - Sets your guild's prefix to specified prefix
+s!prefix - Sets your guild's prefix to 
+specified prefix
 
-s!purge - Bulk deletes the specified number of messages
+s!purge - Bulk deletes the specified number 
+of messages
+
+s!queue - Shows the queue
+
+s!remove - Removes specified song from queue
+
+s!resume - Resumes paused song
 
 s!setbroadcastchannel - sets the channel that broadcasts go to
 
+s!shuffle - Shuffles the queue
+
 s!simp - Simps for the mentioned user
+
+s!skip - Skips the currently playing song
+
+s!stop - Stops playing music & leaves the VC
 
 s!suggest - Sends a suggestion to me
 
 s!support - sends a link for the support server
+
+s!volume - Sets volume to specified percent
 
 s!yesbroadcast - re-enable broadcasts for your server
 
