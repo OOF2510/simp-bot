@@ -13,9 +13,7 @@
     "setup": "python setup/setup.py"
   },
   "devDependencies": {
-    "@mapbox/node-pre-gyp": "^1.0.3",
-    "discord.js": "https://github.com/discordjs/discord.js/tarball/master",
-    "node-gyp": "^8.0.0",
+    "discord.js": "https://github.com/discordjs/discord.js.git#master",
     "pug": "^3.0.2"
   },
   "dependencies": {
