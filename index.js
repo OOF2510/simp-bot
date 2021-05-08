@@ -276,4 +276,3 @@ client.on("guildDelete", (guild) => {
 });
 
 client.login(config.token);
-require("./dash/server");
