@@ -34,7 +34,7 @@ module.exports = {
       const Out = await exec(`${cmd}`);
       const out = Out.stdout.trim();
 
-      let response = "```bash" + `${out}` + "```";
+      let response = "```bash\n" + `${out}` + "```";
 
       if (response.length > 2000)
         response = `Error: Message too long (${response.length}/2000)`;

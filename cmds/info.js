@@ -154,7 +154,7 @@ module.exports = {
     if (args[0] == "-yayfetch") {
       infoEm.addFields({
         name: `Yayfetch`,
-        value: "```yaml" + `${yayFetch}` + "```",
+        value: "```yaml\n" + `${yayFetch}` + "```",
         inline: true,
       });
 
@@ -162,7 +162,7 @@ module.exports = {
     } else if (args[0] == "-screenfetch") {
       infoEm.addFields({
         name: `Screenfetch`,
-        value: "```yaml" + `${screenFetch}` + "```",
+        value: "```yaml\n" + `${screenFetch}` + "```",
         inline: true,
       });
 
