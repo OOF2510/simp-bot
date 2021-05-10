@@ -22,7 +22,6 @@ async function ping(domain) {
 
 module.exports = {
   name: "ping",
-  aliases: ["p"],
   async execute(
     msg,
     args,
