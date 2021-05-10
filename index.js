@@ -66,8 +66,6 @@ const player = new Player(client, {
   quality: "low",
 });
 
-const app = express();
-
 const preDB = new Keyv(`mongodb://${config.mongoURI}`, {
   collection: "prefixes",
 });
