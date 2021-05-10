@@ -1,5 +1,7 @@
 let config = require("../config.json");
 
+import wcmatch from "wildcard-match";
+
 var nodemailer = require("nodemailer");
 
 var transporter = nodemailer.createTransport({
@@ -11,9 +13,12 @@ var transporter = nodemailer.createTransport({
 });
 
 function validateEmail(email) {
-  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 }
+
+var disallowedEmails = ["*@discord.*", "*@*.gov.*"];
 
 module.exports = {
   name: "email",
@@ -61,6 +66,13 @@ module.exports = {
 
     let isEmailValid = validateEmail(recipeint);
     if (!isEmailValid) return msg.reply(`Invalid email!`);
+
+    disallowedEmails.forEach((email) => {
+      const isDisallowed = wcmatch(email);
+
+      if (isDisallowed(recipeint))
+        return channel.send("That email has been blocked to prevent abuse!");
+    });
 
     var mailOptions = {
       from: config.email,

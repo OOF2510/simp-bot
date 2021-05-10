@@ -13,28 +13,22 @@
     "setup": "python setup/setup.py"
   },
   "devDependencies": {
-    "discord.js": "https://github.com/discordjs/discord.js.git#master",
-    "pug": "^3.0.2"
+    "discord.js": "https://github.com/discordjs/discord.js.git#master"
   },
   "dependencies": {
     "@keyv/mongo": "^1.1.0",
     "child_process": "^1.0.2",
-    "cookies": "^0.8.0",
-    "disco-oauth": "^5.0.1",
     "discord-math": "^1.0.5",
     "discord-music-player": "^7.1.4",
-    "ejs": "^3.1.6",
-    "express": "^4.17.1",
     "fs": "^0.0.1-security",
     "keyv": "^4.0.3",
     "long": "^4.0.0",
-    "method-override": "^3.0.0",
     "nodemailer": "^6.5.0",
     "nodemon": "^2.0.7",
     "opusscript": "^0.0.8",
     "os": "^0.1.1",
     "path": "^0.12.7",
     "util": "^0.12.3",
-    "xmlhttprequest": "^1.8.0"
+    "wildcard-match": "^5.1.0"
   }
 }
