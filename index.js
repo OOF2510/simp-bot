@@ -5,7 +5,6 @@ const os = require("os");
 const { promisify } = require("util");
 const exec = promisify(require("child_process").exec);
 const Keyv = require("keyv");
-const express = require("express");
 const path = require("path");
 const { Player } = require("discord-music-player");
 
