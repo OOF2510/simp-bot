@@ -1,6 +1,6 @@
 let config = require("../config.json");
 
-import wcmatch from "wildcard-match";
+const { wcmatch } = require("wildcard-match");
 
 var nodemailer = require("nodemailer");
 
