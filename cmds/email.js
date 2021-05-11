@@ -77,11 +77,7 @@ module.exports = {
     let isEmailValid = validateEmail(recipeint);
     if (!isEmailValid) return msg.reply(`Invalid email!`);
 
-    if (
-      recipeint.endsWith(
-        allowedEmails[0 || 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8]
-      )
-    ) {
+    function sendEmail() {
       var mailOptions = {
         from: config.email,
         to: recipeint,
@@ -96,6 +92,18 @@ module.exports = {
           msg.reply(`Email sent to ${recipeint}`);
         }
       });
+    }
+
+    if (recipeint.endsWith(allowedEmails[0 || 1])) {
+      sendEmail();
+    } else if (recipeint.endsWith(allowedEmails[2 || 3])) {
+      sendEmail();
+    } else if (recipeint.endsWith(allowedEmails[4 || 5])) {
+      sendEmail();
+    } else if (recipeint.endsWith(allowedEmails[6 || 7])) {
+      sendEmail();
+    } else if (recipeint.endsWith(allowedEmails[8])) {
+      sendEmail();
     } else
       return msg.reply(
         `To prevent abuse, you can only send emails to addresses with certian domains, here is a list of acceptable email address domains: \`${allowedEmails.join(
