@@ -1,6 +1,6 @@
 let config = require("../config.json");
 
-const { wcmatch } = require("wildcard-match");
+const wildcardMatch = require("wildcard-match");
 
 var nodemailer = require("nodemailer");
 
@@ -79,7 +79,7 @@ module.exports = {
     if (!isEmailValid) return msg.reply(`Invalid email!`);
 
     allowedEmails.forEach((email) => {
-      const isAllowed = wcmatch(email);
+      const isAllowed = wildcardMatch(email);
 
       if (isAllowed(recipeint)) {
         var mailOptions = {
@@ -97,12 +97,15 @@ module.exports = {
             msg.reply(`Email sent to ${recipeint}`);
           }
         });
-      } else
-        return channel.send(
+        break;
+      } else {
+         channel.send(
           `To prevent abuse, you can only send emails to addresses with certian domains, here is a list of acceptable email address domains (* represents any string): \`${allowedEmails.join(
             ", "
           )}\`!`
         );
+        break;
+      }
     });
   },
 };
