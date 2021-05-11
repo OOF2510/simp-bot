@@ -97,14 +97,12 @@ module.exports = {
             msg.reply(`Email sent to ${recipeint}`);
           }
         });
-        break;
       } else {
-         channel.send(
+        return channel.send(
           `To prevent abuse, you can only send emails to addresses with certian domains, here is a list of acceptable email address domains (* represents any string): \`${allowedEmails.join(
             ", "
           )}\`!`
         );
-        break;
       }
     });
   },
