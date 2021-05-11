@@ -79,15 +79,7 @@ module.exports = {
 
     if (
       recipeint.endsWith(
-        allowedEmails[0] ||
-          allowedEmails[1] ||
-          allowedEmails[2] ||
-          allowedEmails[3] ||
-          allowedEmails[4] ||
-          allowedEmails[5] ||
-          allowedEmails[6] ||
-          allowedEmails[7] ||
-          allowedEmails[8]
+        allowedEmails[0 || 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8]
       )
     ) {
       var mailOptions = {
@@ -105,7 +97,7 @@ module.exports = {
         }
       });
     } else
-      return channel.send(
+      return msg.reply(
         `To prevent abuse, you can only send emails to addresses with certian domains, here is a list of acceptable email address domains: \`${allowedEmails.join(
           ", "
         )}\`!`
