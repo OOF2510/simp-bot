@@ -18,7 +18,18 @@ function validateEmail(email) {
   return re.test(String(email).toLowerCase());
 }
 
-var disallowedEmails = ["*@discord.*", "*@*.gov.*"];
+var allowedEmails = [
+  "*@outlook.*",
+  "*@gmail.com",
+  "*@simp-bot.xyz",
+  "*@yahoo.*",
+  "*@inbox.com",
+  "*@mail.com",
+  "*@email.com",
+  "*@icloud.*",
+  "*@aol.*",
+  "*@yandex.*",
+];
 
 module.exports = {
   name: "email",
@@ -67,27 +78,31 @@ module.exports = {
     let isEmailValid = validateEmail(recipeint);
     if (!isEmailValid) return msg.reply(`Invalid email!`);
 
-    disallowedEmails.forEach((email) => {
-      const isDisallowed = wcmatch(email);
+    allowedEmails.forEach((email) => {
+      const isAllowed = wcmatch(email);
 
-      if (isDisallowed(recipeint))
-        return channel.send("That email has been blocked to prevent abuse!");
-    });
+      if (isAllowed(recipeint)) {
+        var mailOptions = {
+          from: config.email,
+          to: recipeint,
+          subject: `From ${author.username} using Simp Bot on Discord`,
+          text: emailContent,
+        };
 
-    var mailOptions = {
-      from: config.email,
-      to: recipeint,
-      subject: `From ${author.username} using Simp Bot on Discord`,
-      text: emailContent,
-    };
-
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("Email sent: " + info.response);
-        msg.reply(`Email sent to ${recipeint}`);
-      }
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log("Email sent: " + info.response);
+            msg.reply(`Email sent to ${recipeint}`);
+          }
+        });
+      } else
+        return channel.send(
+          `To prevent abuse, you can only send emails to addresses with certian domains, here is a list of acceptable email address domains (* represents any string): \`${allowedEmails.join(
+            ", "
+          )}\`!`
+        );
     });
   },
 };
