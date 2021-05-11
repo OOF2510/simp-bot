@@ -28,6 +28,7 @@ var allowedEmails = [
   "email.com",
   "icloud.com",
   "aol.com",
+  "boxbot.xyz"
 ];
 
 module.exports = {
@@ -102,7 +103,7 @@ module.exports = {
       sendEmail();
     } else if (recipeint.endsWith(allowedEmails[6 || 7])) {
       sendEmail();
-    } else if (recipeint.endsWith(allowedEmails[8])) {
+    } else if (recipeint.endsWith(allowedEmails[8 || 9])) {
       sendEmail();
     } else
       return msg.reply(
