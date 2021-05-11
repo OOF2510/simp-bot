@@ -19,16 +19,15 @@ function validateEmail(email) {
 }
 
 var allowedEmails = [
-  "*@outlook.*",
-  "*@gmail.com",
-  "*@simp-bot.xyz",
-  "*@yahoo.*",
-  "*@inbox.com",
-  "*@mail.com",
-  "*@email.com",
-  "*@icloud.*",
-  "*@aol.*",
-  "*@yandex.*",
+  "outlook.com",
+  "gmail.com",
+  "simp-bot.xyz",
+  "yahoo.net",
+  "inbox.com",
+  "mail.com",
+  "email.com",
+  "icloud.com",
+  "aol.com",
 ];
 
 module.exports = {
@@ -78,32 +77,38 @@ module.exports = {
     let isEmailValid = validateEmail(recipeint);
     if (!isEmailValid) return msg.reply(`Invalid email!`);
 
-    allowedEmails.forEach((email) => {
-      const isAllowed = wildcardMatch(email);
-
-      if (isAllowed(recipeint)) {
-        var mailOptions = {
-          from: config.email,
-          to: recipeint,
-          subject: `From ${author.username} using Simp Bot on Discord`,
-          text: emailContent,
-        };
-
-        transporter.sendMail(mailOptions, function (error, info) {
-          if (error) {
-            console.log(error);
-          } else {
-            console.log("Email sent: " + info.response);
-            msg.reply(`Email sent to ${recipeint}`);
-          }
-        });
-      } else {
-        return channel.send(
-          `To prevent abuse, you can only send emails to addresses with certian domains, here is a list of acceptable email address domains (* represents any string): \`${allowedEmails.join(
-            ", "
-          )}\`!`
-        );
-      }
-    });
+    if (
+      recipeint.endsWith(
+        allowedEmails[0] ||
+          allowedEmails[1] ||
+          allowedEmails[2] ||
+          allowedEmails[3] ||
+          allowedEmails[4] ||
+          allowedEmails[5] ||
+          allowedEmails[6] ||
+          allowedEmails[7] ||
+          allowedEmails[8]
+      )
+    ) {
+      var mailOptions = {
+        from: config.email,
+        to: recipeint,
+        subject: `From ${author.username} using Simp Bot on Discord`,
+        text: emailContent,
+      };
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Email sent: " + info.response);
+          msg.reply(`Email sent to ${recipeint}`);
+        }
+      });
+    } else
+      return channel.send(
+        `To prevent abuse, you can only send emails to addresses with certian domains, here is a list of acceptable email address domains: \`${allowedEmails.join(
+          ", "
+        )}\`!`
+      );
   },
 };
