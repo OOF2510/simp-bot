@@ -1,7 +1,5 @@
 let config = require("../config.json");
 
-const wildcardMatch = require("wildcard-match");
-
 var nodemailer = require("nodemailer");
 
 var transporter = nodemailer.createTransport({
