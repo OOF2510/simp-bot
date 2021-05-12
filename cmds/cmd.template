@@ -24,8 +24,6 @@ module.exports = {
     nbDB,
     bchDB,
     blDB
-  ) {
-    let message = msg
-      
+  ) { 
   },
 };

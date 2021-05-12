@@ -23,6 +23,7 @@
     "fs": "^0.0.1-security",
     "keyv": "^4.0.3",
     "long": "^4.0.0",
+    "node-url-shortener": "^1.1.11",
     "nodemailer": "^6.5.0",
     "nodemon": "^2.0.7",
     "opusscript": "^0.0.8",
