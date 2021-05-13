@@ -56,6 +56,8 @@ s!setbroadcastchannel - sets the channel that broadcasts go to
 
 s!shuffle - Shuffles the queue
 
+s!shortenurl - Shortens given URL
+
 s!simp - Simps for the mentioned user
 
 s!skip - Skips the currently playing song
