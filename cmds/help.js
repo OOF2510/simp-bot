@@ -153,7 +153,8 @@ module.exports = {
           {
             name: `Math`,
             value: `${prefix}math <num1> <operator> <num2> - Does the specified math equation`,
-          }
+          },
+          { name: 'Shorten URL', value: `${prefix}shortenurl <url> - Shortens given url`}
         )
         .setColor("RANDOM");
 
