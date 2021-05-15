@@ -126,13 +126,13 @@ client.player
   )
   .on("songChanged", (message, newSong, oldSong) => {
     let em = new Discord.MessageEmbed()
-    .setTitle(`Added to queue`)
+    .setTitle(`Playing`)
     .setDescription(`**${newSong.name}** is now playing!`)
     message.channel.send(em)
   })
   .on("songFirst", (message, song) => {
     let em = new Discord.MessageEmbed()
-    .setTitle(`Added to queue`)
+    .setTitle(`Playing`)
     .setDescription(`**${song.name}** is now playing!`)
     .setColor("RANDOM")
     message.channel.send(em)
