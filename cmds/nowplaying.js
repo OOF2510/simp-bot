@@ -32,7 +32,7 @@ module.exports = {
         .setTitle(`Now Playing`)
         .setDescription(`Current song: ${song.name}`)
         .setColor("RANDOM");
-      message.channel.send();
+      message.channel.send(em);
     }
   },
 };
