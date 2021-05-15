@@ -29,9 +29,8 @@ module.exports = {
     let queue = client.player.getQueue(message);
     if (queue) {
       let em = new Discord.MessageEmbed()
-        .setTitle(`Removed`)
+        .setTitle(`Queue`)
         .setDescription(
-          "Queue:\n" +
             queue.songs
               .map((song, i) => {
                 return `${i === 0 ? "Now Playing" : `#${i + 1}`} - ${
