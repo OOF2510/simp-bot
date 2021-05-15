@@ -26,6 +26,12 @@ module.exports = {
   ) {
     let message = msg
     let song = client.player.skip(message);
-    if (song) message.channel.send(`${song.name} was skipped!`);
-  },
+    if (song) { 
+      let em = new Discord.MessageEmbed()
+      .setTitle(`Skipped`)
+      .setDescription(`${song.name} was skipped!`)
+      .setColor("RANDOM");
+      message.channel.send(em);
+    }
+    },
 };
