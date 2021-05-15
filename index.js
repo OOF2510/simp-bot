@@ -109,9 +109,12 @@ client.player
       `The **${queue.connection.channel}** was empty, music was removed!`
     )
   )
-  .on("songAdd", (message, queue, song) =>
-    message.channel.send(`**${song.name}** has been added to the queue!`)
-  )
+  .on("songAdd", (message, queue, song) => {
+    let em = new Discord.MessageEmbed()
+      .setTitle(`Added to queue`)
+      .setDescription(`**${song.name}** has been added to the queue!`)
+    message.channel.send(em)
+  })
   .on("playlistAdd", (message, queue, playlist) =>
     message.channel.send(
       `${playlist.name} playlist with ${playlist.videoCount} songs has been added to the queue!`
@@ -120,9 +123,12 @@ client.player
   .on("queueEnd", (message, queue) =>
     message.channel.send(`The queue ended, nothing more to play!`)
   )
-  .on("songChanged", (message, newSong, oldSong) =>
-    message.channel.send(`**${newSong.name}** is now playing!`)
-  )
+  .on("songChanged", (message, newSong, oldSong) => {
+    let em = new Discord.MessageEmbed()
+    .setTitle(`Added to queue`)
+    .setDescription(`**${newSong.name}** is now playing!`)
+    message.channel.send(em)
+  })
   .on("songFirst", (message, song) =>
     message.channel.send(`**${song.name}** is now playing!`)
   )
