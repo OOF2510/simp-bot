@@ -27,6 +27,12 @@ module.exports = {
   ) {
     let message = msg;
     let song = await client.player.nowPlaying(message);
-    if (song) message.channel.send(`Current song: ${song.name}`);
+    if (song) {
+      let em = new Discord.MessageEmbed()
+        .setTitle(`Now Playing`)
+        .setDescription(`Current song: ${song.name}`)
+        .setColor("RANDOM");
+      message.channel.send();
+    }
   },
 };

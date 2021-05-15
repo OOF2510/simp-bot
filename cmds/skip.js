@@ -24,14 +24,14 @@ module.exports = {
     bchDB,
     blDB
   ) {
-    let message = msg
+    let message = msg;
     let song = client.player.skip(message);
-    if (song) { 
+    if (song) {
       let em = new Discord.MessageEmbed()
-      .setTitle(`Skipped`)
-      .setDescription(`${song.name} was skipped!`)
-      .setColor("RANDOM");
+        .setTitle(`Skipped`)
+        .setDescription(`${song.name} was skipped!`)
+        .setColor("RANDOM");
       message.channel.send(em);
     }
-    },
+  },
 };
