@@ -113,6 +113,7 @@ client.player
     let em = new Discord.MessageEmbed()
       .setTitle(`Added to queue`)
       .setDescription(`**${song.name}** has been added to the queue!`)
+      .setColor("RANDOM")
     message.channel.send(em)
   })
   .on("playlistAdd", (message, queue, playlist) =>
@@ -129,9 +130,13 @@ client.player
     .setDescription(`**${newSong.name}** is now playing!`)
     message.channel.send(em)
   })
-  .on("songFirst", (message, song) =>
-    message.channel.send(`**${song.name}** is now playing!`)
-  )
+  .on("songFirst", (message, song) => {
+    let em = new Discord.MessageEmbed()
+    .setTitle(`Added to queue`)
+    .setDescription(`**${song.name}** is now playing!`)
+    .setColor("RANDOM")
+    message.channel.send(em)
+  })
   .on("clientDisconnect", (message, queue) =>
     message.channel.send(
       `I got disconnected from the channel, music was removed.`
