@@ -36,7 +36,7 @@ module.exports = {
             \`Moderation\`
             \`Feedback\`
             \`Misc\`
-            \`Music\``
+            \`Music\``,
         })
         .setTimestamp();
 
@@ -132,8 +132,22 @@ module.exports = {
             name: "Frick",
             value: `${prefix}frick [optional user mention] - I think we all know what that does...`,
           },
-          { name: "Pp", value: `${prefix}pp [optional user mention] - Pp size` },
-          { name: "Youtube Together", value: `${prefix}youtubetogether - Starts a Youtube together session` }
+          {
+            name: "Pp",
+            value: `${prefix}pp [optional user mention] - Pp size`,
+          },
+          {
+            name: "Youtube Together",
+            value: `${prefix}youtubetogether - Starts a Youtube together session`,
+          },
+          {
+            name: "Poker Together",
+            value: `${prefix}poker - Starts a Poker together session`,
+          },
+          {
+            name: "Chess Together",
+            value: `${prefix}chess - Starts a Chess together session`,
+          }
         )
         .setColor("RANDOM");
 
@@ -155,7 +169,10 @@ module.exports = {
             name: `Math`,
             value: `${prefix}math <num1> <operator> <num2> - Does the specified math equation`,
           },
-          { name: 'Shorten URL', value: `${prefix}shortenurl <url> - Shortens given url`}
+          {
+            name: "Shorten URL",
+            value: `${prefix}shortenurl <url> - Shortens given url`,
+          }
         )
         .setColor("RANDOM");
 

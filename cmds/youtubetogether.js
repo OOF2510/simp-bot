@@ -25,6 +25,8 @@ module.exports = {
     bchDB,
     blDB
   ) {
+    if (!msg.member.voice.channel)
+      return msg.reply("You must be in a Voice Channel to use this!");
     client.discordTogether
       .createTogetherCode(msg.member.voice.channelID, "youtube")
       .then(async (invite) => {
