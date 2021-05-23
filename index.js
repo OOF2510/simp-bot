@@ -7,7 +7,7 @@ const exec = promisify(require("child_process").exec);
 const Keyv = require("keyv");
 const path = require("path");
 const { Player } = require("discord-music-player");
-
+const { DiscordTogether } = require("discord-together");
 var allowed = [
   "463119138500378624", //me
   "760473112613093436", //gavin
@@ -88,6 +88,7 @@ blDB.on("error", (err) => console.error("Keyv error", err));
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.player = player;
+client.discordTogether = new DiscordTogether(client);
 
 const cmdFiles = fs
   .readdirSync("./cmds")
@@ -113,8 +114,8 @@ client.player
     let em = new Discord.MessageEmbed()
       .setTitle(`Added to queue`)
       .setDescription(`**${song.name}** has been added to the queue!`)
-      .setColor("RANDOM")
-    message.channel.send(em)
+      .setColor("RANDOM");
+    message.channel.send(em);
   })
   .on("playlistAdd", (message, queue, playlist) =>
     message.channel.send(
@@ -126,16 +127,16 @@ client.player
   )
   .on("songChanged", (message, newSong, oldSong) => {
     let em = new Discord.MessageEmbed()
-    .setTitle(`Playing`)
-    .setDescription(`**${newSong.name}** is now playing!`)
-    message.channel.send(em)
+      .setTitle(`Playing`)
+      .setDescription(`**${newSong.name}** is now playing!`);
+    message.channel.send(em);
   })
   .on("songFirst", (message, song) => {
     let em = new Discord.MessageEmbed()
-    .setTitle(`Playing`)
-    .setDescription(`**${song.name}** is now playing!`)
-    .setColor("RANDOM")
-    message.channel.send(em)
+      .setTitle(`Playing`)
+      .setDescription(`**${song.name}** is now playing!`)
+      .setColor("RANDOM");
+    message.channel.send(em);
   })
   .on("clientDisconnect", (message, queue) =>
     message.channel.send(

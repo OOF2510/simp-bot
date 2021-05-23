@@ -426,6 +426,13 @@ discord-music-player@^7.1.4:
     ytdl-core "^4.5.0"
     ytsr "^3.3.1"
 
+discord-together@^1.1.11:
+  version "1.1.11"
+  resolved "https://registry.yarnpkg.com/discord-together/-/discord-together-1.1.11.tgz#4fd02af4fe0fb1cff09c53029d45cae9c663566a"
+  integrity sha512-pt+Ls6JdDI85PN0Zi5GefHWnDTSLuePDeCYqwvbCdHTB/WKccSP3/l7BiwZurZ2pV8Hh3u0HYJU9p9Bo5Y0M3A==
+  dependencies:
+    node-fetch "^2.6.1"
+
 "discord.js@https://github.com/discordjs/discord.js.git#master":
   version "12.5.0"
   resolved "https://github.com/discordjs/discord.js.git#0e40f9b86826ba50aa3840807fb86e1bce6b1c3d"
