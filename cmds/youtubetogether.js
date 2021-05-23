@@ -28,7 +28,7 @@ module.exports = {
     client.discordTogether
       .createTogetherCode(msg.member.voice.channelID, "youtube")
       .then(async (invite) => {
-        return msg.channel.send(`<${invite.code}>`);
+        return msg.reply(`<${invite.code}>`);
       });
   },
 };

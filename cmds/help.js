@@ -132,7 +132,8 @@ module.exports = {
             name: "Frick",
             value: `${prefix}frick [optional user mention] - I think we all know what that does...`,
           },
-          { name: "Pp", value: `${prefix}pp [optional user mention] - Pp size` }
+          { name: "Pp", value: `${prefix}pp [optional user mention] - Pp size` },
+          { name: "Youtube Together", value: `${prefix}youtubetogether - Starts a Youtube together session` }
         )
         .setColor("RANDOM");
 
