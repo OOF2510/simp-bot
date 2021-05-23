@@ -34,6 +34,11 @@
     mongojs "2.5.0"
     pify "3.0.0"
 
+"@oof2510/ping@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@oof2510/ping/-/ping-1.0.1.tgz#3fecf1fb62f2c4970fc2bf093838d66c56eff81b"
+  integrity sha512-1erNLTIyDqUfMA4oRMSCMSjO8rjuEXd2U82rDnwJsYoHGtX8yeT6yxgIXLl+ew4DL5x2LkVsOHyiqk0v0ETghQ==
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"

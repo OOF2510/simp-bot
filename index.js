@@ -41,24 +41,6 @@ const getDefaultChannel = (guild) => {
     .first();
 };
 
-async function ping(domain) {
-  var PING;
-
-  if (os.platform() == "win32")
-    PING = await exec(`ping -n 1 ${domain} | findstr time=`);
-  else PING = await exec(`ping -c 1 ${domain} | grep time=`);
-
-  var Ping = PING.stdout.trim();
-
-  var ping;
-
-  if (os.platform == "win32")
-    ping = Number(Ping.split("time=").pop().split("ms ")[0]);
-  else ping = Number(Ping.split("time=").pop().split(" ms")[0]);
-
-  return ping;
-}
-
 const intents = new Discord.Intents(Discord.Intents.NON_PRIVILEGED);
 const client = new Discord.Client({ intents: intents });
 
