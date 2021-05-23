@@ -138,15 +138,15 @@ module.exports = {
           },
           {
             name: "Youtube Together",
-            value: `${prefix}youtubetogether - Starts a Youtube together session`,
+            value: `${prefix}youtubetogether - Starts a Youtube together session (may not work on mobile)`,
           },
           {
             name: "Poker Together",
-            value: `${prefix}poker - Starts a Poker together session`,
+            value: `${prefix}poker - Starts a Poker together session (may not work on mobile)`,
           },
           {
             name: "Chess Together",
-            value: `${prefix}chess - Starts a Chess together session`,
+            value: `${prefix}chess - Starts a Chess together session (may not work on mobile)`,
           }
         )
         .setColor("RANDOM");
