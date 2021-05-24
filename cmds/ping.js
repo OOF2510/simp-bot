@@ -1,4 +1,4 @@
-const { ping } = require("@oof2510/ping")
+const { ping } = require("@oof2510/ping");
 
 module.exports = {
   name: "ping",
@@ -45,47 +45,3 @@ module.exports = {
     msg.reply(pingEm);
   },
 };
-
-// var MongoPing1;
-// var MongoPing2;
-
-// if (os.platform() == "win32") {
-//   MongoPing0 = await exec(
-//     `ping -n 1 ${config.mongoShards[0]} | findstr time=`
-//   );
-//   MongoPing1 = await exec(
-//     `ping -n 1 ${config.mongoShards[1]} | findstr time=`
-//   );
-//   MongoPing2 = await exec(
-//     `ping -n 1 ${config.mongoShards[2]} | findstr time=`
-//   );
-// } else {
-//   MongoPing0 = await exec(
-//     `ping -c 1 ${config.mongoShards[0]} | grep time=`
-//   );
-//   MongoPing1 = await exec(
-//     `ping -c 1 ${config.mongoShards[1]} | grep time=`
-//   );
-//   MongoPing2 = await exec(
-//     `ping -c 1 ${config.mongoShards[2]} | grep time=`
-//   );
-// }
-
-// var mongoping0 = MongoPing0.stdout.trim();
-// var mongoping1 = MongoPing1.stdout.trim();
-// var mongoping2 = MongoPing2.stdout.trim();
-
-// var mongoPing0;
-// var mongoPing1;
-// var mongoPing2;
-// if (os.platform == "win32")
-//   mongoPing0 = Number(mongoping0.split("time=").pop().split("ms ")[0]);
-// else mongoPing0 = Number(mongoping0.split("time=").pop().split(" ms")[0]);
-
-// if (os.platform == "win32")
-//   mongoPing1 = Number(mongoping1.split("time=").pop().split("ms ")[0]);
-// else mongoPing1 = Number(mongoping1.split("time=").pop().split(" ms")[0]);
-
-// if (os.platform == "win32")
-//   mongoPing2 = Number(mongoping2.split("time=").pop().split("ms ")[0]);
-// else mongoPing2 = Number(mongoping2.split("time=").pop().split(" ms")[0]);
