@@ -34,10 +34,10 @@
     mongojs "2.5.0"
     pify "3.0.0"
 
-"@oof2510/ping@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@oof2510/ping/-/ping-1.0.1.tgz#3fecf1fb62f2c4970fc2bf093838d66c56eff81b"
-  integrity sha512-1erNLTIyDqUfMA4oRMSCMSjO8rjuEXd2U82rDnwJsYoHGtX8yeT6yxgIXLl+ew4DL5x2LkVsOHyiqk0v0ETghQ==
+"@oof2510/ping@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@oof2510/ping/-/ping-1.1.0.tgz#646051272cddbbf0d1ef9040a49d19c31cee22b1"
+  integrity sha512-yMKMhn+WLPnaV3pUMB2J4PwFwOfsl/mCC4FqHht5FuXMWHyCfVkkFBktbM//IerEOP8LX9AfLOPMkOoc4b+iOA==
 
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
@@ -431,10 +431,10 @@ discord-music-player@^7.1.4:
     ytdl-core "^4.5.0"
     ytsr "^3.3.1"
 
-discord-together@^1.1.11:
-  version "1.1.11"
-  resolved "https://registry.yarnpkg.com/discord-together/-/discord-together-1.1.11.tgz#4fd02af4fe0fb1cff09c53029d45cae9c663566a"
-  integrity sha512-pt+Ls6JdDI85PN0Zi5GefHWnDTSLuePDeCYqwvbCdHTB/WKccSP3/l7BiwZurZ2pV8Hh3u0HYJU9p9Bo5Y0M3A==
+discord-together@^1.1.13:
+  version "1.1.13"
+  resolved "https://registry.yarnpkg.com/discord-together/-/discord-together-1.1.13.tgz#4ecec0a2b9abcf9b324ec1878af903041cc49a9a"
+  integrity sha512-t9chF+0Q4snH2Ayoql9ABULp5K2axiNuYv/3AJpSwdnyAk4DCmzH1pHrayHqYX1bnuDKdwa2psuYXGBZIIIs+w==
   dependencies:
     node-fetch "^2.6.1"
 
@@ -1146,10 +1146,10 @@ node-url-shortener@^1.1.11:
   dependencies:
     request "^2.81.0"
 
-nodemailer@^6.6.0:
-  version "6.6.0"
-  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.6.0.tgz#ed47bb572b48d9d0dca3913fdc156203f438f427"
-  integrity sha512-ikSMDU1nZqpo2WUPE0wTTw/NGGImTkwpJKDIFPZT+YvvR9Sj+ze5wzu95JHkBMglQLoG2ITxU21WukCC/XsFkg==
+nodemailer@^6.6.1:
+  version "6.6.1"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.6.1.tgz#2a05fbf205b897d71bf43884167b5d4d3bd01b99"
+  integrity sha512-1xzFN3gqv+/qJ6YRyxBxfTYstLNt0FCtZaFRvf4Sg9wxNGWbwFmGXVpfSi6ThGK6aRxAo+KjHtYSW8NvCsNSAg==
 
 nodemon@^2.0.7:
   version "2.0.7"
