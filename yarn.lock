@@ -34,10 +34,10 @@
     mongojs "2.5.0"
     pify "3.0.0"
 
-"@oof2510/ping@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@oof2510/ping/-/ping-1.1.0.tgz#646051272cddbbf0d1ef9040a49d19c31cee22b1"
-  integrity sha512-yMKMhn+WLPnaV3pUMB2J4PwFwOfsl/mCC4FqHht5FuXMWHyCfVkkFBktbM//IerEOP8LX9AfLOPMkOoc4b+iOA==
+"@oof2510/ping@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@oof2510/ping/-/ping-1.1.4.tgz#8a012e98effbc1f73ac76b70800e414368cc20f5"
+  integrity sha512-Jmx+07BAaiaaKvHNMyEzpaB8sirTTlk+aNWzq1ZVHdV2Hj54KlnBy74qmGjmO/qlIZb6XWsddgHHugVpyqD+Zw==
 
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
@@ -255,11 +255,6 @@ chalk@^3.0.0:
   dependencies:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
-
-child_process@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/child_process/-/child_process-1.0.2.tgz#b1f7e7fc73d25e7fd1d455adc94e143830182b5a"
-  integrity sha1-sffn/HPSXn/R1FWtyU4UODAYK1o=
 
 chokidar@^3.2.2:
   version "3.5.1"
@@ -1220,11 +1215,6 @@ opusscript@^0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/opusscript/-/opusscript-0.0.8.tgz#00b49e81281b4d99092d013b1812af8654bd0a87"
   integrity sha512-VSTi1aWFuCkRCVq+tx/BQ5q9fMnQ9pVZ3JU4UHKqTkf0ED3fKEPdr+gKAAl3IA2hj9rrP6iyq3hlcJq3HELtNQ==
-
-os@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/os/-/os-0.1.1.tgz#208845e89e193ad4d971474b93947736a56d13f3"
-  integrity sha1-IIhF6J4ZOtTZcUdLk5R3NqVtE/M=
 
 p-cancelable@^1.0.0:
   version "1.1.0"

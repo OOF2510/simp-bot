@@ -17,8 +17,7 @@
   },
   "dependencies": {
     "@keyv/mongo": "^1.1.0",
-    "@oof2510/ping": "^1.1.0",
-    "child_process": "^1.0.2",
+    "@oof2510/ping": "^1.1.4",
     "discord-math": "^1.0.5",
     "discord-music-player": "^7.1.4",
     "discord-together": "^1.1.13",
@@ -29,7 +28,6 @@
     "nodemailer": "^6.6.1",
     "nodemon": "^2.0.7",
     "opusscript": "^0.0.8",
-    "os": "^0.1.1",
     "path": "^0.12.7",
     "util": "^0.12.3"
   }
