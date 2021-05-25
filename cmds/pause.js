@@ -1,6 +1,6 @@
 module.exports = {
-  name: "cmd_name",
-  aliases: ["a1", "a2"],
+  name: "pause",
+  aliases: ["pau"],
   async execute(
     msg,
     args,
