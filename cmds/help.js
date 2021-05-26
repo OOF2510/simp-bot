@@ -147,6 +147,10 @@ module.exports = {
           {
             name: "Chess Together",
             value: `${prefix}chess - Starts a Chess together session (may not work on mobile)`,
+          },
+          {
+            name: "Betrayal Together",
+            value: `${prefix}betrayal - Starts a Betrayal together session (may not work on mobile)`,
           }
         )
         .setColor("RANDOM");
