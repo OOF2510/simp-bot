@@ -20,7 +20,7 @@
     "@oof2510/ping": "^1.1.4",
     "discord-math": "^1.0.5",
     "discord-music-player": "^7.1.4",
-    "discord-together": "^1.1.13",
+    "discord-together": "^1.1.14",
     "fs": "^0.0.1-security",
     "keyv": "^4.0.3",
     "long": "^4.0.0",
@@ -29,6 +29,7 @@
     "nodemon": "^2.0.7",
     "opusscript": "^0.0.8",
     "path": "^0.12.7",
-    "util": "^0.12.3"
+    "systeminformation": "^5.7.4",
+    "util": "^0.12.4"
   }
 }

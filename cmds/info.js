@@ -1,3 +1,4 @@
+const si = require('systeminformation');
 function formatBytes(bytes, decimals = 2) {
   if (bytes === 0) return "0 Bytes";
 
@@ -85,6 +86,7 @@ module.exports = {
     var freeSysMem = os.freemem();
     var usedSysMem = totalSysMem - freeSysMem;
     var sysMemUsage = formatBytes(usedSysMem);
+    var cpuTemp = await si.cpuTemperature();
 
     let Distro;
     let distro;
@@ -95,13 +97,6 @@ module.exports = {
 
     let NodeV = await exec("node -v");
     let nodeV = NodeV.stdout.trim();
-
-    // takes too long
-    // let NpmV = await exec("npm -v");
-    // let npmV = "v" + NpmV.stdout.trim();
-
-    // let YarnV = await exec("yarn -v");
-    // let yarnV = "v" + YarnV.stdout.trim();
 
     let YayFetch = await exec("yayfetch --hide-logo");
     let yayFetch = YayFetch.stdout.trim();
@@ -143,11 +138,10 @@ module.exports = {
           inline: true,
         },
         { name: `NodeJS Version`, value: "`" + nodeV + "`", inline: true },
-        // { name: `NPM Version`, value: "`" + npmV + "`", inline: true },
-        // { name: `Yarn Version`, value: "`" + yarnV + "`", inline: true },
         { name: `Discord.js Version`, value: "`" + djsV + "`", inline: true },
         { name: `System Uptime`, value: "`" + uptime + "`", inline: true },
-        { name: `Bot Uptime`, value: "`" + botUptime + "`", inline: true }
+        { name: `Bot Uptime`, value: "`" + botUptime + "`", inline: true },
+        { name: `CPU Temperature`, value: "`" + cpuTemp + "`", inline: true }
       )
       .setColor("RANDOM");
 

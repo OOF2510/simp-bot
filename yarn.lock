@@ -426,10 +426,10 @@ discord-music-player@^7.1.4:
     ytdl-core "^4.5.0"
     ytsr "^3.3.1"
 
-discord-together@^1.1.13:
-  version "1.1.13"
-  resolved "https://registry.yarnpkg.com/discord-together/-/discord-together-1.1.13.tgz#4ecec0a2b9abcf9b324ec1878af903041cc49a9a"
-  integrity sha512-t9chF+0Q4snH2Ayoql9ABULp5K2axiNuYv/3AJpSwdnyAk4DCmzH1pHrayHqYX1bnuDKdwa2psuYXGBZIIIs+w==
+discord-together@^1.1.14:
+  version "1.1.14"
+  resolved "https://registry.yarnpkg.com/discord-together/-/discord-together-1.1.14.tgz#03f216baa50f2a4984b4216c557eabdf7e4e9bd4"
+  integrity sha512-zBCsQW9dn6pUmpqsrO9/wdrgMH87z/t/KccbOKu3wg9/phkru+tQwotKo08QuBFriJ5TN4LkFBa3HCc7ZhUVcQ==
   dependencies:
     node-fetch "^2.6.1"
 
@@ -1584,6 +1584,11 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
+systeminformation@^5.7.4:
+  version "5.7.4"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.7.4.tgz#13fcc29bd3836cf5043802f0f2532d0c4961a4ea"
+  integrity sha512-m6oziAu2zP8IMnNZpVWptzpcaXG6x59c2sQB8BI7DTcfBOTLXj5jGgjWxCVP65c5k7Fwhn35yVTCIZEypc1n9A==
+
 term-size@^2.1.0:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/term-size/-/term-size-2.2.1.tgz#2a6a54840432c2fb6320fea0f415531e90189f54"
@@ -1729,10 +1734,10 @@ util@^0.10.3:
   dependencies:
     inherits "2.0.3"
 
-util@^0.12.3:
-  version "0.12.3"
-  resolved "https://registry.yarnpkg.com/util/-/util-0.12.3.tgz#971bb0292d2cc0c892dab7c6a5d37c2bec707888"
-  integrity sha512-I8XkoQwE+fPQEhy9v012V+TSdH2kp9ts29i20TaaDUXsg7x/onePbhFJUExBfv/2ay1ZOp/Vsm3nDlmnFGSAog==
+util@^0.12.4:
+  version "0.12.4"
+  resolved "https://registry.yarnpkg.com/util/-/util-0.12.4.tgz#66121a31420df8f01ca0c464be15dfa1d1850253"
+  integrity sha512-bxZ9qtSlGUWSOy9Qa9Xgk11kSslpuZwaxCg4sNIDj6FLucDab2JxnHwyNTCpHMtK1MjoQiWQ6DiUMZYbSrO+Sw==
   dependencies:
     inherits "^2.0.3"
     is-arguments "^1.0.4"
