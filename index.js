@@ -45,8 +45,6 @@ const getDefaultChannel = (guild) => {
 const intents = new Discord.Intents(Discord.Intents.NON_PRIVILEGED);
 const client = new Discord.Client({ intents: intents });
 
-const disbut = require("discord-buttons")(client);
-
 const player = new Player(client, {
   quality: "low",
 });
@@ -74,7 +72,6 @@ client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.player = player;
 client.discordTogether = new DiscordTogether(client);
-client.buttons = disbut;
 
 const cmdFiles = fs
   .readdirSync("./cmds")
