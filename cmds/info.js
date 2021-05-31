@@ -86,7 +86,8 @@ module.exports = {
     var freeSysMem = os.freemem();
     var usedSysMem = totalSysMem - freeSysMem;
     var sysMemUsage = formatBytes(usedSysMem);
-    var cpuTemp = await si.cpuTemperature();
+    var CpuTemp = await si.cpuTemperature();
+    var cpuTemp = CpuTemp.main
 
     let Distro;
     let distro;
@@ -141,7 +142,7 @@ module.exports = {
         { name: `Discord.js Version`, value: "`" + djsV + "`", inline: true },
         { name: `System Uptime`, value: "`" + uptime + "`", inline: true },
         { name: `Bot Uptime`, value: "`" + botUptime + "`", inline: true },
-        { name: `CPU Temperature`, value: "`" + cpuTemp + "`", inline: true }
+        { name: `CPU Temperature`, value: "`" + cpuTemp + "℃`", inline: true }
       )
       .setColor("RANDOM");
 
