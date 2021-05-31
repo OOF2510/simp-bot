@@ -21,15 +21,15 @@ module.exports = {
     os,
     Discord,
     preDB,
-    nbDB, 
+    nbDB,
     bchDB,
     blDB
   ) {
-    const gitEm = new Discord.MessageEmbed()
-      .setTitle("View the source code on GitHub!")
-      .setURL("https://github.com/OOF2510/simp-bot-rewritten")
-      .setColor("RANDOM")
+    let button = new MessageButton()
+      .setLabel("View Source Code on Github")
+      .setStyle("url")
+      .setURL("https://github.com/oof2510/simp-bot-rewritten");
 
-    channel.send(gitEm);
+    channel.send(button);
   },
 };

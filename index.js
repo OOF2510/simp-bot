@@ -8,6 +8,7 @@ const Keyv = require("keyv");
 const path = require("path");
 const { Player } = require("discord-music-player");
 const { DiscordTogether } = require("discord-together");
+
 var allowed = [
   "463119138500378624", //me
   "760473112613093436", //gavin
@@ -44,6 +45,8 @@ const getDefaultChannel = (guild) => {
 const intents = new Discord.Intents(Discord.Intents.NON_PRIVILEGED);
 const client = new Discord.Client({ intents: intents });
 
+const disbut = require("discord-buttons")(client);
+
 const player = new Player(client, {
   quality: "low",
 });
@@ -71,6 +74,7 @@ client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.player = player;
 client.discordTogether = new DiscordTogether(client);
+client.buttons = disbut;
 
 const cmdFiles = fs
   .readdirSync("./cmds")
