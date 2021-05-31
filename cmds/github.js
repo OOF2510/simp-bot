@@ -25,7 +25,7 @@ module.exports = {
     bchDB,
     blDB
   ) {
-    let button = new MessageButton()
+    let button = new client.buttons.MessageButton()
       .setLabel("View Source Code on Github")
       .setStyle("url")
       .setURL("https://github.com/oof2510/simp-bot-rewritten");
