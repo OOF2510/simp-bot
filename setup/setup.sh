@@ -7,6 +7,7 @@ read -p "MongoDB URI: " mongoURI
 read -p "First MongoDB Shard Domain: " mongoShard0
 read -p "Second MongoDB Shard Domain: " mongoShard1
 read -p "Third MongoDB Shard Domain: " mongoShard2
+read -p "Embed Color (hex without the #): " embedColor
 
 touch config.json
 
@@ -25,7 +26,8 @@ echo "{
     \"$mongoShard0\",
     \"$mongoShard1\",
     \"$mongoShard2\"
-  ]
+  ],
+  \"embedColor\": \"$embedColor\"
 }" > ./config.json
 
 echo "config.json:"

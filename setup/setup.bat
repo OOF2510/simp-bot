@@ -8,6 +8,7 @@ set /P mongoURI="MongoDB URI: "
 set /P mongoShard0="First MongoDB Shard Domain: "
 set /P mongoShard1="Second MongoDB Shard Domain: "
 set /P mongoShard2="Third MongoDB Shard Domain: "
+set /P embedColor="Embed Color (hex without the #): "
 
 type nul > config.json
 
@@ -22,7 +23,8 @@ echo "mongoShards": [
 echo    "%mongoShard0%",
 echo    "%mongoShard1%",
 echo    "%mongoShard2%"
-echo   ]
+echo   ],
+echo "embedColor": "%embedColor%"
 echo }
 ) > config.json
 

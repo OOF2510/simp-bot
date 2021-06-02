@@ -8,6 +8,7 @@ port = input("WebServer Port: ")
 mongoShard0 = input("First MongoDB Shard Domain: ")
 mongoShard1 = input("Second MongoDB Shard Domain: ")
 mongoShard2 = input("Third MongoDB Shard Domain: ")
+embedColor = input("Embed Color (hex without the #): ")
 
 configJson = "{" + f"""
   \"prefix\": \"{prefix}\",
@@ -19,7 +20,8 @@ configJson = "{" + f"""
     \"{mongoShard0}\",
     \"{mongoShard1}\",
     \"{mongoShard2}\"
-  ]
+  ],
+  \"embedColor\": \"{embedColor}\"
 """ + "}"
 
 config = open("config.json", "w")
