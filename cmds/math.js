@@ -41,7 +41,7 @@ module.exports = {
       let awnsEm = new Discord.MessageEmbed()
         .setTitle(`${num1} ${operation} ${num2} =`)
         .setDescription(awnser)
-        .setColor("RANDOM");
+        .setColor(config.embedColor);
 
       channel.send(awnsEm);
     } catch (e) {

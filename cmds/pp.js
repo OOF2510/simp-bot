@@ -48,7 +48,7 @@ module.exports = {
       //me
       response = "8======================================================D";
       const ppEm = new Discord.MessageEmbed()
-        .setColor("RANDOM")
+        .setColor(config.embedColor)
         .addFields({ name: `${recNick}'s pp`, value: `${response}` });
 
       msg.channel.send(ppEm);
@@ -56,7 +56,7 @@ module.exports = {
       //robbie
       response = "8=====================================================D";
       const ppEm = new Discord.MessageEmbed()
-        .setColor("RANDOM")
+        .setColor(config.embedColor)
         .addFields({ name: `${recNick}'s pp`, value: `${response}` });
 
       msg.channel.send(ppEm);
@@ -64,7 +64,7 @@ module.exports = {
       //noah
       response = ".";
       const ppEm = new Discord.MessageEmbed()
-        .setColor("RANDOM")
+        .setColor(config.embedColor)
         .addFields({ name: `${recNick}'s pp`, value: `${response}` });
 
       msg.channel.send(ppEm);
@@ -72,7 +72,7 @@ module.exports = {
       //gerrardo
       response = "8===================================================D";
       const ppEm = new Discord.MessageEmbed()
-        .setColor("RANDOM")
+        .setColor(config.embedColor)
         .addFields({ name: `${recNick}'s pp`, value: `${response}` });
 
       msg.channel.send(ppEm);
@@ -80,7 +80,7 @@ module.exports = {
       response = responses[Math.floor(Math.random() * responses.length)];
 
       const ppEm = new Discord.MessageEmbed()
-        .setColor("RANDOM")
+        .setColor(config.embedColor)
         .addFields({ name: `${recNick}'s pp`, value: `${response}` });
 
       msg.channel.send(ppEm);

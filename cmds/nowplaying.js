@@ -31,7 +31,7 @@ module.exports = {
       let em = new Discord.MessageEmbed()
         .setTitle(`Now Playing`)
         .setDescription(`Current song: ${song.name}`)
-        .setColor("RANDOM");
+        .setColor(config.embedColor);
       message.channel.send(em);
     }
   },

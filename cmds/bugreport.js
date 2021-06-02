@@ -34,7 +34,7 @@ module.exports = {
       .setTitle(`New bug report`)
       .addFields({ name: `Report:`, value: `${rep}` })
       .setFooter(`Reported by: ${msg.author.tag}`, msg.author.avatarURL())
-      .setColor("RANDOM")
+      .setColor(config.embedColor)
       .setTimestamp();
 
     repCh.send(repEm);

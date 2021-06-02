@@ -84,7 +84,7 @@ module.exports = {
 
     const flEm = new Discord.MessageEmbed()
       .setTitle(response)
-      .setColor("RANDOM")
+      .setColor(config.embedColor)
       .setFooter(recNick, recipient.avatarURL({ dynamic: true }))
       .setTimestamp();
 

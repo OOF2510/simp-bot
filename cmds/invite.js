@@ -30,7 +30,7 @@ module.exports = {
       .setURL(
         "https://discord.com/api/oauth2/authorize?client_id=808822189905936405&permissions=8&scope=bot"
       )
-      .setColor("RANDOM")
+      .setColor(config.embedColor)
       .setTimestamp();
     channel.send(invEm);
   },

@@ -32,7 +32,7 @@ module.exports = {
       let em = new Discord.MessageEmbed()
       .setTitle(`Removed`)
       .setDescription(`Removed song ${song.name} (${args[0]}) from the Queue!`)
-      .setColor("RANDOM")
+      .setColor(config.embedColor)
       message.channel.send(em);
     }
   },

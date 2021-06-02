@@ -36,7 +36,7 @@ module.exports = {
     let avEm = new Discord.MessageEmbed()
       .setTitle(`${userNick}'s Avatar`)
       .setImage(av)
-      .setColor("RANDOM")
+      .setColor(config.embedColor)
       .setTimestamp();
 
     channel.send(avEm);

@@ -63,7 +63,7 @@ module.exports = {
 
     const simpEm = new Discord.MessageEmbed()
       .setTitle(response)
-      .setColor("RANDOM")
+      .setColor(config.embedColor)
       .setFooter(recNick, recipient.avatarURL({ dynamic: true }))
       .setTimestamp();
 

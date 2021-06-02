@@ -56,7 +56,7 @@ module.exports = {
       if (!message) return msg.channel.send(`Can't send an empty message!`);
 
       let broadcastEm = new Discord.MessageEmbed()
-        .setColor("RANDOM")
+        .setColor(config.embedColor)
         .setTitle(`A message from my team:`)
         .setDescription(message)
         .setFooter(author.username, author.avatarURL({ dynamic: true }))

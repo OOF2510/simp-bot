@@ -39,7 +39,7 @@ module.exports = {
               })
               .join("\n")
         )
-        .setColor("RANDOM");
+        .setColor(config.embedColor);
       message.channel.send(em);
     }
   },

@@ -61,7 +61,7 @@ module.exports = {
       .setTitle("Success!")
       .setDescription(`New broadcast channel is ${ch}`)
       .setTimestamp()
-      .setColor("RANDOM");
+      .setColor(config.embedColor);
 
     channel.send(brChEm);
   },

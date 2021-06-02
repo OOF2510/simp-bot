@@ -97,7 +97,7 @@ client.player
     let em = new Discord.MessageEmbed()
       .setTitle(`Added to queue`)
       .setDescription(`**${song.name}** has been added to the queue!`)
-      .setColor("RANDOM");
+      .setColor(config.embedColor);
     message.channel.send(em);
   })
   .on("playlistAdd", (message, queue, playlist) =>
@@ -118,7 +118,7 @@ client.player
     let em = new Discord.MessageEmbed()
       .setTitle(`Playing`)
       .setDescription(`**${song.name}** is now playing!`)
-      .setColor("RANDOM");
+      .setColor(config.embedColor);
     message.channel.send(em);
   })
   .on("clientDisconnect", (message, queue) =>

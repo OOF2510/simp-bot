@@ -34,7 +34,7 @@ module.exports = {
       .setTitle(`New suggestion`)
       .addFields({ name: `Suggestion:`, value: `${sug}` })
       .setFooter(`Suggested by: ${msg.author.tag}`, msg.author.avatarURL())
-      .setColor("RANDOM")
+      .setColor(config.embedColor)
       .setTimestamp();
 
     sugCh.send(sugEm);

@@ -39,7 +39,7 @@ module.exports = {
     let alisEm = new Discord.MessageEmbed()
       .setTitle(`Aliases for ${cmd.name}`)
       .setDescription(aliases)
-      .setColor("RANDOM")
+      .setColor(config.embedColor)
       .setTimestamp();
 
     channel.send(alisEm);

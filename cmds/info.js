@@ -144,7 +144,7 @@ module.exports = {
         { name: `Bot Uptime`, value: "`" + botUptime + "`", inline: true },
         { name: `CPU Temperature`, value: "`" + cpuTemp + "℃`", inline: true }
       )
-      .setColor("RANDOM");
+      .setColor(config.embedColor);
 
     if (args[0] == "-yayfetch") {
       infoEm.addFields({

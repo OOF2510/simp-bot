@@ -37,7 +37,7 @@ module.exports = {
 
     const nobEm = new Discord.MessageEmbed()
       .setAuthor(botNick, client.user.avatarURL())
-      .setColor("RANDOM")
+      .setColor(config.embedColor)
       .setTitle(`Broadcasts disabled!`)
       .setDescription(
         `Broadcasts have been successfully disabled for this server!`

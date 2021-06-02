@@ -30,7 +30,7 @@ module.exports = {
       let em = new Discord.MessageEmbed()
         .setTitle(`Skipped`)
         .setDescription(`${song.name} was skipped!`)
-        .setColor("RANDOM");
+        .setColor(config.embedColor);
       message.channel.send(em);
     }
   },

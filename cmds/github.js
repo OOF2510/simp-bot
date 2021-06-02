@@ -28,7 +28,7 @@ module.exports = {
     const gitEm = new Discord.MessageEmbed()
       .setTitle("View the source code on GitHub!")
       .setURL("https://github.com/OOF2510/simp-bot-rewritten")
-      .setColor("RANDOM")
+      .setColor(config.embedColor)
 
     channel.send(gitEm);
   },

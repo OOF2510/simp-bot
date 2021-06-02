@@ -32,7 +32,7 @@ module.exports = {
     await preDB.set(guild.id, args[0]);
 
     let prefixEm = new Discord.MessageEmbed()
-      .setColor("RANDOM")
+      .setColor(config.embedColor)
       .setTitle("Prefix Set!")
       .setDescription(`Prefix set to ${args[0]}`);
 

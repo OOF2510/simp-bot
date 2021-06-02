@@ -63,7 +63,7 @@ module.exports = {
             value: `${prefix}setbroadcastchannel <channel mention> - Sets the channel that annoucements go to in your server!`,
           }
         )
-        .setColor("RANDOM");
+        .setColor(config.embedColor);
 
       channel.send(setEm);
     } else if (args[0].toLowerCase() == "info") {
@@ -91,7 +91,7 @@ module.exports = {
             value: `${prefix}github - Sends link to Simp Bot's github page`,
           }
         )
-        .setColor("RANDOM");
+        .setColor(config.embedColor);
 
       channel.send(inEm);
     } else if (args[0].toLowerCase() == "feedback") {
@@ -112,7 +112,7 @@ module.exports = {
             value: `${prefix}support - Join the support server!`,
           }
         )
-        .setColor("RANDOM");
+        .setColor(config.embedColor);
 
       channel.send(fbEm);
     } else if (args[0].toLowerCase() == "fun") {
@@ -153,7 +153,7 @@ module.exports = {
             value: `${prefix}betrayal - Starts a Betrayal together session (may not work on mobile)`,
           }
         )
-        .setColor("RANDOM");
+        .setColor(config.embedColor);
 
       channel.send(funEm);
     } else if (args[0].toLowerCase() == "misc") {
@@ -178,7 +178,7 @@ module.exports = {
             value: `${prefix}shortenurl <url> - Shortens given url`,
           }
         )
-        .setColor("RANDOM");
+        .setColor(config.embedColor);
 
       channel.send(miEm);
     } else if (args[0].toLowerCase() == "dev") {
@@ -204,7 +204,7 @@ module.exports = {
             value: `${prefix}unblacklist <user mention> - Un-blacklists the specified user`,
           }
         )
-        .setColor("RANDOM");
+        .setColor(config.embedColor);
 
       channel.send(deEm);
     } else if (args[0].toLowerCase() == "moderation") {
@@ -215,7 +215,7 @@ module.exports = {
           name: `Purge`,
           value: `${prefix}purge <number of messages to delete> - Deletes specified number of messages`,
         })
-        .setColor("RANDOM");
+        .setColor(config.embedColor);
 
       channel.send(modEm);
     } else if (args[0].toLowerCase() == "music") {
@@ -268,7 +268,7 @@ module.exports = {
             value: `${prefix}volume <number from 0 to 200> - Sets volume to specified percent`,
           }
         )
-        .setColor("RANDOM");
+        .setColor(config.embedColor);
 
       channel.send(muEm);
     } else return;
