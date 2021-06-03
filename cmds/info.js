@@ -113,6 +113,7 @@ module.exports = {
         { name: "Server Info", value: "Information about the server" },
         { name: "Members", value: guild.memberCount, inline: true },
         { name: "Roles", value: guild.roles.cache.size, inline: true },
+        { name: "Channels", value: guild.channels.cache.size, inline: true },
         { name: "Server ID", value: guild.id, inline: true },
         {
           name: "Server Owner",
