@@ -34,10 +34,10 @@
     mongojs "2.5.0"
     pify "3.0.0"
 
-"@oof2510/ping@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@oof2510/ping/-/ping-1.1.4.tgz#8a012e98effbc1f73ac76b70800e414368cc20f5"
-  integrity sha512-Jmx+07BAaiaaKvHNMyEzpaB8sirTTlk+aNWzq1ZVHdV2Hj54KlnBy74qmGjmO/qlIZb6XWsddgHHugVpyqD+Zw==
+"@oof2510/ping@^1.1.9":
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/@oof2510/ping/-/ping-1.1.9.tgz#c25162fadcab38d360d62c51c3e952f6e0023659"
+  integrity sha512-VAEvQc5pcZA3iZQ8PLJ5pTUapEeBd7/nHMtOjJmNXsav13tGtngOOUeFVUK4X0A70bd4c6LFyi97MQdG49U5Ow==
 
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
@@ -408,10 +408,10 @@ delayed-stream@~1.0.0:
   resolved "https://registry.yarnpkg.com/delayed-stream/-/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
   integrity sha1-3zrhmayt+31ECqrgsp4icrJOxhk=
 
-discord-buttons@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/discord-buttons/-/discord-buttons-3.0.1.tgz#ace59e21ff2dc41bad4f3463227482c65bd23783"
-  integrity sha512-SQeX27tgdMetfB5RkSUdz3PnpHp6OGAa/U+NatdGCCijWHQMMlxdgP1xrHz2+e1qWEMa9mQH9YfDGjN2LFraWw==
+discord-buttons@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/discord-buttons/-/discord-buttons-3.1.1.tgz#fc7314ab72a0a2aeee342855cf8eb5956aa4c2b2"
+  integrity sha512-C5a02N2mBf1XJKzwbMT7rNSBB+mD6q+tkZKQFnmwBWaOMCr2YLGcF+RKB7mo0n5TyfnzeOOsTy6IG5NjjB5VVA==
 
 discord-math@^1.0.5:
   version "1.0.5"
