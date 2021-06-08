@@ -24,7 +24,7 @@ echo    "%mongoShard0%",
 echo    "%mongoShard1%",
 echo    "%mongoShard2%"
 echo   ],
-echo "embedColor": "%embedColor%"
+echo "embedColor": "0x%embedColor%"
 echo }
 ) > config.json
 
