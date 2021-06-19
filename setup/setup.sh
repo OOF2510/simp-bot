@@ -27,7 +27,7 @@ echo "{
     \"$mongoShard1\",
     \"$mongoShard2\"
   ],
-  \"embedColor\": \"$embedColor\"
+  \"embedColor\": \"0x$embedColor\"
 }" > ./config.json
 
 echo "config.json:"
