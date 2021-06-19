@@ -7,6 +7,7 @@ const exec = promisify(require("child_process").exec);
 const Keyv = require("keyv");
 const { Player } = require("discord-music-player");
 const { DiscordTogether } = require("discord-together");
+const discordTTS = require("discord-tts");
 
 var allowed = [
   "463119138500378624", //me
@@ -71,6 +72,7 @@ client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.player = player;
 client.discordTogether = new DiscordTogether(client);
+client.tts = discordTTS;
 
 const cmdFiles = fs
   .readdirSync("./cmds")

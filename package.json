@@ -22,6 +22,7 @@
     "discord-math": "^1.0.5",
     "discord-music-player": "^7.1.4",
     "discord-together": "^1.1.14",
+    "discord-tts": "^1.2.0",
     "fs": "^0.0.1-security",
     "keyv": "^4.0.3",
     "long": "^4.0.0",
