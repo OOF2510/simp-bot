@@ -23,6 +23,7 @@
     "discord-music-player": "^7.1.4",
     "discord-together": "^1.1.14",
     "discord-tts": "^1.2.0",
+    "extra-tts": "^1.0.11",
     "fs": "^0.0.1-security",
     "keyv": "^4.0.3",
     "long": "^4.0.0",
