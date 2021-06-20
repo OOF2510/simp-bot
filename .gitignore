@@ -5,3 +5,4 @@ node_modules/
 *.log
 .vscode/
 .idea/
+google-cloud-credentials.json
