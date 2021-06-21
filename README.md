@@ -8,9 +8,13 @@ A discord bot that is a simp
 # Commands
 s!aliases- Lists aliases for specified command
 
-s!avatar - gets your or another user's avatar
+s!avatar - Gets your or another user's avatar
+
+s!betrayal - Starts a game of Betrayal Together
 
 s!bugreport - Sends a bug report to the simp bot team
+
+s!chess - Starts a game of Chess Together
 
 s!email - Sends an email
 
@@ -24,7 +28,9 @@ s!help - Sends a help embed
 
 s!info - Info about the bot and server
 
-s!invite - sends the bot's invite link
+s!invite - Sends the bot's invite link
+
+s!math - Calculator
 
 s!nobroadcast - disable broadcasts for your server
 
@@ -37,6 +43,8 @@ s!ping - Pings the bot
 s!play - Plays specified song
 
 s!playlist - Adds specified playlist to queue
+
+s!poker - Starts a game of Poker Together
 
 s!pp - Pp size
 
@@ -54,9 +62,9 @@ s!resume - Resumes paused song
 
 s!setbroadcastchannel - sets the channel that broadcasts go to
 
-s!shuffle - Shuffles the queue
-
 s!shortenurl - Shortens given URL
+
+s!shuffle - Shuffles the queue
 
 s!simp - Simps for the mentioned user
 
@@ -68,9 +76,13 @@ s!suggest - Sends a suggestion to me
 
 s!support - sends a link for the support server
 
+s!tts - Speaks given message in VC [BETA]
+
 s!volume - Sets volume to specified percent
 
 s!yesbroadcast - re-enable broadcasts for your server
+
+s!youtubetogether - Starts a Youtube Together session
 
 # Self-hosting the bot
 
