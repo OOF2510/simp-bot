@@ -68,7 +68,7 @@ module.exports = {
 
       client.commands.forEach((cmd) => {
         if (cmd.cat.toLowerCase() == "info") {
-          fbEm.addFields({
+          inEm.addFields({
             name: cmd.name,
             value: `${prefix}${cmd.usage} - ${cmd.desc}`,
           });
