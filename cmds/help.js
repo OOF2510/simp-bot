@@ -1,6 +1,9 @@
 module.exports = {
   name: "help",
   aliases: ["h"],
+  cat: "info",
+  usage: "help <module>",
+  desc: "Sends help embed",
   execute(
     msg,
     args,

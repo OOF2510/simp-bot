@@ -1,6 +1,9 @@
 module.exports = {
   name: "suggest",
   aliases: ["sug"],
+  cat: "feedback",
+  usage: "suggest <suggestion>",
+  desc: "Sends a suggestion",
   async execute(
     msg,
     args,

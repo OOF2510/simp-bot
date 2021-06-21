@@ -1,6 +1,9 @@
 module.exports = {
   name: "unblacklist",
   aliases: ["ubl", "unbl"],
+  cat: "dev",
+  usage: "unblacklist <user mention>",
+  desc: "Removes specified user from the blacklist",
   async execute(
     msg,
     args,

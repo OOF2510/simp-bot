@@ -1,5 +1,8 @@
 module.exports = {
   name: "stop",
+  cat: "music",
+  desc: "stops plying music & leaves the VC",
+  usage: "stop",
   async execute(
     msg,
     args,

@@ -26,6 +26,9 @@ const getDefaultChannel = (guild) => {
 module.exports = {
   name: "broadcast",
   aliases: ["br", "broad", "brc"],
+  cat: "dev",
+  usage: "broadcat <message>",
+  desc: "Broadcasts a message with the bot (can only be used by Nate)",
   execute(
     msg,
     args,

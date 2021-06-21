@@ -1,5 +1,8 @@
 module.exports = {
   name: "tts",
+  cat: "misc",
+  usage: "tts <message>",
+  desc: "Speaks given message in VC (in beta)",
   async execute(
     msg,
     args,

@@ -1,5 +1,8 @@
 module.exports = {
   name: "shuffle",
+  cat: "music",
+  desc: "Shuffles the queue",
+  usage: "shuffle",
   async execute(
     msg,
     args,

@@ -1,6 +1,9 @@
 module.exports = {
   name: "pause",
   aliases: ["pau"],
+  cat: "music",
+  usage: "pause",
+  desc: "Pauses the current song",
   async execute(
     msg,
     args,

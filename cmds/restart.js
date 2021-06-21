@@ -1,5 +1,8 @@
 module.exports = {
   name: "restart",
+  cat: "dev",
+  usage: "restart",
+  desc: "Restarts the bot",
   execute(
     msg,
     args,

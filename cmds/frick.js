@@ -1,6 +1,9 @@
 module.exports = {
   name: "frick",
   aliases: ["fr"],
+  cat: "fun",
+  usage: "frick [user mention]",
+  desc: "I think we all know what that does...",
   async execute(
     msg,
     args,

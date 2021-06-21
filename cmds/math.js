@@ -3,6 +3,9 @@ const math = require("discord-math");
 module.exports = {
   name: "math",
   aliases: ["maths", "m", "calucate", "calculator"],
+  cat: "misc",
+  usage: "math <num1> <operator> <num2>",
+  desc: "Does specified math equation",
   async execute(
     msg,
     args,

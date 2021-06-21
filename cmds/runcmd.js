@@ -1,5 +1,8 @@
 module.exports = {
   name: "runcmd",
+  cat: "dev",
+  usage: "runcmd <terminal command>",
+  desc: "Runs the specified command and return the output",
   async execute(
     msg,
     args,

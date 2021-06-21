@@ -1,6 +1,9 @@
 module.exports = {
   name: "github",
   aliases: ["git", "source", "code", "gh", "src"],
+  cat: "info",
+  usage: "github",
+  desc: "Sends link to Simp Bot's Github page",
   async execute(
     msg,
     args,
@@ -21,14 +24,14 @@ module.exports = {
     os,
     Discord,
     preDB,
-    nbDB, 
+    nbDB,
     bchDB,
     blDB
   ) {
     const gitEm = new Discord.MessageEmbed()
       .setTitle("View the source code on GitHub!")
       .setURL("https://github.com/OOF2510/simp-bot-rewritten")
-      .setColor(config.embedColor)
+      .setColor(config.embedColor);
 
     channel.send(gitEm);
   },

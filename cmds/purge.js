@@ -1,6 +1,9 @@
 module.exports = {
   name: "purge",
   aliases: ["clear", "delete", "prune"],
+  cat: "moderation",
+  usage: "purge <number of messages to delete>",
+  desc: "Deletes specified number of messages",
   async execute(
     msg,
     args,

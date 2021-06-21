@@ -1,6 +1,9 @@
 module.exports = {
   name: "nowplaying",
   aliases: ["np"],
+  cat: "music",
+  usage: "nowplaying",
+  desc: "Shows the currently playing song",
   async execute(
     msg,
     args,

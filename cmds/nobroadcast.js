@@ -1,6 +1,9 @@
 module.exports = {
   name: "nobroadcast",
   aliases: ["nbr", "nobr", "nbc", "nobc", "nobrc", "nbrc"],
+  cat: "settings",
+  usage: "nobroadcast",
+  desc: "Disables broadcasts for your server",
   async execute(
     msg,
     args,

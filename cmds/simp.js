@@ -1,6 +1,9 @@
 module.exports = {
   name: "simp",
   aliases: ["s"],
+  cat: "fun",
+  usage: "simp [user mention]",
+  desc: "Sends a random simp image/message/gif",
   async execute(
     msg,
     args,

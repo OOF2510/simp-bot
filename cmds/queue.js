@@ -1,6 +1,9 @@
 module.exports = {
   name: "queue",
   aliases: ["q"],
+  cat: "music",
+  usage: "queue",
+  desc: "Shows the queue",
   async execute(
     msg,
     args,

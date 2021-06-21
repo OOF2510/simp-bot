@@ -1,6 +1,9 @@
 module.exports = {
   name: "avatar",
   aliases: ["av"],
+  cat: "info",
+  usage: "avatar [user mention]",
+  desc: "Gets a user's avatar",
   execute(
     msg,
     args,

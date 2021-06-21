@@ -1,6 +1,7 @@
 module.exports = {
   name: "cmd_name",
   aliases: ["a1", "a2"],
+category_name
   async execute(
     msg,
     args,

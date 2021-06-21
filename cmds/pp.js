@@ -1,5 +1,8 @@
 module.exports = {
   name: "pp",
+  cat: "fun",
+  usage: "pp [user mention]",
+  desc: "pp size",
   async execute(
     msg,
     args,

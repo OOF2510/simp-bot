@@ -1,6 +1,9 @@
 module.exports = {
   name: "play",
   aliases: ["p", "playmusic"],
+  cat: "music",
+  usage: "play <song name or url>",
+  desc: "Plays specified song",
   async execute(
     msg,
     args,

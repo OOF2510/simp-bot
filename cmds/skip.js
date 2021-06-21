@@ -1,5 +1,8 @@
 module.exports = {
   name: "skip",
+  cat: "music",
+  usage: "skip",
+  desc: "Skips the currently playing song",
   async execute(
     msg,
     args,

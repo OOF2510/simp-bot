@@ -1,5 +1,8 @@
 module.exports = {
   name: "resume",
+  cat: "music",
+  usage: "resume",
+  desc: "Resumes paused song",
   async execute(
     msg,
     args,

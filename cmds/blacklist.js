@@ -1,6 +1,9 @@
 module.exports = {
   name: "blacklist",
   aliases: ["bl"],
+  cat: "dev",
+  usage: "blacklist <user mention>",
+  desc: "Stops specified user from using the bot",
   async execute(
     msg,
     args,

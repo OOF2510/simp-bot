@@ -1,6 +1,9 @@
 module.exports = {
   name: "volume",
   aliases: ["vol", "setvol", "setvolume"],
+  cat: "music",
+  usage: "volume <volume level>",
+  desc: "Sets music volume to the specified level",
   async execute(
     msg,
     args,

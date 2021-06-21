@@ -1,6 +1,9 @@
 module.exports = {
   name: "flirt",
   aliases: ["fl"],
+  cat: "fun",
+  usage: "flirt [user mention]",
+  desc: "Sends a random pick-up line",
   async execute(
     msg,
     args,

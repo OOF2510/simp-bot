@@ -1,6 +1,9 @@
 module.exports = {
   name: "bugreport",
   aliases: ["bug"],
+  cat: "feedback",
+  usage: "bugreport <report>",
+  desc: "Sends a bug report",
   async execute(
     msg,
     args,

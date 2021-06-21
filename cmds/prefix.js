@@ -1,5 +1,8 @@
 module.exports = {
   name: "prefix",
+  cat: "settings",
+  usage: "prefix <new prefix>",
+  desc: "Sets new prefix",
   aliases: ["pre"],
   async execute(
     msg,

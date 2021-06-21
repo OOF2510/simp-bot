@@ -16,6 +16,9 @@ function isURL(str) {
 module.exports = {
   name: "shortenurl",
   aliases: ["urlshorten", "shorturl"],
+  cat: "misc",
+  usage: "shortenurl <url>",
+  desc: "Shortens given url",
   async execute(
     msg,
     args,

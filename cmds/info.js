@@ -46,6 +46,9 @@ function millisecondsToStr(milliseconds) {
 module.exports = {
   name: "info",
   aliases: ["in", "inf", "information", "stats"],
+  cat: "info",
+  usage: "info [-yayfetch] [-screenfetch]",
+  desc: "Info about the bot and server",
   async execute(
     msg,
     args,

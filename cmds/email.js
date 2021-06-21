@@ -32,6 +32,9 @@ var allowedEmails = [
 module.exports = {
   name: "email",
   aliases: ["e", "mail", "gmail"],
+  cat: "misc",
+  usage: "email <recipent email> <message>",
+  desc: "Sends an email to the specified email address",
   async execute(
     msg,
     args,

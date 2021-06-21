@@ -2,6 +2,9 @@ const { ping } = require("@oof2510/ping");
 
 module.exports = {
   name: "ping",
+  cat: "info",
+  usage: "ping",
+  desc: "Gets the ping of the bot and databases",
   async execute(
     msg,
     args,

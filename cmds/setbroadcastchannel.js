@@ -18,6 +18,9 @@ module.exports = {
     "broadchannel",
     "setbroadchan",
   ],
+  cat: "settings",
+  usage: "setbroadcastchannel <channel mention>",
+  desc: "Sets the channel that bot broadcasts go to in your server",
   async execute(
     msg,
     args,

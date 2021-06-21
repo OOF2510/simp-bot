@@ -1,6 +1,9 @@
 module.exports = {
   name: "poker",
   aliases: ["pokertogether", "vc-poker"],
+  cat: "fun",
+  usage: "poker",
+  desc: "Starts a Poker Together session (may not work on mobile)",
   async execute(
     msg,
     args,

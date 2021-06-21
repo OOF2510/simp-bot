@@ -1,6 +1,9 @@
 module.exports = {
   name: "support",
   aliases: ["supportserver"],
+  cat: "info",
+  usage: "support",
+  desc: "Join the support server!",
   async execute(
     msg,
     args,

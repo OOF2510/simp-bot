@@ -1,6 +1,9 @@
 module.exports = {
   name: "yesbroadcast",
   aliases: ["ybr", "yesbr"],
+  cat: "settings",
+  usage: "yesbroadcast",
+  desc: "Enables broadcasts for your server",
   async execute(
     msg,
     args,

@@ -1,6 +1,9 @@
 module.exports = {
   name: "invite",
   aliases: ["inv"],
+  cat: "misc",
+  usage: "invite",
+  desc: "Sends the bot's invite link",
   async execute(
     msg,
     args,

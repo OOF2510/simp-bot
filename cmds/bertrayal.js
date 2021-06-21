@@ -1,6 +1,9 @@
 module.exports = {
     name: "betrayal",
     aliases: ["betrayaltogether", "vc-betrayal", "amogus"],
+    cat: "fun",
+    usage: "betrayal",
+    desc: "Starts a Betrayal together session (may not work on mobile)",
     async execute(
       msg,
       args,

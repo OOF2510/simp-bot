@@ -1,6 +1,9 @@
 module.exports = {
   name: "chess",
   aliases: ["chesstogether", "vc-chess"],
+  cat: "fun",
+  usage: "chess",
+  desc: "Starts a Chess Together session (may not work on mobile)",
   async execute(
     msg,
     args,

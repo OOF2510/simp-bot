@@ -1,6 +1,9 @@
 module.exports = {
   name: "remove",
   aliases: ["removesong", "rm"],
+  cat: "music",
+  usage: "remove <queue number>",
+  desc: "Removes specified song from queue",
   async execute(
     msg,
     args,

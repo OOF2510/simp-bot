@@ -1,6 +1,9 @@
 module.exports = {
   name: "playlist",
   aliases: ["pl", "playl"],
+  cat: "music",
+  usage: "playlist <playlist url>",
+  desc: "Adds specified playlist to queue",
   async execute(
     msg,
     args,
