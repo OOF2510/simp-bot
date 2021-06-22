@@ -80,6 +80,16 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@oof2510/osinfo@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@oof2510/osinfo/-/osinfo-1.0.1.tgz#395c3dcaef2e7ad9f4ad71a5e367c475bbc64073"
+  integrity sha512-tzZKP4QL6hGRMzGeu36Etu1UZb0MLOrCC/SJaQ3OGjLm2K/fBh+cVbOoTCcgaGUfr0gG/lKn0FOaJwFsutWAHA==
+  dependencies:
+    child_process "^1.0.2"
+    os "^0.1.1"
+    systeminformation "^5.7.7"
+    util "^0.12.4"
+
 "@oof2510/ping@^1.1.9":
   version "1.1.9"
   resolved "https://registry.yarnpkg.com/@oof2510/ping/-/ping-1.1.9.tgz#c25162fadcab38d360d62c51c3e952f6e0023659"
@@ -452,6 +462,11 @@ chalk@^3.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
+child_process@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/child_process/-/child_process-1.0.2.tgz#b1f7e7fc73d25e7fd1d455adc94e143830182b5a"
+  integrity sha1-sffn/HPSXn/R1FWtyU4UODAYK1o=
+
 chokidar@^3.2.2:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.1.tgz#ee9ce7bbebd2b79f49f304799d5468e31e14e68a"
@@ -644,10 +659,10 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
-discord-buttons@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/discord-buttons/-/discord-buttons-3.1.1.tgz#fc7314ab72a0a2aeee342855cf8eb5956aa4c2b2"
-  integrity sha512-C5a02N2mBf1XJKzwbMT7rNSBB+mD6q+tkZKQFnmwBWaOMCr2YLGcF+RKB7mo0n5TyfnzeOOsTy6IG5NjjB5VVA==
+discord-buttons@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/discord-buttons/-/discord-buttons-3.2.1.tgz#568eebc322d36b010ea67e891b01208c897d8e66"
+  integrity sha512-UN5xOLG0TwTX6Qr/hjdSyP63HxOYxs5saxfdJ/vijSqjfa/yVPgxO2InKF0l8rpsDOVMsLWGDFLI3+Ax97/LOg==
 
 discord-math@^1.0.5:
   version "1.0.5"
@@ -1745,17 +1760,17 @@ node-forge@^0.10.0:
   resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.10.0.tgz#32dea2afb3e9926f02ee5ce8794902691a676bf3"
   integrity sha512-PPmu8eEeG9saEUvI97fm4OYxXVB6bFvyNTyiUOBichBpFG8A1Ljw3bY62+5oOjDEMHRnd0Y7HQ+x7uzxOzC6JA==
 
-node-url-shortener@^1.1.11:
-  version "1.1.11"
-  resolved "https://registry.yarnpkg.com/node-url-shortener/-/node-url-shortener-1.1.11.tgz#38ad7864263640f428e5f543a0740f9b46deb717"
-  integrity sha512-8AKi4gfrwRV8xEKCANgZLJ8Uej8p6jd7mn1Cl7YSMnQ08IbLKIkNHTQhNpmMM0cjBCoay33y45/KttH427HyoA==
+node-url-shortener@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/node-url-shortener/-/node-url-shortener-2.0.0.tgz#dcbbe1682afbd063de8b60d6c33f426681f9c8e2"
+  integrity sha512-TeA4M2oWRNgpeiYETjV84lv3yWVzRczQRM0LFBS0c1v1lkm1/z8CO9CvXq+JUZ3xCxNdiXRyb7iIOFRtRLAByA==
   dependencies:
     request "^2.81.0"
 
-nodemailer@^6.6.1:
-  version "6.6.1"
-  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.6.1.tgz#2a05fbf205b897d71bf43884167b5d4d3bd01b99"
-  integrity sha512-1xzFN3gqv+/qJ6YRyxBxfTYstLNt0FCtZaFRvf4Sg9wxNGWbwFmGXVpfSi6ThGK6aRxAo+KjHtYSW8NvCsNSAg==
+nodemailer@^6.6.2:
+  version "6.6.2"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.6.2.tgz#e184c9ed5bee245a3e0bcabc7255866385757114"
+  integrity sha512-YSzu7TLbI+bsjCis/TZlAXBoM4y93HhlIgo0P5oiA2ua9Z4k+E2Fod//ybIzdJxOlXGRcHIh/WaeCBehvxZb/Q==
 
 nodemon@^2.0.7:
   version "2.0.7"
@@ -1831,6 +1846,11 @@ opusscript@^0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/opusscript/-/opusscript-0.0.8.tgz#00b49e81281b4d99092d013b1812af8654bd0a87"
   integrity sha512-VSTi1aWFuCkRCVq+tx/BQ5q9fMnQ9pVZ3JU4UHKqTkf0ED3fKEPdr+gKAAl3IA2hj9rrP6iyq3hlcJq3HELtNQ==
+
+os@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/os/-/os-0.1.1.tgz#208845e89e193ad4d971474b93947736a56d13f3"
+  integrity sha1-IIhF6J4ZOtTZcUdLk5R3NqVtE/M=
 
 p-cancelable@^1.0.0:
   version "1.1.0"
@@ -2340,10 +2360,10 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-systeminformation@^5.7.4:
-  version "5.7.4"
-  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.7.4.tgz#13fcc29bd3836cf5043802f0f2532d0c4961a4ea"
-  integrity sha512-m6oziAu2zP8IMnNZpVWptzpcaXG6x59c2sQB8BI7DTcfBOTLXj5jGgjWxCVP65c5k7Fwhn35yVTCIZEypc1n9A==
+systeminformation@^5.7.7:
+  version "5.7.7"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.7.7.tgz#f39d2ec4c72820aa97efd6f32021e455f20d1e61"
+  integrity sha512-aQ7MBeVI2MKPYOi3YJAoZ45JVlRkBA7IXoqGgtVBamvtE0I6JLOyJzD/VVc9pnMXDb3yqaMwssAjhwtJax4/Rw==
 
 temp-dir@^2.0.0:
   version "2.0.0"

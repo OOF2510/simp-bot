@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@keyv/mongo": "^1.1.0",
+    "@oof2510/osinfo": "^1.0.1",
     "@oof2510/ping": "^1.1.9",
     "discord-buttons": "^3.2.1",
     "discord-math": "^1.0.5",
