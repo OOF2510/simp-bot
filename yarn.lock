@@ -80,16 +80,6 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oof2510/osinfo@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@oof2510/osinfo/-/osinfo-1.0.1.tgz#395c3dcaef2e7ad9f4ad71a5e367c475bbc64073"
-  integrity sha512-tzZKP4QL6hGRMzGeu36Etu1UZb0MLOrCC/SJaQ3OGjLm2K/fBh+cVbOoTCcgaGUfr0gG/lKn0FOaJwFsutWAHA==
-  dependencies:
-    child_process "^1.0.2"
-    os "^0.1.1"
-    systeminformation "^5.7.7"
-    util "^0.12.4"
-
 "@oof2510/ping@^1.1.9":
   version "1.1.9"
   resolved "https://registry.yarnpkg.com/@oof2510/ping/-/ping-1.1.9.tgz#c25162fadcab38d360d62c51c3e952f6e0023659"
@@ -461,11 +451,6 @@ chalk@^3.0.0:
   dependencies:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
-
-child_process@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/child_process/-/child_process-1.0.2.tgz#b1f7e7fc73d25e7fd1d455adc94e143830182b5a"
-  integrity sha1-sffn/HPSXn/R1FWtyU4UODAYK1o=
 
 chokidar@^3.2.2:
   version "3.5.1"
@@ -1846,11 +1831,6 @@ opusscript@^0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/opusscript/-/opusscript-0.0.8.tgz#00b49e81281b4d99092d013b1812af8654bd0a87"
   integrity sha512-VSTi1aWFuCkRCVq+tx/BQ5q9fMnQ9pVZ3JU4UHKqTkf0ED3fKEPdr+gKAAl3IA2hj9rrP6iyq3hlcJq3HELtNQ==
-
-os@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/os/-/os-0.1.1.tgz#208845e89e193ad4d971474b93947736a56d13f3"
-  integrity sha1-IIhF6J4ZOtTZcUdLk5R3NqVtE/M=
 
 p-cancelable@^1.0.0:
   version "1.1.0"
