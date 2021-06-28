@@ -21,7 +21,7 @@ configJson = "{" + f"""
     \"{mongoShard1}\",
     \"{mongoShard2}\"
   ],
-  \"embedColor\": \"{embedColor}\"
+  \"embedColor\": \"0x{embedColor}\"
 """ + "}"
 
 config = open("config.json", "w")
