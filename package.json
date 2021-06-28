@@ -12,12 +12,11 @@
     "setup:win": "./setup/setup.bat",
     "setup": "python setup/setup.py"
   },
-  "devDependencies": {
-    "discord.js": "https://github.com/discordjs/discord.js.git#master"
-  },
+  "devDependencies": {},
   "dependencies": {
     "@keyv/mongo": "^1.1.0",
     "@oof2510/ping": "^1.1.9",
+    "discord.js": "https://github.com/discordjs/discord.js.git#master",
     "discord-buttons": "^3.2.1",
     "discord-math": "^1.0.5",
     "discord-music-player": "^7.1.4",
