@@ -39,6 +39,6 @@ module.exports = {
       .setTitle("Prefix Set!")
       .setDescription(`Prefix set to ${args[0]}`);
 
-    channel.send(prefixEm);
+    channel.send({ embeds: [prefixEm] });
   },
 };

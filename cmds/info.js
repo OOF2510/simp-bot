@@ -1,4 +1,4 @@
-const si = require('systeminformation');
+const si = require("systeminformation");
 function formatBytes(bytes, decimals = 2) {
   if (bytes === 0) return "0 Bytes";
 
@@ -90,7 +90,7 @@ module.exports = {
     var usedSysMem = totalSysMem - freeSysMem;
     var sysMemUsage = formatBytes(usedSysMem);
     var CpuTemp = await si.cpuTemperature();
-    var cpuTemp = CpuTemp.main
+    var cpuTemp = CpuTemp.main;
 
     let Distro;
     let distro;
@@ -157,7 +157,7 @@ module.exports = {
         inline: true,
       });
 
-      channel.send(infoEm);
+      channel.send({ embeds: [infoEm] });
     } else if (args[0] == "-screenfetch") {
       infoEm.addFields({
         name: `Screenfetch`,
@@ -165,9 +165,9 @@ module.exports = {
         inline: true,
       });
 
-      channel.send(infoEm);
+      channel.send({ embeds: [infoEm] });
     } else {
-      channel.send(infoEm);
+      channel.send({ embeds: [infoEm] });
     }
   },
 };

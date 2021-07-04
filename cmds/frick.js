@@ -26,7 +26,7 @@ module.exports = {
   ) {
     let response;
     let sender = msg.author;
-    let sendMem = guild.members.cache.get(sender)
+    let sendMem = guild.members.cache.get(sender);
 
     let sendNick = sendMem ? sendMem.displayName : sender.username;
 
@@ -37,29 +37,23 @@ module.exports = {
     let recNick = recMem ? recMem.displayName : recipient.username;
 
     let responses = [
-      `${recNick} gets fricked by ${sendNick}... *How lewd...*`,
-      `${sendNick} gives ${recNick} a "hug"... hmm...`,
+      `${recipient} gets fricked by ${sendNick}... *How lewd...*`,
+      `${sendNick} gives ${recipient} a "hug"... hmm...`,
       `Senpai... No! Not there... OwO!`,
       `oh no... daddy... no daddy...`,
-      `${recNick} recieves adult fun time from ${sendNick}. Ew. `,
-      `Wanna lube up this hole, ${recNick}?`,
-      `${recNick} and ${sendNick} found a room to... play Xbox in...`,
+      `${recipient} recieves adult fun time from ${sendNick}. Ew. `,
+      `Wanna lube up this hole, ${recipient}?`,
+      `${recipient} and ${sendNick} found a room to... play Xbox in...`,
       `https://gifs.le6barbare.me/img/Conversation-Gifs/thats-lewd.gif`,
       `https://i.stack.imgur.com/2PeMcm.png`,
-      `Hey ${recNick} I think ${sendNick} needs to talk to you in *private* 😉`,
+      `Hey ${recipient} I think ${sendNick} needs to talk to you in *private* 😉`,
       `Helvete, gå knulla själv, deen jävla fitta`,
-      `${sendNick} pegs ${recNick}`,
-      `${sendNick} and ${recNick} do some not very christian things together`,
+      `${sendNick} pegs ${recipient}`,
+      `${sendNick} and ${recipient} do some not very christian things together`,
     ];
 
     response = responses[Math.floor(Math.random() * responses.length)];
 
-    const frEm = new Discord.MessageEmbed()
-    .setTitle(response)
-    .setColor(config.embedColor)
-    .setFooter(recNick, recipient.avatarURL({ dynamic: true }))
-    .setTimestamp();
-
-    msg.channel.send(frEm);
+    msg.channel.send(response);
   },
 };

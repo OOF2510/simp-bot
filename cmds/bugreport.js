@@ -40,9 +40,9 @@ module.exports = {
       .setColor(config.embedColor)
       .setTimestamp();
 
-    repCh.send(repEm);
-    repCh2.send(repEm);
-    repCh3.send(repEm);
+    repCh.send({ embeds: [repEm] });
+    repCh2.send({ embeds: [repEm] });
+    repCh3.send({ embeds: [repEm] });
 
     msg.reply(`I have sent your bug report, queen!`);
   },

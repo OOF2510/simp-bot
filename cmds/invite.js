@@ -35,6 +35,6 @@ module.exports = {
       )
       .setColor(config.embedColor)
       .setTimestamp();
-    channel.send(invEm);
+    channel.send({ embeds: [invEm]});
   },
 };

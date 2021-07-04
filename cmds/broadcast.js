@@ -76,7 +76,7 @@ module.exports = {
 
         if (!defC.permissionsFor(botMem).has("SEND_MESSAGES")) return;
         if (defC.type == "text" || "news") {
-          defC.send(broadcastEm);
+          defC.send({ embeds: [broadcastEm] });
         } else return;
       });
 

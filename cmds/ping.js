@@ -45,6 +45,6 @@ module.exports = {
       )
       .setColor(config.embedColor);
 
-    msg.reply(pingEm);
+    msg.reply({ embeds: [pingEm] });
   },
 };

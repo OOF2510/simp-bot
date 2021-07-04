@@ -47,6 +47,6 @@ module.exports = {
       )
       .setTimestamp();
 
-    channel.send(nobEm);
+    channel.send({ embeds: [nobEm] });
   },
 };

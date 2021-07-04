@@ -46,6 +46,6 @@ module.exports = {
       .setColor(config.embedColor)
       .setTimestamp();
 
-    channel.send(alisEm);
+    channel.send({ embeds: [alisEm] });
   },
 };

@@ -54,7 +54,7 @@ module.exports = {
         .setColor(config.embedColor)
         .addFields({ name: `${recNick}'s pp`, value: `${response}` });
 
-      msg.channel.send(ppEm);
+      msg.channel.send({ embeds: [ppEm] });
     } else if (recipient.id == "793910661293801524") {
       //robbie
       response = "8=====================================================D";
@@ -62,7 +62,7 @@ module.exports = {
         .setColor(config.embedColor)
         .addFields({ name: `${recNick}'s pp`, value: `${response}` });
 
-      msg.channel.send(ppEm);
+      msg.channel.send({ embeds: [ppEm] });
     } else if (recipient.id == "463119267832004620") {
       //noah
       response = ".";
@@ -70,7 +70,7 @@ module.exports = {
         .setColor(config.embedColor)
         .addFields({ name: `${recNick}'s pp`, value: `${response}` });
 
-      msg.channel.send(ppEm);
+      msg.channel.send({ embeds: [ppEm] });
     } else if (recipient.id == "763480802511945789") {
       //gerrardo
       response = "8===================================================D";
@@ -78,7 +78,7 @@ module.exports = {
         .setColor(config.embedColor)
         .addFields({ name: `${recNick}'s pp`, value: `${response}` });
 
-      msg.channel.send(ppEm);
+      msg.channel.send({ embeds: [ppEm] });
     } else {
       response = responses[Math.floor(Math.random() * responses.length)];
 
@@ -86,7 +86,7 @@ module.exports = {
         .setColor(config.embedColor)
         .addFields({ name: `${recNick}'s pp`, value: `${response}` });
 
-      msg.channel.send(ppEm);
+      msg.channel.send({ embeds: [ppEm] });
     }
   },
 };

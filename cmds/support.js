@@ -34,6 +34,6 @@ module.exports = {
       .setURL("https://discord.gg/zHtfa8GdPx")
       .setTimestamp();
 
-    channel.send(supEm);
+    channel.send({ embeds: [supEm] });
   },
 };

@@ -46,7 +46,7 @@ module.exports = {
         .setDescription(awnser)
         .setColor(config.embedColor);
 
-      channel.send(awnsEm);
+      channel.send({ embeds: [awnsEm] });
     } catch (e) {
       console.log(e);
     }
