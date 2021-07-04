@@ -6,7 +6,6 @@ const { promisify } = require("util");
 const exec = promisify(require("child_process").exec);
 const Keyv = require("keyv");
 const { DiscordTogether } = require("discord-together");
-const discordTTS = require("discord-tts");
 const voice = require("@discordjs/voice");
 
 var allowed = [
@@ -67,8 +66,7 @@ blDB.on("error", (err) => console.error("Keyv error", err));
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.discordTogether = new DiscordTogether(client);
-client.tts = discordTTS;
-client.voice = voice;
+// client.voice = voice;
 
 const cmdFiles = fs
   .readdirSync("./cmds")

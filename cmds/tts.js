@@ -1,3 +1,4 @@
+const voice = require("@discordjs/voice");
 module.exports = {
   name: "tts",
   cat: "misc",
@@ -31,23 +32,34 @@ module.exports = {
 
     let message = args.join(" ");
 
-    const broadcast = client.voice.createBroadcast();
-    const channelId = msg.member.voice.channelID;
-    const Channel = client.channels.cache.get(channelId);
+    let timeStamp = new Date();
+    let filename = "./temp/" + timeStamp + ".wav"
 
-    const connection = client.voice.joinVoiceChannel({
+    await exec(`espeak -s 125 -v en+m3 -p 25 "${message}" --stdout > "${filename}"`)
+
+    const channelID = msg.member.voice.channelID;
+    const Channel = client.channels.cache.get(channelID);
+
+    const player = voice.createAudioPlayer();
+
+    const connection = voice.joinVoiceChannel({
       channelId: channelID,
       guildId: Channel.guild.id,
       adapterCreator: Channel.guild.voiceAdapterCreator,
     });
 
-    const subscription = connection.subscribe(broadcast);
+    const resource = voice.createAudioResource(filename);
+    player.play(resource);
 
-    const dispatcher = connection.play(broadcast);
+    connection.subscribe(player)
 
-    // Channel.join().then((connection) => {
-    //   broadcast.play(client.tts.getVoiceStream(message));
-    //   const dispatcher = connection.play(broadcast);
-    // });
+    player.on('error', error => {
+      console.error(`Error: ${error.message} with resource ${error.resource.metadata.title}`);
+      player.stop()
+    });
+
+    player.on(voice.AudioPlayerStatus.Idle, () => {
+      player.stop();
+    });
   },
 };

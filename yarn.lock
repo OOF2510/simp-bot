@@ -332,13 +332,6 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
   integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
 
-axios@^0.21.0:
-  version "0.21.1"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
-  integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
-  dependencies:
-    follow-redirects "^1.10.0"
-
 balanced-match@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.2.tgz#e83e3a7e3f300b34cb9d87f615fa0cbf357690ee"
@@ -660,13 +653,6 @@ discord-together@^1.1.14:
   dependencies:
     node-fetch "^2.6.1"
 
-discord-tts@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/discord-tts/-/discord-tts-1.2.0.tgz#3dbf6c53ea906f74946096b04d9b02a92d0b8ecf"
-  integrity sha512-bJOTTa7tKKzbquowms391kunEmN4urES5Z7gI02fTbNn7R6s1XcE9MTZVPrf/WNAVJiY2KJIqnOZ3cT+CyYC0Q==
-  dependencies:
-    google-tts-api "^2.0.2"
-
 discord.js@^13.0.0-dev.56b5b7e.1625313788:
   version "13.0.0-dev.56b5b7e.1625313788"
   resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-13.0.0-dev.56b5b7e.1625313788.tgz#32931b0dd7fe25b32aec13e230497fdd1b3bee0d"
@@ -922,11 +908,6 @@ fill-range@^7.0.1:
   dependencies:
     to-regex-range "^5.0.1"
 
-follow-redirects@^1.10.0:
-  version "1.14.1"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.1.tgz#d9114ded0a1cfdd334e164e6662ad02bfd91ff43"
-  integrity sha512-HWqDgT7ZEkqRzBvc2s64vSZ/hfOceEol3ac/7tKwzuvEyWx3/4UegXh5oBOIotkGsObyk3xznnSRVADBgWSQVg==
-
 foreach@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/foreach/-/foreach-2.0.5.tgz#0bee005018aeb260d0a3af3ae658dd0136ec1b99"
@@ -1102,13 +1083,6 @@ google-p12-pem@^3.0.3:
   integrity sha512-JUtEHXL4DY/N+xhlm7TC3qL797RPAtk0ZGXNs3/gWyiDHYoA/8Rjes0pztkda+sZv4ej1EoO2KhWgW5V9KTrSQ==
   dependencies:
     node-forge "^0.10.0"
-
-google-tts-api@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/google-tts-api/-/google-tts-api-2.0.2.tgz#5f02bbde9b41f57569a94a3dd1d2de808a97bb97"
-  integrity sha512-MkQYbBJEdom8hJpfEVDfD3tpBtkz0X59C+FNsoRhbnCiFjZRnzyurGQ5OrAr3xkigII56/jmk0JNwZsp450G+Q==
-  dependencies:
-    axios "^0.21.0"
 
 got@^9.6.0:
   version "9.6.0"
