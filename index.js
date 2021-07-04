@@ -5,9 +5,9 @@ const os = require("os");
 const { promisify } = require("util");
 const exec = promisify(require("child_process").exec);
 const Keyv = require("keyv");
-const { Player } = require("discord-music-player");
 const { DiscordTogether } = require("discord-together");
 const discordTTS = require("discord-tts");
+const voice = require("@discordjs/voice");
 
 var allowed = [
   "463119138500378624", //me
@@ -45,10 +45,6 @@ const getDefaultChannel = (guild) => {
 const intents = new Discord.Intents(Discord.Intents.NON_PRIVILEGED);
 const client = new Discord.Client({ intents: intents });
 
-const player = new Player(client, {
-  quality: "low",
-});
-
 const preDB = new Keyv(`mongodb://${config.mongoURI}`, {
   collection: "prefixes",
 });
@@ -70,9 +66,9 @@ blDB.on("error", (err) => console.error("Keyv error", err));
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
-client.player = player;
 client.discordTogether = new DiscordTogether(client);
 client.tts = discordTTS;
+client.voice = voice;
 
 const cmdFiles = fs
   .readdirSync("./cmds")
@@ -87,89 +83,6 @@ for (const file of cmdFiles) {
     });
   } else continue;
 }
-
-client.player
-  .on("channelEmpty", (message, queue) =>
-    message.channel.send(
-      `The **${queue.connection.channel}** was empty, music was removed!`
-    )
-  )
-  .on("songAdd", (message, queue, song) => {
-    let em = new Discord.MessageEmbed()
-      .setTitle(`Added to queue`)
-      .setDescription(`**${song.name}** has been added to the queue!`)
-      .setColor(config.embedColor);
-    message.channel.send({ embeds: [em] });
-  })
-  .on("playlistAdd", (message, queue, playlist) =>
-    message.channel.send(
-      `${playlist.name} playlist with ${playlist.videoCount} songs has been added to the queue!`
-    )
-  )
-  .on("queueEnd", (message, queue) =>
-    message.channel.send(`The queue ended, nothing more to play!`)
-  )
-  .on("songChanged", (message, newSong, oldSong) => {
-    let em = new Discord.MessageEmbed()
-      .setTitle(`Playing`)
-      .setDescription(`**${newSong.name}** is now playing!`);
-    message.channel.send({ embeds: [em] });
-  })
-  .on("songFirst", (message, song) => {
-    let em = new Discord.MessageEmbed()
-      .setTitle(`Playing`)
-      .setDescription(`**${song.name}** is now playing!`)
-      .setColor(config.embedColor);
-    message.channel.send({ embeds: [em] });
-  })
-  .on("clientDisconnect", (message, queue) =>
-    message.channel.send(
-      `I got disconnected from the channel, music was removed.`
-    )
-  )
-  .on("clientUndeafen", (message, queue) =>
-    message.channel.send(
-      `I got disconnected from the channel, music was removed.`
-    )
-  )
-  .on("error", (error, message) => {
-    switch (error) {
-      case "SearchIsNull":
-        message.channel.send(`No song with that query was found.`);
-        break;
-      case "InvalidPlaylist":
-        message.channel.send(`No Playlist was found with that link.`);
-        break;
-      case "InvalidSpotify":
-        message.channel.send(`No Spotify Song was found with that link.`);
-        break;
-      case "QueueIsNull":
-        message.channel.send(`There is no music playing right now.`);
-        break;
-      case "VoiceChannelTypeInvalid":
-        message.channel.send(
-          `You need to be in a Voice Channel to play music.`
-        );
-        break;
-      case "LiveUnsupported":
-        message.channel.send(`We do not support YouTube Livestreams.`);
-        break;
-      case "VideoUnavailable":
-        message.channel.send(
-          `Something went wrong while playing the current song, skipping...`
-        );
-        break;
-      case "NotANumber":
-        message.channel.send(`The provided argument was Not A Number.`);
-        break;
-      case "MessageTypeInvalid":
-        message.channel.send(`The Message object was not provided.`);
-        break;
-      default:
-        message.channel.send(`**Unknown Error Ocurred:** ${error}`);
-        break;
-    }
-  });
 
 client.on("ready", () => {
   console.log("Ready!");

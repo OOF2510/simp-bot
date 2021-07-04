@@ -34,9 +34,20 @@ module.exports = {
     const broadcast = client.voice.createBroadcast();
     const channelId = msg.member.voice.channelID;
     const Channel = client.channels.cache.get(channelId);
-    Channel.join().then((connection) => {
-      broadcast.play(client.tts.getVoiceStream(message));
-      const dispatcher = connection.play(broadcast);
+
+    const connection = client.voice.joinVoiceChannel({
+      channelId: channelID,
+      guildId: Channel.guild.id,
+      adapterCreator: Channel.guild.voiceAdapterCreator,
     });
+
+    const subscription = connection.subscribe(broadcast);
+
+    const dispatcher = connection.play(broadcast);
+
+    // Channel.join().then((connection) => {
+    //   broadcast.play(client.tts.getVoiceStream(message));
+    //   const dispatcher = connection.play(broadcast);
+    // });
   },
 };
