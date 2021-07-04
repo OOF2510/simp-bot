@@ -20,7 +20,6 @@
     "discord-math": "^1.0.5",
     "discord-together": "^1.1.14",
     "discord.js": "^13.0.0-dev.56b5b7e.1625313788",
-    "extra-tts": "^1.0.11",
     "fs": "^0.0.1-security",
     "keyv": "^4.0.3",
     "libsodium-wrappers": "^0.7.9",
