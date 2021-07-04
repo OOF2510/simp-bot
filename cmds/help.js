@@ -43,7 +43,7 @@ module.exports = {
         })
         .setTimestamp();
 
-      channel.send(hIEm);
+      channel.send({ embeds: [hIEm] });
     } else if (args[0].toLowerCase() == "settings") {
       let setEm = new Discord.MessageEmbed()
         .setAuthor(botNick, client.user.avatarURL())
@@ -59,7 +59,7 @@ module.exports = {
         }
       });
 
-      channel.send(setEm);
+      channel.send({ embeds: [setEm] });
     } else if (args[0].toLowerCase() == "info") {
       let inEm = new Discord.MessageEmbed()
         .setAuthor(botNick, client.user.avatarURL())
@@ -75,7 +75,7 @@ module.exports = {
         }
       });
 
-      channel.send(inEm);
+      channel.send({ embeds: [inEm] });
     } else if (args[0].toLowerCase() == "feedback") {
       let fbEm = new Discord.MessageEmbed()
         .setAuthor(botNick, client.user.avatarURL())
@@ -91,7 +91,7 @@ module.exports = {
         }
       });
 
-      channel.send(fbEm);
+      channel.send({ embeds: [fbEm] });
     } else if (args[0].toLowerCase() == "fun") {
       let funEm = new Discord.MessageEmbed()
         .setAuthor(botNick, client.user.avatarURL())
@@ -107,7 +107,7 @@ module.exports = {
         }
       });
 
-      channel.send(funEm);
+      channel.send({ embeds: [funEm] });
     } else if (args[0].toLowerCase() == "misc") {
       let miEm = new Discord.MessageEmbed()
         .setAuthor(botNick, client.user.avatarURL())
@@ -123,7 +123,7 @@ module.exports = {
         }
       });
 
-      channel.send(miEm);
+      channel.send({ embeds: [miEm] });
     } else if (args[0].toLowerCase() == "dev") {
       let deEm = new Discord.MessageEmbed()
         .setAuthor(botNick, client.user.avatarURL())
@@ -139,7 +139,7 @@ module.exports = {
         }
       });
 
-      channel.send(deEm);
+      channel.send({ embeds: [deEm] });
     } else if (args[0].toLowerCase() == "moderation") {
       let modEm = new Discord.MessageEmbed()
         .setAuthor(botNick, client.user.avatarURL())
@@ -155,7 +155,7 @@ module.exports = {
         }
       });
 
-      channel.send(modEm);
+      channel.send({ embeds: [modEm] });
     } else if (args[0].toLowerCase() == "music") {
       let muEm = new Discord.MessageEmbed()
         .setAuthor(botNick, client.user.avatarURL())
@@ -171,7 +171,7 @@ module.exports = {
         }
       });
 
-      channel.send(muEm);
+      channel.send({ embeds: [muEm] });
     } else return;
   },
 };

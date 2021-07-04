@@ -34,16 +34,16 @@ module.exports = {
       let em = new Discord.MessageEmbed()
         .setTitle(`Queue`)
         .setDescription(
-            queue.songs
-              .map((song, i) => {
-                return `${i === 0 ? "Now Playing" : `#${i + 1}`} - ${
-                  song.name
-                } | ${song.author}`;
-              })
-              .join("\n")
+          queue.songs
+            .map((song, i) => {
+              return `${i === 0 ? "Now Playing" : `#${i + 1}`} - ${
+                song.name
+              } | ${song.author}`;
+            })
+            .join("\n")
         )
         .setColor(config.embedColor);
-      message.channel.send(em);
+      message.channel.send({ embeds: [em] });
     }
   },
 };

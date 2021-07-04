@@ -99,7 +99,7 @@ client.player
       .setTitle(`Added to queue`)
       .setDescription(`**${song.name}** has been added to the queue!`)
       .setColor(config.embedColor);
-    message.channel.send(em);
+    message.channel.send({ embeds: [em] });
   })
   .on("playlistAdd", (message, queue, playlist) =>
     message.channel.send(
@@ -113,14 +113,14 @@ client.player
     let em = new Discord.MessageEmbed()
       .setTitle(`Playing`)
       .setDescription(`**${newSong.name}** is now playing!`);
-    message.channel.send(em);
+    message.channel.send({ embeds: [em] });
   })
   .on("songFirst", (message, song) => {
     let em = new Discord.MessageEmbed()
       .setTitle(`Playing`)
       .setDescription(`**${song.name}** is now playing!`)
       .setColor(config.embedColor);
-    message.channel.send(em);
+    message.channel.send({ embeds: [em] });
   })
   .on("clientDisconnect", (message, queue) =>
     message.channel.send(

@@ -31,12 +31,14 @@ module.exports = {
     let message = msg;
     let SongID = parseInt(args[0]) - 1;
     let song = client.player.remove(message, SongID);
-    if (song){
+    if (song) {
       let em = new Discord.MessageEmbed()
-      .setTitle(`Removed`)
-      .setDescription(`Removed song ${song.name} (${args[0]}) from the Queue!`)
-      .setColor(config.embedColor)
-      message.channel.send(em);
+        .setTitle(`Removed`)
+        .setDescription(
+          `Removed song ${song.name} (${args[0]}) from the Queue!`
+        )
+        .setColor(config.embedColor);
+      message.channel.send({ embeds: [em] });
     }
   },
 };

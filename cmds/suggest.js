@@ -31,7 +31,7 @@ module.exports = {
     const sugCh = client.channels.cache.get("816823026384633887");
     const sugCh2 = client.channels.cache.get("816828453110022166");
     const sugCh3 = client.channels.cache.get("825840766769299527");
-    const sug = args.join(" ")
+    const sug = args.join(" ");
 
     const sugEm = new Discord.MessageEmbed()
       .setTitle(`New suggestion`)
@@ -40,9 +40,9 @@ module.exports = {
       .setColor(config.embedColor)
       .setTimestamp();
 
-    sugCh.send(sugEm);
-    sugCh2.send(sugEm);
-    sugCh3.send(sugEm);
+    sugCh.send({ embeds: [sugEm] });
+    sugCh2.send({ embeds: [sugEm] });
+    sugCh3.send({ embeds: [sugEm] });
 
     msg.reply(`I have sent your suggestion, queen!`);
   },

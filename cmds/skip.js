@@ -34,7 +34,7 @@ module.exports = {
         .setTitle(`Skipped`)
         .setDescription(`${song.name} was skipped!`)
         .setColor(config.embedColor);
-      message.channel.send(em);
+      message.channel.send({ embeds: [em] });
     }
   },
 };

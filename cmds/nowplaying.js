@@ -35,7 +35,7 @@ module.exports = {
         .setTitle(`Now Playing`)
         .setDescription(`Current song: ${song.name}`)
         .setColor(config.embedColor);
-      message.channel.send(em);
+      message.channel.send({ embeds: [em] });
     }
   },
 };

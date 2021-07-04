@@ -66,6 +66,6 @@ module.exports = {
       .setTimestamp()
       .setColor(config.embedColor);
 
-    channel.send(brChEm);
+    channel.send({ embeds: [brChEm] });
   },
 };

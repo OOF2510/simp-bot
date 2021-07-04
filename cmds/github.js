@@ -33,6 +33,6 @@ module.exports = {
       .setURL("https://github.com/OOF2510/simp-bot-rewritten")
       .setColor(config.embedColor);
 
-    channel.send(gitEm);
+    channel.send({ embeds: [gitEm] });
   },
 };
