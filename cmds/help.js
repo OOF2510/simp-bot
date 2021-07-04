@@ -157,21 +157,23 @@ module.exports = {
 
       channel.send({ embeds: [modEm] });
     } else if (args[0].toLowerCase() == "music") {
-      let muEm = new Discord.MessageEmbed()
-        .setAuthor(botNick, client.user.avatarURL())
-        .setTitle("Help - Music")
-        .setColor(config.embedColor);
+      msg.reply("Muisc is temporarly disabled while we work on a new muisc engine!")
 
-      client.commands.forEach((cmd) => {
-        if (cmd.cat.toLowerCase() == "music") {
-          muEm.addFields({
-            name: cmd.name,
-            value: `${prefix}${cmd.usage} - ${cmd.desc}`,
-          });
-        }
-      });
+      // let muEm = new Discord.MessageEmbed()
+      //   .setAuthor(botNick, client.user.avatarURL())
+      //   .setTitle("Help - Music")
+      //   .setColor(config.embedColor);
 
-      channel.send({ embeds: [muEm] });
+      // client.commands.forEach((cmd) => {
+      //   if (cmd.cat.toLowerCase() == "music") {
+      //     muEm.addFields({
+      //       name: cmd.name,
+      //       value: `${prefix}${cmd.usage} - ${cmd.desc}`,
+      //     });
+      //   }
+      // });
+
+      // channel.send({ embeds: [muEm] });
     } else return;
   },
 };
