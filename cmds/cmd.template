@@ -1,7 +1,9 @@
 module.exports = {
   name: "cmd_name",
-  aliases: ["a1", "a2"],
-category_name
+  aliases: ["ali_1", "ali_2"],
+  cat: "category_name",
+  usage: "cmd_name <args?>",
+  desc: "Command description",
   async execute(
     msg,
     args,
@@ -25,6 +27,7 @@ category_name
     nbDB,
     bchDB,
     blDB
-  ) { 
+  ) {
+
   },
 };

@@ -99,6 +99,13 @@ ajv@^6.12.3:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
+aki-api@^5.2.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/aki-api/-/aki-api-5.2.1.tgz#07b411d2db36f137350d663e2703f3348d027d19"
+  integrity sha512-hKncCXEBsP6JOkaUoXVQtLlIZw8VQsWroZNEjtNWW+CVWt6zmXrKEDJtZ00ycg4TzQemRZPH6PhvJnP9Lq3lIw==
+  dependencies:
+    axios "^0.21.1"
+
 ansi-align@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/ansi-align/-/ansi-align-3.0.0.tgz#b536b371cf687caaef236c18d3e21fe3797467cb"
@@ -169,6 +176,13 @@ aws4@^1.8.0:
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
   integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
+
+axios@^0.21.1:
+  version "0.21.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
+  integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
+  dependencies:
+    follow-redirects "^1.10.0"
 
 balanced-match@^1.0.0:
   version "1.0.2"
@@ -415,6 +429,28 @@ discord-together@^1.1.14:
   dependencies:
     node-fetch "^2.6.1"
 
+"discord.js-akinator@https://github.com/OOF2510/Discord.js-Akinator-Package-Dev":
+  version "2.0.5"
+  resolved "https://github.com/OOF2510/Discord.js-Akinator-Package-Dev#21b50d5213f8d3cccc0be3bd7873ebac8736ec91"
+  dependencies:
+    aki-api "^5.2.1"
+    discord.js "^13.0.0-dev.2e078e4.1625521956"
+
+discord.js@^13.0.0-dev.2e078e4.1625521956:
+  version "13.0.0-dev.fe6cc0c.1625227356"
+  resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-13.0.0-dev.fe6cc0c.1625227356.tgz#1fafefe671758898afd3c092cef6447286d2ca27"
+  integrity sha512-m9oY7nlAX6RhZYxTzg9s5JHGdkm6Fk+XKCHj2qeD7pG+GOmFV9mrqVBt5xZq4NZME81BmPASLhn0q6us4uDfJA==
+  dependencies:
+    "@discordjs/builders" "^0.1.1"
+    "@discordjs/collection" "^0.1.6"
+    "@discordjs/form-data" "^3.0.1"
+    "@sapphire/async-queue" "^1.1.4"
+    "@types/ws" "^7.4.5"
+    abort-controller "^3.0.0"
+    discord-api-types "^0.19.0-next.f393ba520d7d6d2aacaca7b3ca5d355fab614f6e"
+    node-fetch "^2.6.1"
+    ws "^7.5.1"
+
 discord.js@^13.0.0-dev.56b5b7e.1625313788:
   version "13.0.0-dev.56b5b7e.1625313788"
   resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-13.0.0-dev.56b5b7e.1625313788.tgz#32931b0dd7fe25b32aec13e230497fdd1b3bee0d"
@@ -549,6 +585,11 @@ fill-range@^7.0.1:
   integrity sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==
   dependencies:
     to-regex-range "^5.0.1"
+
+follow-redirects@^1.10.0:
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.1.tgz#d9114ded0a1cfdd334e164e6662ad02bfd91ff43"
+  integrity sha512-HWqDgT7ZEkqRzBvc2s64vSZ/hfOceEol3ac/7tKwzuvEyWx3/4UegXh5oBOIotkGsObyk3xznnSRVADBgWSQVg==
 
 foreach@^2.0.5:
   version "2.0.5"
