@@ -29,6 +29,7 @@ module.exports = {
     bchDB,
     blDB
   ) {
+    if (!msg.member.voice.channel) return msg.reply("You must be in a voice channel to do that!")
     if (!args[0]) return msg.reply("Please provide a message to say!");
 
     let message = args.join(" ");
