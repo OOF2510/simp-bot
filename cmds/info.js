@@ -108,24 +108,24 @@ module.exports = {
     let ScreenFetch = await exec("screenfetch -N");
     let screenFetch = ScreenFetch.stdout.trim();
 
-    let djsV = "master";
+    let djsV = "13.0.0-dev.56b5b7e.1625313788";
 
     let infoEm = new Discord.MessageEmbed()
       .setTitle("Info")
       .addFields(
         { name: "Server Info", value: "Information about the server" },
-        { name: "Members", value: guild.memberCount, inline: true },
-        { name: "Roles", value: guild.roles.cache.size, inline: true },
-        { name: "Channels", value: guild.channels.cache.size, inline: true },
-        { name: "Server ID", value: guild.id, inline: true },
+        { name: "Members", value: `${guild.memberCount}`, inline: true },
+        { name: "Roles", value: `${guild.roles.cache.size}`, inline: true },
+        { name: "Channels", value: `${guild.channels.cache.size}`, inline: true },
+        { name: "Server ID", value: `${guild.id}`, inline: true },
         {
           name: "Server Owner",
-          value: client.users.cache.get(msg.guild.ownerID),
+          value: `${client.users.cache.get(msg.guild.ownerID)}`,
           inline: true,
         },
-        { name: `Region`, value: guild.region, inline: true },
-        { name: "Default Channel", value: defChannel, inline: true },
-        { name: "Prefix", value: prefix, inline: true },
+        { name: `Region`, value: `${guild.region}`, inline: true },
+        { name: "Default Channel", value: `${defChannel}`, inline: true },
+        { name: "Prefix", value: `${prefix}`, inline: true },
         {
           name: "OS Info",
           value: `Information about the bot's OS`,
