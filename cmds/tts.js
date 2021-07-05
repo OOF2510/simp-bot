@@ -1,4 +1,5 @@
 const voice = require("@discordjs/voice");
+const fs = require("fs")
 module.exports = {
   name: "tts",
   cat: "misc",
@@ -32,10 +33,14 @@ module.exports = {
 
     let message = args.join(" ");
 
-    let timeStamp = new Date();
-    let filename = "./temp/" + timeStamp + ".wav"
+    if (!fs.existsSync("./temp")) {
+      fs.mkdirSync("./temp");
+    }
 
-    await exec(`espeak -s 125 -v en+m3 -p 25 "${message}" --stdout > "${filename}"`)
+    let timeStamp = new Date();
+    let filename = "./temp/" + timeStamp + ".mp3";
+
+    await exec(`gtts-cli '${message}' --output "${filename}"`);
 
     const channelID = msg.member.voice.channelID;
     const Channel = client.channels.cache.get(channelID);
@@ -51,11 +56,13 @@ module.exports = {
     const resource = voice.createAudioResource(filename);
     player.play(resource);
 
-    connection.subscribe(player)
+    connection.subscribe(player);
 
-    player.on('error', error => {
-      console.error(`Error: ${error.message} with resource ${error.resource.metadata.title}`);
-      player.stop()
+    player.on("error", (error) => {
+      console.error(
+        `Error: ${error.message} with resource ${error.resource.metadata.title}`
+      );
+      player.stop();
     });
 
     player.on(voice.AudioPlayerStatus.Idle, () => {
