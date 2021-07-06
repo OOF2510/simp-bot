@@ -56,12 +56,16 @@ const bchDB = new Keyv(`mongodb://${config.mongoURI}`, {
 const blDB = new Keyv(`mongodb://${config.mongoURI}`, {
   collection: "blacklist",
 });
+const wcDB = new Keyv(`mongodb://${config.mongoURI}`, {
+  collection: "welcomeChannels",
+});
 console.log("Connected to DBs");
 
 preDB.on("error", (err) => console.error("Keyv error:", err));
 nbDB.on("error", (err) => console.error("Keyv error:", err));
 bchDB.on("error", (err) => console.error("Keyv error:", err));
 blDB.on("error", (err) => console.error("Keyv error", err));
+wcDB.on("error", (err) => console.error("Keyv error", err));
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
@@ -96,6 +100,31 @@ client.on("ready", () => {
     }
   );
   console.log(client.user.tag);
+});
+
+client.on("guildMemberAdd", async (member) => {
+  let guild = member.guild;
+  let welcomeEnabled = await wcDB.get(guild.id);
+  if (!welcomeEnabled) return;
+  let welcomeChannel = guild.channels.cache.get(welcomeEnabled);
+  welcomeChannel.send(`${member} welcome to **${guild.name}**`);
+});
+
+client.on("guildCreate", async (guild) => {
+  nbDB.set(guild.id, "true");
+  let defC = getDefaultChannel(guild);
+  client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, {
+    type: "WATCHING",
+  });
+  defC.send(
+    "Thanks for adding me UwU, you can see my commands by doing `s!help`"
+  );
+});
+
+client.on("guildDelete", (guild) => {
+  client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, {
+    type: "WATCHING",
+  });
 });
 
 client.on("message", async (msg) => {
@@ -152,7 +181,8 @@ client.on("message", async (msg) => {
         preDB,
         nbDB,
         bchDB,
-        blDB
+        blDB,
+        wcDB
       );
   } catch (error) {
     console.error(error);
@@ -160,23 +190,6 @@ client.on("message", async (msg) => {
       `An error occured executing that command! Try again! (\`${error}\`)`
     );
   }
-});
-
-client.on("guildCreate", async (guild) => {
-  nbDB.set(guild.id, "true");
-  let defC = getDefaultChannel(guild);
-  client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, {
-    type: "WATCHING",
-  });
-  defC.send(
-    "Thanks for adding me UwU, you can see my commands by doing `s!help`"
-  );
-});
-
-client.on("guildDelete", (guild) => {
-  client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, {
-    type: "WATCHING",
-  });
 });
 
 client.login(config.token);
