@@ -9,6 +9,7 @@ set /P mongoShard0="First MongoDB Shard Domain: "
 set /P mongoShard1="Second MongoDB Shard Domain: "
 set /P mongoShard2="Third MongoDB Shard Domain: "
 set /P embedColor="Embed Color (hex without the #): "
+set /P lavalinkHost="Lavalink Host: "
 
 type nul > config.json
 
@@ -24,7 +25,8 @@ echo    "%mongoShard0%",
 echo    "%mongoShard1%",
 echo    "%mongoShard2%"
 echo   ],
-echo "embedColor": "0x%embedColor%"
+echo "embedColor": "0x%embedColor%",
+echo "lavalinkHost": "%lavalinkHost%"
 echo }
 ) > config.json
 

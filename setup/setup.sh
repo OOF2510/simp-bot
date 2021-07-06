@@ -8,6 +8,7 @@ read -p "First MongoDB Shard Domain: " mongoShard0
 read -p "Second MongoDB Shard Domain: " mongoShard1
 read -p "Third MongoDB Shard Domain: " mongoShard2
 read -p "Embed Color (hex without the #): " embedColor
+read -p "Lavalink Host: " lavalinkHost
 
 touch config.json
 
@@ -27,7 +28,8 @@ echo "{
     \"$mongoShard1\",
     \"$mongoShard2\"
   ],
-  \"embedColor\": \"0x$embedColor\"
+  \"embedColor\": \"0x$embedColor\",
+  \"lavalinkHost\": \"$lavalinkHost\"
 }" > ./config.json
 
 echo "config.json:"
