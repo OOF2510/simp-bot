@@ -70,6 +70,9 @@ s!yesbroadcast - Re-enables broadcasts for your server
 
 s!youtubetogether - Starts a Youtube Together session
 
+### Music Commands
+clearqueue, help, loop, lyrics, move, nowplaying, pause, play, previous, queue, radio, remove, removedupes, resume, search, seek, shuffle, skip, stats, stop, volume
+
 # Self-hosting the bot
 
 ## Linux
