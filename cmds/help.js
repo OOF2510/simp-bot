@@ -157,7 +157,8 @@ module.exports = {
 
       channel.send({ embeds: [modEm] });
     } else if (args[0].toLowerCase() == "music") {
-      msg.reply("Music is temporarly disabled while we work on a new music engine!")
+      return;
+      // msg.reply("Music is temporarly disabled while we work on a new music engine!")
 
       // let muEm = new Discord.MessageEmbed()
       //   .setAuthor(botNick, client.user.avatarURL())
