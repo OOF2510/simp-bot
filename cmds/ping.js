@@ -44,7 +44,7 @@ module.exports = {
       .addFields(
         { name: `Bot Ping`, value: `\`${client.ws.ping}ms\``, inline: true },
         { name: `Database Ping`, value: `\`${mongoPing}ms\``, inline: true },
-        { name: "Lavalink (music) Ping", value: `\`${llPing}\``, inline: true }
+        { name: "Lavalink (music) Ping", value: `\`${llPing}ms\``, inline: true }
       )
       .setColor(config.embedColor);
 
