@@ -27,7 +27,7 @@ module.exports = {
     if (!args[0]) {
       const hIEm = new Discord.MessageEmbed()
         .setAuthor(botNick, client.user.avatarURL())
-        .setColor("RANDOM")
+        .setColor(config.embedColor)
         .setTitle("Help")
         .setDescription(`Use ${prefix}help <module> for more info`)
         .addFields({
