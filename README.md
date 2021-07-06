@@ -1,4 +1,5 @@
 # Simp Bot
+
 A discord bot that is a simp
 
 ### [Invite the bot to your server](https://discord.com/api/oauth2/authorize?client_id=808822189905936405&permissions=8&scope=bot)
@@ -6,6 +7,9 @@ A discord bot that is a simp
 ### [Join the support server!](https://discord.gg/zHtfa8GdPx)
 
 # Commands
+
+s!akinator - Starts a game of Akinator
+
 s!aliases- Lists aliases for specified command
 
 s!avatar - Gets your or another user's avatar
@@ -34,78 +38,64 @@ s!math - Calculator
 
 s!nobroadcast - disable broadcasts for your server
 
-s!nowplaying - Shows the currently playing song
-
-s!pause - Pauses the current song
-
 s!ping - Pings the bot
-
-s!play - Plays specified song
-
-s!playlist - Adds specified playlist to queue
 
 s!poker - Starts a game of Poker Together
 
 s!pp - Pp size
 
-s!prefix - Sets your guild's prefix to 
+s!prefix - Sets your guild's prefix to
 specified prefix
 
-s!purge - Bulk deletes the specified number 
+s!purge - Bulk deletes the specified number
 of messages
-
-s!queue - Shows the queue
-
-s!remove - Removes specified song from queue
-
-s!resume - Resumes paused song
 
 s!setbroadcastchannel - sets the channel that broadcasts go to
 
 s!shortenurl - Shortens given URL
 
-s!shuffle - Shuffles the queue
-
 s!simp - Simps for the mentioned user
-
-s!skip - Skips the currently playing song
-
-s!stop - Stops playing music & leaves the VC
 
 s!suggest - Sends a suggestion to me
 
-s!support - sends a link for the support server
+s!support - Sends a link for the support server
 
 s!tts - Speaks given message in VC [BETA]
 
-s!volume - Sets volume to specified percent
+s!whois - Gets info about a user
 
-s!yesbroadcast - re-enable broadcasts for your server
+s!yesbroadcast - Re-enables broadcasts for your server
 
 s!youtubetogether - Starts a Youtube Together session
 
 # Self-hosting the bot
 
 ## Linux
-* Install git, nodejs & yarn
- ```bash
- git clone https://github.com/OOF2510/simp-bot-rewritten.git
- cd simp-bot-rewritten
- yarn run setup:linux
- yarn run start
- ```
+
+- Install git, nodejs & yarn
+
+```bash
+git clone https://github.com/OOF2510/simp-bot-rewritten.git
+cd simp-bot-rewritten
+yarn run setup:linux
+yarn run start
+```
 
 ## Windows
-* Install git, nodejs & yarn
- ```bash
- git clone https://github.com/OOF2510/simp-bot-rewritten.git
- cd simp-bot-rewritten
- yarn run setup:win
- yarn run start
- ```
+
+- Install git, nodejs & yarn
+
+```bash
+git clone https://github.com/OOF2510/simp-bot-rewritten.git
+cd simp-bot-rewritten
+yarn run setup:win
+yarn run start
+```
 
 ## Universial
-* Install git, nodejs, python & yarn
+
+- Install git, nodejs, python & yarn
+
 ```bash
  git clone https://github.com/OOF2510/simp-bot-rewritten.git
  cd simp-bot-rewritten
@@ -114,5 +104,6 @@ s!youtubetogether - Starts a Youtube Together session
 ```
 
 # The original simp bot
+
 I reworte [Simp bot 10000](https://discordbotlist.com/bots/simp-bot-10000) because it wouldn't let me add it to my server, I tried hosting it myself, but it
 kept crashing, so I rewrote the code and added a bunch of stuff of my own onto it. Simp bot 10000 seems to be abandoned now and is never online.
