@@ -28,11 +28,16 @@ module.exports = {
     bchDB,
     blDB
   ) {
-    const gitEm = new Discord.MessageEmbed()
-      .setTitle("View the source code on GitHub!")
-      .setURL("https://github.com/OOF2510/simp-bot-rewritten")
-      .setColor(config.embedColor);
+    const row = new Discord.MessageActionRow().addComponents(
+      new Discord.MessageButton()
+        .setStyle("LINK")
+        .setLabel("GitHub")
+        .setURL("https://github.com/OOF2510/simp-bot-rewritten")
+    );
 
-    channel.send({ embeds: [gitEm] });
+    channel.send({
+      content: "Click the button below to go to Simp Bot's Github repo!",
+      components: [row],
+    });
   },
 };
