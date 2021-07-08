@@ -30,6 +30,7 @@
     "nodemon": "^2.0.9",
     "path": "^0.12.7",
     "systeminformation": "^5.7.7",
-    "util": "^0.12.4"
+    "util": "^0.12.4",
+    "whois-light": "^1.1.0"
   }
 }
