@@ -43,3 +43,5 @@ else:
   os.system("yarn global add yayfetch")
 
 os.system("yarn install")
+
+os.system("python3 -m pip install gTTS")

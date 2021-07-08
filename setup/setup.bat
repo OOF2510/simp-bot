@@ -36,4 +36,6 @@ type config.json
 yarn global add yayfetch
 yarn install
 
+python3 -m pip install gTTS
+
 exit

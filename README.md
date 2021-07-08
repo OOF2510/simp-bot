@@ -71,13 +71,14 @@ s!yesbroadcast - Re-enables broadcasts for your server
 s!youtubetogether - Starts a Youtube Together session
 
 ### Music Commands
+
 clearqueue, help, loop, lyrics, move, nowplaying, pause, play, previous, queue, radio, remove, removedupes, resume, search, seek, shuffle, skip, stats, stop, volume
 
 # Self-hosting the bot
 
 ## Linux
 
-- Install git, nodejs & yarn
+- Install git, nodejs, python3-pip & yarn
 
 ```bash
 git clone https://github.com/OOF2510/simp-bot-rewritten.git
@@ -88,7 +89,7 @@ yarn run start
 
 ## Windows
 
-- Install git, nodejs & yarn
+- Install git, nodejs, python3-pip & yarn
 
 ```bash
 git clone https://github.com/OOF2510/simp-bot-rewritten.git
@@ -99,7 +100,7 @@ yarn run start
 
 ## Universial
 
-- Install git, nodejs, python & yarn
+- Install git, nodejs, python, python3-pip & yarn
 
 ```bash
  git clone https://github.com/OOF2510/simp-bot-rewritten.git
