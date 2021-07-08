@@ -46,6 +46,7 @@ module.exports = {
     blDB,
     wcDB
   ) {
+    try {
     if (!args[0]) return msg.reply(`Usage: \`${prefix}${this.usage}\``);
     let domain = args[0];
     if (!checkDomain(domain)) return msg.reply("That is not a valid domain!");
@@ -77,5 +78,10 @@ module.exports = {
       .setTimestamp();
 
     channel.send({ embeds: [widEm] });
+      } catch (error) {
+        let message = `Error executing: ||\`${error}\`||`
+        if (message.length > 2000) return msg.reply(`Error executing`)
+        msg.reply(message)
+        }
   },
 };
