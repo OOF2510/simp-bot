@@ -43,7 +43,7 @@ module.exports = {
 
       let awnsEm = new Discord.MessageEmbed()
         .setTitle(`${num1} ${operation} ${num2} =`)
-        .setDescription(awnser)
+        .setDescription(`${awnser}`)
         .setColor(config.embedColor);
 
       channel.send({ embeds: [awnsEm] });
