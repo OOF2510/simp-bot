@@ -36,7 +36,8 @@ module.exports = {
     var MongoPing = mongoPing0 + mongoPing1 + mongoPing2;
     var mongoPing = Math.round(MongoPing / 3);
 
-    var llPing = await ping(config.lavalinkHost);
+    var LlPing = await ping(config.lavalinkHost);
+    var llPing = Math.round(Llping);
 
     const pingEm = new Discord.MessageEmbed()
       .setTitle(`Pong UwU!`)
