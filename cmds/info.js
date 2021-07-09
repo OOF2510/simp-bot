@@ -47,7 +47,7 @@ module.exports = {
   name: "info",
   aliases: ["in", "inf", "information"],
   cat: "info",
-  usage: "info [-yayfetch] [-screenfetch]",
+  usage: "info [-yayfetch|-screenfetch]",
   desc: "Info about the bot and server",
   async execute(
     msg,
@@ -102,11 +102,8 @@ module.exports = {
     let NodeV = await exec("node -v");
     let nodeV = NodeV.stdout.trim();
 
-    let YayFetch = await exec("yayfetch --hide-logo");
-    let yayFetch = YayFetch.stdout.trim();
 
-    let ScreenFetch = await exec("screenfetch -N");
-    let screenFetch = ScreenFetch.stdout.trim();
+
 
     let djsV = "13.0.0-dev.56b5b7e.1625313788";
 
@@ -151,6 +148,8 @@ module.exports = {
       .setColor(config.embedColor);
 
     if (args[0] == "-yayfetch") {
+      let YayFetch = await exec("yayfetch --hide-logo");
+      let yayFetch = YayFetch.stdout.trim();
       infoEm.addFields({
         name: `Yayfetch`,
         value: "```yaml\n" + `${yayFetch}` + "```",
@@ -159,6 +158,8 @@ module.exports = {
 
       channel.send({ embeds: [infoEm] });
     } else if (args[0] == "-screenfetch") {
+      let ScreenFetch = await exec("screenfetch -N");
+      let screenFetch = ScreenFetch.stdout.trim();
       infoEm.addFields({
         name: `Screenfetch`,
         value: "```yaml\n" + `${screenFetch}` + "```",
