@@ -16,7 +16,7 @@
   "dependencies": {
     "@discordjs/voice": "^0.5.3",
     "@keyv/mongo": "^1.1.0",
-    "@oof2510/ping": "^1.1.9",
+    "@oof2510/ping": "^2.0.0",
     "aki-api": "^5.2.1",
     "discord-math": "^1.0.5",
     "discord-together": "^1.1.14",
