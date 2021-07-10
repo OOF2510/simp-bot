@@ -8,6 +8,8 @@ A discord bot that is a simp
 
 ### [Music Portion](https://github.com/OOF2510/simp-bot-music)
 
+### [Website Source Code](https://github.com/OOF2510/simp-bot-site)
+
 # Commands
 
 s!akinator - Starts a game of Akinator
