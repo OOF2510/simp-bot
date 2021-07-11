@@ -102,9 +102,6 @@ module.exports = {
     let NodeV = await exec("node -v");
     let nodeV = NodeV.stdout.trim();
 
-
-
-
     let djsV = "13.0.0-dev.56b5b7e.1625313788";
 
     let infoEm = new Discord.MessageEmbed()
