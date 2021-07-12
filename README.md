@@ -2,8 +2,7 @@
 [![Build Status](https://img.shields.io/github/forks/oof2510/simp-bot-rewritten.svg)](https://github.com/oof2510/simp-bot-rewritten)
 [![Build Status](https://img.shields.io/github/stars/oof2510/simp-bot-rewritten.svg)](https://github.com/oof2510/simp-bot-rewritten)
 [![License](https://img.shields.io/github/license/oof2510/simp-bot-rewritten.svg)](https://github.com/oof2510/simp-bot-rewritten)
-[![Maintainability](https://img.shields.io/codeclimate/maintainability/oof2510/simp-bot-rewritten.svg)](https://codeclimate.com/github/oof2510/simp-bot-rewritten)
-[![Technical Debt](https://img.shields.io/codeclimate/tech-debt/oof2510/simp-bot-rewritten.svg)](https://codeclimate.com/github/oof2510/simp-bot-rewritten)
+[![Maintainability](https://api.codeclimate.com/v1/badges/4c542ad2130b91018c63/maintainability)](https://codeclimate.com/github/OOF2510/simp-bot-rewritten/maintainability)
 
 # Simp Bot
 
