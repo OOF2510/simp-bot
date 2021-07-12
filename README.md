@@ -1,6 +1,12 @@
-# Simp Bot
-
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/10f27f4ae9404b73bddb1e34f7754f6d)](https://app.codacy.com/gh/OOF2510/simp-bot-rewritten?utm_source=github.com&utm_medium=referral&utm_content=OOF2510/simp-bot-rewritten&utm_campaign=Badge_Grade_Settings)
+[![Build Status](https://img.shields.io/github/forks/oof2510/simp-bot-rewritten.svg)](https://github.com/oof2510/simp-bot-rewritten)
+[![Build Status](https://img.shields.io/github/stars/oof2510/simp-bot-rewritten.svg)](https://github.com/oof2510/simp-bot-rewritten)
+[![License](https://img.shields.io/github/license/oof2510/simp-bot-rewritten.svg)](https://github.com/oof2510/simp-bot-rewritten)
+[![Maintainability](https://img.shields.io/codeclimate/maintainability/oof2510/simp-bot-rewritten.svg)](https://codeclimate.com/github/oof2510/simp-bot-rewritten)
+[![Technical Debt](https://img.shields.io/codeclimate/tech-debt/oof2510/simp-bot-rewritten.svg)](https://codeclimate.com/github/oof2510/simp-bot-rewritten)
+[![Test Coverage](https://img.shields.io/codeclimate/coverage/github/oof2510/simp-bot-rewritten.svg)](https://codeclimate.com/github/oof2510/simp-bot-rewritten)
+
+# Simp Bot
 
 A discord bot that is a simp
 
