@@ -4,7 +4,6 @@
 [![License](https://img.shields.io/github/license/oof2510/simp-bot-rewritten.svg)](https://github.com/oof2510/simp-bot-rewritten)
 [![Maintainability](https://img.shields.io/codeclimate/maintainability/oof2510/simp-bot-rewritten.svg)](https://codeclimate.com/github/oof2510/simp-bot-rewritten)
 [![Technical Debt](https://img.shields.io/codeclimate/tech-debt/oof2510/simp-bot-rewritten.svg)](https://codeclimate.com/github/oof2510/simp-bot-rewritten)
-[![Test Coverage](https://img.shields.io/codeclimate/coverage/github/oof2510/simp-bot-rewritten.svg)](https://codeclimate.com/github/oof2510/simp-bot-rewritten)
 
 # Simp Bot
 
