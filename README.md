@@ -1,5 +1,7 @@
 # Simp Bot
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/10f27f4ae9404b73bddb1e34f7754f6d)](https://app.codacy.com/gh/OOF2510/simp-bot-rewritten?utm_source=github.com&utm_medium=referral&utm_content=OOF2510/simp-bot-rewritten&utm_campaign=Badge_Grade_Settings)
+
 A discord bot that is a simp
 
 ### [Invite the bot to your server](https://discord.com/api/oauth2/authorize?client_id=808822189905936405&permissions=8&scope=bot)
