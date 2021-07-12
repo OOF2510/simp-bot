@@ -3,6 +3,9 @@
 [![Build Status](https://img.shields.io/github/stars/oof2510/simp-bot-rewritten.svg)](https://github.com/oof2510/simp-bot-rewritten)
 [![License](https://img.shields.io/github/license/oof2510/simp-bot-rewritten.svg)](https://github.com/oof2510/simp-bot-rewritten)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4c542ad2130b91018c63/maintainability)](https://codeclimate.com/github/OOF2510/simp-bot-rewritten/maintainability)
+![Lines of code](https://img.shields.io/tokei/lines/github/oof2510/simp-bot-rewritten)
+![GitHub repo size](https://img.shields.io/github/repo-size/oof2510/simp-bot-rewritten)
+![GitHub last commit](https://img.shields.io/github/last-commit/oof2510/simp-bot-rewritten)
 
 # Simp Bot
 
