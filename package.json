@@ -16,7 +16,7 @@
   "dependencies": {
     "@discordjs/voice": "^0.5.3",
     "@keyv/mongo": "^1.1.0",
-    "@oof2510/ping": "^2.0.0",
+    "@oof2510/ping": "^3.0.1",
     "aki-api": "^5.2.1",
     "discord-math": "^1.0.5",
     "discord-together": "^1.1.14",
@@ -27,7 +27,7 @@
     "long": "^4.0.0",
     "node-url-shortener": "^2.0.0",
     "nodemailer": "^6.6.2",
-    "nodemon": "^2.0.11",
+    "nodemon": "^2.0.12",
     "opusscript": "^0.0.8",
     "path": "^0.12.7",
     "systeminformation": "^5.7.7",
