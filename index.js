@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const config = require("./config.json");
 const fs = require("fs");
 const os = require("os");
 const { promisify } = require("util");
@@ -7,6 +6,11 @@ const exec = promisify(require("child_process").exec);
 const Keyv = require("keyv");
 const { DiscordTogether } = require("discord-together");
 const voice = require("@discordjs/voice");
+
+let config;
+var startupArgs = process.argv.slice(2);
+if (startupArgs[0] == "--dev") config = require("./config.dev.json");
+else config = require("./config.json");
 
 var allowed = [
   "463119138500378624", //me

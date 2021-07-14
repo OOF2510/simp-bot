@@ -8,3 +8,4 @@ node_modules/
 google-cloud-credentials.json
 temp/
 config.json.test
+config.dev.json

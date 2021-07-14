@@ -8,6 +8,7 @@
   "license": "WTFPL",
   "scripts": {
     "start": "nodemon -x 'node index.js || touch index.js'",
+    "dev": "nodemon -x 'node index.js --dev'",
     "setup:linux": "chmod +x setup/setup.x && ./setup/setup.x",
     "setup:win": "./setup/setup.bat",
     "setup": "python setup/setup.py"
