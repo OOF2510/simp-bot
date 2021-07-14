@@ -15,7 +15,7 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "@discordjs/voice": "^0.5.3",
+    "@discordjs/voice": "^0.5.4",
     "@keyv/mongo": "^1.1.0",
     "@oof2510/ping": "^3.0.1",
     "aki-api": "^5.2.1",

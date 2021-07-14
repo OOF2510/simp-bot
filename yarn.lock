@@ -24,10 +24,10 @@
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
 
-"@discordjs/voice@^0.5.3":
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/@discordjs/voice/-/voice-0.5.3.tgz#fbb1821b64d3dff1d379ec3821d632f1e11b95bb"
-  integrity sha512-We7rumaR6prv/nHavWQzo/4Qk8enROWJ0Y8Zpe5GwI8vRXxas0Tn+oiD7PE+VTmIAx3QyMuB3l26mHv7zydTdQ==
+"@discordjs/voice@^0.5.4":
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/@discordjs/voice/-/voice-0.5.4.tgz#02af74778177be8f42772118ba2193af481f442e"
+  integrity sha512-CLkJH1YXHhLyocvwAgIJBeyCe3iBVvg6pDPcJUEAwg09TykjJRH6qSpg2ly858WffzR7jOsLcliODAOMDwKtnA==
   dependencies:
     "@types/ws" "^7.4.4"
     discord-api-types "^0.18.1"
@@ -1519,15 +1519,10 @@ write-file-atomic@^3.0.0:
     signal-exit "^3.0.2"
     typedarray-to-buffer "^3.1.5"
 
-ws@^7.4.4:
+ws@^7.4.4, ws@^7.5.1:
   version "7.5.2"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.2.tgz#09cc8fea3bec1bc5ed44ef51b42f945be36900f6"
   integrity sha512-lkF7AWRicoB9mAgjeKbGqVUekLnSNO4VjKVnuPHpQeOxZOErX6BPXwJk70nFslRCEEA8EVW7ZjKwXaP9N+1sKQ==
-
-ws@^7.5.1:
-  version "7.5.1"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.1.tgz#44fc000d87edb1d9c53e51fbc69a0ac1f6871d66"
-  integrity sha512-2c6faOUH/nhoQN6abwMloF7Iyl0ZS2E9HGtsiLrWn0zOOMWlhtDmdf/uihDt6jnuCxgtwGBNy6Onsoy2s2O2Ow==
 
 xdg-basedir@^4.0.0:
   version "4.0.0"
