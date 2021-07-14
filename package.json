@@ -26,7 +26,7 @@
     "libsodium-wrappers": "^0.7.9",
     "long": "^4.0.0",
     "node-url-shortener": "^2.0.0",
-    "nodemailer": "^6.6.2",
+    "nodemailer": "^6.6.3",
     "nodemon": "^2.0.12",
     "opusscript": "^0.0.8",
     "systeminformation": "^5.7.7",
