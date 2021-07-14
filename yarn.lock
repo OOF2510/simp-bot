@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@discordjs/builders@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@discordjs/builders/-/builders-0.1.1.tgz#d1e888ee8ef273cce639c79cb24abac7169cfb88"
-  integrity sha512-9eBC22bX2HBsob5ixMwZ6quy/vewU5GHuSJhpmSZ3cDGg8XPnrYdzbwI54U+V9kQBTa7M+aMu1lYVqMEPojj8A==
+"@discordjs/builders@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@discordjs/builders/-/builders-0.2.0.tgz#832c8d894aad13362db7a99f11a7826b21e4cd94"
+  integrity sha512-TVq7NZBCJrrTRc3CfxOr3IdgY5nrtqVxZ7qDUF1mN6LgxIiOldmFxsSwMrQBzLFVmOwqFyNLKCeblley8UpEuw==
   dependencies:
     discord-api-types "^0.18.1"
     tslib "^2.3.0"
@@ -447,12 +447,12 @@ discord-together@^1.1.14:
   dependencies:
     node-fetch "^2.6.1"
 
-discord.js@^13.0.0-dev.56b5b7e.1625313788:
-  version "13.0.0-dev.56b5b7e.1625313788"
-  resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-13.0.0-dev.56b5b7e.1625313788.tgz#32931b0dd7fe25b32aec13e230497fdd1b3bee0d"
-  integrity sha512-D1d0fqjwa6ktn4yyZOE83Q/1sTl8ZNgJ95+cMUlK+FZBIe9G3nLHpHcCg+ph+SJIvQKUJubpzk2Yhbm/oJ1EvA==
+discord.js@^13.0.0-dev.98c6078.1626264203:
+  version "13.0.0-dev.98c6078.1626264203"
+  resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-13.0.0-dev.98c6078.1626264203.tgz#1172e28fc4c160fc57fe4e9b7bcffa2492d87f60"
+  integrity sha512-Wxrzv3JsSrZ3q0Mep8G4cc79SaIYf/I12wlBn+hMXtskNnh/yxKRys2L158FjzOAVUA3N1fuazivqvzL91WEbw==
   dependencies:
-    "@discordjs/builders" "^0.1.1"
+    "@discordjs/builders" "^0.2.0"
     "@discordjs/collection" "^0.1.6"
     "@discordjs/form-data" "^3.0.1"
     "@sapphire/async-queue" "^1.1.4"
@@ -1519,15 +1519,10 @@ write-file-atomic@^3.0.0:
     signal-exit "^3.0.2"
     typedarray-to-buffer "^3.1.5"
 
-ws@^7.4.4:
+ws@^7.4.4, ws@^7.5.1:
   version "7.5.2"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.2.tgz#09cc8fea3bec1bc5ed44ef51b42f945be36900f6"
   integrity sha512-lkF7AWRicoB9mAgjeKbGqVUekLnSNO4VjKVnuPHpQeOxZOErX6BPXwJk70nFslRCEEA8EVW7ZjKwXaP9N+1sKQ==
-
-ws@^7.5.1:
-  version "7.5.1"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.1.tgz#44fc000d87edb1d9c53e51fbc69a0ac1f6871d66"
-  integrity sha512-2c6faOUH/nhoQN6abwMloF7Iyl0ZS2E9HGtsiLrWn0zOOMWlhtDmdf/uihDt6jnuCxgtwGBNy6Onsoy2s2O2Ow==
 
 xdg-basedir@^4.0.0:
   version "4.0.0"
