@@ -2,6 +2,7 @@ import os
 
 prefix = input("Prefix: ")
 token = input("Token: ")
+clientID = input("Bot CLient ID: ")
 email = input("Bot Email: ")
 emailPass = input("Bot Email Password: ")
 mongoURI = input("MongoDB URI: ")
@@ -14,6 +15,7 @@ lavalinkHost = input("Lavalink Host: ")
 configJson = "{" + f"""
   \"prefix\": \"{prefix}\",
   \"token\": \"{token}\",
+  \"clientID\": \"{clientID}\",
   \"email\": \"{email}\",
   \"emailPass\": \"{emailPass}\",
   \"mongoURI\": \"{mongoURI}\",

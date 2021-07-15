@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 read -p "Prefix: " prefix
 read -p "Bot Token: " token
+read -p "Bot Client ID: " clientID
 read -p "Bot Email: " email
 read -p "Bot Email Password: " emailPass
 read -p "MongoDB URI: " mongoURI
@@ -16,12 +17,8 @@ echo "{
   \"prefix\": \"$prefix\",
   \"token\": \"$token\",
   \"clientID\": \"$clientID\",
-  \"clientSecret\": \"$clientSecret\",
-  \"sessionSecret\": \"$sessionSecret\",
   \"email\": \"$email\",
   \"emailPass\": \"$emailPass\",
-  \"port\": $port,
-  \"dashboardURL\": \"$dashboardURL\",
   \"mongoURI\": \"$mongoURI\",
   \"mongoShards\": [
     \"$mongoShard0\",

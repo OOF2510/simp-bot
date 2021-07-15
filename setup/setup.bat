@@ -2,6 +2,7 @@
 
 set /P prefix="Prefix: "
 set /P token="Bot Token: "
+set /P clientID="Bot Client ID: "
 set /P email="Bot Email: "
 set /P emailPass="Bot Email Password: "
 set /P mongoURI="MongoDB URI: "
@@ -17,6 +18,7 @@ type nul > config.json
 echo {
 echo "prefix": "%prefix%",
 echo "token": "%token%",
+echo "clientID": "%clientID%",
 echo "email": "%email%",
 echo "emailPass": "%emailPass%",
 echo "mongoURI": "%mongoURI%",

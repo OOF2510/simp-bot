@@ -31,10 +31,10 @@ module.exports = {
     let invEm = new Discord.MessageEmbed()
       .setTitle(`Invite me to your server!`)
       .setURL(
-        "https://discord.com/api/oauth2/authorize?client_id=808822189905936405&permissions=8&scope=bot"
+        `https://discord.com/api/oauth2/authorize?client_id=${config.clientID}&permissions=8&scope=bot`
       )
       .setColor(config.embedColor)
       .setTimestamp();
-    channel.send({ embeds: [invEm]});
+    channel.send({ embeds: [invEm] });
   },
 };
