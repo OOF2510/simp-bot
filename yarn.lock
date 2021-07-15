@@ -463,10 +463,10 @@ discord-together@^1.1.14:
   dependencies:
     node-fetch "^2.6.1"
 
-discord.js@^13.0.0-dev.98c6078.1626264203:
-  version "13.0.0-dev.98c6078.1626264203"
-  resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-13.0.0-dev.98c6078.1626264203.tgz#1172e28fc4c160fc57fe4e9b7bcffa2492d87f60"
-  integrity sha512-Wxrzv3JsSrZ3q0Mep8G4cc79SaIYf/I12wlBn+hMXtskNnh/yxKRys2L158FjzOAVUA3N1fuazivqvzL91WEbw==
+discord.js@^13.0.0-dev.4206e35.1626350625:
+  version "13.0.0-dev.4206e35.1626350625"
+  resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-13.0.0-dev.4206e35.1626350625.tgz#e03baa68a09053fd382ad50879536b6895317767"
+  integrity sha512-gnWp8MSZZq4fItRIYgP8ZEh7Tlk0Rr8kUW71TNvFzmiibkbgCmpOvhqayw2mApJE8XXzHnyZ97vhiux6nlhiBw==
   dependencies:
     "@discordjs/builders" "^0.2.0"
     "@discordjs/collection" "^0.1.6"
