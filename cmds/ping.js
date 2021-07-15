@@ -36,10 +36,10 @@ module.exports = {
     var MongoPing = mongoPing0 + mongoPing1 + mongoPing2;
     var mongoPing = Math.round(MongoPing / 3);
 
-    // var llPing;
-    // llPing = await ping(config.lavalinkHost).catch((error) => {
-    //   llPing = "Error pinging!";
-    // });
+    var llPing;
+    llPing = await ping(config.lavalinkHost).catch((error) => {
+        llPing = "Error pinging!";
+    });
 
     const pingEm = new Discord.MessageEmbed()
       .setTitle(`Pong UwU!`)
@@ -47,11 +47,11 @@ module.exports = {
       .addFields(
         { name: `Bot Ping`, value: `\`${client.ws.ping}ms\``, inline: true },
         { name: `Database Ping`, value: `\`${mongoPing}ms\``, inline: true },
-        // {
-        //   name: "Lavalink (music) Ping",
-        //   value: `\`${llPing}ms\``,
-        //   inline: true,
-        // }
+        {
+           name: "Lavalink (music) Ping",
+           value: `\`${llPing}ms\``,
+           inline: true,
+         }
       )
       .setColor(config.embedColor);
 
