@@ -18,7 +18,7 @@
     "@discordjs/voice": "^0.5.4",
     "@keyv/mongo": "^1.1.0",
     "@oof2510/ping": "^3.0.1",
-    "aki-api": "^6.0.3",
+    "aki-api": "^5.2.1",
     "discord-math": "^1.0.5",
     "discord-together": "^1.1.14",
     "discord.js": "^13.0.0-dev.4206e35.1626350625",
