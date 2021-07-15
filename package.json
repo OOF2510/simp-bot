@@ -21,7 +21,7 @@
     "aki-api": "^6.0.3",
     "discord-math": "^1.0.5",
     "discord-together": "^1.1.14",
-    "discord.js": "^13.0.0-dev.98c6078.1626264203",
+    "discord.js": "^13.0.0-dev.4206e35.1626350625",
     "keyv": "^4.0.3",
     "libsodium-wrappers": "^0.7.9",
     "long": "^4.0.0",
