@@ -45,7 +45,7 @@ const getDefaultChannel = (guild) => {
     .first();
 };
 
-intents = new Discord.Intents(32509)
+intents = new Discord.Intents(32509);
 
 const client = new Discord.Client({ intents: intents });
 
@@ -64,6 +64,9 @@ const blDB = new Keyv(`mongodb://${config.mongoURI}`, {
 const wcDB = new Keyv(`mongodb://${config.mongoURI}`, {
   collection: "welcomeChannels",
 });
+const djDB = new Keyv(`mongodb://${config.mongoURI}`, {
+  collection: "DJRoles",
+});
 console.log("Connected to DBs");
 
 preDB.on("error", (err) => console.error("Keyv error:", err));
@@ -71,6 +74,7 @@ nbDB.on("error", (err) => console.error("Keyv error:", err));
 bchDB.on("error", (err) => console.error("Keyv error:", err));
 blDB.on("error", (err) => console.error("Keyv error", err));
 wcDB.on("error", (err) => console.error("Keyv error", err));
+djDB.on("error", (err) => console.error("Keyv error", err));
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
@@ -121,6 +125,7 @@ client.on("guildCreate", async (guild) => {
   client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, {
     type: "WATCHING",
   });
+  if (!defC) return;
   defC.send(
     "Thanks for adding me UwU, you can see my commands by doing `s!help`"
   );
@@ -187,7 +192,8 @@ client.on("messageCreate", async (msg) => {
         nbDB,
         bchDB,
         blDB,
-        wcDB
+        wcDB,
+        djDB
       );
   } catch (error) {
     console.error(error);

@@ -27,7 +27,8 @@ module.exports = {
     nbDB,
     bchDB,
     blDB,
-    wcDB
+    wcDB,
+    djDB
   ) {
 
   },
