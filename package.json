@@ -7,13 +7,19 @@
   "author": "OOF2510 <64423517+OOF2510@users.noreply.github.com>",
   "license": "WTFPL",
   "scripts": {
-    "start": "nodemon -x 'node index.js || touch index.js'",
-    "dev": "nodemon -x 'node index.js --dev'",
+    "start": "yarn run minify && cd minified && nodemon -x 'node index.min.js || touch index.min.js'",
+    "dev": "yarn run minify && cd minified && nodemon -x 'node index.min.js --dev'",
     "setup:linux": "chmod +x setup/setup.x && ./setup/setup.x",
     "setup:win": "./setup/setup.bat",
-    "setup": "python setup/setup.py"
+    "setup": "python setup/setup.py",
+    "minify": "node minify.js",
+    "lint": "eslint",
+    "start:nomin": "nodemon -x 'node index.js || touch index.js",
+    "dev:nomin": "nodemon -x 'node index.js --dev"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^7.30.0"
+  },
   "dependencies": {
     "@discordjs/voice": "^0.5.4",
     "@keyv/mongo": "^1.1.0",
@@ -30,6 +36,7 @@
     "nodemon": "^2.0.12",
     "opusscript": "^0.0.8",
     "systeminformation": "^5.7.7",
+    "uglify-js": "^3.13.10",
     "whois-light": "^1.1.0"
   }
 }
