@@ -45,7 +45,8 @@ const getDefaultChannel = (guild) => {
     .first();
 };
 
-const intents = new Discord.Intents(Discord.Intents.NON_PRIVILEGED);
+intents = new Discord.Intents(32509)
+
 const client = new Discord.Client({ intents: intents });
 
 const preDB = new Keyv(`mongodb://${config.mongoURI}`, {
@@ -131,7 +132,7 @@ client.on("guildDelete", (guild) => {
   });
 });
 
-client.on("message", async (msg) => {
+client.on("messageCreate", async (msg) => {
   let channel = msg.channel;
   let author = msg.author;
   let server = msg.guild;

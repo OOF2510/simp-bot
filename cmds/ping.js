@@ -49,7 +49,7 @@ module.exports = {
         { name: `Database Ping`, value: `\`${mongoPing}ms\``, inline: true },
         {
            name: "Lavalink (music) Ping",
-           value: `\`${llPing}ms\``,
+           value: `\`${Math.round(llPing)}ms\``,
            inline: true,
          }
       )
