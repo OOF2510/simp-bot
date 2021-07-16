@@ -56,10 +56,12 @@ module.exports = {
         let role = msg.mentions.roles.first();
         await setRole(role);
       } else if (args[1]) {
-        let roleName = args[1];
+        let RoleName = args;
+        RoleName.shift();
+        let roleName = RoleName.join(" ")
         let Role = guild.roles.cache.find((x) => x.name === roleName);
-        if (typeof Role === undefined) {
-          if (!botMem.premissions.has("MANAGE_ROLES"))
+        if (!Role) {
+          if (!botMem.permissions.has("MANAGE_ROLES"))
             return msg.reply(
               "I need the `MANAGE_ROLES` permission to do that!"
             );
@@ -67,6 +69,7 @@ module.exports = {
           await guild.roles.create({
             name: `${roleName}`,
             color: "BLUE",
+            permissions: [],
           });
           let role = guild.roles.cache.find((x) => x.name === roleName);
           await setRole(role);
