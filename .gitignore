@@ -9,4 +9,3 @@ google-cloud-credentials.json
 temp/
 config.json.test
 config.dev.json
-minified/
