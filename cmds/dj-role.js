@@ -64,7 +64,7 @@ module.exports = {
               "I need the `MANAGE_ROLES` permission to do that!"
             );
           msg.channel.send(`Role doesn't exist, creating it!`);
-          guild.roles.create({
+          await guild.roles.create({
             name: `${roleName}`,
             color: "BLUE",
           });
