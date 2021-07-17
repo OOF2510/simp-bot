@@ -11,9 +11,12 @@
     "dev": "nodemon -x 'node index.js --dev'",
     "setup:linux": "chmod +x setup/setup.x && ./setup/setup.x",
     "setup:win": "./setup/setup.bat",
-    "setup": "python setup/setup.py"
+    "setup": "python setup/setup.py",
+    "minify": "node minify.js"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "uglify-js": "^3.13.10"
+  },
   "dependencies": {
     "@discordjs/voice": "^0.5.4",
     "@keyv/mongo": "^1.1.0",
