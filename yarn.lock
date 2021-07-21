@@ -440,10 +440,10 @@ discord-math@^1.0.5:
   resolved "https://registry.yarnpkg.com/discord-math/-/discord-math-1.0.5.tgz#a806c3466cf9fd881b0cc20f15bb9d7f017b2271"
   integrity sha512-4xh44vYe1LkQ/UbC9yGrVHGfowXkxOnq8dKvVrA2hME3gHMZbckmFSLpzBS0dhTqnL4MQnGDqLgG1UFeLmhEDw==
 
-discord-together@^1.1.21:
-  version "1.1.21"
-  resolved "https://registry.yarnpkg.com/discord-together/-/discord-together-1.1.21.tgz#05727ceca3229cfa2f4f842b4ca8819f6448ef92"
-  integrity sha512-/EwzJ9EgBKayBRb9nI8wkveqWzpxNXoKSYirYgH4QirZbEOLzGv39GIJgNocPasNZ15apHYOVp9+ZgocZ8BABQ==
+discord-together@^1.1.22:
+  version "1.1.22"
+  resolved "https://registry.yarnpkg.com/discord-together/-/discord-together-1.1.22.tgz#4e7e520eec6754669983503641f7296a2a9b032b"
+  integrity sha512-Qy7zejHAlUs3+PZ7myW4Nnpb5QpuAvUyyVVR+EjWdGwKiZXT/IuMPLhM41wwE8N7xIIxuzQSs93vty8LRfN6Sg==
   dependencies:
     discord.js "^12.5.3"
     node-fetch "^2.6.1"
