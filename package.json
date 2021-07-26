@@ -23,7 +23,7 @@
     "@oof2510/ping": "^3.0.1",
     "aki-api": "^5.2.1",
     "discord-math": "^1.0.5",
-    "discord-together": "^1.1.21",
+    "discord-together": "^1.1.31",
     "discord.js": "^13.0.0-dev.77784ac.1626696170",
     "keyv": "^4.0.3",
     "libsodium-wrappers": "^0.7.9",
