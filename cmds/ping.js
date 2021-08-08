@@ -38,7 +38,7 @@ module.exports = {
 
     var llPing;
     llPing = await ping(config.lavalinkHost).catch((error) => {
-        llPing = "Error pinging!";
+      llPing = "Error pinging!";
     });
 
     const pingEm = new Discord.MessageEmbed()
@@ -48,11 +48,12 @@ module.exports = {
         { name: `Bot Ping`, value: `\`${client.ws.ping}ms\``, inline: true },
         { name: `Database Ping`, value: `\`${mongoPing}ms\``, inline: true },
         {
-           name: "Lavalink (music) Ping",
-           value: `\`${Math.round(llPing)}ms\``,
-           inline: true,
-         }
+          name: "Lavalink (music) Ping",
+          value: `\`${Math.round(llPing)}ms\``,
+          inline: true,
+        }
       )
+      .setFooter(`Powered by [oplent.host](https://opulent.host)`)
       .setColor(config.embedColor);
 
     msg.reply({ embeds: [pingEm] });
