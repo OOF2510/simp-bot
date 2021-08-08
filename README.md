@@ -37,8 +37,6 @@ s!email - Sends an email
 
 s!flirt - Flirts with the mentioned user
 
-s!frick - I think we all know what that does...
-
 s!github - Sends link to github page
 
 s!help - Sends a help embed

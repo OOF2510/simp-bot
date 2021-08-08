@@ -18,13 +18,14 @@
     "uglify-js": "^3.14.1"
   },
   "dependencies": {
-    "@discordjs/voice": "^0.5.5",
+    "@discordjs/voice": "^0.5.6",
     "@keyv/mongo": "^1.1.0",
     "@oof2510/ping": "^3.0.1",
     "aki-api": "^5.2.1",
     "discord-math": "^1.0.5",
     "discord-together": "^1.1.53",
-    "discord.js": "^13.0.0-dev.77784ac.1626696170",
+    "discord.js": "^13.0.1",
+    "huggingface-api": "^1.0.3",
     "keyv": "^4.0.3",
     "libsodium-wrappers": "^0.7.9",
     "long": "^4.0.0",
@@ -32,7 +33,7 @@
     "nodemailer": "^6.6.3",
     "nodemon": "^2.0.12",
     "opusscript": "^0.0.8",
-    "systeminformation": "^5.7.13",
+    "systeminformation": "^5.8.0",
     "whois-light": "^1.1.0"
   }
 }
