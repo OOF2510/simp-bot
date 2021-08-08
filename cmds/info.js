@@ -147,7 +147,7 @@ module.exports = {
         { name: `Bot Uptime`, value: "`" + botUptime + "`", inline: true },
         { name: `CPU Temperature`, value: "`" + cpuTemp + "℃`", inline: true }
       )
-      .setFooter(`Powered by [opulent.host](https://opulent.host)`)
+      .setFooter(`Powered by opulent.host`)
       .setColor(config.embedColor);
 
     if (args[0] == "-yayfetch") {
