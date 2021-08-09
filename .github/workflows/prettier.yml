@@ -38,9 +38,9 @@ jobs:
         run: yarn run format
 
       - name: Commit changes
-     uses: stefanzweifel/git-auto-commit-action@v4
-     with:
-      commit_message: "[auto] Code formatting"
-      branch: ${{ github.head_ref }}
-      commit_user_name: OOF2510
-      commit_user_email: 64423517+OOF2510@users.noreply.github.com
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "[auto] Code formatting"
+          branch: ${{ github.head_ref }}
+          commit_user_name: OOF2510
+          commit_user_email: 64423517+OOF2510@users.noreply.github.com
