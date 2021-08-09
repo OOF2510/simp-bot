@@ -12,10 +12,12 @@
     "setup:linux": "chmod +x setup/setup.x && ./setup/setup.x",
     "setup:win": "./setup/setup.bat",
     "setup": "python setup/setup.py",
-    "minify": "node minify.js"
+    "minify": "node minify.js",
+    "format": "prettier --no-config --write . --ignore-unknown"
   },
   "devDependencies": {
-    "uglify-js": "^3.14.1"
+    "uglify-js": "^3.14.1",
+    "prettier": "^2.3.2"
   },
   "dependencies": {
     "@discordjs/voice": "^0.5.6",
