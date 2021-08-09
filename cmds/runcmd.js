@@ -33,19 +33,19 @@ module.exports = {
       );
     } else {
       let cmd = args.join(" ");
-      try {   
-      const Out = await exec(`${cmd}`);
-      const out = Out.stdout.trim();
+      try {
+        const Out = await exec(`${cmd}`);
+        const out = Out.stdout.trim();
 
-      let response = "```bash\n" + `${out}` + "```";
+        let response = "```bash\n" + `${out}` + "```";
 
-      if (response.length > 2000)
-        response = `Error: Message too long (${response.length}/2000)`;
+        if (response.length > 2000)
+          response = `Error: Message too long (${response.length}/2000)`;
 
-      channel.send(response);
-    } catch {
-      channel.send(`Error executing`)
+        channel.send(response);
+      } catch {
+        channel.send(`Error executing`);
+      }
     }
-  }
   },
 };

@@ -35,7 +35,7 @@ module.exports = {
     if (!args[0]) return msg.reply(`Usage: \`${this.usage}\``);
     let text = args.join(" ");
 
-    msg.reply("Generating text, please wait...")
+    msg.reply("Generating text, please wait...");
 
     hf.request({
       text: `${text}`,
@@ -43,7 +43,7 @@ module.exports = {
       api_key: `${config.hfKey}`,
       return_type: "STRING",
     }).then((data) => {
-      msg.reply(data)
+      msg.reply(data);
     });
   },
 };

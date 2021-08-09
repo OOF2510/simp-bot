@@ -26,7 +26,7 @@ var allowedEmails = [
   "email.com",
   "icloud.com",
   "aol.com",
-  "boxbot.xyz"
+  "boxbot.xyz",
 ];
 
 module.exports = {

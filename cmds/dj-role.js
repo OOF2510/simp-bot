@@ -58,7 +58,7 @@ module.exports = {
       } else if (args[1]) {
         let RoleName = args;
         RoleName.shift();
-        let roleName = RoleName.join(" ")
+        let roleName = RoleName.join(" ");
         let Role = guild.roles.cache.find((x) => x.name === roleName);
         if (!Role) {
           if (!botMem.permissions.has("MANAGE_ROLES"))

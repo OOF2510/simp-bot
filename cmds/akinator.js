@@ -39,7 +39,7 @@ module.exports = {
 
     const aki = new Aki("en");
 
-    channel.send("Starting Akinator game...")
+    channel.send("Starting Akinator game...");
 
     await aki.start();
 
