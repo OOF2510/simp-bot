@@ -158,23 +158,6 @@ module.exports = {
       channel.send({ embeds: [modEm] });
     } else if (args[0].toLowerCase() == "music") {
       return;
-      // msg.reply("Music is temporarly disabled while we work on a new music engine!")
-
-      // let muEm = new Discord.MessageEmbed()
-      //   .setAuthor(botNick, client.user.avatarURL())
-      //   .setTitle("Help - Music")
-      //   .setColor(config.embedColor);
-
-      // client.commands.forEach((cmd) => {
-      //   if (cmd.cat.toLowerCase() == "music") {
-      //     muEm.addFields({
-      //       name: cmd.name,
-      //       value: `${prefix}${cmd.usage} - ${cmd.desc}`,
-      //     });
-      //   }
-      // });
-
-      // channel.send({ embeds: [muEm] });
     } else return;
   },
 };

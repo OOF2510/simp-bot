@@ -15,8 +15,11 @@ function validateEmail(email) {
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 }
+function getSecondPart(str, seperator) {
+  return str.split(seperator)[1];
+}
 
-var allowedEmails = [
+var allowedDoms = [
   "outlook.com",
   "gmail.com",
   "simp-bot.xyz",
@@ -27,6 +30,7 @@ var allowedEmails = [
   "icloud.com",
   "aol.com",
   "boxbot.xyz",
+  "zentool.xyz",
 ];
 
 module.exports = {
@@ -96,21 +100,49 @@ module.exports = {
       });
     }
 
-    if (recipeint.endsWith(allowedEmails[0 || 1])) {
-      sendEmail();
-    } else if (recipeint.endsWith(allowedEmails[2 || 3])) {
-      sendEmail();
-    } else if (recipeint.endsWith(allowedEmails[4 || 5])) {
-      sendEmail();
-    } else if (recipeint.endsWith(allowedEmails[6 || 7])) {
-      sendEmail();
-    } else if (recipeint.endsWith(allowedEmails[8 || 9])) {
-      sendEmail();
-    } else
-      return msg.reply(
-        `To prevent abuse, you can only send emails to addresses with certian domains, here is a list of acceptable email address domains: \`${allowedEmails.join(
-          ", "
-        )}\`!`
-      );
+    let domain = getSecondPart(recipeint, "@");
+
+    switch (domain) {
+      case "outlook.com":
+        sendEmail();
+        break;
+      case "gmail.com":
+        sendEmail();
+        break;
+      case "simp-bot.xyz":
+        sendEmail();
+        break;
+      case "yahoo.net":
+        sendEmail();
+        break;
+      case "inbox.com":
+        sendEmail();
+        break;
+      case "mail.com":
+        sendEmail();
+        break;
+      case "email.com":
+        sendEmail();
+        break;
+      case "icloud.com":
+        sendEmail();
+        break;
+      case "aol.com":
+        sendEmail();
+        break;
+      case "boxbot.xyz":
+        sendEmail();
+        break;
+      case "zentool.xyz":
+        sendEmail();
+        break;
+
+      default:
+        msg.reply(
+          `To prevent abuse, you can only send emails to addresses with certian domains, here is a list of acceptable email address domains: \`${allowedDoms.join(
+            ", "
+          )}\`!`
+        );
+    }
   },
 };
