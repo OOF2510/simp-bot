@@ -27,10 +27,10 @@
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
 
-"@discordjs/voice@^0.5.6":
-  version "0.5.6"
-  resolved "https://registry.yarnpkg.com/@discordjs/voice/-/voice-0.5.6.tgz#78d52567acacab28411fca1dbf8fe3f7b6cc86d3"
-  integrity sha512-CGwD5pz1YB8MXfERcXQ6jVCThfMjzPKbad8pYuvPt4ozFcLWGRKFJ5lj+CSRNDj0Cobc6MIKOKpFfOPlXTKTrw==
+"@discordjs/voice@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@discordjs/voice/-/voice-0.6.0.tgz#ea03632c6ee35f9a739cf35364432d3e0fc30980"
+  integrity sha512-DF2fZAnB8gX3Qz5BEWPOUl565ptpda1uVmXJije4iK5aQrECfkqc6XcI+wzbGaNvzsH1Wb76NPzxngsEw8bblw==
   dependencies:
     "@types/ws" "^7.4.4"
     discord-api-types "^0.22.0"
@@ -88,14 +88,7 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-16.3.3.tgz#0c30adff37bbbc7a50eb9b58fae2a504d0d88038"
   integrity sha512-8h7k1YgQKxKXWckzFCMfsIwn0Y61UK6tlD6y2lOb3hTOIMlK3t9/QwHOhc81TwU+RMf0As5fj7NPjroERCnejQ==
 
-"@types/ws@^7.4.4":
-  version "7.4.6"
-  resolved "https://registry.yarnpkg.com/@types/ws/-/ws-7.4.6.tgz#c4320845e43d45a7129bb32905e28781c71c1fff"
-  integrity sha512-ijZ1vzRawI7QoWnTNL8KpHixd2b2XVb9I9HAqI3triPsh1EC0xH0Eg6w2O3TKbDCgiNNlJqfrof6j4T2I+l9vw==
-  dependencies:
-    "@types/node" "*"
-
-"@types/ws@^7.4.7":
+"@types/ws@^7.4.4", "@types/ws@^7.4.7":
   version "7.4.7"
   resolved "https://registry.yarnpkg.com/@types/ws/-/ws-7.4.7.tgz#f7c390a36f7a0679aa69de2d501319f4f8d9b702"
   integrity sha512-JQbbmxZTZehdc2iszGKs5oC3NFnjeay7mtAWrdt7qNtAVK0g19muApzAy4bm9byz79xa2ZnO/BOBC2R8RC5Lww==

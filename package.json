@@ -20,7 +20,7 @@
     "prettier": "^2.3.2"
   },
   "dependencies": {
-    "@discordjs/voice": "^0.5.6",
+    "@discordjs/voice": "^0.6.0",
     "@keyv/mongo": "^1.1.0",
     "@oof2510/ping": "^3.0.1",
     "aki-api": "^5.2.1",
