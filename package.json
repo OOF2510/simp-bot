@@ -36,6 +36,6 @@
     "nodemon": "^2.0.12",
     "opusscript": "^0.0.8",
     "systeminformation": "^5.8.0",
-    "whois-light": "^1.1.0"
+    "whois-light": "^1.1.1"
   }
 }

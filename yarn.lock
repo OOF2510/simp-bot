@@ -1561,10 +1561,10 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-whois-light@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/whois-light/-/whois-light-1.1.0.tgz#0a1a3862c8e4cab86be927efad1919ce6056112e"
-  integrity sha512-hLyiPNzj0jGpem5H9tlCQNvULfnVRwlQKqlfGubVptsNDSyh3w+YTxEOuGEgjZrAcboLrlPKAgNbRjvhdLyCww==
+whois-light@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/whois-light/-/whois-light-1.1.1.tgz#eaa4475a7cfb57ae5043ec5b9404bdb1d6afff0f"
+  integrity sha512-iM/EeOPRAXMcW+AW8bcEFQPzQNCpu/gwM6oEyiyB0lE1nKbzv1PJepOLotnBAVgwnaWgn/NrrD4iiGbaIXx+cA==
 
 widest-line@^3.1.0:
   version "3.1.0"
