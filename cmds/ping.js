@@ -53,7 +53,6 @@ module.exports = {
           inline: true,
         }
       )
-      .setFooter(`Powered by opulent.host`)
       .setColor(config.embedColor);
 
     msg.reply({ embeds: [pingEm] });
