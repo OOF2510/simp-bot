@@ -4,7 +4,7 @@ module.exports = {
   cat: "info",
   usage: "help <module>",
   desc: "Sends help embed",
-  execute(
+  async execute(
     msg,
     args,
     client,
@@ -44,14 +44,16 @@ module.exports = {
         .setTimestamp();
 
       channel.send({ embeds: [hIEm] });
-    } else if (args[0].toLowerCase() == "settings") {
-      let setEm = new Discord.MessageEmbed()
+    }
+
+    async function createAndSendEmbed(name, category = name) {
+      let em = new Discord.MessageEmbed()
         .setAuthor(botNick, client.user.avatarURL())
-        .setTitle("Help - Settings")
+        .setTitle(`Help - ${name}`)
         .setColor(config.embedColor);
 
       client.commands.forEach((cmd) => {
-        if (cmd.cat.toLowerCase() == "settings") {
+        if (cmd.cat.toLowerCase() == category) {
           setEm.addFields({
             name: cmd.name,
             value: `${prefix}${cmd.usage} - ${cmd.desc}`,
@@ -59,105 +61,46 @@ module.exports = {
         }
       });
 
-      channel.send({ embeds: [setEm] });
-    } else if (args[0].toLowerCase() == "info") {
-      let inEm = new Discord.MessageEmbed()
-        .setAuthor(botNick, client.user.avatarURL())
-        .setTitle("Help - Info")
-        .setColor(config.embedColor);
+      channel.send({ embeds: [em] });
+    }
 
-      client.commands.forEach((cmd) => {
-        if (cmd.cat.toLowerCase() == "info") {
-          inEm.addFields({
-            name: cmd.name,
-            value: `${prefix}${cmd.usage} - ${cmd.desc}`,
-          });
-        }
-      });
+    let cat = args[0].toLowerCase();
 
-      channel.send({ embeds: [inEm] });
-    } else if (args[0].toLowerCase() == "feedback") {
-      let fbEm = new Discord.MessageEmbed()
-        .setAuthor(botNick, client.user.avatarURL())
-        .setTitle("Help - Feedback")
-        .setColor(config.embedColor);
+    switch (cat) {
+      case "settings":
+        createAndSendEmbed("settings");
+        break;
 
-      client.commands.forEach((cmd) => {
-        if (cmd.cat.toLowerCase() == "feedback") {
-          fbEm.addFields({
-            name: cmd.name,
-            value: `${prefix}${cmd.usage} - ${cmd.desc}`,
-          });
-        }
-      });
+      case "info":
+        createAndSendEmbed("info");
+        break;
 
-      channel.send({ embeds: [fbEm] });
-    } else if (args[0].toLowerCase() == "fun") {
-      let funEm = new Discord.MessageEmbed()
-        .setAuthor(botNick, client.user.avatarURL())
-        .setTitle("Help - Fun")
-        .setColor(config.embedColor);
+      case "feedback":
+        createAndSendEmbed("feedback");
+        break;
 
-      client.commands.forEach((cmd) => {
-        if (cmd.cat.toLowerCase() == "fun") {
-          funEm.addFields({
-            name: cmd.name,
-            value: `${prefix}${cmd.usage} - ${cmd.desc}`,
-          });
-        }
-      });
+      case "fun":
+        createAndSendEmbed("fun");
+        break;
 
-      channel.send({ embeds: [funEm] });
-    } else if (args[0].toLowerCase() == "misc") {
-      let miEm = new Discord.MessageEmbed()
-        .setAuthor(botNick, client.user.avatarURL())
-        .setTitle("Help - Misc")
-        .setColor(config.embedColor);
+      case "misc":
+        createAndSendEmbed("misc");
+        break;
 
-      client.commands.forEach((cmd) => {
-        if (cmd.cat.toLowerCase() == "misc") {
-          miEm.addFields({
-            name: cmd.name,
-            value: `${prefix}${cmd.usage} - ${cmd.desc}`,
-          });
-        }
-      });
+      case "dev":
+        createAndSendEmbed("dev");
+        break;
 
-      channel.send({ embeds: [miEm] });
-    } else if (args[0].toLowerCase() == "dev") {
-      let deEm = new Discord.MessageEmbed()
-        .setAuthor(botNick, client.user.avatarURL())
-        .setTitle("Help - Dev-level/Whitelist-level commands")
-        .setColor(config.embedColor);
+      case "moderation":
+        createAndSendEmbed("moderation");
+        break;
 
-      client.commands.forEach((cmd) => {
-        if (cmd.cat.toLowerCase() == "dev") {
-          deEm.addFields({
-            name: cmd.name,
-            value: `${prefix}${cmd.usage} - ${cmd.desc}`,
-          });
-        }
-      });
+      case "music":
+        break;
 
-      channel.send({ embeds: [deEm] });
-    } else if (args[0].toLowerCase() == "moderation") {
-      let modEm = new Discord.MessageEmbed()
-        .setAuthor(botNick, client.user.avatarURL())
-        .setTitle("Help - Moderation")
-        .setColor(config.embedColor);
-
-      client.commands.forEach((cmd) => {
-        if (cmd.cat.toLowerCase() == "moderation") {
-          modEm.addFields({
-            name: cmd.name,
-            value: `${prefix}${cmd.usage} - ${cmd.desc}`,
-          });
-        }
-      });
-
-      channel.send({ embeds: [modEm] });
-    } else if (args[0].toLowerCase() == "music") {
-      return;
-    } else return;
+      default:
+        msg.reply("That is not a valid command module");
+        break;
+    }
   },
 };
