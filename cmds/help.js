@@ -54,7 +54,7 @@ module.exports = {
 
       client.commands.forEach((cmd) => {
         if (cmd.cat.toLowerCase() == category) {
-          setEm.addFields({
+          em.addFields({
             name: cmd.name,
             value: `${prefix}${cmd.usage} - ${cmd.desc}`,
           });
