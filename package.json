@@ -26,7 +26,7 @@
     "aki-api": "^5.2.1",
     "discord-math": "^1.0.5",
     "discord-together": "^1.1.62",
-    "discord.js": "^13.0.1",
+    "discord.js": "^13.1.0",
     "huggingface-api": "^1.0.3",
     "keyv": "^4.0.3",
     "libsodium-wrappers": "^0.7.9",
