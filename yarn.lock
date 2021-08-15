@@ -928,10 +928,9 @@ discord-mongo-economy@^0.3.0:
   dependencies:
     mongoose "^5.12.2"
 
-discord-together@^1.1.62:
+"discord-together@https://github.com/RemyK888/discord-together.git#main":
   version "1.1.62"
-  resolved "https://registry.yarnpkg.com/discord-together/-/discord-together-1.1.62.tgz#b7c3f3b51da299f5c9e37d24e32e960108b15f66"
-  integrity sha512-l84sy0b1NjzAJexTAjUHkkm9pfdzAqg+ZRg0+4cy4cj7vlepsdfdCiHJoUYcT0tsnT/AfklYk7BEnC9jdT31tw==
+  resolved "https://github.com/RemyK888/discord-together.git#89c1a996c9284d87ceb0ec67e850d2bb669a9bb3"
   dependencies:
     node-fetch "^2.6.1"
 

@@ -27,7 +27,7 @@
     "discord-image-generation": "^1.4.9",
     "discord-math": "^1.0.5",
     "discord-mongo-economy": "^0.3.0",
-    "discord-together": "^1.1.62",
+    "discord-together": "https://github.com/RemyK888/discord-together.git#main",
     "discord.js": "^13.1.0",
     "huggingface-api": "^1.0.3",
     "keyv": "^4.0.3",
