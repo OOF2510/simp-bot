@@ -111,13 +111,13 @@ client.on("ready", () => {
   console.log(client.user.tag);
 });
 
-client.on("guildMemberAdd", async (member) => {
-  let guild = member.guild;
-  let welcomeEnabled = await wcDB.get(guild.id);
-  if (!welcomeEnabled) return;
-  let welcomeChannel = guild.channels.cache.get(welcomeEnabled);
-  welcomeChannel.send(`${member} welcome to **${guild.name}**`);
-});
+// client.on("guildMemberAdd", async (member) => {
+//   let guild = member.guild;
+//   let welcomeEnabled = await wcDB.get(guild.id);
+//   if (!welcomeEnabled) return;
+//   let welcomeChannel = guild.channels.cache.get(welcomeEnabled);
+//   welcomeChannel.send(`${member} welcome to **${guild.name}**`);
+// });
 
 client.on("guildCreate", async (guild) => {
   nbDB.set(guild.id, "true");
