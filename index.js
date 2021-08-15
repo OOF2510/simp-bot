@@ -5,7 +5,7 @@ const { promisify } = require("util");
 const exec = promisify(require("child_process").exec);
 const Keyv = require("keyv");
 const { DiscordTogether } = require("discord-together");
-const voice = require("@discordjs/voice");
+const mongoeconomy = require("discord-mongo-economy");
 
 let config;
 var startupArgs = process.argv.slice(2);
@@ -17,6 +17,7 @@ var allowed = [
   "760473112613093436", //gavin
   "463119267832004620", //noah
   "686680792348622856", //ryan
+  "458353546006495232", //dylan
 ];
 
 var Long = require("long");
@@ -78,7 +79,6 @@ djDB.on("error", (err) => console.error("Keyv error", err));
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.discordTogether = new DiscordTogether(client);
-// client.voice = voice;
 
 const cmdFiles = fs
   .readdirSync("./cmds")
@@ -107,6 +107,7 @@ client.on("ready", () => {
       type: "WATCHING",
     }
   );
+  mongoeconomy.connectDatabase(`mongodb://${config.mongoURI}`);
   console.log(client.user.tag);
 });
 

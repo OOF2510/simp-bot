@@ -16,8 +16,8 @@
     "format": "prettier --no-config --write . --ignore-unknown"
   },
   "devDependencies": {
-    "uglify-js": "^3.14.1",
-    "prettier": "^2.3.2"
+    "prettier": "^2.3.2",
+    "uglify-js": "^3.14.1"
   },
   "dependencies": {
     "@discordjs/voice": "^0.6.0",
@@ -25,6 +25,7 @@
     "@oof2510/ping": "^3.0.1",
     "aki-api": "^5.2.1",
     "discord-math": "^1.0.5",
+    "discord-mongo-economy": "^0.3.0",
     "discord-together": "^1.1.62",
     "discord.js": "^13.1.0",
     "huggingface-api": "^1.0.3",
