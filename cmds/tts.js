@@ -44,7 +44,7 @@ module.exports = {
 
     await exec(`gtts-cli '${message}' --output "${filename}"`);
 
-    const channelID = msg.member.voice.channelID;
+    const channelID = msg.member.voice.channelId;
     const Channel = client.channels.cache.get(channelID);
 
     const player = voice.createAudioPlayer();
