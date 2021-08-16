@@ -3,7 +3,7 @@ const disImg = require("discord-image-generation");
 module.exports = {
   name: "hitler",
   aliases: ["h*tler"],
-  cat: "fun",
+  cat: "img",
   usage: "hitler [user mention]",
   desc: "Makes specified user worse than hitler",
   async execute(
@@ -36,7 +36,7 @@ module.exports = {
     if (!user) user = author;
     let avatar = user.displayAvatarURL({ dynamic: false, format: "png" });
     let img = await new disImg.Hitler().getImage(avatar);
-    let attach = new Discord.MessageAttachment(img, "delete.png");
+    let attach = new Discord.MessageAttachment(img, "hitler.png");
     msg.channel.send({ files: [attach] });
   },
 };

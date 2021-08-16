@@ -3,7 +3,7 @@ const disImg = require("discord-image-generation");
 module.exports = {
   name: "gay",
   aliases: ["homo", "homosexual"],
-  cat: "fun",
+  cat: "img",
   usage: "gay [user mention]",
   desc: "Gay-ifys specified user's pfp",
   async execute(

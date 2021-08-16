@@ -1,11 +1,11 @@
 const disImg = require("discord-image-generation");
 
 module.exports = {
-  name: "delete",
-  aliases: ["del"],
+  name: "rip",
+  aliases: ["funeral"],
   cat: "img",
-  usage: "delete [user mention]",
-  desc: "Deletes specified user",
+  usage: "rip [user mention]",
+  desc: "Makes a funeral for the specified user",
   async execute(
     msg,
     args,
@@ -35,8 +35,8 @@ module.exports = {
     let user = msg.mentions.users.first();
     if (!user) user = author;
     let avatar = user.displayAvatarURL({ dynamic: false, format: "png" });
-    let img = await new disImg.Delete().getImage(avatar);
-    let attach = new Discord.MessageAttachment(img, "delete.png");
+    let img = await new disImg.Rip().getImage(avatar);
+    let attach = new Discord.MessageAttachment(img, "rip.png");
     msg.channel.send({ files: [attach] });
   },
 };

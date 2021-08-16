@@ -39,11 +39,12 @@ module.exports = {
             \`Moderation\`
             \`Feedback\`
             \`Misc\`
-            \`Music\``,
+            \`Music\`
+            \`Image\``,
         })
         .setTimestamp();
 
-      channel.send({ embeds: [hIEm] });
+      return channel.send({ embeds: [hIEm] });
     }
 
     async function createAndSendEmbed(name, category = name) {
@@ -96,6 +97,10 @@ module.exports = {
         break;
 
       case "music":
+        break;
+
+      case "image":
+        createAndSendEmbed("image", "img");
         break;
 
       default:
