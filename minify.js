@@ -52,15 +52,17 @@ fs.writeFile(`./minified/index.min.js`, result.code, function (err) {
   }
 });
 
-["./config.json", "./config.dev.json", "package.json", "yarn.lock"].forEach((file) => {
-  if (!fs.existsSync(file)) return;
-  fs.readFileSync(file);
+["./config.json", "./config.dev.json", "package.json", "yarn.lock"].forEach(
+  (file) => {
+    if (!fs.existsSync(file)) return;
+    fs.readFileSync(file);
 
-  fs.copyFile(file, `./minified/${file}`, (err) => {
-    if (err) {
-      console.log(`Error Copying ${file}`, err);
-    } else {
-      console.log(`Copied file ${file}`);
-    }
-  });
-});
+    fs.copyFile(file, `./minified/${file}`, (err) => {
+      if (err) {
+        console.log(`Error Copying ${file}`, err);
+      } else {
+        console.log(`Copied file ${file}`);
+      }
+    });
+  }
+);
