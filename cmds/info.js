@@ -1,54 +1,7 @@
 const si = require("systeminformation");
-function formatBytes(bytes, decimals = 2) {
-  if (bytes === 0) return "0 Bytes";
-
-  const k = 1024;
-  const dm = decimals < 0 ? 0 : decimals;
-  const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
-
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
-}
-function millisecondsToStr(milliseconds) {
-  var seconds = {},
-    minutes = {},
-    hours = {},
-    days = {},
-    months = {},
-    years = {};
-
-  seconds.val = Math.floor(milliseconds / 1000);
-  minutes.val = Math.floor(seconds.val / 60);
-  hours.val = Math.floor(minutes.val / 60);
-  days.val = Math.floor(hours.val / 24);
-  months.val = Math.floor(days.val / 30);
-  years.val = Math.floor(days.val / 365);
-
-  seconds.val %= 60;
-  minutes.val %= 60;
-  hours.val %= 24;
-  days.val %= 30;
-  months.val %= 12;
-
-  seconds.name = "sec";
-  minutes.name = "min";
-  hours.name = "hr";
-  days.name = "day";
-  months.name = "month";
-  years.name = "yr";
-
-  var units = [years, months, days, hours, minutes, seconds];
-  var toReturn = [];
-
-  for (const unit of units) {
-    if (unit.val === 1) toReturn.push(`${unit.val} ${unit.name}`);
-    else if (unit.val > 1) toReturn.push(`${unit.val} ${unit.name}s`);
-  }
-
-  let str = toReturn.join(", ");
-  return str;
-}
+const formatBytes = require("../util/formatBytes");
+const millisecondsToStr = require("../util/convertMilsec");
+const isLinux = require("../util/isLinux");
 
 module.exports = {
   name: "info",
@@ -80,37 +33,42 @@ module.exports = {
     bchDB,
     blDB
   ) {
-    function isLinux() {
-      let osPlat = os.platform();
-      if (osPlat == "linux") return true;
-      else return false;
-    }
+    var uptimeMilsec = os.uptime() * 1000,
+      uptime = millisecondsToStr(uptimeMilsec),
+      botUptimeMilsec = process.uptime() * 1000,
+      botUptime = millisecondsToStr(botUptimeMilsec),
+      memUsageB = process.memoryUsage().heapUsed,
+      memUsage = formatBytes(memUsageB),
+      totalSysMem = os.totalmem(),
+      freeSysMem = os.freemem(),
+      usedSysMem = totalSysMem - freeSysMem,
+      sysMemUsage = formatBytes(usedSysMem),
+      CpuTemp = await si.cpuTemperature(),
+      cpuTemp = CpuTemp.main;
 
-    var uptimeMilsec = os.uptime() * 1000;
-    var uptime = millisecondsToStr(uptimeMilsec);
-    var botUptimeMilsec = process.uptime() * 1000;
-    var botUptime = millisecondsToStr(botUptimeMilsec);
-    var memUsageB = process.memoryUsage().heapUsed;
-    var memUsage = formatBytes(memUsageB);
-    var totalSysMem = os.totalmem();
-    var freeSysMem = os.freemem();
-    var usedSysMem = totalSysMem - freeSysMem;
-    var sysMemUsage = formatBytes(usedSysMem);
-    var CpuTemp = await si.cpuTemperature();
-    var cpuTemp = CpuTemp.main;
-
-    let Distro;
-    let distro;
+    let Distro, distro;
     if (isLinux())
       Distro = await exec('hostnamectl | grep -i "operating system"');
     if (!Distro) distro = "Error getting distro";
     else distro = Distro.stdout.trim().replace("Operating System: ", ``);
 
-    let NodeV = await exec("node -v");
-    let nodeV = NodeV.stdout.trim();
+    let NodeV = await exec("node -v"),
+      nodeV = NodeV.stdout.trim();
 
-    let DjsV = require("../package.json").dependencies["discord.js"];
-    let djsV = DjsV.replace("^", "");
+    let DjsV = require("../package.json").dependencies["discord.js"],
+      djsV = DjsV.replace("^", "v");
+
+    var options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      },
+      ServerCreated = guild.createdAt,
+      serverCreated = ServerCreated.toLocaleDateString("en-US", options),
+      today = new Date();
+    (ServerAge = today.getTime() - ServerCreated.getTime()),
+      (serverAge = millisecondsToStr(ServerAge));
 
     let infoEm = new Discord.MessageEmbed()
       .setTitle("Info")
@@ -123,14 +81,27 @@ module.exports = {
           value: `${guild.channels.cache.size}`,
           inline: true,
         },
+        {
+          name: "Emojis",
+          value: `${guild.emojis.cache.size}`,
+          inline: true,
+        },
+        {
+          name: "Stickers",
+          value: `${guild.stickers.cache.size}`,
+          inline: true,
+        },
         { name: "Server ID", value: `${guild.id}`, inline: true },
         {
           name: "Server Owner",
-          value: `${client.users.cache.get(msg.guild.ownerID)}`,
+          value: `${client.users.cache.get(guild.ownerId)}`,
           inline: true,
         },
-        { name: `Region`, value: `${guild.region}`, inline: true },
-        { name: "Default Channel", value: `${defChannel}`, inline: true },
+        {
+          name: `Server Created`,
+          value: `${serverCreated} (${serverAge} ago)`,
+          inline: true,
+        },
         { name: "Prefix", value: `${prefix}`, inline: true },
         {
           name: "OS Info",
@@ -154,6 +125,7 @@ module.exports = {
         { name: `Bot Uptime`, value: "`" + botUptime + "`", inline: true },
         { name: `CPU Temperature`, value: "`" + cpuTemp + "℃`", inline: true }
       )
+      .setThumbnail(guild.iconURL({ dynamic: true }))
       .setColor(config.embedColor);
 
     if (args[0] == "-yayfetch") {
