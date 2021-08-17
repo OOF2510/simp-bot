@@ -48,7 +48,8 @@ module.exports = {
         (ro) => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase()
       );
     if (!member) return msg.reply("That user is not in this server!");
-    if (member.id === msg.guild.me.id) return msg.reply("I cannot kick myself!")
+    if (member.id === msg.guild.me.id)
+      return msg.reply("I cannot kick myself!");
     if (member.id === author.id) return msg.reply("You can't kick yourself!");
     if (!member.kickable)
       return msg.channel.send(
