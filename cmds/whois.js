@@ -1,34 +1,41 @@
-function millisecondsToStr(milliseconds) {
-  // TIP: to find current time in milliseconds, use:
-  // var  current_time_milliseconds = new Date().getTime();
+function milsecConvert(milliseconds) {
+  var seconds = {},
+    minutes = {},
+    hours = {},
+    days = {},
+    months = {},
+    years = {};
 
-  function numberEnding(number) {
-    return number > 1 ? "s" : "";
+  seconds.val = Math.floor(milliseconds / 1000);
+  minutes.val = Math.floor(seconds.val / 60);
+  hours.val = Math.floor(minutes.val / 60);
+  days.val = Math.floor(hours.val / 24);
+  months.val = Math.floor(days.val / 30);
+  years.val = Math.floor(days.val / 365);
+
+  seconds.val %= 60;
+  minutes.val %= 60;
+  hours.val %= 24;
+  days.val %= 30;
+  months.val %= 12;
+
+  seconds.name = "sec";
+  minutes.name = "min";
+  hours.name = "hr";
+  days.name = "day";
+  months.name = "month";
+  years.name = "yr";
+
+  var units = [years, months, days, hours, minutes, seconds];
+  var toReturn = [];
+
+  for (const unit of units) {
+    if (unit.val === 1) toReturn.push(`${unit.val} ${unit.name}`);
+    else if (unit.val > 1) toReturn.push(`${unit.val} ${unit.name}s`);
   }
 
-  var temp = Math.floor(milliseconds / 1000);
-  var years = Math.floor(temp / 31536000);
-  if (years) {
-    return years + " year" + numberEnding(years);
-  }
-  //TODO: Months! Maybe weeks?
-  var days = Math.floor((temp %= 31536000) / 86400);
-  if (days) {
-    return days + " day" + numberEnding(days);
-  }
-  var hours = Math.floor((temp %= 86400) / 3600);
-  if (hours) {
-    return hours + " hour" + numberEnding(hours);
-  }
-  var minutes = Math.floor((temp %= 3600) / 60);
-  if (minutes) {
-    return minutes + " minute" + numberEnding(minutes);
-  }
-  var seconds = temp % 60;
-  if (seconds) {
-    return seconds + " second" + numberEnding(seconds);
-  }
-  return "less than a second"; //'just now' //or other string you like;
+  let str = toReturn.join(", ");
+  return str;
 }
 module.exports = {
   name: "whois",
@@ -76,13 +83,13 @@ module.exports = {
     var today = new Date();
 
     var AccAge = today.getTime() - AccCreated.getTime();
-    let accAge = millisecondsToStr(AccAge);
+    let accAge = milsecConvert(AccAge);
 
     var MemJoined = mem.joinedAt;
     let memJoined = MemJoined.toLocaleDateString("en-US", options);
 
     var MemAge = today.getTime() - MemJoined.getTime();
-    let memAge = millisecondsToStr(MemAge);
+    let memAge = milsecConvert(MemAge);
 
     let av = user.avatarURL({ dynamic: true });
 
@@ -102,12 +109,12 @@ module.exports = {
         { name: "User ID", value: `${user.id}`, inline: true },
         {
           name: "Account Created",
-          value: `${accCreated} (~${accAge} ago)`,
+          value: `${accCreated} (${accAge} ago)`,
           inline: true,
         },
         {
           name: "Joined Server",
-          value: `${memJoined} (~${memAge} ago)`,
+          value: `${memJoined} (${memAge} ago)`,
           inline: true,
         },
         { name: "Bot?", value: `${user.bot}`, inline: true },
