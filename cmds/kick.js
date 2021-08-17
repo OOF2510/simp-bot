@@ -2,7 +2,7 @@ module.exports = {
   name: "kick",
   aliases: ["k", "ki", "kck"],
   cat: "moderation",
-  usage: "kick <user mention|user id|username|nickname>",
+  usage: "kick <user mention|user id|username|nickname> [reason]",
   desc: "Kicks specified member from the server",
   async execute(
     msg,

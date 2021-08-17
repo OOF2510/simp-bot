@@ -96,6 +96,10 @@ module.exports = {
         createAndSendEmbed("moderation");
         break;
 
+      case "mod":
+        createAndSendEmbed("moderation");
+        break;
+
       case "music":
         break;
 
