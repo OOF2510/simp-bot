@@ -52,7 +52,7 @@ fs.writeFile(`./minified/index.min.js`, result.code, function (err) {
   }
 });
 
-["./config.json", "./config.dev.json", "package.json"].forEach((file) => {
+["./config.json", "./config.dev.json", "package.json", "yarn.lock"].forEach((file) => {
   if (!fs.existsSync(file)) return;
   fs.readFileSync(file);
 
