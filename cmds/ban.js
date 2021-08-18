@@ -76,7 +76,7 @@ module.exports = {
         ? Reason + ` (Performed by ${author.tag})`
         : `Performed by ${author.tag}`;
 
-    await member.ban(reason);
+    await member.ban({ reason: reason });
     msg.reply(`✅ Successfully banned **${member.user.tag}**`);
   },
 };
