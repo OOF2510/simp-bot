@@ -3,7 +3,7 @@ let config = require("../config.json");
 var nodemailer = require("nodemailer");
 
 var transporter = nodemailer.createTransport({
-  service: "gmail",
+  service: "outlook365",
   auth: {
     user: config.email,
     pass: config.emailPass,
