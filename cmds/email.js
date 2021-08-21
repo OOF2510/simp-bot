@@ -29,7 +29,6 @@ var allowedDoms = [
   "email.com",
   "icloud.com",
   "aol.com",
-  "boxbot.xyz",
   "zentool.xyz",
 ];
 
@@ -128,9 +127,6 @@ module.exports = {
         sendEmail();
         break;
       case "aol.com":
-        sendEmail();
-        break;
-      case "boxbot.xyz":
         sendEmail();
         break;
       case "zentool.xyz":
