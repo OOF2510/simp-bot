@@ -23,12 +23,7 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    bchDB,
-    blDB,
-    wcDB,
-    djDB
+    db
   ) {
 
   },

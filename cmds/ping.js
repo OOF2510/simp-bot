@@ -24,17 +24,9 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    bchDB,
-    blDB
+    db
   ) {
-    var mongoPing0 = await ping(config.mongoShards[0]);
-    var mongoPing1 = await ping(config.mongoShards[1]);
-    var mongoPing2 = await ping(config.mongoShards[2]);
-
-    var MongoPing = mongoPing0 + mongoPing1 + mongoPing2;
-    var mongoPing = Math.round(MongoPing / 3);
+    var dbPing = await ping(config.mysql.ip);
 
     var llPing;
     llPing = await ping(config.lavalinkHost).catch((error) => {
@@ -46,7 +38,7 @@ module.exports = {
       .setAuthor(botNick, client.user.avatarURL())
       .addFields(
         { name: `Bot Ping`, value: `\`${client.ws.ping}ms\``, inline: true },
-        { name: `Database Ping`, value: `\`${mongoPing}ms\``, inline: true },
+        { name: `Database Ping`, value: `\`${Math.round(dbPing)}ms\``, inline: true },
         {
           name: "Lavalink (music) Ping",
           value: `\`${Math.round(llPing)}ms\``,

@@ -3,9 +3,8 @@ const fs = require("fs");
 const os = require("os");
 const { promisify } = require("util");
 const exec = promisify(require("child_process").exec);
-const Keyv = require("keyv");
+const Sequelize = require("sequelize");
 const { DiscordTogether } = require("discord-together");
-const mongoeconomy = require("discord-mongo-economy");
 
 let config;
 var startupArgs = process.argv.slice(2);
@@ -49,33 +48,6 @@ intents = new Discord.Intents(32509);
 
 const client = new Discord.Client({ intents: intents });
 
-const preDB = new Keyv(`mongodb://${config.mongoURI}`, {
-  collection: "prefixes",
-});
-const nbDB = new Keyv(`mongodb://${config.mongoURI}`, {
-  collection: "nobroadcast",
-});
-const bchDB = new Keyv(`mongodb://${config.mongoURI}`, {
-  collection: "broadchs",
-});
-const blDB = new Keyv(`mongodb://${config.mongoURI}`, {
-  collection: "blacklist",
-});
-const wcDB = new Keyv(`mongodb://${config.mongoURI}`, {
-  collection: "welcomeChannels",
-});
-const djDB = new Keyv(`mongodb://${config.mongoURI}`, {
-  collection: "DJRoles",
-});
-console.log("Connected to DBs");
-
-preDB.on("error", (err) => console.error("Keyv error:", err));
-nbDB.on("error", (err) => console.error("Keyv error:", err));
-bchDB.on("error", (err) => console.error("Keyv error:", err));
-blDB.on("error", (err) => console.error("Keyv error", err));
-wcDB.on("error", (err) => console.error("Keyv error", err));
-djDB.on("error", (err) => console.error("Keyv error", err));
-
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.discordTogether = new DiscordTogether(client);
@@ -94,6 +66,8 @@ for (const file of cmdFiles) {
   } else continue;
 }
 
+let db;
+
 client.on("ready", () => {
   console.log("Ready!");
   console.log(`Logged in as ${client.user.tag}!`);
@@ -107,17 +81,23 @@ client.on("ready", () => {
       type: "WATCHING",
     }
   );
-  mongoeconomy.connectDatabase(`mongodb://${config.mongoURI}`);
+  const auth = config.mysql;
+  const options = {
+    host: auth.ip,
+    port: auth.port,
+    dialect: "mysql",
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000,
+    },
+  };
+  db = new Sequelize(auth.schema, auth.username, auth.password, options);
+  db.get = require("./util/getValueFromDB")
+  console.log("Connected to DB");
   console.log(client.user.tag);
 });
-
-// client.on("guildMemberAdd", async (member) => {
-//   let guild = member.guild;
-//   let welcomeEnabled = await wcDB.get(guild.id);
-//   if (!welcomeEnabled) return;
-//   let welcomeChannel = guild.channels.cache.get(welcomeEnabled);
-//   welcomeChannel.send(`${member} welcome to **${guild.name}**`);
-// });
 
 client.on("guildCreate", async (guild) => {
   nbDB.set(guild.id, "true");
@@ -152,14 +132,15 @@ client.on("messageCreate", async (msg) => {
 
   if (channel.type == "dm") return;
 
-  let prefix = await preDB.get(guild.id);
+  let prefix = await db.get("prefix", config.mysql.schema, "prefixes", "server_id", guild.id)
+  console.log(prefix);
   if (!prefix) prefix = config.prefix;
 
   if (!msg.content.startsWith(prefix)) return;
 
-  let blacklisted = await blDB.get(author.id);
-  if (blacklisted)
-    return msg.reply(`You have been banned from using simp bot!`);
+  // let blacklisted = await blDB.get(author.id);
+  // if (blacklisted)
+  //   return msg.reply(`You have been banned from using simp bot!`);
 
   const args = msg.content.slice(prefix.length).trim().split(/ +/g);
   let cmd = args.shift().toLowerCase();
@@ -188,12 +169,7 @@ client.on("messageCreate", async (msg) => {
         exec,
         os,
         Discord,
-        preDB,
-        nbDB,
-        bchDB,
-        blDB,
-        wcDB,
-        djDB
+        db
       );
   } catch (error) {
     console.error(error);
