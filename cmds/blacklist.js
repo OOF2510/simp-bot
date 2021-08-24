@@ -23,10 +23,7 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    bchDB,
-    blDB
+    db
   ) {
     if (!allowed.includes(author.id))
       return msg.channel.send(`nononononononononono`);
@@ -35,10 +32,10 @@ module.exports = {
     if (!u) return channel.send(`Mention a user!`);
     let uID = u.id;
 
-    let blacklisted = await blDB.get(uID);
+    let blacklisted = await db.get("user_id", config.mysql.schema, "blacklist", "user_id", uID);
     if (blacklisted) return channel.send(`${u} is already blacklisted!`);
 
-    await blDB.set(uID, "true");
+    await db.query(`INSERT INTO ${config.mysql.schema}.\`blacklist\` (\`user_id\`) VALUES (${uID});`)
 
     msg.channel.send(`Blacklisted ${u}`);
   },

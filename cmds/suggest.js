@@ -23,10 +23,7 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    bchDB,
-    blDB
+    db
   ) {
     const sugCh = client.channels.cache.get("816823026384633887");
     const sugCh2 = client.channels.cache.get("816828453110022166");

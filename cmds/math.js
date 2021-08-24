@@ -25,10 +25,7 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    bchDB,
-    blDB
+    db
   ) {
     try {
       let num1 = Number(args[0]);

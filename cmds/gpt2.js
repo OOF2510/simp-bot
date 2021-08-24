@@ -25,12 +25,7 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    bchDB,
-    blDB,
-    wcDB,
-    djDB
+    db
   ) {
     if (!args[0]) return msg.reply(`Usage: \`${this.usage}\``);
     let text = args.join(" ");

@@ -22,11 +22,7 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    niDB,
-    bchDB,
-    blDB
+    db
   ) {
     if (allowed.includes(author.id)) {
       msg.reply(`Restarting UwU!`);

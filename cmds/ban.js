@@ -23,12 +23,7 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    bchDB,
-    blDB,
-    wcDB,
-    djDB
+    db
   ) {
     if (!msg.member.permissions.has("BAN_MEMBERS"))
       return msg.reply("You must have the `BAN_MEMBERS` permission to do that");

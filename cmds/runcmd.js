@@ -22,10 +22,7 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    bchDB,
-    blDB
+    db
   ) {
     if (!allowed.includes(author.id)) {
       channel.send(

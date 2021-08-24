@@ -23,10 +23,7 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    bchDB,
-    blDB
+    db
   ) {
     if (!args[0]) return msg.reply(`Usage: ${prefix}aliases <command>`);
     let cmd = client.commands.get(args[0]);

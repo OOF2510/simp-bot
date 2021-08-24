@@ -23,10 +23,7 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    bchDB,
-    blDB
+    db
   ) {
     let invEm = new Discord.MessageEmbed()
       .setTitle(`Invite me to your server!`)

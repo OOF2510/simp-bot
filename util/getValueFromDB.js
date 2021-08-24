@@ -12,6 +12,7 @@ const options = {
     acquire: 30000,
     idle: 10000,
   },
+  logging: false,
 };
 db = new Sequelize(auth.schema, auth.username, auth.password, options);
 
@@ -26,6 +27,7 @@ module.exports = async function (
     `SELECT ${column} FROM ${schema}.${table} WHERE ${varToMatch} = ${varToMatchValue}`,
     { plain: true, type: Sequelize.QueryTypes.SELECT }
   );
+  if (Value == null) return false;
   let value = Value[column];
   if (!value) return false;
   else return value;

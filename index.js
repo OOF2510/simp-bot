@@ -92,15 +92,15 @@ client.on("ready", () => {
       acquire: 30000,
       idle: 10000,
     },
+    logging: false
   };
   db = new Sequelize(auth.schema, auth.username, auth.password, options);
-  db.get = require("./util/getValueFromDB")
+  db.get = require("./util/getValueFromDB");
   console.log("Connected to DB");
   console.log(client.user.tag);
 });
 
 client.on("guildCreate", async (guild) => {
-  nbDB.set(guild.id, "true");
   let defC = getDefaultChannel(guild);
   client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, {
     type: "WATCHING",
@@ -132,15 +132,26 @@ client.on("messageCreate", async (msg) => {
 
   if (channel.type == "dm") return;
 
-  let prefix = await db.get("prefix", config.mysql.schema, "prefixes", "server_id", guild.id)
-  console.log(prefix);
+  let prefix = await db.get(
+    "prefix",
+    config.mysql.schema,
+    "prefixes",
+    "server_id",
+    guild.id
+  );
   if (!prefix) prefix = config.prefix;
 
   if (!msg.content.startsWith(prefix)) return;
 
-  // let blacklisted = await blDB.get(author.id);
-  // if (blacklisted)
-  //   return msg.reply(`You have been banned from using simp bot!`);
+  let blacklisted = await db.get(
+    "user_id",
+    config.mysql.schema,
+    "blacklist",
+    "user_id",
+    author.id
+  );
+  if (blacklisted)
+    return msg.reply(`You have been banned from using simp bot!`);
 
   const args = msg.content.slice(prefix.length).trim().split(/ +/g);
   let cmd = args.shift().toLowerCase();

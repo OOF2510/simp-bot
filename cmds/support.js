@@ -23,10 +23,7 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    bchDB,
-    blDB
+    db
   ) {
     let supEm = new Discord.MessageEmbed()
       .setAuthor(botNick, client.user.avatarURL)

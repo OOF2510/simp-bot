@@ -23,10 +23,7 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    bchDB,
-    blDB
+    db
   ) {
     const row = new Discord.MessageActionRow().addComponents(
       new Discord.MessageButton()

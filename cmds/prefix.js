@@ -23,16 +23,13 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    bchDB,
-    blDB
+    db
   ) {
     if (!msg.member.permissions.has("MANAGE_GUILD"))
       return msg.reply("You don't have permissions to do that!");
     if (!args[0]) return msg.reply(`Usage: ${prefix}prefix <new prefix>`);
 
-    await preDB.set(guild.id, args[0]);
+    await preDB.query(`INSERT INTO ${config.mysql.schema}.\`prefix\` (\`server_id\`, \`prefix\`) VALUES (${guild.id}, ${args[0]});`);
 
     let prefixEm = new Discord.MessageEmbed()
       .setColor(config.embedColor)

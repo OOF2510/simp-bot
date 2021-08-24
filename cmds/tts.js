@@ -24,10 +24,7 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    bchDB,
-    blDB
+    db
   ) {
     if (!msg.member.voice.channel)
       return msg.reply("You must be in a voice channel to do that!");

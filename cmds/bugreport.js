@@ -23,10 +23,7 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    bchDB,
-    blDB
+    db
   ) {
     const repCh = client.channels.cache.get("817885616791355404");
     const repCh2 = client.channels.cache.get("817885785637257216");

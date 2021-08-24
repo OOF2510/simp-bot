@@ -23,12 +23,7 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    bchDB,
-    blDB,
-    wcDB,
-    djDB
+    db
   ) {
     if (!msg.member.permissions.has("KICK_MEMBERS"))
       return msg.reply(

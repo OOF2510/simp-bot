@@ -26,10 +26,7 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    bchDB,
-    blDB
+    db
   ) {
     if (isPlaying.has(msg.author.id)) {
       return msg.channel.send(":x: | The game already started..");

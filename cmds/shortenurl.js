@@ -38,10 +38,7 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    bchDB,
-    blDB
+    db
   ) {
     if (!args[0]) return channel.send("You must provide a url");
     if (!isURL(args[0])) return channel.send("That is not a valid URL!");

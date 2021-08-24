@@ -28,10 +28,7 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    bchDB,
-    blDB
+    db
   ) {
     var uptimeMilsec = os.uptime() * 1000,
       uptime = millisecondsToStr(uptimeMilsec),

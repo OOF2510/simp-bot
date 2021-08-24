@@ -40,11 +40,7 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    bchDB,
-    blDB,
-    wcDB
+    db
   ) {
     if (!args[0]) return msg.reply(`Usage: \`${prefix}${this.usage}\``);
     let domain = args[0];

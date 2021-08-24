@@ -25,12 +25,7 @@ module.exports = {
     exec,
     os,
     Discord,
-    preDB,
-    nbDB,
-    bchDB,
-    blDB,
-    wcDB,
-    djDB
+    db
   ) {
     let user = msg.mentions.users.first();
     if (!user) user = author;
