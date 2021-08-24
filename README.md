@@ -19,70 +19,6 @@ A Discord bot that is a simp
 
 ### [Website Source Code](https://github.com/OOF2510/simp-bot-site)
 
-# Commands
-
-s!akinator - Starts a game of Akinator
-
-s!aliases- Lists aliases for specified command
-
-s!avatar - Gets your or another user's avatar
-
-s!betrayal - Starts a game of Betrayal Together
-
-s!bugreport - Sends a bug report to the simp bot team
-
-s!chess - Starts a game of Chess Together
-
-s!email - Sends an email
-
-s!flirt - Flirts with the mentioned user
-
-s!github - Sends link to github page
-
-s!help - Sends a help embed
-
-s!info - Info about the bot and server
-
-s!invite - Sends the bot's invite link
-
-s!math - Calculator
-
-s!nobroadcast - disable broadcasts for your server
-
-s!ping - Pings the bot
-
-s!poker - Starts a game of Poker Together
-
-s!pp - Pp size
-
-s!prefix - Sets your guild's prefix to
-specified prefix
-
-s!purge - Bulk deletes the specified number
-of messages
-
-s!setbroadcastchannel - sets the channel that broadcasts go to
-
-s!shortenurl - Shortens given URL
-
-s!simp - Simps for the mentioned user
-
-s!suggest - Sends a suggestion to me
-
-s!support - Sends a link for the support server
-
-s!tts - Speaks given message in VC [BETA]
-
-s!whois - Gets info about a user
-
-s!yesbroadcast - Re-enables broadcasts for your server
-
-s!youtubetogether - Starts a Youtube Together session
-
-### Music Commands
-
-clearqueue, help, loop, lyrics, move, nowplaying, pause, play, previous, queue, radio, remove, removedupes, resume, search, seek, shuffle, skip, stats, stop, volume
-
 # Self-hosting the bot
 
 ## Linux
@@ -94,6 +30,36 @@ git clone https://github.com/OOF2510/simp-bot-rewritten.git
 cd simp-bot-rewritten
 yarn run setup:linux
 yarn run start
+```
+
+## Docker
+
+- Install docker
+- Create a file named "config.json" using the format below:
+
+```json
+{
+ "prefix": "your-bot-prefix",
+ "token": "your-bot-token",
+ "clientID": "your-bot-clientid",
+ "email": "your-bot-email",
+ "emailPass": "your-bot-email-password",
+ "mongoURI": "your-mongodb-uri",
+ "mongoShards": [
+  "mongodb-shard-1",
+  "mongodb-shard-2",
+  "mongodb-shard-3"
+ ],
+ "embedColor": "hex-color-code",
+ "lavalinkHost": "your-lavalink-host",
+ "hfkey": "your-huggingface-api-key"
+```
+
+- Build and run the docker container
+
+```bash
+docker build -t simpbot .
+docker run -d simpbot
 ```
 
 ## Windows
