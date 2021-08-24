@@ -58,8 +58,8 @@ yarn run start
 - Build and run the docker container
 
 ```bash
-docker build -t SimpBot .
-docker run -d SimpBot
+docker build -t simpbot .
+docker run -d simpbot
 ```
 
 ## Windows
