@@ -29,7 +29,9 @@ module.exports = {
       return msg.reply("You don't have permissions to do that!");
     if (!args[0]) return msg.reply(`Usage: ${prefix}prefix <new prefix>`);
 
-    await db.query(`INSERT INTO ${config.mysql.schema}.\`prefixes\` (\`server_id\`, \`prefix\`) VALUES (${guild.id}, '${args[0]}');`);
+    await db.query(
+      `INSERT INTO ${config.mysql.schema}.\`prefixes\` (\`server_id\`, \`prefix\`) VALUES (${guild.id}, '${args[0]}');`
+    );
 
     let prefixEm = new Discord.MessageEmbed()
       .setColor(config.embedColor)
