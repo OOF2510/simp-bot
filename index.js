@@ -92,7 +92,7 @@ client.on("ready", () => {
       acquire: 30000,
       idle: 10000,
     },
-    logging: false
+    logging: false,
   };
   db = new Sequelize(auth.schema, auth.username, auth.password, options);
   db.get = require("./util/getValueFromDB");
