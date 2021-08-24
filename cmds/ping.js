@@ -38,7 +38,11 @@ module.exports = {
       .setAuthor(botNick, client.user.avatarURL())
       .addFields(
         { name: `Bot Ping`, value: `\`${client.ws.ping}ms\``, inline: true },
-        { name: `Database Ping`, value: `\`${Math.round(dbPing)}ms\``, inline: true },
+        {
+          name: `Database Ping`,
+          value: `\`${Math.round(dbPing)}ms\``,
+          inline: true,
+        },
         {
           name: "Lavalink (music) Ping",
           value: `\`${Math.round(llPing)}ms\``,

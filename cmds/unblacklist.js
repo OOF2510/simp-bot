@@ -32,10 +32,18 @@ module.exports = {
     if (!u) return channel.send(`Mention a user!`);
     let uID = u.id;
 
-    let blacklisted = db.get("user_id", config.mysql.schema, "blacklist", "user_id", uID);
+    let blacklisted = db.get(
+      "user_id",
+      config.mysql.schema,
+      "blacklist",
+      "user_id",
+      uID
+    );
     if (!blacklisted) return channel.send(`${u} isn't blacklisted!`);
 
-    await db.query(`DELETE FROM ${config.mysql.schema}.\`blacklist\` WHERE (\`user_id\` = ${uID});`)
+    await db.query(
+      `DELETE FROM ${config.mysql.schema}.\`blacklist\` WHERE (\`user_id\` = ${uID});`
+    );
 
     msg.channel.send(`Unblacklisted ${u}`);
   },
