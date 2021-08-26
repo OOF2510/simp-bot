@@ -2203,10 +2203,10 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-systeminformation@^5.8.0:
-  version "5.8.0"
-  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.8.0.tgz#43e6d0918d7d42c65e53e36059f0849354ab2873"
-  integrity sha512-l4drbK2PtNynGKblaShY9hDLW/gg1zxUq2+Yk4gTyd6a2JUvFyTGP8PhHV9iOh+MzS25PQa8W1t0kvcIvr9n7Q==
+systeminformation@^5.8.5:
+  version "5.8.5"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.8.5.tgz#d84691a21e2842b0ab7eb2a30b2dc1c4410fd598"
+  integrity sha512-J4m/1m2ek6qPnhYnMQmpW35WGfqDIszW8f8rWbKNPECn2CaCC/tgktvrchWvJySSKWNsdJv2P/cy/a5l0CHLkQ==
 
 tar@^6.1.0:
   version "6.1.8"
