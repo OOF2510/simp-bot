@@ -870,7 +870,8 @@ discord-math@^1.0.5:
 
 "discord-together@https://github.com/RemyK888/discord-together.git#main":
   version "1.1.62"
-  resolved "https://github.com/RemyK888/discord-together.git#89c1a996c9284d87ceb0ec67e850d2bb669a9bb3"
+  uid fbc535477266e4476dc05e65e733fa11839ece40
+  resolved "https://github.com/RemyK888/discord-together.git#fbc535477266e4476dc05e65e733fa11839ece40"
   dependencies:
     node-fetch "^2.6.1"
 
