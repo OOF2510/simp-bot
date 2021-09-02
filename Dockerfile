@@ -4,7 +4,9 @@ RUN mkdir -p /usr/src/SimpBot
 WORKDIR /usr/src/SimpBot
 COPY . ./
 
-RUN apt update && apt install iputils-ping git python3 python3-pip clang build-essential python3-dev -y
+RUN apt update 
+RUN apt install apt-utils
+RUN apt install iputils-ping git python3 python3-pip clang build-essential libjpeg-dev -y
 RUN yarn install && yarn global add yayfetch && python3 -m pip install gTTS
 
 CMD ["yarn", "start"]
