@@ -25,7 +25,7 @@
     "aki-api": "^5.2.1",
     "discord-image-generation": "^1.4.9",
     "discord-math": "^1.0.5",
-    "discord-together": "https://github.com/RemyK888/discord-together.git#main",
+    "discord-together": "^1.1.62",
     "discord.js": "^13.1.0",
     "huggingface-api": "^1.0.3",
     "libsodium-wrappers": "^0.7.9",
