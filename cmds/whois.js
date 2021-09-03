@@ -34,8 +34,8 @@ module.exports = {
       ) ||
       msg.guild.members.cache.find(
         (ro) => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase()
-      ); ||
-      msg.member
+      ) ||
+      msg.member;
     let user = member.user
 
     var options = {
