@@ -36,7 +36,7 @@ module.exports = {
         (ro) => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase()
       ) ||
       msg.member;
-    let user = member.user
+    let user = mem.user
 
     var options = {
       weekday: "long",
