@@ -27,7 +27,8 @@ module.exports = {
     Discord,
     db
   ) {
-    let mem = msg.mentions.members.first() ||
+    let mem =
+      msg.mentions.members.first() ||
       msg.guild.members.cache.get(args[0]) ||
       msg.guild.members.cache.find(
         (r) => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()
