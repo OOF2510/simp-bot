@@ -4,7 +4,7 @@ module.exports = {
   name: "whois",
   aliases: ["wi"],
   cat: "info",
-  usage: "whois [user mention]",
+  usage: "whois [user mention|user id|username|nickname]",
   desc: "Gets info about a user",
   async execute(
     msg,
@@ -27,9 +27,16 @@ module.exports = {
     Discord,
     db
   ) {
-    let user = msg.mentions.users.first();
-    if (!user) user = author;
-    let mem = guild.members.cache.get(user.id);
+    let mem = msg.mentions.members.first() ||
+      msg.guild.members.cache.get(args[0]) ||
+      msg.guild.members.cache.find(
+        (r) => r.user.username.toLowerCase() === args[0].toLocaleLowerCase()
+      ) ||
+      msg.guild.members.cache.find(
+        (ro) => ro.displayName.toLowerCase() === args[0].toLocaleLowerCase()
+      ); ||
+      msg.member
+    let user = member.user
 
     var options = {
       weekday: "long",
