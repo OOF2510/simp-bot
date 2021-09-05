@@ -16,6 +16,7 @@
     "format": "prettier --no-config --write . --ignore-unknown"
   },
   "devDependencies": {
+    "nodemon": "^2.0.12",
     "prettier": "^2.3.2",
     "uglify-js": "^3.14.1"
   },
@@ -33,7 +34,6 @@
     "mysql2": "^2.3.0",
     "node-url-shortener": "^2.0.0",
     "nodemailer": "^6.6.3",
-    "nodemon": "^2.0.12",
     "opusscript": "^0.0.8",
     "sequelize": "^6.6.5",
     "systeminformation": "^5.8.7",
