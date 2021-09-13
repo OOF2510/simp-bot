@@ -37,7 +37,7 @@ module.exports = {
     }
 
     let timeStamp = new Date();
-    let filename = "./temp/" + timeStamp + ".mp3";
+    let filename = "./temp/" + guild.name + `-` + timeStamp + ".mp3";
 
     await exec(`gtts-cli '${message}' --output "${filename}"`);
 
