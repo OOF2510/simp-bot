@@ -25,6 +25,6 @@ module.exports = {
     Discord,
     db
   ) {
-	msg.reply(`Simp Bot is in ${client.guilds.cache.size} servers!`)
+	msg.replay(`Simp Bot is in ${client.guilds.cache.size} servers!`);
   },
 };
