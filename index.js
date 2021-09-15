@@ -75,12 +75,7 @@ client.on("ready", () => {
     console.log(`🗸 Loaded ${cmd.name}`);
   });
   console.log(client);
-  client.user.setActivity(
-    `${client.guilds.cache.size} servers! | ${config.prefix}help`,
-    {
-      type: "WATCHING",
-    }
-  );
+  require('./util/setStaus')(client)
   const auth = config.mysql;
   const options = {
     host: auth.ip,
