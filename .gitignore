@@ -10,3 +10,4 @@ temp/
 config.json.test
 config.dev.json
 minified/
+lastStatus.json

@@ -40,9 +40,9 @@ module.exports = {
         }
       );
       // delete last status file if exists
-      // if (fs.existsSync("./temp/lastStatus.json")) {
-      //   fs.unlink("./temp/lastStatus.json");
-      // }
+      if (fs.existsSync("./temp/lastStatus.json")) {
+        fs.unlinkSync("./temp/lastStatus.json");
+      }
 
       return msg.reply("done");
     }
@@ -57,21 +57,18 @@ module.exports = {
     await client.user.setActivity(`${args.join(" ")}`, { type: type });
     msg.reply("done");
 
-    // // save to file
-    // let status = {
-    //   type: type,
-    //   name: args.join(" "),
-    // };
+    // save to file
+    let status = {
+      type: type,
+      name: args.join(" "),
+    };
 
-    // let data = JSON.stringify(status);
+    let data = JSON.stringify(status);
 
-    // if (!fs.existsSync("./temp")) {
-    //   fs.mkdirSync("./temp");
-    // }
-    // if (fs.existsSync("./temp/lastStatus.json")) {
-    //   fs.unlink("./temp/lastStatus.json");
-    // }
+    if (fs.existsSync("./temp/lastStatus.json")) {
+      fs.unlinkSync("./temp/lastStatus.json");
+    }
 
-    // fs.writeFileSync("./temp/lastStatus.json", data);
+    fs.writeFileSync("./temp/lastStatus.json", data);
   },
 };

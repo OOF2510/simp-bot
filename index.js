@@ -75,11 +75,11 @@ client.on("ready", () => {
     console.log(`🗸 Loaded ${cmd.name}`);
   });
   console.log(client);
-  // require("./util/setStatus")(client);
-  client.user.setActivity(
-    `${client.guilds.cache.size} servers! | ${config.prefix}help`,
-    { type: "WATCHING" }
-  );
+  if(fs.existsSync('./temp/lastStatus.json')) require("./util/setStatus")(client);
+  else client.user.setActivity(
+     `${client.guilds.cache.size} servers! | ${config.prefix}help`,
+     { type: "WATCHING" }
+   );
   const auth = config.mysql;
   const options = {
     host: auth.ip,
