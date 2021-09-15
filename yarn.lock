@@ -2217,10 +2217,10 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-systeminformation@^5.8.9:
-  version "5.8.9"
-  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.8.9.tgz#59ef32247d5ff8baf25d147285b10d026093a05f"
-  integrity sha512-dWI4eojNu3cSrMBSSfwV1Xq52mKj2zlliurvYV/y9v1xlv6W86ZKKalSkSZAurww5Xb7+ty5gCKIkQCX2SJK3g==
+systeminformation@^5.9.0:
+  version "5.9.0"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.9.0.tgz#28be04db2fcf36576060e51f2318ffcdbb6202da"
+  integrity sha512-OGJKohmMI5wk3njRWFgaRcQUNJtNyaUQFL4GcNwvFdSANcsZMyBzJ4DtsIcacoGOqsBcMT0FRwi0L/rrxGD1Ag==
 
 tar@^6.1.0:
   version "6.1.8"
