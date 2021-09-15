@@ -1,4 +1,5 @@
 const fs = require("fs");
+let config = require("../config.json")
 
 module.exports = function (client) {
   if (fs.existsSync("./temp/lastStatus.json")) {
