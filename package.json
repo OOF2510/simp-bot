@@ -7,7 +7,7 @@
   "author": "OOF2510 <64423517+OOF2510@users.noreply.github.com>",
   "license": "MPL-2.0",
   "scripts": {
-    "start": "nodemon -x 'node index.js || touch index.js'",
+    "start": "nodemon --ignore temp/ -x 'node index.js || touch index.js'",
     "dev": "nodemon -x 'node index.js --dev'",
     "setup:linux": "chmod +x setup/setup.x && ./setup/setup.x",
     "setup:win": "./setup/setup.bat",
