@@ -29,6 +29,16 @@ module.exports = {
       return msg.reply("You don't have permissions to do that!");
     if (!args[0]) return msg.reply(`Usage: ${prefix}prefix <new prefix>`);
 
+    let hasCustomPrefix = await db.get(
+      "prefix",
+      config.mysql.schema,
+      "prefixes",
+      "server_id",
+      guild.id
+    );
+
+    if (hasCustomPrefix) await db.query(`DELETE FROM ${config.mysql.schema}.prefixes WHERE (server_id = '${guild.id}')`)
+
     await db.query(
       `INSERT INTO ${config.mysql.schema}.\`prefixes\` (\`server_id\`, \`prefix\`) VALUES (${guild.id}, '${args[0]}');`
     );
