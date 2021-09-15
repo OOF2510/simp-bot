@@ -75,7 +75,7 @@ client.on("ready", () => {
     console.log(`🗸 Loaded ${cmd.name}`);
   });
   console.log(client);
-  require('./util/setStatus')(client)
+  require("./util/setStatus")(client);
   const auth = config.mysql;
   const options = {
     host: auth.ip,
