@@ -25,6 +25,7 @@ module.exports = {
     Discord,
     db
   ) {
+    if (!args[0]) return msg.reply(`Usage: \`${prefix}${this.usage}\``)
     const sugCh = client.channels.cache.get("816823026384633887");
     const sugCh2 = client.channels.cache.get("816828453110022166");
     const sugCh3 = client.channels.cache.get("825840766769299527");
