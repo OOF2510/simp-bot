@@ -1855,10 +1855,10 @@ prepend-http@^2.0.0:
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-2.0.0.tgz#e92434bfa5ea8c19f41cdfd401d741a3c819d897"
   integrity sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
 
-prettier@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.4.0.tgz#85bdfe0f70c3e777cf13a4ffff39713ca6f64cba"
-  integrity sha512-DsEPLY1dE5HF3BxCRBmD4uYZ+5DCbvatnolqTqcxEgKVZnL2kUfyu7b8pPQ5+hTBkdhU9SLUmK0/pHb07RE4WQ==
+prettier@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.4.1.tgz#671e11c89c14a4cfc876ce564106c4a6726c9f5c"
+  integrity sha512-9fbDAXSBcc6Bs1mZrDYb3XKzDLm4EXXL9sC1LqKP5rZkT6KRr/rf9amVUcODVXgguK/isJz0d0hP72WeaKWsvA==
 
 prism-media@^1.3.1:
   version "1.3.1"
@@ -2217,10 +2217,10 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-systeminformation@^5.9.0:
-  version "5.9.0"
-  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.9.0.tgz#28be04db2fcf36576060e51f2318ffcdbb6202da"
-  integrity sha512-OGJKohmMI5wk3njRWFgaRcQUNJtNyaUQFL4GcNwvFdSANcsZMyBzJ4DtsIcacoGOqsBcMT0FRwi0L/rrxGD1Ag==
+systeminformation@^5.9.2:
+  version "5.9.2"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.9.2.tgz#c8483afa2f957fa4bbb54b1c148be71d1b2df256"
+  integrity sha512-KfW+dwGx4NX2J08IKeeptKnA8NioKB6YVDeqkvIVL+5GQfHSVenoA6Y9h8EnYall52OrOOggGTap0xbZH7pyUQ==
 
 tar@^6.1.0:
   version "6.1.8"
