@@ -9,15 +9,13 @@
   "scripts": {
     "start": "nodemon --ignore temp/ -x 'node index.js || touch index.js'",
     "dev": "nodemon -x 'node index.js --dev'",
-    "setup:linux": "chmod +x setup/setup.x && ./setup/setup.x",
-    "setup:win": "./setup/setup.bat",
-    "setup": "python setup/setup.py",
+    "setup": "python3 setup/setup.py",
     "minify": "node minify.js",
     "format": "prettier --no-config --write . --ignore-unknown"
   },
   "devDependencies": {
     "nodemon": "^2.0.12",
-    "prettier": "^2.4.0",
+    "prettier": "^2.4.1",
     "uglify-js": "^3.14.2"
   },
   "dependencies": {
@@ -37,7 +35,7 @@
     "nodemailer": "^6.6.3",
     "opusscript": "^0.0.8",
     "sequelize": "^6.6.5",
-    "systeminformation": "^5.9.0",
+    "systeminformation": "^5.9.2",
     "utf-8-validate": "^5.0.5",
     "whois-light": "^1.1.1"
   }

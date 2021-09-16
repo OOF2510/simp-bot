@@ -51,7 +51,9 @@ module.exports = {
         args[0].toUpperCase()
       )
     )
-      return msg.reply("please give a valid type");
+      return msg.reply(
+        'please give a valid type ("PLAYING", "STREAMING", "LISTENING", "WATCHING", or "COMPETING")'
+      );
 
     let type = args.shift().toUpperCase();
     await client.user.setActivity(`${args.join(" ")}`, { type: type });

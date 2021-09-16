@@ -11,13 +11,7 @@ var startupArgs = process.argv.slice(2);
 if (startupArgs[0] == "--dev") config = require("./config.dev.json");
 else config = require("./config.json");
 
-var allowed = [
-  "463119138500378624", //me
-  "760473112613093436", //gavin
-  "463119267832004620", //noah
-  "686680792348622856", //ryan
-  "458353546006495232", //dylan
-];
+var allowed = config.allowed;
 
 var Long = require("long");
 
@@ -52,9 +46,9 @@ client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.discordTogether = new DiscordTogether(client);
 
-const cmdFiles = fs
-  .readdirSync("./cmds")
-  .filter((file) => file.endsWith(".js"));
+const cmdFiles = require("./util/getAllFiles")("./cmds/").filter((file) =>
+  file.endsWith(".js")
+);
 
 for (const file of cmdFiles) {
   const cmd = require(`./cmds/${file}`);
@@ -75,11 +69,13 @@ client.on("ready", () => {
     console.log(`🗸 Loaded ${cmd.name}`);
   });
   console.log(client);
-  if(fs.existsSync('./temp/lastStatus.json')) require("./util/setStatus")(client);
-  else client.user.setActivity(
-     `${client.guilds.cache.size} servers! | ${config.prefix}help`,
-     { type: "WATCHING" }
-   );
+  if (fs.existsSync("./temp/lastStatus.json"))
+    require("./util/setStatus")(client);
+  else
+    client.user.setActivity(
+      `${client.guilds.cache.size} servers! | ${config.prefix}help`,
+      { type: "WATCHING" }
+    );
   const auth = config.mysql;
   const options = {
     host: auth.ip,

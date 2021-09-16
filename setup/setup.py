@@ -5,12 +5,15 @@ token = input("Token: ")
 clientID = input("Bot CLient ID: ")
 email = input("Bot Email: ")
 emailPass = input("Bot Email Password: ")
-mongoURI = input("MongoDB URI: ")
-mongoShard0 = input("First MongoDB Shard Domain: ")
-mongoShard1 = input("Second MongoDB Shard Domain: ")
-mongoShard2 = input("Third MongoDB Shard Domain: ")
+sqlIP = input("MySQL host IP/Domain: ")
+sqlPort = input("MySQL Port: ")
+sqlUser = input("MySQL Username: ")
+sqlPass = input("MySQL Password: ")
+sqlSchema = input("MySQL Schema Name: ")
 embedColor = input("Embed Color (hex without the #): ")
 lavalinkHost = input("Lavalink Host: ")
+hfKey = input("Huggingface API Key: ")
+uID = input("Your Discord User Id")
 
 configJson = "{" + f"""
   \"prefix\": \"{prefix}\",
@@ -18,14 +21,19 @@ configJson = "{" + f"""
   \"clientID\": \"{clientID}\",
   \"email\": \"{email}\",
   \"emailPass\": \"{emailPass}\",
-  \"mongoURI\": \"{mongoURI}\",
-  \"mongoShards\": [
-    \"{mongoShard0}\",
-    \"{mongoShard1}\",
-    \"{mongoShard2}\"
-  ],
+  \"mysql\":""" + "{" + f"""
+    \"ip\": \"{sqlIP}\",
+    \"port\": \"{sqlPort}\",
+    \"user\": \"{sqlUser}\",
+    \"password\": \"{sqlPass}\",
+    \"schema\": \"${sqlSchema}\"
+  """ + "}" + f"""
   \"embedColor\": \"0x{embedColor}\",
-  \"lavalinkHost\": \"{lavalinkHost}\"
+  \"lavalinkHost\": \"{lavalinkHost}\",
+  \"hfKey\": \"{hfKey}\",
+  \"allowed\": [
+    \"{uID}\"
+  ]
 """ + "}"
 
 config = open("config.json", "w")

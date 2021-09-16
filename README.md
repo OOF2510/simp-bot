@@ -22,15 +22,15 @@ A Discord bot that is a simp
 
 # Self-hosting the bot
 
-## Linux
+## Universial
 
-- Install git, nodejs, python3-pip & yarn
+- Install git, nodejs, python3, python3-pip & yarn
 
 ```bash
-git clone https://github.com/OOF2510/simp-bot-rewritten.git
-cd simp-bot-rewritten
-yarn run setup:linux
-yarn run start
+ git clone https://github.com/OOF2510/simp-bot-rewritten.git
+ cd simp-bot-rewritten
+ yarn run setup
+ yarn run start
 ```
 
 ## Docker
@@ -40,20 +40,23 @@ yarn run start
 
 ```json
 {
- "prefix": "your-bot-prefix",
- "token": "your-bot-token",
- "clientID": "your-bot-clientid",
- "email": "your-bot-email",
- "emailPass": "your-bot-email-password",
- "mongoURI": "your-mongodb-uri",
- "mongoShards": [
-  "mongodb-shard-1",
-  "mongodb-shard-2",
-  "mongodb-shard-3"
- ],
- "embedColor": "hex-color-code",
- "lavalinkHost": "your-lavalink-host",
- "hfkey": "your-huggingface-api-key"
+  "prefix": "your-bot-prefix",
+  "token": "your-bot-token",
+  "clientID": "your-bot-clientid",
+  "email": "your-bot-email",
+  "emailPass": "your-bot-email-password",
+  "mysql": {
+    "ip": "sql-host-ip/domain",
+    "port": "sql-port",
+    "username": "sql-username",
+    "password": "sql-password",
+    "schema": "sql-schema-name"
+  },
+  "embedColor": "hex-color-code",
+  "lavalinkHost": "your-lavalink-host",
+  "hfkey": "your-huggingface-api-key",
+  "allowed": ["your-user-id"]
+}
 ```
 
 - Build and run the docker container
@@ -61,28 +64,6 @@ yarn run start
 ```bash
 docker build -t simpbot .
 docker run -d simpbot
-```
-
-## Windows
-
-- Install git, nodejs, python3-pip & yarn
-
-```bash
-git clone https://github.com/OOF2510/simp-bot-rewritten.git
-cd simp-bot-rewritten
-yarn run setup:win
-yarn run start
-```
-
-## Universial
-
-- Install git, nodejs, python, python3-pip & yarn
-
-```bash
- git clone https://github.com/OOF2510/simp-bot-rewritten.git
- cd simp-bot-rewritten
- yarn run setup
- yarn run start
 ```
 
 # The original simp bot
