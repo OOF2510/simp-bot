@@ -1,7 +1,7 @@
 module.exports = {
   name: "servercount",
   aliases: ["sc", "servers"],
-  cat: "misc",
+  cat: "info",
   usage: "servercount",
   desc: "Returns the amount of servers simp bot is in",
   async execute(
