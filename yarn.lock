@@ -1436,6 +1436,13 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+kanye.js@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/kanye.js/-/kanye.js-1.0.0.tgz#5dff878ebd7171684ee554f5f92b575a5bb66b88"
+  integrity sha512-ITT185pjhEfM4xfBQJp+mYnGusS6N1VedpEUDp3wItgdnK9kz55BBs0COiUMm92RvuaP6jf444vYhomQb+53Eg==
+  dependencies:
+    node-fetch "^2.6.0"
+
 keyv@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/keyv/-/keyv-3.1.0.tgz#ecc228486f69991e49e9476485a5be1e8fc5c4d9"
@@ -1658,6 +1665,11 @@ nan@^2.14.0:
   version "2.15.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.15.0.tgz#3f34a473ff18e15c1b5626b62903b5ad6e665fee"
   integrity sha512-8ZtvEnA2c5aYCZYd1cvgdnU6cqwixRoYg70xPLWUws5ORTa/lnw+u4amixRS/Ac5U5mQVgp9pnlSUnbNWFaWZQ==
+
+node-fetch@^2.6.0:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.2.tgz#986996818b73785e47b1965cc34eb093a1d464d0"
+  integrity sha512-aLoxToI6RfZ+0NOjmWAgn9+LEd30YCkJKFSyWacNZdEKTit/ZMcKjGkTRo8uWEsnIb/hfKecNPEbln02PdWbcA==
 
 node-fetch@^2.6.1:
   version "2.6.1"

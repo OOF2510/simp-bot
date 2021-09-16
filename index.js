@@ -39,7 +39,6 @@ const getDefaultChannel = (guild) => {
 };
 
 intents = new Discord.Intents(32509);
-
 const client = new Discord.Client({ intents: intents });
 
 client.commands = new Discord.Collection();
