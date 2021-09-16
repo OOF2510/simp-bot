@@ -30,7 +30,8 @@ module.exports = {
     let { quote } = await kanye();
     let quoteEm = new Discord.MessageEmbed()
       .setTitle(`"${quote}"`)
-      .setFooter(`- Kanye West`);
+      .setFooter(`- Kanye West`)
+      .setColor(config.embedColor);
     msg.reply({ embeds: [quoteEm] });
   },
 };
