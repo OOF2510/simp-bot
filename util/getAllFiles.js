@@ -1,7 +1,7 @@
 const fs = require("fs")
 const path = require("path")
 
-module.exports = function(dirPath, arrayOfFiles) {
+module.exports = function getAllFiles(dirPath, arrayOfFiles) {
   files = fs.readdirSync(dirPath)
 
   arrayOfFiles = arrayOfFiles || []
@@ -10,7 +10,7 @@ module.exports = function(dirPath, arrayOfFiles) {
     if (fs.statSync(dirPath + "/" + file).isDirectory()) {
       arrayOfFiles = getAllFiles(dirPath + "/" + file, arrayOfFiles)
     } else {
-      arrayOfFiles.push(path.join(__dirname, dirPath, "/", file))
+      arrayOfFiles.push(path.join(__dirname, "../" , dirPath, "/", file))
     }
   })
 

@@ -1,4 +1,4 @@
-let config = require("../config.json");
+let config = require("../../config.json");
 
 var nodemailer = require("nodemailer");
 

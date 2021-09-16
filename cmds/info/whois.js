@@ -1,4 +1,4 @@
-const milsecConvert = require("../util/convertMilsec");
+const milsecConvert = require("../../util/convertMilsec");
 
 module.exports = {
   name: "whois",

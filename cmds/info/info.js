@@ -1,7 +1,7 @@
 const si = require("systeminformation");
-const formatBytes = require("../util/formatBytes");
-const millisecondsToStr = require("../util/convertMilsec");
-const isLinux = require("../util/isLinux");
+const formatBytes = require("../../util/formatBytes");
+const millisecondsToStr = require("../../util/convertMilsec");
+const isLinux = require("../../util/isLinux");
 
 module.exports = {
   name: "info",

@@ -51,7 +51,7 @@ const cmdFiles = require("./util/getAllFiles")("./cmds/").filter((file) =>
 );
 
 for (const file of cmdFiles) {
-  const cmd = require(`./cmds/${file}`);
+  const cmd = require(`${file}`);
   client.commands.set(cmd.name, cmd);
   if (cmd.aliases) {
     cmd.aliases.forEach((alias) => {
