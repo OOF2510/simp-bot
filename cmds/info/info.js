@@ -52,7 +52,7 @@ module.exports = {
     let NodeV = await exec("node -v"),
       nodeV = NodeV.stdout.trim();
 
-    let DjsV = require("../package.json").dependencies["discord.js"],
+    let DjsV = require("../../package.json").dependencies["discord.js"],
       djsV = DjsV.replace("^", "v");
 
     var options = {
