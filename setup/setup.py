@@ -27,7 +27,7 @@ configJson = "{" + f"""
     \"user\": \"{sqlUser}\",
     \"password\": \"{sqlPass}\",
     \"schema\": \"${sqlSchema}\"
-  """ + "}" + f"""
+  """ + "}," + f"""
   \"embedColor\": \"0x{embedColor}\",
   \"lavalinkHost\": \"{lavalinkHost}\",
   \"hfKey\": \"{hfKey}\",
