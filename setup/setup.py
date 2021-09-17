@@ -13,7 +13,7 @@ sqlSchema = input("MySQL Schema Name: ")
 embedColor = input("Embed Color (hex without the #): ")
 lavalinkHost = input("Lavalink Host: ")
 hfKey = input("Huggingface API Key: ")
-uID = input("Your Discord User Id")
+uID = input("Your Discord User Id: ")
 
 configJson = "{" + f"""
   \"prefix\": \"{prefix}\",
