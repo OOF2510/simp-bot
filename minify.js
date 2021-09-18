@@ -2,7 +2,9 @@ const uglify = require("uglify-js");
 const fs = require("fs");
 const path = require("path");
 
-const cmdFiles = require('./util/getAllFiles')('./cmds').filter((File) => File.endsWith(".js"));
+const cmdFiles = require("./util/getAllFiles")("./cmds").filter((File) =>
+  File.endsWith(".js")
+);
 
 for (const File of cmdFiles) {
   let file = fs.readFileSync(`${File}`, "utf-8");
