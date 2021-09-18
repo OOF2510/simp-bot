@@ -2,12 +2,10 @@ const uglify = require("uglify-js");
 const fs = require("fs");
 const path = require("path");
 
-const cmdFiles = fs
-  .readdirSync("./cmds")
-  .filter((File) => File.endsWith(".js"));
+const cmdFiles = require('./util/getAllFiles')('./cmds').filter((File) => File.endsWith(".js"));
 
 for (const File of cmdFiles) {
-  let file = fs.readFileSync(`./cmds/${File}`, "utf-8");
+  let file = fs.readFileSync(`${File}`, "utf-8");
   let fileName = path.basename(File).split(".")[0];
   var result = uglify.minify(file);
 
