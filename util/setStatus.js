@@ -1,4 +1,3 @@
-const fs = require("fs");
 let config = require("../config.json");
 let lastStatus = require("../temp/lastStatus.json");
 
