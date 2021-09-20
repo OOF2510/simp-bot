@@ -1,11 +1,12 @@
-FROM node:latest
+FROM node:current-alpine
 
 RUN mkdir -p /usr/src/SimpBot
 WORKDIR /usr/src/SimpBot
 COPY . ./
 
-RUN apt update 
-RUN apt install iputils-ping git python3 python3-pip clang build-essential libjpeg-dev -y
-RUN yarn install && yarn global add yayfetch && python3 -m pip install gTTS
+RUN apk add --no-cache iputils python3 py3-pip clang cairo pango pkgconfig libpng libjpeg giflib-dev librsvg-dev
+RUN yarn install
+RUN yarn global add yayfetch
+RUN pip3 install gTTS
 
 CMD ["yarn", "start"]
