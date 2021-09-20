@@ -11,6 +11,8 @@ var startupArgs = process.argv.slice(2);
 if (startupArgs[0] == "--dev") config = require("./config.dev.json");
 else config = require("./config.json");
 
+if (config.token == "ci") return process.exit(0)
+
 var allowed = config.allowed;
 
 var Long = require("long");
