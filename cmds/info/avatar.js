@@ -22,8 +22,7 @@ module.exports = {
     config,
     exec,
     os,
-    Discord,
-    db
+    Discord
   ) {
     let user = msg.mentions.users.first();
     if (!user) user = author;
