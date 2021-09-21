@@ -4,9 +4,10 @@ RUN mkdir -p /usr/src/SimpBot
 WORKDIR /usr/src/SimpBot
 COPY . ./
 
-RUN apk add --no-cache iputils python3 py3-pip build-base g++ cairo-dev jpeg-dev pango-dev giflib-dev libjpeg-turbo-dev bash imagemagick libpng-dev
-RUN yarn install
-RUN yarn global add yayfetch
-RUN pip3 install gTTS
+RUN apk add --no-cache iputils python3 py3-pip build-base g++ cairo-dev jpeg-dev pango-dev giflib-dev libjpeg-turbo-dev bash imagemagick libpng-dev \
+&& yarn install \
+&& yarn cache clean \
+&& yarn global add yayfetch \
+&& pip3 install --no-cache-dir gTTS
 
 CMD ["yarn", "start"]
