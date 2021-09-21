@@ -38,7 +38,7 @@ module.exports = {
       totalSysMem = os.totalmem(),
       freeSysMem = os.freemem(),
       usedSysMem = totalSysMem - freeSysMem,
-      sysMemUsage = formatBytes(usedSysMem)
+      sysMemUsage = formatBytes(usedSysMem);
 
     let Distro, distro;
     if (isLinux())
