@@ -8,7 +8,7 @@
 ![Lines of code](https://img.shields.io/tokei/lines/github/oof2510/simp-bot-rewritten)
 ![GitHub repo size](https://img.shields.io/github/repo-size/oof2510/simp-bot-rewritten)
 ![GitHub last commit](https://img.shields.io/github/last-commit/oof2510/simp-bot-rewritten)
-[![Build Docker Image](https://github.com/OOF2510/simp-bot-rewritten/actions/workflows/main.yml/badge.svg)](https://github.com/OOF2510/simp-bot-rewritten/actions/workflows/main.yml)
+[![Build Docker Image](https://github.com/OOF2510/simp-bot-rewritten/actions/workflows/docker.yml/badge.svg)](https://github.com/OOF2510/simp-bot-rewritten/actions/workflows/docker.yml)
 
 # Simp Bot
 
