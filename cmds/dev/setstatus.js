@@ -32,6 +32,11 @@ module.exports = {
         `Only the developer & certian whitelisted users can use that command!`
       );
     if (!args[0]) return msg.reply(`usage: ${this.usage}`);
+
+    if (!fs.existsSync("./temp")) {
+      fs.mkdirSync("./temp");
+    }
+
     if (args[0].toLowerCase() === "reset") {
       await client.user.setActivity(
         `${client.guilds.cache.size} servers! | ${config.prefix}help`,

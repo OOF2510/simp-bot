@@ -36,7 +36,6 @@
     "nodemailer": "^6.6.3",
     "opusscript": "^0.0.8",
     "sequelize": "^6.6.5",
-    "systeminformation": "^5.9.3",
     "utf-8-validate": "^5.0.5",
     "whois-light": "^1.1.1"
   }

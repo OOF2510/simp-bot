@@ -1,4 +1,3 @@
-const si = require("systeminformation");
 const formatBytes = require("../../util/formatBytes");
 const millisecondsToStr = require("../../util/convertMilsec");
 const isLinux = require("../../util/isLinux");
@@ -39,9 +38,7 @@ module.exports = {
       totalSysMem = os.totalmem(),
       freeSysMem = os.freemem(),
       usedSysMem = totalSysMem - freeSysMem,
-      sysMemUsage = formatBytes(usedSysMem),
-      CpuTemp = await si.cpuTemperature(),
-      cpuTemp = CpuTemp.main;
+      sysMemUsage = formatBytes(usedSysMem)
 
     let Distro, distro;
     if (isLinux())
@@ -119,8 +116,7 @@ module.exports = {
         { name: `NodeJS Version`, value: "`" + nodeV + "`", inline: true },
         { name: `Discord.js Version`, value: "`" + djsV + "`", inline: true },
         { name: `System Uptime`, value: "`" + uptime + "`", inline: true },
-        { name: `Bot Uptime`, value: "`" + botUptime + "`", inline: true },
-        { name: `CPU Temperature`, value: "`" + cpuTemp + "℃`", inline: true }
+        { name: `Bot Uptime`, value: "`" + botUptime + "`", inline: true }
       )
       .setThumbnail(guild.iconURL({ dynamic: true }))
       .setColor(config.embedColor);
