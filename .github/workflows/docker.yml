@@ -11,3 +11,6 @@ jobs:
       
       - name: Build Docker Image
         run: docker build -t simpbot .
+      
+      - name: Get size of Docker Image
+        run: docker system df -v
