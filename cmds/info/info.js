@@ -1,6 +1,5 @@
 const formatBytes = require("../../util/formatBytes");
 const millisecondsToStr = require("../../util/convertMilsec");
-const isLinux = require("../../util/isLinux");
 
 module.exports = {
   name: "info",
@@ -39,12 +38,6 @@ module.exports = {
       freeSysMem = os.freemem(),
       usedSysMem = totalSysMem - freeSysMem,
       sysMemUsage = formatBytes(usedSysMem);
-
-    let Distro, distro;
-    if (isLinux())
-      Distro = await exec('hostnamectl | grep -i "operating system"');
-    if (!Distro) distro = "Error getting distro";
-    else distro = Distro.stdout.trim().replace("Operating System: ", ``);
 
     let NodeV = await exec("node -v"),
       nodeV = NodeV.stdout.trim();
@@ -106,7 +99,6 @@ module.exports = {
         { name: "Arch", value: "`" + os.arch() + "`", inline: true },
         { name: "Release", value: "`" + os.release() + "`", inline: true },
         { name: "Version", value: "`" + os.version() + "`", inline: true },
-        { name: "Linux Distro", value: "`" + distro + "`", inline: true },
         { name: "Bot RAM Usage", value: "`" + memUsage + "`", inline: true },
         {
           name: "System RAM Usage",
