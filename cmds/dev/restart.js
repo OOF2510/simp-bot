@@ -18,11 +18,7 @@ module.exports = {
     me,
     allowed,
     prefix,
-    config,
-    exec,
-    os,
-    Discord,
-    db
+    config
   ) {
     if (allowed.includes(author.id)) {
       msg.reply(`Restarting UwU!`);
