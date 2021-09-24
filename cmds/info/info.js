@@ -113,6 +113,6 @@ module.exports = {
       .setThumbnail(guild.iconURL({ dynamic: true }))
       .setColor(config.embedColor);
 
-    msg.reply({ embeds: [ infoEm ] });
+    msg.reply({ embeds: [infoEm] });
   },
 };
