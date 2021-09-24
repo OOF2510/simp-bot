@@ -7,7 +7,10 @@ WORKDIR /usr/src/SimpBot
 COPY . ./
 
 RUN yarn install \
-&& yarn cache clean \
-&& apk del build-base g++
+&& yarn cache clean 
+
+WORKDIR /
+
+RUN apk del build-base g++
 
 CMD ["yarn", "start"]
