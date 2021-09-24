@@ -63,7 +63,7 @@ A Discord bot that is a simp
 
 ```bash
 docker build -t simpbot .
-docker run -d simpbot
+docker run -it simpbot
 ```
 
 # The original simp bot
