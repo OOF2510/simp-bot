@@ -5,7 +5,7 @@ module.exports = {
   name: "info",
   aliases: ["in", "inf", "information"],
   cat: "info",
-  usage: "info [-yayfetch|-screenfetch]",
+  usage: "info",
   desc: "Info about the bot and server",
   async execute(
     msg,
@@ -113,28 +113,6 @@ module.exports = {
       .setThumbnail(guild.iconURL({ dynamic: true }))
       .setColor(config.embedColor);
 
-    if (args[0] == "-yayfetch") {
-      let YayFetch = await exec("yayfetch --hide-logo");
-      let yayFetch = YayFetch.stdout.trim();
-      infoEm.addFields({
-        name: `Yayfetch`,
-        value: "```yaml\n" + `${yayFetch}` + "```",
-        inline: true,
-      });
-
-      channel.send({ embeds: [infoEm] });
-    } else if (args[0] == "-screenfetch") {
-      let ScreenFetch = await exec("screenfetch -N");
-      let screenFetch = ScreenFetch.stdout.trim();
-      infoEm.addFields({
-        name: `Screenfetch`,
-        value: "```yaml\n" + `${screenFetch}` + "```",
-        inline: true,
-      });
-
-      channel.send({ embeds: [infoEm] });
-    } else {
-      channel.send({ embeds: [infoEm] });
-    }
+    msg.reply({ embeds: [ infoEm ] });
   },
 };

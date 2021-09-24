@@ -1,13 +1,12 @@
-FROM node:current-alpine
+FROM oof2510/discordbot-base:v1
 
 RUN mkdir -p /usr/src/SimpBot
+
 WORKDIR /usr/src/SimpBot
 COPY . ./
 
-RUN apk add --no-cache iputils python3 py3-pip ffmpeg libsodium build-base g++ cairo-dev pango-dev giflib-dev libjpeg-turbo-dev libpng-dev \
-&& yarn install \
+RUN yarn install \
 && yarn cache clean \
-&& yarn global add yayfetch \
 && pip3 install --no-cache-dir gTTS \
 && apk del build-base g++
 

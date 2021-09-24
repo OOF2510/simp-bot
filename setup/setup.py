@@ -45,13 +45,6 @@ print("config.json:")
 print(config.read())
 config.close()
 
-os_name = os.name
-
-if os_name == "posix":
-  os.system("sudo yarn global add yayfetch")
-else:
-  os.system("yarn global add yayfetch")
-
 os.system("yarn install")
 
 os.system("python3 -m pip install gTTS")
