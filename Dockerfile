@@ -13,4 +13,6 @@ WORKDIR /
 
 RUN apk del build-base g++
 
+WORKDIR /usr/src/SimpBot
+
 CMD ["yarn", "start"]
