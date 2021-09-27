@@ -22,7 +22,7 @@
     "@discordjs/voice": "^0.6.0",
     "@oof2510/ping": "^3.0.1",
     "aki-api": "^5.2.1",
-    "bufferutil": "^4.0.3",
+    "bufferutil": "^4.0.4",
     "discord-image-generation": "^1.4.9",
     "discord-math": "^1.0.5",
     "discord-together": "^1.2.0",
