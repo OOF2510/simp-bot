@@ -880,10 +880,10 @@ discord-math@^1.0.5:
   resolved "https://registry.yarnpkg.com/discord-math/-/discord-math-1.0.5.tgz#a806c3466cf9fd881b0cc20f15bb9d7f017b2271"
   integrity sha512-4xh44vYe1LkQ/UbC9yGrVHGfowXkxOnq8dKvVrA2hME3gHMZbckmFSLpzBS0dhTqnL4MQnGDqLgG1UFeLmhEDw==
 
-discord-together@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/discord-together/-/discord-together-1.2.0.tgz#e8ee765ce07fd7dcd673c8c5a748b613aec5f5e2"
-  integrity sha512-L1G20599PxkaGv7QQ6KGF1GVCdcAZ0FE6ua0E1CPuoXbYLT+gLLuZKRC9ysw4+ygNKCy9RNn7fonydmJxq00Yw==
+discord-together@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/discord-together/-/discord-together-1.3.0.tgz#88a54ff839e441d840eb35ff659ed984df2479a5"
+  integrity sha512-mqz4tHgFZi0wobILhNNyKIZgTU0JkQ7U9L1Ku4hQgnjM4DzWDND0d+ouoN1O5yVJ/sbccV2A8jCtfz/iiiBz5Q==
   dependencies:
     discord.js "^13.1.0"
     node-fetch "^2.6.1"
@@ -1671,15 +1671,10 @@ nan@^2.14.0:
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.15.0.tgz#3f34a473ff18e15c1b5626b62903b5ad6e665fee"
   integrity sha512-8ZtvEnA2c5aYCZYd1cvgdnU6cqwixRoYg70xPLWUws5ORTa/lnw+u4amixRS/Ac5U5mQVgp9pnlSUnbNWFaWZQ==
 
-node-fetch@^2.6.0:
+node-fetch@^2.6.0, node-fetch@^2.6.1:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.2.tgz#986996818b73785e47b1965cc34eb093a1d464d0"
   integrity sha512-aLoxToI6RfZ+0NOjmWAgn9+LEd30YCkJKFSyWacNZdEKTit/ZMcKjGkTRo8uWEsnIb/hfKecNPEbln02PdWbcA==
-
-node-fetch@^2.6.1:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
-  integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
 
 node-gyp-build@^4.2.0:
   version "4.2.3"
