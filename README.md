@@ -33,7 +33,7 @@ A Discord bot that is a simp
  yarn run start
 ```
 
-## Docker
+## Docker (x86_64 only)
 
 - Install docker
 - Create a file named "config.json" using the format below:
