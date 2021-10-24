@@ -97,20 +97,10 @@ client.on("ready", () => {
 });
 
 client.on("guildCreate", async (guild) => {
-  //let defC = getDefaultChannel(guild);
-  //client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, {
-  // type: "WATCHING",
-  // });
   if (!defC) return;
   defC.send(
     "Thanks for adding me UwU, you can see my commands by doing `s!help`"
   );
-});
-
-client.on("guildDelete", (guild) => {
-  //  client.user.setActivity(`${client.guilds.cache.size} servers! | s!help`, {
-  //  type: "WATCHING",
-  // });
 });
 
 client.on("messageCreate", async (msg) => {
