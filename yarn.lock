@@ -1552,6 +1552,11 @@ long@^4.0.0:
   resolved "https://registry.yarnpkg.com/long/-/long-4.0.0.tgz#9a7b71cfb7d361a194ea555241c92f7468d5bf28"
   integrity sha512-XsP+KhQif4bjX1kbuSiySJFNAehNxgLb6hPRGJ9QsUr8ajHkuXGdrHmFUTUUXhDwVX2R5bY4JNZEwbUiMhV+MA==
 
+long@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/long/-/long-5.0.0.tgz#f674d2dcf8f36b274a454ca5948e982be6d6f5a2"
+  integrity sha512-tY7iSaAZGq/oWJLe3EMCWCKC4601zDA5pisYcyf+Aew2M092iuycFBTa0Ko0TOgPU2mQS56aYTDhyLsHXFaIog==
+
 lowercase-keys@^1.0.0, lowercase-keys@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/lowercase-keys/-/lowercase-keys-1.0.1.tgz#6f9e30b47084d971a7c820ff15a6c5167b74c26f"
