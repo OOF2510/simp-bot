@@ -16,7 +16,7 @@
   "devDependencies": {
     "nodemon": "^2.0.14",
     "prettier": "^2.4.1",
-    "uglify-js": "^3.14.2"
+    "uglify-js": "^3.14.3"
   },
   "dependencies": {
     "@discordjs/voice": "^0.7.2",
