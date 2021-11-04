@@ -31,7 +31,7 @@
     "kanye.js": "^1.0.1",
     "libsodium-wrappers": "^0.7.9",
     "long": "^4.0.0",
-    "mathjs": "^9.5.1",
+    "mathjs": "^10.0.0",
     "mysql2": "^2.3.2",
     "node-url-shortener": "^2.0.0",
     "nodemailer": "^6.7.0",
