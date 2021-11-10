@@ -14,7 +14,7 @@
     "format": "prettier --no-config --write . --ignore-unknown"
   },
   "devDependencies": {
-    "nodemon": "^2.0.14",
+    "nodemon": "^2.0.15",
     "prettier": "^2.4.1",
     "uglify-js": "^3.14.3"
   },
