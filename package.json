@@ -19,7 +19,7 @@
     "uglify-js": "^3.14.3"
   },
   "dependencies": {
-    "@discordjs/voice": "^0.7.2",
+    "@discordjs/voice": "^0.7.5",
     "@oof2510/ping": "^3.0.1",
     "aki-api": "^5.2.1",
     "bufferutil": "^4.0.5",
