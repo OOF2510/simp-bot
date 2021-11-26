@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.15",
-    "prettier": "^2.4.1",
+    "prettier": "^2.5.0",
     "uglify-js": "^3.14.3"
   },
   "dependencies": {
