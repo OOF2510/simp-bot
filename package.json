@@ -37,7 +37,7 @@
     "nodemailer": "^6.7.2",
     "opusscript": "^0.0.8",
     "sequelize": "^6.12.5",
-    "utf-8-validate": "^5.0.7",
+    "utf-8-validate": "^5.0.8",
     "whois-light": "^1.1.2"
   }
 }
