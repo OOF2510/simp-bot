@@ -36,7 +36,7 @@
     "node-url-shortener": "^2.0.0",
     "nodemailer": "^6.7.2",
     "opusscript": "^0.0.8",
-    "sequelize": "^6.13.0",
+    "sequelize": "^6.14.1",
     "utf-8-validate": "^5.0.8",
     "whois-light": "^1.1.2"
   }
