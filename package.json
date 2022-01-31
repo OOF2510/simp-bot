@@ -38,6 +38,6 @@
     "opusscript": "^0.0.8",
     "sequelize": "^6.15.0",
     "utf-8-validate": "^5.0.8",
-    "whois-light": "^1.1.2"
+    "whois-light": "^1.1.5"
   }
 }
