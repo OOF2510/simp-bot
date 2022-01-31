@@ -1706,10 +1706,10 @@ node-gyp-build@^4.3.0:
   resolved "https://registry.yarnpkg.com/node-gyp-build/-/node-gyp-build-4.3.0.tgz#9f256b03e5826150be39c764bf51e993946d71a3"
   integrity sha512-iWjXZvmboq0ja1pUGULQBexmxq8CV4xBhX7VDOTbL7ZR4FOowwY/VOtRxBN/yKxmdGoIp4j5ysNT4u3S2pDQ3Q==
 
-node-url-shortener@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/node-url-shortener/-/node-url-shortener-2.0.0.tgz#dcbbe1682afbd063de8b60d6c33f426681f9c8e2"
-  integrity sha512-TeA4M2oWRNgpeiYETjV84lv3yWVzRczQRM0LFBS0c1v1lkm1/z8CO9CvXq+JUZ3xCxNdiXRyb7iIOFRtRLAByA==
+node-url-shortener@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/node-url-shortener/-/node-url-shortener-2.0.1.tgz#f46c8d3252e46812b85c375a24c3c69f42cc1391"
+  integrity sha512-ItyDoyFV7tEY+c6D6kW7UgJdkf4cs+oQDsSgpfCvYlwguLpRbcthGuYC3n9EoMg9kpgT0rwG46u8Ot7UgdWl4w==
   dependencies:
     request "^2.81.0"
 
