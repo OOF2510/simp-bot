@@ -25,17 +25,17 @@
   resolved "https://registry.yarnpkg.com/@discordjs/collection/-/collection-0.4.0.tgz#b6488286a1cc7b41b644d7e6086f25a1c1e6f837"
   integrity sha512-zmjq+l/rV35kE6zRrwe8BHqV78JvIh2ybJeZavBi5NySjWXqN3hmmAKg7kYMMXSeiWtSsMoZ/+MQi0DiQWy2lw==
 
-"@discordjs/voice@^0.7.5":
-  version "0.7.5"
-  resolved "https://registry.yarnpkg.com/@discordjs/voice/-/voice-0.7.5.tgz#c95bd4ecf73905f51990827df5209eb26472dbd5"
-  integrity sha512-lUk+CmIXNKslT6DkC9IF9rpsqhzlTiedauUCPBzepjd4XWxwBZiyVIzR6QpbAirxkAwCoAbbje+3Ho71PGLEAw==
+"@discordjs/voice@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@discordjs/voice/-/voice-0.8.0.tgz#5d790fc25b883698f6eb7762efe1af00b6440947"
+  integrity sha512-o0JfVLMs3eLjUzPf6oxMydEeum40I7xzfUc66SLN+RrKpSAsTbngf5qnCF53nm+KDNSvrwg1AZqNm4LEAdxJIA==
   dependencies:
     "@types/ws" "^8.2.0"
-    discord-api-types "^0.24.0"
+    discord-api-types "^0.26.1"
     prism-media "^1.3.2"
     tiny-typed-emitter "^2.1.0"
     tslib "^2.3.1"
-    ws "^8.2.3"
+    ws "^8.4.2"
 
 "@jimp/bmp@^0.16.1":
   version "0.16.1"
@@ -858,12 +858,7 @@ detect-libc@^1.0.3:
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
   integrity sha1-+hN8S9aY7fVc1c0CrFWfkaTEups=
 
-discord-api-types@^0.24.0:
-  version "0.24.0"
-  resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.24.0.tgz#9e429b8a1ddb4147134dfb3109093422de7ec549"
-  integrity sha512-X0uA2a92cRjowUEXpLZIHWl4jiX1NsUpDhcEOpa1/hpO1vkaokgZ8kkPtPih9hHth5UVQ3mHBu/PpB4qjyfJ4A==
-
-discord-api-types@^0.26.0:
+discord-api-types@^0.26.0, discord-api-types@^0.26.1:
   version "0.26.1"
   resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.26.1.tgz#726f766ddc37d60da95740991d22cb6ef2ed787b"
   integrity sha512-T5PdMQ+Y1MEECYMV5wmyi9VEYPagEDEi4S0amgsszpWY0VB9JJ/hEvM6BgLhbdnKky4gfmZEXtEEtojN8ZKJQQ==
@@ -1555,10 +1550,10 @@ make-dir@^3.0.0, make-dir@^3.1.0:
   dependencies:
     semver "^6.0.0"
 
-mathjs@^10.0.2:
-  version "10.0.2"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-10.0.2.tgz#bf73f825ee9788d5a001e67383d1ce3d19d05f31"
-  integrity sha512-QCbsqJ2iBCJP/yTj9Dg45SWecwVf5fxe8sZo4SyerthHVydpxRL33hU0MynwAHqz1XglSGkSKk7QzTD8U8wPFg==
+mathjs@^10.1.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-10.1.0.tgz#87e3e5ec73d9d36bd5d72731ab6d7a10d14f5b32"
+  integrity sha512-TrpZAR3H9jR0Cv6cnzT+TZhE40Xs2SCaLf/qm2WcWm2tui69Gas/bC/ct5ZLZNWnWvNvJ7H2uHvuRDDl151PHA==
   dependencies:
     "@babel/runtime" "^7.16.5"
     complex.js "^2.0.15"
@@ -1706,10 +1701,10 @@ node-gyp-build@^4.3.0:
   resolved "https://registry.yarnpkg.com/node-gyp-build/-/node-gyp-build-4.3.0.tgz#9f256b03e5826150be39c764bf51e993946d71a3"
   integrity sha512-iWjXZvmboq0ja1pUGULQBexmxq8CV4xBhX7VDOTbL7ZR4FOowwY/VOtRxBN/yKxmdGoIp4j5ysNT4u3S2pDQ3Q==
 
-node-url-shortener@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/node-url-shortener/-/node-url-shortener-2.0.0.tgz#dcbbe1682afbd063de8b60d6c33f426681f9c8e2"
-  integrity sha512-TeA4M2oWRNgpeiYETjV84lv3yWVzRczQRM0LFBS0c1v1lkm1/z8CO9CvXq+JUZ3xCxNdiXRyb7iIOFRtRLAByA==
+node-url-shortener@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/node-url-shortener/-/node-url-shortener-2.0.1.tgz#f46c8d3252e46812b85c375a24c3c69f42cc1391"
+  integrity sha512-ItyDoyFV7tEY+c6D6kW7UgJdkf4cs+oQDsSgpfCvYlwguLpRbcthGuYC3n9EoMg9kpgT0rwG46u8Ot7UgdWl4w==
   dependencies:
     request "^2.81.0"
 
@@ -2098,10 +2093,10 @@ sequelize-pool@^7.1.0:
   resolved "https://registry.yarnpkg.com/sequelize-pool/-/sequelize-pool-7.1.0.tgz#210b391af4002762f823188fd6ecfc7413020768"
   integrity sha512-G9c0qlIWQSK29pR/5U2JF5dDQeqqHRragoyahj/Nx4KOOQ3CPPfzxnfqFPCSB7x5UgjOgnZ61nSxz+fjDpRlJg==
 
-sequelize@^6.13.0:
-  version "6.13.0"
-  resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-6.13.0.tgz#ce042fc511313094c1e4ca2b2ee13a563359e7b6"
-  integrity sha512-p0dXXGZSc0Ng7CdGwlKN4P6DTRD/w9Ar2CnmHamNVDnqEWh6pMVOp3xrlG5+IWhbwrqL3SjIYEYt3Xog1vXRDw==
+sequelize@^6.15.0:
+  version "6.15.0"
+  resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-6.15.0.tgz#536874e327ab412ff4688bce7c45eabecc151df6"
+  integrity sha512-Ks2jSaKMfICZ8jMlhH401fLw5ikE8Vqt6slcR2peKOn4lA3H+LRfXdlnAl/CUDO1MflFl7PhifnzPxwhamciGQ==
   dependencies:
     "@types/debug" "^4.1.7"
     debug "^4.3.3"
@@ -2465,10 +2460,10 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-whois-light@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/whois-light/-/whois-light-1.1.2.tgz#1f94ad2bbf024d5e1af0d623c2dfc76d7499ec88"
-  integrity sha512-F71cMsP35bplk/oTbacdU30mzYdT7uvNWi9LCGkulOnJ1XrjdjsKcevIhQaiZdoVVx1GwZUilQNlamlMI8K3+Q==
+whois-light@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/whois-light/-/whois-light-1.1.5.tgz#57667270bb5bdc3782009157d33ae73ef168ef11"
+  integrity sha512-la/u4fLRY2kYL34rB58/Q/NAqOXJraJ3aBWJnj2FRXGE3AMgUE8gHZBgh+fTrI7FOscQChfidkUi4BxeBieh/Q==
 
 wide-align@^1.1.0:
   version "1.1.3"
@@ -2515,10 +2510,10 @@ write-file-atomic@^3.0.0:
     signal-exit "^3.0.2"
     typedarray-to-buffer "^3.1.5"
 
-ws@^8.2.3, ws@^8.4.0:
-  version "8.4.0"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-8.4.0.tgz#f05e982a0a88c604080e8581576e2a063802bed6"
-  integrity sha512-IHVsKe2pjajSUIl4KYMQOdlyliovpEPquKkqbwswulszzI7r0SfQrxnXdWAEqOlDCLrVSJzo+O1hAwdog2sKSQ==
+ws@^8.4.0, ws@^8.4.2:
+  version "8.4.2"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.4.2.tgz#18e749868d8439f2268368829042894b6907aa0b"
+  integrity sha512-Kbk4Nxyq7/ZWqr/tarI9yIt/+iNNFOjBXEWgTb4ydaNHBNGgvf2QHbS9fdfsndfjFlFwEd4Al+mw83YkaD10ZA==
 
 xdg-basedir@^4.0.0:
   version "4.0.0"
