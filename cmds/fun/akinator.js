@@ -35,7 +35,7 @@ module.exports = {
     isPlaying.add(msg.author.id);
 
     const aki = new Aki("en");
-
+    // Gamertag: Airstriker76
     channel.send("Starting Akinator game...");
 
     await aki.start();
