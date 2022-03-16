@@ -91,6 +91,28 @@ client.on("ready", () => {
   db = new Sequelize(auth.schema, auth.username, auth.password, options);
   db.get = require("./util/getValueFromDB");
   console.log("Connected to DB");
+
+  // start loadin them slash commands
+  const { REST } = require("@discordjs/rest");
+  const { Routes } = require("discord-api-types/v9");
+  const { token } = config;
+  const commands = [];
+  const clientId = config.clientID;
+  for (const file of slashCmdFiles) {
+    const command = require(`${file}`);
+    commands.push(command.data.toJSON());
+  }
+  const rest = new REST({ version: "9" }).setToken(token);
+  (async () => {
+    try {
+      console.log("Started refreshing application (/) commands.");
+      await rest.put(Routes.applicationCommands(clientId), { body: commands });
+      console.log("Successfully reloaded application (/) commands.");
+    } catch (error) {
+      console.error(error);
+    }
+  })();
+
   console.log(client.user.tag);
 });
 
