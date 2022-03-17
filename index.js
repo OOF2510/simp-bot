@@ -48,16 +48,7 @@ client.discordTogether = new DiscordTogether(client);
 const cmdFiles = require("./util/getAllFiles")("./cmds/").filter((file) =>
   file.endsWith(".js")
 );
-
-for (const file of cmdFiles) {
-  const cmd = require(`${file}`);
-  client.commands.set(cmd.name, cmd);
-  if (cmd.aliases) {
-    cmd.aliases.forEach((alias) => {
-      client.aliases.set(alias, cmd.name);
-    });
-  } else continue;
-}
+const slashCmdFiles = cmdFiles;
 
 let db;
 
@@ -98,7 +89,7 @@ client.on("ready", () => {
   const { token } = config;
   const commands = [];
   const clientId = config.clientID;
-  for (const file of slashCmdFiles) {
+  for (const file of cmdFiles) {
     const command = require(`${file}`);
     commands.push(command.data.toJSON());
   }
@@ -121,6 +112,26 @@ client.on("guildCreate", async (guild) => {
   defC.send(
     "Thanks for adding me UwU, you can see my commands by doing `s!help`"
   );
+});
+
+client.on("interactionCreate", async (interaction) => {
+  if (!interaction.isCommand()) return;
+  const { commandName } = interaction;
+  const command = client.commands.get(commandName);
+  if (!command) return;
+
+  interaction.author = interaction.user;
+  interaction.send = interaction.reply;
+
+  try {
+    await command.execute(interaction, client, config, db, Discord, allowed);
+  } catch (error) {
+    console.error(error);
+    await interaction.reply({
+      content: "There was an error while executing this command!",
+      ephemeral: true,
+    });
+  }
 });
 
 client.on("messageCreate", async (msg) => {
