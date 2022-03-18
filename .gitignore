@@ -11,3 +11,5 @@ config.json.test
 config.dev.json
 minified/
 lastStatus.json
+.yarn/
+.yarn/install-state.gz
