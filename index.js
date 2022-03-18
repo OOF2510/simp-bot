@@ -50,14 +50,21 @@ const cmdFiles = require("./util/getAllFiles")("./cmds/").filter((file) =>
 );
 const slashCmdFiles = cmdFiles;
 
+for (const file of cmdFiles) {
+  const cmd = require(`${file}`);
+  client.commands.set(cmd.data.name, cmd);
+  if (cmd.aliases) {
+    cmd.aliases.forEach((alias) => {
+      client.aliases.set(alias, cmd.name);
+    });
+  } else continue;
+}
+
 let db;
 
 client.on("ready", () => {
   console.log("Ready!");
   console.log(`Logged in as ${client.user.tag}!`);
-  client.commands.forEach((cmd) => {
-    console.log(`🗸 Loaded ${cmd.name}`);
-  });
   console.log(client);
   if (fs.existsSync("./temp/lastStatus.json"))
     require("./util/setStatus")(client);
@@ -104,6 +111,10 @@ client.on("ready", () => {
     }
   })();
 
+  client.commands.forEach((cmd) => {
+    console.log(`🗸 Loaded ${cmd.data.name}`);
+  });
+
   console.log(client.user.tag);
 });
 
@@ -119,6 +130,7 @@ client.on("interactionCreate", async (interaction) => {
   const { commandName } = interaction;
   const command = client.commands.get(commandName);
   if (!command) return;
+  console.log("is command")
 
   interaction.author = interaction.user;
   interaction.send = interaction.reply;

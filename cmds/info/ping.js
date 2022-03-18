@@ -24,6 +24,6 @@ module.exports = {
       )
       .setColor(config.embedColor);
 
-    await interaction.reply({ embeds: [pingEm] });
+    interaction.reply({ embeds: [pingEm] });
   },
 };
