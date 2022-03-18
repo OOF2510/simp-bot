@@ -1,5 +1,6 @@
 {
   "name": "simp-bot",
+  "packageManager": "yarn@3.2.0",
   "version": "1.0.0",
   "description": "A discord bot that is a simp",
   "main": "index.js",
