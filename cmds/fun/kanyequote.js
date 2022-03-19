@@ -3,7 +3,7 @@ const kanye = require("kanye.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("KanyeQuote")
+        .setName("kanyequote")
         .setDescription("Gives a random quote by Kanye West"),
     async execute(interaction, client, config, db, Discord, allowed) {
         let msg = interaction
