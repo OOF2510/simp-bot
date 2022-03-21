@@ -118,12 +118,12 @@ client.on("ready", () => {
   console.log(client.user.tag);
 });
 
-client.on("guildCreate", async (guild) => {
-  if (!defC) return;
-  defC.send(
-    "Thanks for adding me UwU, you can see my commands by doing `s!help`"
-  );
-});
+// client.on("guildCreate", async (guild) => {
+//   if (!defC) return;
+//   defC.send(
+//     "Thanks for adding me UwU, you can see my commands by doing `s!help`"
+//   );
+// });
 
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isCommand()) return;
