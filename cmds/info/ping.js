@@ -9,18 +9,18 @@ module.exports = {
     let botMem = interaction.guild.members.cache.get(client.user.id);
     let botNick = botMem ? botMem.displayName : client.user.username;
 
-    var dbPing = await ping(config.mysql.ip);
+    // var dbPing = await ping(config.mysql.ip);
 
     const pingEm = new Discord.MessageEmbed()
       .setTitle(`Pong UwU!`)
       .setAuthor(botNick, client.user.avatarURL())
       .addFields(
-        { name: `Bot Ping`, value: `\`${client.ws.ping}ms\``, inline: true },
-        {
-          name: `Database Ping`,
-          value: `\`${Math.round(dbPing)}ms\``,
-          inline: true,
-        }
+        { name: `Bot Ping`, value: `\`${client.ws.ping}ms\``, inline: true }//,
+        // {
+        //   name: `Database Ping`,
+        //   value: `\`${Math.round(dbPing)}ms\``,
+        //   inline: true,
+        // }
       )
       .setColor(config.embedColor);
 
