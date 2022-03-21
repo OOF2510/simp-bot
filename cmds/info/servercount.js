@@ -5,7 +5,7 @@ module.exports = {
     .setName("servercount")
     .setDescription("Returns the amount of servers simp bot is in"),
   async execute(interaction, client, config, db, Discord, allowed) {
-    let msg = interaction
+    let msg = interaction;
 
     msg.reply(`Simp Bot is in ${client.guilds.cache.size} servers!`);
   },

@@ -1,0 +1,34 @@
+const { SlashCommandBuilder } = require("@discordjs/builders");
+
+module.exports = {
+  data: new SlashCommandBuilder()
+    .setName("bugreport")
+    .setDescription("Sends a bug report")
+    .addStringOption((option) =>
+      option
+        .setName("bug")
+        .setDescription("Description of the bug")
+        .setRequired(true)
+    ),
+  async execute(interaction, client, config, db, Discord, allowed) {
+    let msg = interaction;
+
+    const repCh = client.channels.cache.get("817885616791355404");
+    const repCh2 = client.channels.cache.get("817885785637257216");
+    const repCh3 = client.channels.cache.get("825841694712004669");
+    const rep = interaction.options.getString("bug");
+
+    const repEm = new Discord.MessageEmbed()
+      .setTitle(`New bug report`)
+      .addFields({ name: `Report:`, value: `${rep}` })
+      .setFooter(`Reported by: ${msg.author.tag}`, msg.author.avatarURL())
+      .setColor(config.embedColor)
+      .setTimestamp();
+
+    repCh.send({ embeds: [repEm] });
+    repCh2.send({ embeds: [repEm] });
+    repCh3.send({ embeds: [repEm] });
+
+    msg.reply(`I have sent your bug report, queen!`);
+  },
+};

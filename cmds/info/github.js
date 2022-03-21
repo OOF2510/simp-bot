@@ -5,19 +5,18 @@ module.exports = {
     .setName("github")
     .setDescription("Sends link to Simp Bot's Github page"),
   async execute(interaction, client, config, db, Discord, allowed) {
-    let msg = interaction
-
+    let msg = interaction;
 
     const row = new Discord.MessageActionRow().addComponents(
-        new Discord.MessageButton()
-          .setStyle("LINK")
-          .setLabel("GitHub")
-          .setURL("https://github.com/OOF2510/simp-bot-rewritten")
-      );
-  
-      msg.reply({
-        content: "Click the button below to go to Simp Bot's Github repo!",
-        components: [row],
-      });
+      new Discord.MessageButton()
+        .setStyle("LINK")
+        .setLabel("GitHub")
+        .setURL("https://github.com/OOF2510/simp-bot-rewritten")
+    );
+
+    msg.reply({
+      content: "Click the button below to go to Simp Bot's Github repo!",
+      components: [row],
+    });
   },
 };

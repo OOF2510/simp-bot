@@ -15,7 +15,7 @@ module.exports = {
       .setTitle(`Pong UwU!`)
       .setAuthor(botNick, client.user.avatarURL())
       .addFields(
-        { name: `Bot Ping`, value: `\`${client.ws.ping}ms\``, inline: true }//,
+        { name: `Bot Ping`, value: `\`${client.ws.ping}ms\``, inline: true } //,
         // {
         //   name: `Database Ping`,
         //   value: `\`${Math.round(dbPing)}ms\``,
