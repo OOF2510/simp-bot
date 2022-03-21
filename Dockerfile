@@ -6,8 +6,10 @@ RUN mkdir -p /usr/src/SimpBot \
 WORKDIR /usr/src/SimpBot
 COPY . ./
 
-RUN yarn install \
-&& yarn cache clean 
+RUN corepack enable \
+&& yarn set version stable
+
+RUN yarn install 
 
 WORKDIR /
 
