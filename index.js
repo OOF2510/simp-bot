@@ -73,7 +73,7 @@ client.on("ready", () => {
       `${client.guilds.cache.size} servers! | ${config.prefix}help`,
       { type: "WATCHING" }
     );
-  const auth = config.mysql;
+  const auth = config.mysql; // bartholemew was here
   const options = {
     host: auth.ip,
     port: auth.port,
