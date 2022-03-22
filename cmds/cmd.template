@@ -3,13 +3,13 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("cmd_name")
-    .setDescription("cmd desc")//,
+    .setDescription("cmd desc")
     // .addStringOption((option) =>
     //   option
     //     .setName("stringoptionname")
     //     .setDescription("Description")
     //     .setRequired(true/false)
-    // ),
+    // )
     // .addUserOption((option) =>
     //   option
     //     .setName("user")
@@ -19,6 +19,7 @@ module.exports = {
     ,
   async execute(interaction, client, config, db, Discord, allowed) {
     let msg = interaction
-
+    //let string = interaction.options.getString("stringoptionname");
+    //let user = interaction.options.getUser("user") || interaction.author;
   },
 };

@@ -105,7 +105,10 @@ client.on("ready", () => {
     try {
       console.log("Started refreshing application (/) commands.");
       await rest.put(Routes.applicationCommands(clientId), { body: commands });
-      await rest.put(Routes.applicationGuildCommands(clientId, '786722539250516007'), { body: commands })
+      await rest.put(
+        Routes.applicationGuildCommands(clientId, "786722539250516007"),
+        { body: commands }
+      );
       console.log("Successfully reloaded application (/) commands.");
     } catch (error) {
       console.error(error);
