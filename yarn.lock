@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@babel/runtime@^7.17.2", "@babel/runtime@^7.7.2":
-  version "7.17.2"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.17.2.tgz#66f68591605e59da47523c631416b18508779941"
-  integrity sha512-hzeyJyMA1YGdJTuWU0e/j4wKXrU4OMFvY2MSlaI9B7VQb0r5cxTE3EAIS2Q7Tn2RIcDkRvTA/v2JsAEhxe99uw==
+"@babel/runtime@^7.17.8", "@babel/runtime@^7.7.2":
+  version "7.17.8"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.17.8.tgz#3e56e4aff81befa55ac3ac6a0967349fd1c5bca2"
+  integrity sha512-dQpEpK0O9o6lj6oPu0gRDbbnk+4LeHlNcBpspf6Olzt3GIX4P1lWF1gS+pHLDFlaJvbR6q7jCfQ08zA4QJBnmA==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -1555,12 +1555,12 @@ make-dir@^3.0.0, make-dir@^3.1.0:
   dependencies:
     semver "^6.0.0"
 
-mathjs@^10.4.0:
-  version "10.4.0"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-10.4.0.tgz#7fa5d352c496cfd4ba1324b564b1948d49d6e10d"
-  integrity sha512-2zVrKvORwxeWbewweD5NDxkTgAMvqkwmMljHUPhDPJtX4sGJEL6ugFXQN597rhH9RGtnMxNzz/+hPGIr9UEWrg==
+mathjs@^10.4.1:
+  version "10.4.1"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-10.4.1.tgz#d0bfc49f7af080d082ef3219a7d1560757c43e6e"
+  integrity sha512-l/ONB3f2N9MMy/Gx3YPdKXjmV0LKN1Ew2fqcz3tzKlAIcPCFuLlup5KHm9cmKTKMHn7MVJZWegqCQhCDEpYyNQ==
   dependencies:
-    "@babel/runtime" "^7.17.2"
+    "@babel/runtime" "^7.17.8"
     complex.js "^2.0.15"
     decimal.js "^10.3.1"
     escape-latex "^1.2.0"
@@ -1568,7 +1568,7 @@ mathjs@^10.4.0:
     javascript-natural-sort "^0.7.1"
     seedrandom "^3.0.5"
     tiny-emitter "^2.1.0"
-    typed-function "^2.0.0"
+    typed-function "^2.1.0"
 
 mime-db@1.48.0:
   version "1.48.0"
@@ -2360,10 +2360,10 @@ type-fest@^0.20.2:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.20.2.tgz#1bf207f4b28f91583666cb5fbd327887301cd5f4"
   integrity sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==
 
-typed-function@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/typed-function/-/typed-function-2.0.0.tgz#15ab3825845138a8b1113bd89e60cd6a435739e8"
-  integrity sha512-Hhy1Iwo/e4AtLZNK10ewVVcP2UEs408DS35ubP825w/YgSBK1KVLwALvvIG4yX75QJrxjCpcWkzkVRB0BwwYlA==
+typed-function@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/typed-function/-/typed-function-2.1.0.tgz#ded6f8a442ba8749ff3fe75bc41419c8d46ccc3f"
+  integrity sha512-bctQIOqx2iVbWGDGPWwIm18QScpu2XRmkC19D8rQGFsjKSgteq/o1hTZvIG/wuDq8fanpBDrLkLq+aEN/6y5XQ==
 
 typedarray-to-buffer@^3.1.5:
   version "3.1.5"
