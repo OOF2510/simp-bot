@@ -2,20 +2,20 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("cmd_name")
-    .setDescription("cmd desc")
+    .setName("pp")
+    .setDescription("pp size")
     .addUserOption((option) =>
       option
         .setName("user")
         .setDescription("description")
-        .setRequired(true / false)
+        .setRequired(false)
     ),
   async execute(interaction, client, config, db, Discord, allowed) {
     let msg = interaction;
     let recipient = interaction.options.getUser("user") || interaction.author;
 
     let response;
-    let recMem = guild.members.cache.get(recipient.id);
+    let recMem = msg.guild.members.cache.get(recipient.id);
 
     let recNick = recMem ? recMem.displayName : recipient.username;
 
