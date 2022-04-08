@@ -5,10 +5,7 @@ module.exports = {
     .setName("pp")
     .setDescription("pp size")
     .addUserOption((option) =>
-      option
-        .setName("user")
-        .setDescription("description")
-        .setRequired(false)
+      option.setName("user").setDescription("description").setRequired(false)
     ),
   async execute(interaction, client, config, db, Discord, allowed) {
     let msg = interaction;

@@ -16,7 +16,7 @@ module.exports = {
     let text = interaction.options.getString("startingText");
 
     msg.channel.send("Generating text, please wait...");
-    msg.channel.send("COMMAND BROKEN")
+    msg.channel.send("COMMAND BROKEN");
 
     // hf.request({
     //   text: `${text}`,
