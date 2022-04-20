@@ -61,6 +61,20 @@ for (const file of cmdFiles) {
   } else continue;
 }
 
+const cmdFiles = require("./util/getAllFiles")("./legacycmds/").filter((file) =>
+  file.endsWith(".js")
+);
+
+for (const file of legcmdFiles) {
+  const cmd = require(`${file}`);
+  client.legCommands.set(cmd.name, cmd);
+  if (cmd.aliases) {
+    cmd.aliases.forEach((alias) => {
+      client.aliases.set(alias, cmd.name);
+    });
+  } else continue;
+}
+
 let db;
 
 client.on("ready", () => {
