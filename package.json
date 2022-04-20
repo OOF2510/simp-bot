@@ -38,7 +38,7 @@
     "mathjs": "^10.4.0",
     "mysql2": "^2.3.3",
     "node-url-shortener": "^2.0.1",
-    "nodemailer": "^6.7.2",
+    "nodemailer": "^6.7.3",
     "opusscript": "^0.0.8",
     "sequelize": "^6.17.0",
     "utf-8-validate": "^5.0.9",
