@@ -61,7 +61,7 @@ for (const file of cmdFiles) {
   } else continue;
 }
 
-const cmdFiles = require("./util/getAllFiles")("./legacycmds/").filter((file) =>
+const legcmdFiles = require("./util/getAllFiles")("./legacycmds/").filter((file) =>
   file.endsWith(".js")
 );
 
