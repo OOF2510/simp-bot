@@ -5,7 +5,7 @@ module.exports = {
     .setName("tts")
     .setDescription("speaks given message in vc")
     .addStringOption((option) =>
-      option.setName("Text").setDescription("Text to say").setRequired(true)
+      option.setName("text").setDescription("Text to say").setRequired(true)
     ),
   async execute(interaction, client, config, db, Discord, allowed) {
     let msg = interaction;
