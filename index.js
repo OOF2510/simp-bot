@@ -42,6 +42,7 @@ intents = new Discord.Intents(32509);
 const client = new Discord.Client({ intents: intents });
 
 client.commands = new Discord.Collection();
+client.legCommands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.discordTogether = new DiscordTogether(client);
 
@@ -189,9 +190,9 @@ client.on("messageCreate", async (msg) => {
   let cmd = args.shift().toLowerCase();
 
   if (client.aliases.has(cmd)) cmd = client.aliases.get(cmd);
-  if (!client.commands.has(cmd)) return;
+  if (!client.legCommands.has(cmd)) return;
   try {
-    client.commands
+    client.legCommands
       .get(cmd)
       .execute(
         msg,
