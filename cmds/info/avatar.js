@@ -1,32 +1,18 @@
+const { SlashCommandBuilder } = require("@discordjs/builders");
+
 module.exports = {
-  name: "avatar",
-  aliases: ["av"],
-  cat: "info",
-  usage: "avatar [user mention]",
-  desc: "Gets a user's avatar",
-  execute(
-    msg,
-    args,
-    client,
-    channel,
-    author,
-    server,
-    guild,
-    botMem,
-    botNick,
-    testServer,
-    defChannel,
-    me,
-    allowed,
-    prefix,
-    config,
-    exec,
-    os,
-    Discord
-  ) {
-    let user = msg.mentions.users.first();
-    if (!user) user = author;
-    let mem = guild.members.cache.get(user.id);
+  data: new SlashCommandBuilder()
+    .setName("avatar")
+    .setDescription("Gets a user's avatar")
+    .addUserOption((option) =>
+      option
+        .setName("user")
+        .setDescription("User to get avatar of")
+        .setRequired(false)
+    ),
+  async execute(interaction, client, config, db, Discord, allowed) {
+    let user = interaction.options.getUser("user") || interaction.author;
+    let mem = interaction.guild.members.cache.get(user.id);
 
     let userNick = mem ? mem.displayName : user.username;
 
@@ -38,6 +24,6 @@ module.exports = {
       .setColor(config.embedColor)
       .setTimestamp();
 
-    channel.send({ embeds: [avEm] });
+    await interaction.reply({ embeds: [avEm] });
   },
 };

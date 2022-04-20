@@ -1,20 +1,37 @@
 const milsecConvert = require("../../util/convertMilsec");
-const { SlashCommandBuilder } = require("@discordjs/builders");
 
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("whois")
-    .setDescription("Gets info about a user")
-    .addUserOption((option) =>
-      option
-        .setName("user")
-        .setDescription("user to get info of")
-        .setRequired(false)
-    ),
-  async execute(interaction, client, config, db, Discord, allowed) {
-    let msg = interaction;
-    let user = interaction.options.getUser("user") || interaction.author;
-    let mem = interaction.guild.members.cache.get(user.id);
+  name: "whois",
+  aliases: ["wi"],
+  cat: "info",
+  usage: "whois [user mention|user id|username|nickname]",
+  desc: "Gets info about a user",
+  async execute(
+    msg,
+    args,
+    client,
+    channel,
+    author,
+    server,
+    guild,
+    botMem,
+    botNick,
+    testServer,
+    defChannel,
+    me,
+    allowed,
+    prefix,
+    config,
+    exec,
+    os,
+    Discord,
+    db
+  ) {
+    let mem =
+      msg.mentions.members.first() ||
+      msg.guild.members.cache.get(args[0]) ||
+      msg.member;
+    let user = mem.user;
 
     var options = {
       weekday: "long",
@@ -67,6 +84,6 @@ module.exports = {
       )
       .setTimestamp();
 
-    msg.reply({ embeds: [wiEm] });
+    channel.send({ embeds: [wiEm] });
   },
 };

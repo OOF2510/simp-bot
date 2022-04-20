@@ -1,30 +1,11 @@
+const { SlashCommandBuilder } = require("@discordjs/builders");
+
 module.exports = {
-  name: "invite",
-  aliases: ["inv"],
-  cat: "misc",
-  usage: "invite",
-  desc: "Sends the bot's invite link",
-  async execute(
-    msg,
-    args,
-    client,
-    channel,
-    author,
-    server,
-    guild,
-    botMem,
-    botNick,
-    testServer,
-    defChannel,
-    me,
-    allowed,
-    prefix,
-    config,
-    exec,
-    os,
-    Discord,
-    db
-  ) {
+  data: new SlashCommandBuilder()
+    .setName("invite")
+    .setDescription("Sends the bot's invite link"),
+  async execute(interaction, client, config, db, Discord, allowed) {
+    let msg = interaction;
     let invEm = new Discord.MessageEmbed()
       .setTitle(`Invite me to your server!`)
       .setURL(
@@ -32,6 +13,6 @@ module.exports = {
       )
       .setColor(config.embedColor)
       .setTimestamp();
-    channel.send({ embeds: [invEm] });
+    msg.reply({ embeds: [invEm] });
   },
 };

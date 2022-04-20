@@ -1,18 +1,38 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("flirt")
-    .setDescription("Sends a random pick-up line")
-    .addUserOption((option) =>
-      option
-        .setName("user")
-        .setDescription("user to direct pick up line at")
-        .setRequired(false)
-    ),
-  async execute(interaction, client, config, db, Discord, allowed) {
-    let msg = interaction;
-    let recipient = interaction.options.getUser("user") || interaction.author;
+  name: "flirt",
+  aliases: ["fl"],
+  cat: "fun",
+  usage: "flirt [user mention]",
+  desc: "Sends a random pick-up line",
+  async execute(
+    msg,
+    args,
+    client,
+    channel,
+    author,
+    server,
+    guild,
+    botMem,
+    botNick,
+    testServer,
+    defChannel,
+    me,
+    allowed,
+    prefix,
+    config,
+    exec,
+    os,
+    Discord,
+    db
+  ) {
+    let response;
+    let sender = msg.author;
+
+    let recipient = msg.mentions.users.first();
+    if (!recipient) recipient = sender;
+    let recMem = guild.members.cache.get(recipient.id);
+
+    let recNick = recMem ? recMem.displayName : recipient.username;
 
     let responses = [
       `${recipient} do- do you wanna go to the movies or something?`,
@@ -43,9 +63,9 @@ module.exports = {
       `Are you a library book? Cause I'm checking you out`,
       `Are you my homework? Cause I want to slam you on the desk, promise to do you all night long, get distracted, last 2 minutes, cry, turn on the tv and continue to hate myself for another weak performance`,
       `Yes, I'm G.A.Y:
-              Gonna
-              Ask
-              You out`,
+            Gonna
+            Ask
+            You out`,
       `${recipient} are you Italian? Cause I wanna pizza that ass`,
       `Hey ${recipient} you're pretty and I'm fucking ugly. Together we could be pretty fucking ugly`,
       `Hey ${recipient}, I shit my pants, can I get in yours?`,
@@ -59,8 +79,8 @@ module.exports = {
       `Do you believe in love at first sight ${recipient}, or should I walk by again?`,
     ];
 
-    let response = responses[Math.floor(Math.random() * responses.length)];
+    response = responses[Math.floor(Math.random() * responses.length)];
 
-    msg.reply(response);
+    msg.channel.send(response);
   },
 };

@@ -1,0 +1,23 @@
+// const { SlashCommandBuilder } = require("@discordjs/builders");
+// const disImg = require("discord-image-generation");
+
+// module.exports = {
+//   data: new SlashCommandBuilder()
+//     .setName("delete")
+//     .setDescription("[image] Deletes specified user")
+//     .addUserOption((option) =>
+//       option
+//         .setName("user")
+//         .setDescription("User to delete")
+//         .setRequired(false)
+//     ),
+//   async execute(interaction, client, config, db, Discord, allowed) {
+//       let msg = interaction
+//       let user = interaction.options.getUser("user") || interaction.author;
+
+//     let avatar = user.displayAvatarURL({ dynamic: false, format: "png" });
+//     let img = await new disImg.Delete().getImage(avatar);
+//     let attach = new Discord.MessageAttachment(img, "delete.png");
+//     msg.channel.send({ files: [attach] });
+//   },
+// };

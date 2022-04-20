@@ -48,10 +48,11 @@ client.discordTogether = new DiscordTogether(client);
 const cmdFiles = require("./util/getAllFiles")("./cmds/").filter((file) =>
   file.endsWith(".js")
 );
+const slashCmdFiles = cmdFiles;
 
 for (const file of cmdFiles) {
   const cmd = require(`${file}`);
-  client.commands.set(cmd.name, cmd);
+  client.commands.set(cmd.data.name, cmd);
   if (cmd.aliases) {
     cmd.aliases.forEach((alias) => {
       client.aliases.set(alias, cmd.name);
@@ -64,9 +65,6 @@ let db;
 client.on("ready", () => {
   console.log("Ready!");
   console.log(`Logged in as ${client.user.tag}!`);
-  client.commands.forEach((cmd) => {
-    console.log(`🗸 Loaded ${cmd.name}`);
-  });
   console.log(client);
   if (fs.existsSync("./temp/lastStatus.json"))
     require("./util/setStatus")(client);
@@ -75,7 +73,7 @@ client.on("ready", () => {
       `${client.guilds.cache.size} servers! | ${config.prefix}help`,
       { type: "WATCHING" }
     );
-  const auth = config.mysql;
+  const auth = config.mysql; // bartholemew was here
   const options = {
     host: auth.ip,
     port: auth.port,
@@ -91,14 +89,64 @@ client.on("ready", () => {
   db = new Sequelize(auth.schema, auth.username, auth.password, options);
   db.get = require("./util/getValueFromDB");
   console.log("Connected to DB");
+
+  // start loadin them slash commands
+  const { REST } = require("@discordjs/rest");
+  const { Routes } = require("discord-api-types/v9");
+  const { token } = config;
+  const commands = [];
+  const clientId = config.clientID;
+  for (const file of cmdFiles) {
+    const command = require(`${file}`);
+    commands.push(command.data.toJSON());
+  }
+  const rest = new REST({ version: "9" }).setToken(token);
+  (async () => {
+    try {
+      console.log("Started refreshing application (/) commands.");
+      await rest.put(Routes.applicationCommands(clientId), { body: commands });
+      await rest.put(
+        Routes.applicationGuildCommands(clientId, "786722539250516007"),
+        { body: commands }
+      );
+      console.log("Successfully reloaded application (/) commands.");
+    } catch (error) {
+      console.error(error);
+    }
+  })();
+
+  client.commands.forEach((cmd) => {
+    console.log(`🗸 Loaded ${cmd.data.name}`);
+  });
+
   console.log(client.user.tag);
 });
 
-client.on("guildCreate", async (guild) => {
-  if (!defC) return;
-  defC.send(
-    "Thanks for adding me UwU, you can see my commands by doing `s!help`"
-  );
+// client.on("guildCreate", async (guild) => {
+//   if (!defC) return;
+//   defC.send(
+//     "Thanks for adding me UwU, you can see my commands by doing `s!help`"
+//   );
+// });
+
+client.on("interactionCreate", async (interaction) => {
+  if (!interaction.isCommand()) return;
+  const { commandName } = interaction;
+  const command = client.commands.get(commandName);
+  if (!command) return;
+
+  interaction.author = interaction.user;
+  interaction.send = interaction.reply;
+
+  try {
+    await command.execute(interaction, client, config, db, Discord, allowed);
+  } catch (error) {
+    console.error(error);
+    await interaction.reply({
+      content: "There was an error while executing this command!",
+      ephemeral: true,
+    });
+  }
 });
 
 client.on("messageCreate", async (msg) => {

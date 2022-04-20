@@ -1,18 +1,41 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("simp")
-    .setDescription("Sends a random simp image/message/gif")
-    .addUserOption((option) =>
-      option
-        .setName("user")
-        .setDescription("user to direct message at")
-        .setRequired(false)
-    ),
-  async execute(interaction, client, config, db, Discord, allowed) {
-    let msg = interaction;
-    let recipient = interaction.options.getUser("user") || interaction.author;
+  name: "simp",
+  aliases: ["s"],
+  cat: "fun",
+  usage: "simp [user mention]",
+  desc: "Sends a random simp image/message/gif",
+  async execute(
+    msg,
+    args,
+    client,
+    channel,
+    author,
+    server,
+    guild,
+    botMem,
+    botNick,
+    testServer,
+    defChannel,
+    me,
+    allowed,
+    prefix,
+    config,
+    exec,
+    os,
+    Discord,
+    db
+  ) {
+    let response;
+    let sender = msg.author;
+    let sendMem = guild.members.cache.get(sender);
+
+    let sendNick = sendMem ? sendMem.displayName : sender.username;
+
+    let recipient = msg.mentions.users.first();
+    if (!recipient) recipient = guild.members.cache.random().user;
+    let recMem = guild.members.cache.get(recipient.id);
+
+    let recNick = recMem ? recMem.displayName : recipient.username;
 
     let responses = [
       `${recipient} damn you thicc`,
@@ -38,6 +61,6 @@ module.exports = {
 
     response = responses[Math.floor(Math.random() * responses.length)];
 
-    msg.reply(response);
+    msg.channel.send(response);
   },
 };

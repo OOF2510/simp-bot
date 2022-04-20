@@ -1,18 +1,34 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("pp")
-    .setDescription("pp size")
-    .addUserOption((option) =>
-      option.setName("user").setDescription("description").setRequired(false)
-    ),
-  async execute(interaction, client, config, db, Discord, allowed) {
-    let msg = interaction;
-    let recipient = interaction.options.getUser("user") || interaction.author;
-
+  name: "pp",
+  cat: "fun",
+  usage: "pp [user mention]",
+  desc: "pp size",
+  async execute(
+    msg,
+    args,
+    client,
+    channel,
+    author,
+    server,
+    guild,
+    botMem,
+    botNick,
+    testServer,
+    defChannel,
+    me,
+    allowed,
+    prefix,
+    config,
+    exec,
+    os,
+    Discord
+  ) {
     let response;
-    let recMem = msg.guild.members.cache.get(recipient.id);
+    let sender = msg.author;
+
+    let recipient = msg.mentions.users.first();
+    if (!recipient) recipient = author;
+    let recMem = guild.members.cache.get(recipient.id);
 
     let recNick = recMem ? recMem.displayName : recipient.username;
 
@@ -38,7 +54,7 @@ module.exports = {
         .setColor(config.embedColor)
         .addFields({ name: `${recNick}'s pp`, value: `${response}` });
 
-      msg.reply({ embeds: [ppEm] });
+      msg.channel.send({ embeds: [ppEm] });
     } else if (recipient.id == "463119267832004620") {
       //noah
       response = ".";
@@ -46,7 +62,7 @@ module.exports = {
         .setColor(config.embedColor)
         .addFields({ name: `${recNick}'s pp`, value: `${response}` });
 
-      msg.reply({ embeds: [ppEm] });
+      msg.channel.send({ embeds: [ppEm] });
     } else if (recipient.id == "763480802511945789") {
       //gerrardo
       response = "8===================================================D";
@@ -54,7 +70,7 @@ module.exports = {
         .setColor(config.embedColor)
         .addFields({ name: `${recNick}'s pp`, value: `${response}` });
 
-      msg.reply({ embeds: [ppEm] });
+      msg.channel.send({ embeds: [ppEm] });
     } else {
       response = responses[Math.floor(Math.random() * responses.length)];
 
@@ -62,7 +78,7 @@ module.exports = {
         .setColor(config.embedColor)
         .addFields({ name: `${recNick}'s pp`, value: `${response}` });
 
-      msg.reply({ embeds: [ppEm] });
+      msg.channel.send({ embeds: [ppEm] });
     }
   },
 };

@@ -4,22 +4,46 @@ function checkDomain(domain) {
   const regex = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/;
   return regex.test(domain);
 }
-const { SlashCommandBuilder } = require("@discordjs/builders");
 
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("domainwhois")
-    .setDescription("whois lookup on specified domain")
-    .addStringOption((option) =>
-      option
-        .setName("domain")
-        .setDescription("domain to get info of")
-        .setRequired(true)
-    ),
-  async execute(interaction, client, config, db, Discord, allowed) {
-    let msg = interaction;
-    let domain = interaction.options.getString("domain");
-
+  name: "domain-whois",
+  aliases: [
+    "whoisdomain",
+    "dwhois",
+    "dwi",
+    "wid",
+    "domainwhois",
+    "domain",
+    "whoisd",
+    "domainwi",
+    "widomain",
+  ],
+  cat: "info",
+  usage: "domain-whois <domain>",
+  desc: "Gets info about a domain",
+  async execute(
+    msg,
+    args,
+    client,
+    channel,
+    author,
+    server,
+    guild,
+    botMem,
+    botNick,
+    testServer,
+    defChannel,
+    me,
+    allowed,
+    prefix,
+    config,
+    exec,
+    os,
+    Discord,
+    db
+  ) {
+    if (!args[0]) return msg.reply(`Usage: \`${prefix}${this.usage}\``);
+    let domain = args[0];
     if (!checkDomain(domain)) return msg.reply("That is not a valid domain!");
     let tld = domain.split(".")[1];
 
@@ -54,6 +78,6 @@ module.exports = {
       )
       .setTimestamp();
 
-    msg.reply({ embeds: [widEm] });
+    channel.send({ embeds: [widEm] });
   },
 };

@@ -1,10 +1,11 @@
+const { SlashCommandBuilder } = require("@discordjs/builders");
+
 module.exports = {
-  name: "bread",
-  aliases: ["givebread", "breadpls"],
-  cat: "misc",
-  usage: "bread",
-  desc: "gives bread to user",
-  async execute(msg) {
+  data: new SlashCommandBuilder()
+    .setName("bread")
+    .setDescription("gives bread to user"),
+  async execute(interaction, client, config, db, Discord, allowed) {
+    let msg = interaction;
     msg.reply(`Here is your bread: :bread:`); // wow what a sellout cant even afford bread
   },
 };

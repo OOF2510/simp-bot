@@ -1,16 +1,33 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { promisify } = require("util");
-const exec = promisify(require("child_process").exec);
-let os = require("os")
+const formatBytes = require("../../util/formatBytes");
+const millisecondsToStr = require("../../util/convertMilsec");
 
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("info")
-    .setDescription("Info about the bot and server"),
-  async execute(interaction, client, config, db, Discord, allowed) {
-    let msg = interaction;
-    let guild = msg.guild;
-
+  name: "info",
+  aliases: ["in", "inf", "information"],
+  cat: "info",
+  usage: "info",
+  desc: "Info about the bot and server",
+  async execute(
+    msg,
+    args,
+    client,
+    channel,
+    author,
+    server,
+    guild,
+    botMem,
+    botNick,
+    testServer,
+    defChannel,
+    me,
+    allowed,
+    prefix,
+    config,
+    exec,
+    os,
+    Discord,
+    db
+  ) {
     var uptimeMilsec = os.uptime() * 1000,
       uptime = millisecondsToStr(uptimeMilsec),
       botUptimeMilsec = process.uptime() * 1000,

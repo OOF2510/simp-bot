@@ -1,30 +1,25 @@
-module.exports = {
-  name: "cmd_name",
-  aliases: ["ali_1", "ali_2"],
-  cat: "category_name",
-  usage: "cmd_name <args?>",
-  desc: "Command description",
-  async execute(
-    msg,
-    args,
-    client,
-    channel,
-    author,
-    server,
-    guild,
-    botMem,
-    botNick,
-    testServer,
-    defChannel,
-    me,
-    allowed,
-    prefix,
-    config,
-    exec,
-    os,
-    Discord,
-    db
-  ) {
+const { SlashCommandBuilder } = require("@discordjs/builders");
 
+module.exports = {
+  data: new SlashCommandBuilder()
+    .setName("cmd_name")
+    .setDescription("cmd desc")
+    // .addStringOption((option) =>
+    //   option
+    //     .setName("stringoptionname")
+    //     .setDescription("Description")
+    //     .setRequired(true/false)
+    // )
+    // .addUserOption((option) =>
+    //   option
+    //     .setName("user")
+    //     .setDescription("description")
+    //     .setRequired(true/false)
+    // )
+    ,
+  async execute(interaction, client, config, db, Discord, allowed) {
+    let msg = interaction
+    //let string = interaction.options.getString("stringoptionname");
+    //let user = interaction.options.getUser("user") || interaction.author;
   },
 };

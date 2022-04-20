@@ -1,22 +1,34 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("bugreport")
-    .setDescription("Sends a bug report")
-    .addStringOption((option) =>
-      option
-        .setName("bug")
-        .setDescription("Description of the bug")
-        .setRequired(true)
-    ),
-  async execute(interaction, client, config, db, Discord, allowed) {
-    let msg = interaction;
-
+  name: "bugreport",
+  aliases: ["bug"],
+  cat: "feedback",
+  usage: "bugreport <report>",
+  desc: "Sends a bug report",
+  async execute(
+    msg,
+    args,
+    client,
+    channel,
+    author,
+    server,
+    guild,
+    botMem,
+    botNick,
+    testServer,
+    defChannel,
+    me,
+    allowed,
+    prefix,
+    config,
+    exec,
+    os,
+    Discord,
+    db
+  ) {
     const repCh = client.channels.cache.get("817885616791355404");
     const repCh2 = client.channels.cache.get("817885785637257216");
     const repCh3 = client.channels.cache.get("825841694712004669");
-    const rep = interaction.options.getString("bug");
+    const rep = args.join(" ");
 
     const repEm = new Discord.MessageEmbed()
       .setTitle(`New bug report`)

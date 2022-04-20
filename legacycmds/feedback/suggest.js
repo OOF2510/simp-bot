@@ -1,22 +1,35 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("suggest")
-    .setDescription("Sends a suggestion")
-    .addStringOption((option) =>
-      option
-        .setName("suggestion")
-        .setDescription("Your suggestion for simp bot")
-        .setRequired(true)
-    ),
-  async execute(interaction, client, config, db, Discord, allowed) {
-    let msg = interaction;
-
+  name: "suggest",
+  aliases: ["sug"],
+  cat: "feedback",
+  usage: "suggest <suggestion>",
+  desc: "Sends a suggestion",
+  async execute(
+    msg,
+    args,
+    client,
+    channel,
+    author,
+    server,
+    guild,
+    botMem,
+    botNick,
+    testServer,
+    defChannel,
+    me,
+    allowed,
+    prefix,
+    config,
+    exec,
+    os,
+    Discord,
+    db
+  ) {
+    if (!args[0]) return msg.reply(`Usage: \`${prefix}${this.usage}\``);
     const sugCh = client.channels.cache.get("816823026384633887");
     const sugCh2 = client.channels.cache.get("816828453110022166");
     const sugCh3 = client.channels.cache.get("825840766769299527");
-    const sug = interaction.options.getString("suggestion");
+    const sug = args.join(" ");
 
     const sugEm = new Discord.MessageEmbed()
       .setTitle(`New suggestion`)

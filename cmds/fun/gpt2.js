@@ -1,44 +1,30 @@
+const { SlashCommandBuilder } = require("@discordjs/builders");
 const hf = require("huggingface-api");
 
 module.exports = {
-  name: "gpt2",
-  aliases: ["aitext", "ai-text", "aitxt", "ai-complete", "autocomplete", "gpt"],
-  cat: "fun",
-  usage: "gpt3 <starting text>",
-  desc: "Completes text using OpenAi's GPT2",
-  async execute(
-    msg,
-    args,
-    client,
-    channel,
-    author,
-    server,
-    guild,
-    botMem,
-    botNick,
-    testServer,
-    defChannel,
-    me,
-    allowed,
-    prefix,
-    config,
-    exec,
-    os,
-    Discord,
-    db
-  ) {
-    if (!args[0]) return msg.reply(`Usage: \`${this.usage}\``);
-    let text = args.join(" ");
+  data: new SlashCommandBuilder()
+    .setName("gpt2")
+    .setDescription("Completes text using OpenAi's GPT2")
+    .addStringOption((option) =>
+      option
+        .setName("startingtext")
+        .setDescription("Text for the ai to work with")
+        .setRequired(true)
+    ),
+  async execute(interaction, client, config, db, Discord, allowed) {
+    let msg = interaction;
+    let text = interaction.options.getString("startingText");
 
-    msg.reply("Generating text, please wait...");
+    msg.channel.send("Generating text, please wait...");
+    msg.channel.send("COMMAND BROKEN");
 
-    hf.request({
-      text: `${text}`,
-      model: "EleutherAI/gpt-neo-2.7B",
-      api_key: `${config.hfKey}`,
-      return_type: "STRING",
-    }).then((data) => {
-      msg.reply(data);
-    });
+    // hf.request({
+    //   text: `${text}`,
+    //   model: "EleutherAI/gpt-neo-2.7B",
+    //   api_key: `${config.hfKey}`,
+    //   return_type: "STRING",
+    // }).then((data) => {
+    //   msg.reply(data);
+    // });
   },
 };
