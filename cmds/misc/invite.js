@@ -9,7 +9,7 @@ module.exports = {
     let invEm = new Discord.MessageEmbed()
       .setTitle(`Invite me to your server!`)
       .setURL(
-        `https://discord.com/api/oauth2/authorize?client_id=${config.clientID}&permissions=8&scope=bot`
+        `https://discord.com/api/oauth2/authorize?client_id=${config.clientID}&permissions=8&scope=bot%20applications.commands`
       )
       .setColor(config.embedColor)
       .setTimestamp();
