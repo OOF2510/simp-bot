@@ -158,7 +158,7 @@ client.on("interactionCreate", async (interaction) => {
   } catch (error) {
     console.error(error);
     bugChannel = client.channels.cache.get('825841694712004669');
-    bugChannel.send(`An error occured when ${interaction.author.tag} tried to run ${commandName}: \`\`\`${error}\`\`\``);
+    bugChannel.send(`An error occured when **${interaction.author.tag}** tried to run **${commandName}**: \`\`\`${error}\`\`\``);
     await interaction.reply({
       content: "There was an error while executing this command!",
       ephemeral: true,

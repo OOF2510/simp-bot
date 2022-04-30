@@ -74,7 +74,6 @@ module.exports = {
           value: `${serverCreated} (${serverAge} ago)`,
           inline: true,
         },
-        { name: "Prefix", value: `${prefix}`, inline: true },
         {
           name: "OS Info",
           value: `Information about the bot's OS`,
