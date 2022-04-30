@@ -3,6 +3,7 @@ const { promisify } = require("util");
 const exec = promisify(require("child_process").exec);
 let os = require("os")
 const millisecondsToStr = require("./../../util/convertMilsec.js");
+const formatBytes = require("./../../util/formatBytes.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
