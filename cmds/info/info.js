@@ -42,6 +42,8 @@ module.exports = {
     (ServerAge = today.getTime() - ServerCreated.getTime()),
       (serverAge = millisecondsToStr(ServerAge));
 
+    let serverOwner = await msg.guild.fetchOwner()
+
     let infoEm = new Discord.MessageEmbed()
       .setTitle("Info")
       .addFields(
@@ -66,7 +68,7 @@ module.exports = {
         { name: "Server ID", value: `${guild.id}`, inline: true },
         {
           name: "Server Owner",
-          value: `${client.users.cache.get(guild.ownerId)}`,
+          value: `${serverOwner}`,
           inline: true,
         },
         {
