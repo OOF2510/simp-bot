@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { promisify } = require("util");
 const exec = promisify(require("child_process").exec);
 let os = require("os")
-const millisecondsToStr = require("./../../util/convertMisec");
+const millisecondsToStr = require("./../../util/convertMilsec.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
