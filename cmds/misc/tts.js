@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const fs = require("fs");
 const { promisify } = require("util");
 const exec = promisify(require("child_process").exec);
+const voice = require('@discordjs/voice')
 
 module.exports = {
   data: new SlashCommandBuilder()
