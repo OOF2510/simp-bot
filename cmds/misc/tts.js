@@ -13,7 +13,7 @@ module.exports = {
     ),
   async execute(interaction, client, config, db, Discord, allowed) {
     let msg = interaction;
-    let message = interaction.options.getString("tts");
+    let message = interaction.options.getString("text");
     let guild = interaction.guild;
     if (!msg.member.voice.channel)
       return msg.reply("You must be in a voice channel to do that!")
