@@ -52,7 +52,7 @@ module.exports = {
 
     player.on(voice.AudioPlayerStatus.Idle, async () => {
       player.stop();
-      await msg.reply("Done!", { ephemeral: true });
+      await msg.reply({ content: "Done!", ephemeral: true });
     });
   },
 };
