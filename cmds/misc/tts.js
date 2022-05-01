@@ -9,10 +9,9 @@ module.exports = {
     ),
   async execute(interaction, client, config, db, Discord, allowed) {
     let msg = interaction;
-    let message = interaction.options.getString("stringoptionname");
+    let message = interaction.options.getString("tts");
     if (!msg.member.voice.channel)
-      return msg.reply("You must be in a voice channel to do that!");
-    if (!args[0]) return msg.reply("Please provide a message to say!");
+      return msg.reply("You must be in a voice channel to do that!")
 
     if (!fs.existsSync("./temp")) {
       fs.mkdirSync("./temp");
@@ -46,8 +45,9 @@ module.exports = {
       player.stop();
     });
 
-    player.on(voice.AudioPlayerStatus.Idle, () => {
+    player.on(voice.AudioPlayerStatus.Idle, async () => {
       player.stop();
+      await msg.reply("Done!", { ephemeral: true });
     });
   },
 };
