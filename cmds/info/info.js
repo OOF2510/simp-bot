@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { promisify } = require("util");
 const exec = promisify(require("child_process").exec);
-let os = require("os")
+let os = require("os");
 const millisecondsToStr = require("./../../util/convertMilsec.js");
 const formatBytes = require("./../../util/formatBytes.js");
 
@@ -42,7 +42,7 @@ module.exports = {
     (ServerAge = today.getTime() - ServerCreated.getTime()),
       (serverAge = millisecondsToStr(ServerAge));
 
-    let serverOwner = await msg.guild.fetchOwner()
+    let serverOwner = await msg.guild.fetchOwner();
 
     let infoEm = new Discord.MessageEmbed()
       .setTitle("Info")

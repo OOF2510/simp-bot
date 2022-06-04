@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const fs = require("fs");
 const { promisify } = require("util");
 const exec = promisify(require("child_process").exec);
-const voice = require('@discordjs/voice')
+const voice = require("@discordjs/voice");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -16,7 +16,7 @@ module.exports = {
     let message = interaction.options.getString("text");
     let guild = interaction.guild;
     if (!msg.member.voice.channel)
-      return msg.reply("You must be in a voice channel to do that!")
+      return msg.reply("You must be in a voice channel to do that!");
 
     if (!fs.existsSync("./temp")) {
       fs.mkdirSync("./temp");

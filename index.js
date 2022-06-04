@@ -61,8 +61,8 @@ for (const file of cmdFiles) {
   } else continue;
 }
 
-const legcmdFiles = require("./util/getAllFiles")("./legacycmds/").filter((file) =>
-  file.endsWith(".js")
+const legcmdFiles = require("./util/getAllFiles")("./legacycmds/").filter(
+  (file) => file.endsWith(".js")
 );
 
 for (const file of legcmdFiles) {
@@ -157,8 +157,10 @@ client.on("interactionCreate", async (interaction) => {
     await command.execute(interaction, client, config, db, Discord, allowed);
   } catch (error) {
     console.error(error);
-    bugChannel = client.channels.cache.get('825841694712004669');
-    bugChannel.send(`An error occured when **${interaction.author.tag}** tried to run **${commandName}**: \`\`\`${error}\`\`\``);
+    bugChannel = client.channels.cache.get("825841694712004669");
+    bugChannel.send(
+      `An error occured when **${interaction.author.tag}** tried to run **${commandName}**: \`\`\`${error}\`\`\``
+    );
     await interaction.reply({
       content: "There was an error while executing this command!",
       ephemeral: true,
