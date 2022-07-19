@@ -25,6 +25,8 @@ module.exports = {
     let timeStamp = new Date();
     let filename = "./temp/" + guild.name + `-` + timeStamp + ".mp3";
 
+    message = message.replaceAll("'", '')
+
     await exec(`gtts-cli '${message}' --output "${filename}"`);
 
     const channelID = msg.member.voice.channelId;
