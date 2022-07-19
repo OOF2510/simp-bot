@@ -1,5 +1,6 @@
 const uglify = require("uglify-js");
-const fs = require("fs");
+const { existsSync, mkdirSync, writeFile, readFileSync, copyFile } = require("fs");
+
 const path = require("path");
 
 const cmdFiles = require("./util/getAllFiles")("./cmds").filter((File) =>
@@ -7,7 +8,7 @@ const cmdFiles = require("./util/getAllFiles")("./cmds").filter((File) =>
 );
 
 for (const File of cmdFiles) {
-  let file = fs.readFileSync(`${File}`, "utf-8");
+  let file = readFileSync(`${File}`, "utf-8");
   let fileName = path.basename(File).split(".")[0];
   var result = uglify.minify(file);
 
@@ -15,15 +16,15 @@ for (const File of cmdFiles) {
     console.error("Error minifying: " + result.error);
   }
 
-  if (!fs.existsSync("./minified")) {
-    fs.mkdirSync("./minified");
+  if (!existsSync("./minified")) {
+    mkdirSync("./minified");
   }
 
-  if (!fs.existsSync("./minified/cmds")) {
-    fs.mkdirSync("./minified/cmds");
+  if (!existsSync("./minified/cmds")) {
+    mkdirSync("./minified/cmds");
   }
 
-  fs.writeFile(
+  writeFile(
     `./minified/cmds/${fileName}.min.js`,
     result.code,
     function (err) {
@@ -36,7 +37,7 @@ for (const File of cmdFiles) {
   );
 }
 
-const index = fs.readFileSync("./index.js", "utf-8");
+const index = readFileSync("./index.js", "utf-8");
 
 var result = uglify.minify(index);
 
@@ -44,7 +45,7 @@ if (result.error) {
   console.error("Error minifying: " + result.error);
 }
 
-fs.writeFile(`./minified/index.min.js`, result.code, function (err) {
+writeFile(`./minified/index.min.js`, result.code, function (err) {
   if (err) {
     console.error(err);
   } else {
@@ -54,10 +55,10 @@ fs.writeFile(`./minified/index.min.js`, result.code, function (err) {
 
 ["./config.json", "./config.dev.json", "package.json", "yarn.lock"].forEach(
   (file) => {
-    if (!fs.existsSync(file)) return;
-    fs.readFileSync(file);
+    if (!existsSync(file)) return;
+    readFileSync(file);
 
-    fs.copyFile(file, `./minified/${file}`, (err) => {
+    copyFile(file, `./minified/${file}`, (err) => {
       if (err) {
         console.log(`Error Copying ${file}`, err);
       } else {

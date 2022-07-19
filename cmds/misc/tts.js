@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const fs = require("fs");
+const { existsSync, mkdirSync, } = require("fs");
 const { promisify } = require("util");
 const exec = promisify(require("child_process").exec);
 const voice = require("@discordjs/voice");
@@ -18,8 +18,8 @@ module.exports = {
     if (!msg.member.voice.channel)
       return msg.reply("You must be in a voice channel to do that!");
 
-    if (!fs.existsSync("./temp")) {
-      fs.mkdirSync("./temp");
+    if (!existsSync("./temp")) {
+      mkdirSync("./temp");
     }
 
     let timeStamp = new Date();

@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const fs = require("fs");
+const { existsSync } = require("fs");
 const os = require("os");
 const { promisify } = require("util");
 const exec = promisify(require("child_process").exec);
@@ -81,7 +81,7 @@ client.on("ready", () => {
   console.log("Ready!");
   console.log(`Logged in as ${client.user.tag}!`);
   console.log(client);
-  if (fs.existsSync("./temp/lastStatus.json"))
+  if (existsSync("./temp/lastStatus.json"))
     require("./util/setStatus")(client);
   else
     client.user.setActivity(

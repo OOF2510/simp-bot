@@ -1,5 +1,5 @@
 const voice = require("@discordjs/voice");
-const fs = require("fs");
+const { existsSync, mkdirSync } = require("fs");
 module.exports = {
   name: "tts",
   cat: "misc",
@@ -32,8 +32,8 @@ module.exports = {
 
     let message = args.join(" ");
 
-    if (!fs.existsSync("./temp")) {
-      fs.mkdirSync("./temp");
+    if (!existsSync("./temp")) {
+      mkdirSync("./temp");
     }
 
     let timeStamp = new Date();

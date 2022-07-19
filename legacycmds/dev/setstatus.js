@@ -1,4 +1,4 @@
-const fs = require("fs");
+const { existsSync, mkdirSync, unlinkSync, writeFileSync } = require("fs");
 
 module.exports = {
   name: "setstatus",
@@ -33,8 +33,8 @@ module.exports = {
       );
     if (!args[0]) return msg.reply(`usage: ${this.usage}`);
 
-    if (!fs.existsSync("./temp")) {
-      fs.mkdirSync("./temp");
+    if (!existsSync("./temp")) {
+      mkdirSync("./temp");
     }
 
     if (args[0].toLowerCase() === "reset") {
@@ -45,8 +45,8 @@ module.exports = {
         }
       );
       // delete last status file if exists
-      if (fs.existsSync("./temp/lastStatus.json")) {
-        fs.unlinkSync("./temp/lastStatus.json");
+      if (existsSync("./temp/lastStatus.json")) {
+        unlinkSync("./temp/lastStatus.json");
       }
 
       return msg.reply("done");
@@ -72,10 +72,10 @@ module.exports = {
 
     let data = JSON.stringify(status);
 
-    if (fs.existsSync("./temp/lastStatus.json")) {
-      fs.unlinkSync("./temp/lastStatus.json");
+    if (existsSync("./temp/lastStatus.json")) {
+      unlinkSync("./temp/lastStatus.json");
     }
 
-    fs.writeFileSync("./temp/lastStatus.json", data);
+    writeFileSync("./temp/lastStatus.json", data);
   },
 };
