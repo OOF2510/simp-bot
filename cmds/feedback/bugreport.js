@@ -29,6 +29,6 @@ module.exports = {
     repCh2.send({ embeds: [repEm] });
     repCh3.send({ embeds: [repEm] });
 
-    msg.reply(`I have sent your bug report, queen!`);
+    msg.reply(`I have sent your bug report, queen! Join our server to see when it's responded to! https://discord.gg/zHtfa8GdPx`);
   },
 };

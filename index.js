@@ -162,7 +162,7 @@ client.on("interactionCreate", async (interaction) => {
       `An error occured when **${interaction.author.tag}** tried to run **${commandName}**: \`\`\`${error}\`\`\``
     );
     await interaction.reply({
-      content: "There was an error while executing this command!",
+      content: "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
       ephemeral: true,
     });
   }

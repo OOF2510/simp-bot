@@ -42,6 +42,6 @@ module.exports = {
     sugCh2.send({ embeds: [sugEm] });
     sugCh3.send({ embeds: [sugEm] });
 
-    msg.reply(`I have sent your suggestion, queen!`);
+    msg.reply(`I have sent your suggestion, queen! Join our server to see when it's responded to! https://discord.gg/zHtfa8GdPx`);
   },
 };
