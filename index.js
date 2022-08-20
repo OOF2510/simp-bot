@@ -208,7 +208,7 @@ client.on("messageCreate", async (msg) => {
   let cmd = args.shift().toLowerCase();
 
   if (client.aliases.has(cmd)) cmd = client.aliases.get(cmd);
-  if (!client.legCommands.has(cmd)) return;
+  if (!client.legCommands.has(cmd)) return msg.reply("OOPS! THAT DONT EXIST");
   try {
     client.legCommands
       .get(cmd)

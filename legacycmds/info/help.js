@@ -53,7 +53,7 @@ module.exports = {
         .setTitle(`Help - ${name}`)
         .setColor(config.embedColor);
 
-      client.commands.forEach((cmd) => {
+      client.legCommands.forEach((cmd) => {
         if (cmd.cat.toLowerCase() == category) {
           em.addFields({
             name: cmd.name,

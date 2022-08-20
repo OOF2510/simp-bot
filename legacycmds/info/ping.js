@@ -26,28 +26,18 @@ module.exports = {
     Discord,
     db
   ) {
-    var dbPing = await ping(config.mysql.ip);
-
-    var llPing;
-    llPing = await ping(config.lavalinkHost).catch((error) => {
-      llPing = "Error pinging!";
-    });
+    // var dbPing = await ping(config.mysql.ip);
 
     const pingEm = new Discord.MessageEmbed()
       .setTitle(`Pong UwU!`)
       .setAuthor(botNick, client.user.avatarURL())
       .addFields(
-        { name: `Bot Ping`, value: `\`${client.ws.ping}ms\``, inline: true },
-        {
-          name: `Database Ping`,
-          value: `\`${Math.round(dbPing)}ms\``,
-          inline: true,
-        },
-        {
-          name: "Lavalink (music) Ping",
-          value: `\`${Math.round(llPing)}ms\``,
-          inline: true,
-        }
+        { name: `Bot Ping`, value: `\`${client.ws.ping}ms\``, inline: true }//,
+        // {
+        //   name: `Database Ping`,
+        //   value: `\`${Math.round(dbPing)}ms\``,
+        //   inline: true,
+        // }
       )
       .setColor(config.embedColor);
 
