@@ -13,32 +13,7 @@ else config = require("./config.json");
 
 var allowed = config.allowed;
 
-var Long = require("long");
-
-const getDefaultChannel = (guild) => {
-  const generalChannel = guild.channels.cache.find(
-    (channel) => channel.name === "general"
-  );
-  if (generalChannel) return generalChannel;
-
-  if (guild.channels.cache.has(guild.id))
-    return guild.channels.cache.get(guild.id);
-
-  return guild.channels.cache
-    .filter(
-      (c) =>
-        c.type === "text" &&
-        c.permissionsFor(guild.client.user).has("SEND_MESSAGES")
-    )
-    .sort(
-      (a, b) =>
-        a.position - b.position ||
-        Long.fromString(a.id).sub(Long.fromString(b.id)).toNumber()
-    )
-    .first();
-};
-
-intents = new Discord.Intents(32509);
+intents = new Discord.Intents(3243773);
 const client = new Discord.Client({ intents: intents });
 
 client.commands = new Discord.Collection();
@@ -54,20 +29,6 @@ const slashCmdFiles = cmdFiles;
 for (const file of cmdFiles) {
   const cmd = require(`${file}`);
   client.commands.set(cmd.data.name, cmd);
-  if (cmd.aliases) {
-    cmd.aliases.forEach((alias) => {
-      client.aliases.set(alias, cmd.name);
-    });
-  } else continue;
-}
-
-const legcmdFiles = require("./util/getAllFiles")("./legacycmds/").filter(
-  (file) => file.endsWith(".js")
-);
-
-for (const file of legcmdFiles) {
-  const cmd = require(`${file}`);
-  client.legCommands.set(cmd.name, cmd);
   if (cmd.aliases) {
     cmd.aliases.forEach((alias) => {
       client.aliases.set(alias, cmd.name);
@@ -165,79 +126,6 @@ client.on("interactionCreate", async (interaction) => {
       content: "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
       ephemeral: true,
     });
-  }
-});
-
-client.on("messageCreate", async (msg) => {
-  let channel = msg.channel;
-  let author = msg.author;
-  let server = msg.guild;
-  let guild = server;
-  let botMem = server.members.cache.get(client.user.id);
-  let botNick = botMem ? botMem.displayName : client.user.username;
-  let testServer = client.guilds.cache.get("786722539250516007");
-  let defChannel = getDefaultChannel(server);
-  let me = client.users.cache.get("463119138500378624");
-
-  if (author.bot) return;
-
-  if (channel.type == "dm") return;
-
-  let prefix = await db.get(
-    "prefix",
-    config.mysql.schema,
-    "prefixes",
-    "server_id",
-    guild.id
-  );
-  if (!prefix) prefix = config.prefix;
-
-  if (!msg.content.startsWith(prefix)) return;
-
-  let blacklisted = await db.get(
-    "user_id",
-    config.mysql.schema,
-    "blacklist",
-    "user_id",
-    author.id
-  );
-  if (blacklisted)
-    return msg.reply(`You have been banned from using simp bot!`);
-
-  const args = msg.content.slice(prefix.length).trim().split(/ +/g);
-  let cmd = args.shift().toLowerCase();
-
-  if (client.aliases.has(cmd)) cmd = client.aliases.get(cmd);
-  if (!client.legCommands.has(cmd)) return msg.reply("OOPS! THAT DONT EXIST");
-  try {
-    client.legCommands
-      .get(cmd)
-      .execute(
-        msg,
-        args,
-        client,
-        channel,
-        author,
-        server,
-        guild,
-        botMem,
-        botNick,
-        testServer,
-        defChannel,
-        me,
-        allowed,
-        prefix,
-        config,
-        exec,
-        os,
-        Discord,
-        db
-      );
-  } catch (error) {
-    console.error(error);
-    msg.reply(
-      `An error occured executing that command! Try again! (\`${error}\`)`
-    );
   }
 });
 
