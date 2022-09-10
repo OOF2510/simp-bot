@@ -25,6 +25,15 @@ for (const file of cmdFiles) {
   client.commands.set(cmd.data.name, cmd);
 }
 
+const devCmdFiles = require("./util/getAllFiles")("./devCmds/").filter((file) =>
+  file.endsWith(".js")
+);
+
+for (const file of devCmdFiles) {
+  const cmd = require(`${file}`);
+  client.commands.set(cmd.data.name, cmd);
+}
+
 let db;
 
 client.on("ready", () => {
@@ -60,10 +69,16 @@ client.on("ready", () => {
   const { Routes } = require("discord-api-types/v10");
   const { token } = config;
   const commands = [];
+  const devCmds = []
   const clientId = config.clientID;
+  const sbservID = config.devCmdServerID
   for (const file of cmdFiles) {
     const command = require(`${file}`);
     commands.push(command.data.toJSON());
+  }
+  for (const file of devCmdFiles) {
+    const command = require(`${file}`);
+    devCmds.push(command.data.toJSON());
   }
   const rest = new REST({ version: "10" }).setToken(token);
   (async () => {
@@ -73,6 +88,10 @@ client.on("ready", () => {
       await rest.put(
         Routes.applicationGuildCommands(clientId, "786722539250516007"),
         { body: commands }
+      );
+      await rest.put(
+        Routes.applicationGuildCommands(clientId, sbservID),
+        { body: devCmds }
       );
       console.log("Successfully reloaded application (/) commands.");
     } catch (error) {

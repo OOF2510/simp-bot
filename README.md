@@ -40,11 +40,9 @@ A Discord bot that is a simp
 
 ```json
 {
-  "prefix": "your-bot-prefix",
   "token": "your-bot-token",
   "clientID": "your-bot-clientid",
-  "email": "your-bot-email",
-  "emailPass": "your-bot-email-password",
+  "devCmdServerID": "your-server-id",
   "mysql": {
     "ip": "sql-host-ip/domain",
     "port": "sql-port",

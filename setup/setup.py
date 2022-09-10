@@ -1,10 +1,8 @@
 import os
 
-prefix = input("Prefix: ")
 token = input("Token: ")
-clientID = input("Bot CLient ID: ")
-email = input("Bot Email: ")
-emailPass = input("Bot Email Password: ")
+clientID = input("Bot Client ID: ")
+devCmdServerID = input("Your Server ID: ")
 sqlIP = input("MySQL host IP/Domain: ")
 sqlPort = input("MySQL Port: ")
 sqlUser = input("MySQL Username: ")
@@ -16,11 +14,9 @@ hfKey = input("Huggingface API Key: ")
 uID = input("Your Discord User Id: ")
 
 configJson = "{" + f"""
-  \"prefix\": \"{prefix}\",
   \"token\": \"{token}\",
   \"clientID\": \"{clientID}\",
-  \"email\": \"{email}\",
-  \"emailPass\": \"{emailPass}\",
+  \"devCmdServerID\": \"{devCmdServerID}\",
   \"mysql\":""" + "{" + f"""
     \"ip\": \"{sqlIP}\",
     \"port\": \"{sqlPort}\",

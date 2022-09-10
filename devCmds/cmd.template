@@ -1,0 +1,26 @@
+const { SlashCommandBuilder } = require("discord.js");
+
+module.exports = {
+  data: new SlashCommandBuilder()
+    .setName("cmd_name")
+    .setDescription("[DEV]")
+    // .addStringOption((option) =>
+    //   option
+    //     .setName("stringoptionname")
+    //     .setDescription("Description")
+    //     .setRequired(true/false)
+    // )
+    // .addUserOption((option) =>
+    //   option
+    //     .setName("user")
+    //     .setDescription("description")
+    //     .setRequired(true/false)
+    // )
+    ,
+  async execute(interaction, client, config, db, Discord, allowed) {
+    let msg = interaction
+    if (!allowed.includes(msg.author.id)) return msg.reply(`Only the developer & certian whitelisted users can use that command!`, { ephemeral: true });
+    //let string = interaction.options.getString("stringoptionname");
+    //let user = interaction.options.getUser("user") || interaction.author;
+  },
+};
