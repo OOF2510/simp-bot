@@ -1,8 +1,5 @@
 const Discord = require("discord.js");
 const { existsSync } = require("fs");
-const os = require("os");
-const { promisify } = require("util");
-const exec = promisify(require("child_process").exec);
 const Sequelize = require("sequelize");
 const { DiscordTogether } = require("discord-together");
 
@@ -17,23 +14,15 @@ intents = new Discord.Intents(3243773);
 const client = new Discord.Client({ intents: intents });
 
 client.commands = new Discord.Collection();
-client.legCommands = new Discord.Collection();
-client.aliases = new Discord.Collection();
 client.discordTogether = new DiscordTogether(client);
 
 const cmdFiles = require("./util/getAllFiles")("./cmds/").filter((file) =>
   file.endsWith(".js")
 );
-const slashCmdFiles = cmdFiles;
 
 for (const file of cmdFiles) {
   const cmd = require(`${file}`);
   client.commands.set(cmd.data.name, cmd);
-  if (cmd.aliases) {
-    cmd.aliases.forEach((alias) => {
-      client.aliases.set(alias, cmd.name);
-    });
-  } else continue;
 }
 
 let db;
@@ -97,13 +86,6 @@ client.on("ready", () => {
 
   console.log(client.user.tag);
 });
-
-// client.on("guildCreate", async (guild) => {
-//   if (!defC) return;
-//   defC.send(
-//     "Thanks for adding me UwU, you can see my commands by doing `s!help`"
-//   );
-// });
 
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isCommand()) return;
