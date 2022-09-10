@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 const { promisify } = require("util");
 const exec = promisify(require("child_process").exec);
 let os = require("os");
@@ -44,7 +44,7 @@ module.exports = {
 
     let serverOwner = await msg.guild.fetchOwner();
 
-    let infoEm = new Discord.MessageEmbed()
+    let infoEm = new Discord.EmbedBuilder()
       .setTitle("Info")
       .addFields(
         { name: "Server Info", value: "Information about the server" },
@@ -96,7 +96,7 @@ module.exports = {
         { name: `System Uptime`, value: "`" + uptime + "`", inline: true },
         { name: `Bot Uptime`, value: "`" + botUptime + "`", inline: true }
       )
-      .setThumbnail(guild.iconURL({ dynamic: true }))
+      .setThumbnail(guild.iconURL())
       .setColor(config.embedColor);
 
     msg.reply({ embeds: [infoEm] });

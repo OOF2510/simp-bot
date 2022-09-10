@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 const { existsSync, mkdirSync, } = require("fs");
 const { promisify } = require("util");
 const exec = promisify(require("child_process").exec);

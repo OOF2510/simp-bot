@@ -1,5 +1,5 @@
 const { ping } = require("@oof2510/ping");
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -11,7 +11,7 @@ module.exports = {
 
     // var dbPing = await ping(config.mysql.ip);
 
-    const pingEm = new Discord.MessageEmbed()
+    const pingEm = new Discord.EmbedBuilder()
       .setTitle(`Pong UwU!`)
       .setAuthor(botNick, client.user.avatarURL())
       .addFields(

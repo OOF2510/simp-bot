@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -16,9 +16,9 @@ module.exports = {
 
     let userNick = mem ? mem.displayName : user.username;
 
-    let av = user.avatarURL({ dynamic: true, size: 512 });
+    let av = user.avatarURL({ size: 512 });
 
-    let avEm = new Discord.MessageEmbed()
+    let avEm = new Discord.EmbedBuilder()
       .setTitle(`${userNick}'s Avatar`)
       .setImage(av)
       .setColor(config.embedColor)

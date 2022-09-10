@@ -4,7 +4,7 @@ function checkDomain(domain) {
   const regex = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/;
   return regex.test(domain);
 }
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -40,7 +40,7 @@ module.exports = {
     let abuseEmail = domainInfo["Registrar Abuse Contact Email"];
     let regOrg = domainInfo["Registrant Organization"];
 
-    let widEm = new Discord.MessageEmbed()
+    let widEm = new Discord.EmbedBuilder()
       .setTitle(`Domain info for ${domainName}`)
       .setColor(config.embedColor)
       .addFields(

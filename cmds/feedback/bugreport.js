@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -18,7 +18,7 @@ module.exports = {
     const repCh3 = client.channels.cache.get("825841694712004669");
     const rep = interaction.options.getString("bug");
 
-    const repEm = new Discord.MessageEmbed()
+    const repEm = new Discord.EmbedBuilder()
       .setTitle(`New bug report`)
       .addFields({ name: `Report:`, value: `${rep}` })
       .setFooter(`Reported by: ${msg.author.tag}`, msg.author.avatarURL())

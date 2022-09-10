@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -18,7 +18,7 @@ module.exports = {
     const sugCh3 = client.channels.cache.get("825840766769299527");
     const sug = interaction.options.getString("suggestion");
 
-    const sugEm = new Discord.MessageEmbed()
+    const sugEm = new Discord.EmbedBuilder()
       .setTitle(`New suggestion`)
       .addFields({ name: `Suggestion:`, value: `${sug}` })
       .setFooter(`Suggested by: ${msg.author.tag}`, msg.author.avatarURL())

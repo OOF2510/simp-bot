@@ -1,5 +1,5 @@
 const milsecConvert = require("../../util/convertMilsec");
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -36,7 +36,7 @@ module.exports = {
     var MemAge = today.getTime() - MemJoined.getTime();
     let memAge = milsecConvert(MemAge);
 
-    let av = user.avatarURL({ dynamic: true });
+    let av = user.avatarURL();
 
     let flags = await user.fetchFlags();
     var Badges = flags.toArray();
@@ -45,7 +45,7 @@ module.exports = {
     if (Badges.length == 0) badges = "No badges";
     else badges = Badges.join(", ");
 
-    let wiEm = new Discord.MessageEmbed()
+    let wiEm = new Discord.EmbedBuilder()
       .setAuthor(user.tag, av)
       .setDescription(`${user}`)
       .setThumbnail(av)

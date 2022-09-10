@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -7,7 +7,7 @@ module.exports = {
   async execute(interaction, client, config, db, Discord, allowed) {
     let msg = interaction;
 
-    let supEm = new Discord.MessageEmbed()
+    let supEm = new Discord.EmbedBuilder()
       .setTitle(`Join Simp Bot Support!`)
       .setURL("https://discord.gg/zHtfa8GdPx")
       .setTimestamp();

@@ -10,7 +10,7 @@ else config = require("./config.json");
 
 var allowed = config.allowed;
 
-intents = new Discord.Intents(3243773);
+intents = new Discord.IntentsBitField(3243773);
 const client = new Discord.Client({ intents: intents });
 
 client.commands = new Discord.Collection();
@@ -88,7 +88,7 @@ client.on("ready", () => {
 });
 
 client.on("interactionCreate", async (interaction) => {
-  if (!interaction.isCommand()) return;
+  if (interaction.type != Discord.InteractionType.ApplicationCommand) return;
   const { commandName } = interaction;
   const command = client.commands.get(commandName);
   if (!command) return;

@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -8,7 +8,7 @@ module.exports = {
     let msg = interaction;
 
     const row = new Discord.MessageActionRow().addComponents(
-      new Discord.MessageButton()
+      new Discord.ButtonBuilder()
         .setStyle("LINK")
         .setLabel("GitHub")
         .setURL("https://github.com/OOF2510/simp-bot-rewritten")
