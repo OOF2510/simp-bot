@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { existsSync, mkdirSync, } = require("fs");
+const { existsSync, mkdirSync } = require("fs");
 const { promisify } = require("util");
 const exec = promisify(require("child_process").exec);
 const voice = require("@discordjs/voice");
@@ -25,7 +25,7 @@ module.exports = {
     let timeStamp = new Date();
     let filename = "./temp/" + guild.name + `-` + timeStamp + ".mp3";
 
-    message = message.replaceAll("'", '')
+    message = message.replaceAll("'", "");
 
     await exec(`gtts-cli '${message}' --output "${filename}"`);
 

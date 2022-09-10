@@ -1,4 +1,4 @@
-const { readdirSync, statSync  } = require("fs");
+const { readdirSync, statSync } = require("fs");
 const path = require("path");
 
 module.exports = function getAllFiles(dirPath, arrayOfFiles) {

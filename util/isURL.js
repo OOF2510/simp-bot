@@ -9,4 +9,4 @@ module.exports = function isURL(str) {
     "i"
   ); // fragment locator
   return !!pattern.test(str);
-}
+};

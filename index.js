@@ -40,8 +40,7 @@ client.on("ready", () => {
   console.log("Ready!");
   console.log(`Logged in as ${client.user.tag}!`);
   console.log(client);
-  if (existsSync("./temp/lastStatus.json"))
-    require("./util/setStatus")(client);
+  if (existsSync("./temp/lastStatus.json")) require("./util/setStatus")(client);
   else
     client.user.setActivity(
       `${client.guilds.cache.size} servers! | ${config.prefix}help`,
@@ -69,9 +68,9 @@ client.on("ready", () => {
   const { Routes } = require("discord-api-types/v10");
   const { token } = config;
   const commands = [];
-  const devCmds = []
+  const devCmds = [];
   const clientId = config.clientID;
-  const sbservID = config.devCmdServerID
+  const sbservID = config.devCmdServerID;
   for (const file of cmdFiles) {
     const command = require(`${file}`);
     commands.push(command.data.toJSON());
@@ -89,10 +88,9 @@ client.on("ready", () => {
         Routes.applicationGuildCommands(clientId, "786722539250516007"),
         { body: commands }
       );
-      await rest.put(
-        Routes.applicationGuildCommands(clientId, sbservID),
-        { body: devCmds }
-      );
+      await rest.put(Routes.applicationGuildCommands(clientId, sbservID), {
+        body: devCmds,
+      });
       console.log("Successfully reloaded application (/) commands.");
     } catch (error) {
       console.error(error);
@@ -124,7 +122,8 @@ client.on("interactionCreate", async (interaction) => {
       `An error occured when **${interaction.author.tag}** tried to run **${commandName}**: \`\`\`${error}\`\`\``
     );
     await interaction.reply({
-      content: "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
+      content:
+        "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
       ephemeral: true,
     });
   }

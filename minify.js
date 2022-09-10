@@ -1,5 +1,11 @@
 const uglify = require("uglify-js");
-const { existsSync, mkdirSync, writeFile, readFileSync, copyFile } = require("fs");
+const {
+  existsSync,
+  mkdirSync,
+  writeFile,
+  readFileSync,
+  copyFile,
+} = require("fs");
 
 const path = require("path");
 
@@ -24,17 +30,13 @@ for (const File of cmdFiles) {
     mkdirSync("./minified/cmds");
   }
 
-  writeFile(
-    `./minified/cmds/${fileName}.min.js`,
-    result.code,
-    function (err) {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log("File was successfully saved.");
-      }
+  writeFile(`./minified/cmds/${fileName}.min.js`, result.code, function (err) {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log("File was successfully saved.");
     }
-  );
+  });
 }
 
 const index = readFileSync("./index.js", "utf-8");
