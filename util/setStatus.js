@@ -1,4 +1,3 @@
-let config = require("../config.json");
 let lastStatus = require("../temp/lastStatus.json");
 
 module.exports = function (client) {
@@ -8,7 +7,7 @@ module.exports = function (client) {
     });
   else
     return client.user.setActivity(
-      `${client.guilds.cache.size} servers! | ${config.prefix}help`,
+      `${client.guilds.cache.size} servers!`,
       { type: "WATCHING" }
     );
 };

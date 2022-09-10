@@ -13,7 +13,6 @@ module.exports = {
 
     const pingEm = new Discord.EmbedBuilder()
       .setTitle(`Pong UwU!`)
-      .setAuthor(botNick, client.user.avatarURL())
       .addFields(
         { name: `Bot Ping`, value: `\`${client.ws.ping}ms\``, inline: true } //,
         // {

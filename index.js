@@ -43,7 +43,7 @@ client.on("ready", () => {
   if (existsSync("./temp/lastStatus.json")) require("./util/setStatus")(client);
   else
     client.user.setActivity(
-      `${client.guilds.cache.size} servers! | ${config.prefix}help`,
+      `${client.guilds.cache.size} servers!`,
       { type: "WATCHING" }
     );
   const auth = config.mysql; // bartholemew was here
