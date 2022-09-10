@@ -7,7 +7,7 @@ WORKDIR /usr/src/SimpBot
 COPY . ./
 
 RUN corepack enable \
-&& yarn set version stable
+&& yarn set version latest
 
 RUN yarn install 
 
