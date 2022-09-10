@@ -34,6 +34,6 @@ module.exports = {
         if (!msg.member.voice.channel)
             return msg.reply("You must be in a voice channel to do that!");
 
-        client.discordTogether.createTogetherCode(member.voice.channel.id, `${activity}`).then(async invite => { return msg.reply(`${invite.code}`) })
+        client.discordTogether.createTogetherCode(member.voice.channel.id, `${activity}`).then(async invite => { return msg.reply(`Click the **link**: <${invite.code}>`) })
     },
 };
