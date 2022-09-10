@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, ActivityType } = require("discord.js");
 const { existsSync, mkdirSync, unlinkSync, writeFileSync } = require("fs");
 
 module.exports = {
@@ -29,14 +29,14 @@ module.exports = {
         `Only the developer & certian whitelisted users can use that command!`,
         { ephemeral: true }
       );
-    let type = interaction.options.getString("status-type");
+    let Type = interaction.options.getString("status-type");
     let content = interaction.options.getString("content");
 
     if (!existsSync("./temp")) {
       mkdirSync("./temp");
     }
 
-    if (type === "reset") {
+    if (Type === "reset") {
       await client.user.setActivity(
         `${client.guilds.cache.size} servers! | ${config.prefix}help`,
         {
@@ -49,6 +49,28 @@ module.exports = {
       }
 
       return msg.reply("done");
+    }
+
+    var type
+    switch (Type) {
+      case 'PLAYING':
+        type = ActivityType.Playing
+        break;
+      case 'STREAMING':
+        type = ActivityType.Streaming
+        break;
+      case 'LISTENING':
+        type = ActivityType.Listening
+        break;
+      case 'WATCHING':
+        type = ActivityType.Watching
+        break;
+      case 'COMPETING':
+        type = ActivityType.Competing
+        break;
+
+      default:
+        break;
     }
 
     await client.user.setActivity(`${content}`, { type: type });

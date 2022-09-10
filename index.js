@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const { existsSync } = require("fs");
 const Sequelize = require("sequelize");
 const { DiscordTogether } = require("discord-together");
+const { ActivityType } = require("discord.js");
 
 let config;
 var startupArgs = process.argv.slice(2);
@@ -44,7 +45,7 @@ client.on("ready", () => {
   else
     client.user.setActivity(
       `${client.guilds.cache.size} servers!`,
-      { type: "WATCHING" }
+      { type: ActivityType.Watching }
     );
   const auth = config.mysql; // bartholemew was here
   const options = {
