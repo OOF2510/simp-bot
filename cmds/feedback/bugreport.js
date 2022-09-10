@@ -21,7 +21,7 @@ module.exports = {
     const repEm = new Discord.EmbedBuilder()
       .setTitle(`New bug report`)
       .addFields({ name: `Report:`, value: `${rep}` })
-      .setFooter(`Reported by: ${msg.author.tag}`, msg.author.avatarURL())
+      .setFooter({ text: `Reported by: ${msg.author.tag}`, iconUrl: `${msg.author.avatarURL()}` })
       .setColor(config.embedColor)
       .setTimestamp();
 

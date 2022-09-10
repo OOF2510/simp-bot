@@ -11,7 +11,7 @@ module.exports = {
     let { quote } = await kanye();
     let quoteEm = new Discord.EmbedBuilder()
       .setTitle(`"${quote}"`)
-      .setFooter(`- Kanye West`)
+      .setFooter({ text: `- Kanye West` })
       .setColor(config.embedColor);
     msg.reply({ embeds: [quoteEm] });
   },

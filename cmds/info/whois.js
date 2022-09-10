@@ -46,7 +46,7 @@ module.exports = {
     else badges = Badges.join(", ");
 
     let wiEm = new Discord.EmbedBuilder()
-      .setAuthor(user.tag, av)
+      .setAuthor({name: `${user.tag}`, iconURL: `${av}`})
       .setDescription(`${user}`)
       .setThumbnail(av)
       .setColor(config.embedColor)
