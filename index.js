@@ -57,7 +57,7 @@ client.on("ready", () => {
 
   // start loadin them slash commands
   const { REST } = require("@discordjs/rest");
-  const { Routes } = require("discord-api-types/v9");
+  const { Routes } = require("discord-api-types/v10");
   const { token } = config;
   const commands = [];
   const clientId = config.clientID;
@@ -65,7 +65,7 @@ client.on("ready", () => {
     const command = require(`${file}`);
     commands.push(command.data.toJSON());
   }
-  const rest = new REST({ version: "9" }).setToken(token);
+  const rest = new REST({ version: "10" }).setToken(token);
   (async () => {
     try {
       console.log("Started refreshing application (/) commands.");
