@@ -38,9 +38,9 @@ module.exports = {
 
     if (Type === "reset") {
       await client.user.setActivity(
-        `${client.guilds.cache.size} servers! | ${config.prefix}help`,
+        `${client.guilds.cache.size} servers!`,
         {
-          type: "WATCHING",
+          type: ActivityType.Watching,
         }
       );
       // delete last status file if exists

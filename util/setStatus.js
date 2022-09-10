@@ -1,4 +1,5 @@
 let lastStatus = require("../temp/lastStatus.json");
+let { ActivityType } = require('discord.js')
 
 module.exports = function (client) {
   if (lastStatus)
@@ -8,6 +9,6 @@ module.exports = function (client) {
   else
     return client.user.setActivity(
       `${client.guilds.cache.size} servers!`,
-      { type: "WATCHING" }
+      { type: ActivityType.Watching }
     );
 };
