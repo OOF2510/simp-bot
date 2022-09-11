@@ -11,8 +11,13 @@ else config = require("./config.json");
 
 var allowed = config.allowed;
 
+// NORMAL
 intents = new Discord.IntentsBitField(3243773);
 const client = new Discord.Client({ intents: intents });
+
+// NORMAL + MESSAGE CONTENT
+// intents = new Discord.IntentsBitField(3276541);
+// const client = new Discord.Client({ intents: intents });
 
 client.commands = new Discord.Collection();
 client.discordTogether = new DiscordTogether(client);
@@ -129,5 +134,12 @@ client.on("interactionCreate", async (interaction) => {
     });
   }
 });
+
+// client.on('messageCreate', async (msg) => {
+//   if (msg.channel.type == Discord.ChannelType.GuildNews) {
+//     if (msg.crosspostable) return msg.crosspost()
+//     else return
+//   } else return
+// })
 
 client.login(config.token);
