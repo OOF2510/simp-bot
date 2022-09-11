@@ -25,7 +25,7 @@ module.exports = {
 
         if (reason) {
             try {
-                await user.send(`You have been warned in **${msg.guild}** by **${msg.author.tag} for \`${reason}\``)
+                await user.send(`You have been warned in **${msg.guild}** by **${msg.author.tag}** for \`${reason}\``)
                 msg.reply(`${user.tag} has been warned!`)
             } catch (e) {
                 return msg.reply('Cannot warn this user! They probably have me blocked \:(')
