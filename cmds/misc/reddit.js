@@ -18,7 +18,7 @@ module.exports = {
     
     try {
         let em = new Discord.embedBuilder()
-        let post = await getPost(sub);
+        let post = await getPost(`${sub}`);
         switch (post.selftext) {
           case "":
             em.setTitle(`${post.title? post.title : 'Error getting title'}`).setImage(`${post.url}`).setColor(config.embedColor).setFooter({ text: `${post.subreddit_name_prefixed}`, iconURL: 'https://logodownload.org/wp-content/uploads/2018/02/reddit-logo-16.png' })
@@ -30,7 +30,7 @@ module.exports = {
             break;
         }
       } catch (e) {
-        console.log("Are you sure that subreddit exists?");
+        msg.reply(`Are you sure that subreddit exists?\n\`${e}\``);
       }
   },
 };
