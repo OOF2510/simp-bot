@@ -164,7 +164,7 @@ client.distube
   )
   .on("addSong", (queue, song) =>
     queue.textChannel.send(
-      `${client.emotes.success} | Added ${song.name} - \`${song.formattedDuration}\` to the queue\n\`Requested by ${song.user.tag}\``
+      `${client.emotes.success} | Added \`${song.name}\` - \`${song.formattedDuration}\` to the queue\n\`Requested by ${song.user.tag}\``
     )
   )
   .on("addList", (queue, playlist) =>

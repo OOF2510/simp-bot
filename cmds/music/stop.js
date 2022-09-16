@@ -8,10 +8,12 @@ module.exports = {
     let msg = interaction;
     if (!msg.member.voice.channel)
       return msg.reply("You must be in a voice channel to do that!");
-    
-      const queue = client.distube.getQueue(msg)
-      if (!queue) return msg.reply(`${client.emotes.error} | There is nothing playing!`)
-      queue.stop()
-      msg.reply(`${client.emotes.success} | Stopped!`)
+
+    const queue = client.distube.getQueue(msg);
+    if (!queue)
+      return msg.reply(`${client.emotes.error} | There is nothing playing!`);
+    queue.stop();
+    client.distube.voices.leave(message);
+    msg.reply(`${client.emotes.success} | Stopped & left!`);
   },
 };

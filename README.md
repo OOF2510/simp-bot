@@ -47,7 +47,6 @@ A Discord bot that is a simp
     "schema": "sql-schema-name"
   },
   "embedColor": "hex-color-code",
-  "lavalinkHost": "your-lavalink-host",
   "hfkey": "your-huggingface-api-key",
   "allowed": ["your-user-id"]
 }

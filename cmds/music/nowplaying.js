@@ -13,8 +13,6 @@ module.exports = {
         `${client.emotes.error} | There is nothing in the queue right now!`
       );
     const song = queue.songs[0];
-    msg.reply(
-      `${client.emotes.play} | I'm playing **\`${song.name}\`**`
-    );
+    msg.reply(`${client.emotes.play} | I'm playing **\`${song.name}\`**`);
   },
 };

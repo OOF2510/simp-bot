@@ -9,7 +9,6 @@ sqlUser = input("MySQL Username: ")
 sqlPass = input("MySQL Password: ")
 sqlSchema = input("MySQL Schema Name: ")
 embedColor = input("Embed Color (hex without the #): ")
-lavalinkHost = input("Lavalink Host: ")
 hfKey = input("Huggingface API Key: ")
 uID = input("Your Discord User Id: ")
 
@@ -25,7 +24,6 @@ configJson = "{" + f"""
     \"schema\": \"${sqlSchema}\"
   """ + "}," + f"""
   \"embedColor\": \"0x{embedColor}\",
-  \"lavalinkHost\": \"{lavalinkHost}\",
   \"hfKey\": \"{hfKey}\",
   \"allowed\": [
     \"{uID}\"
