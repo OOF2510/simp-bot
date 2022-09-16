@@ -13,18 +13,20 @@ module.exports = {
     ),
   async execute(interaction, client, config, db, Discord, allowed) {
     let msg = interaction;
-    let text = interaction.options.getString("startingText");
+    let text = interaction.options.getString("startingtext");
 
-    msg.channel.send("Generating text, please wait...");
-    msg.channel.send("COMMAND BROKEN");
+    await msg.reply({
+      content: "Generating text, please wait...",
+      ephemeral: false,
+    });
 
-    // hf.request({
-    //   text: `${text}`,
-    //   model: "EleutherAI/gpt-neo-2.7B",
-    //   api_key: `${config.hfKey}`,
-    //   return_type: "STRING",
-    // }).then((data) => {
-    //   msg.reply(data);
-    // });
+    hf.request({
+      text: text,
+      model: "gpt2",
+      api_key: `${config.hfKey}`,
+      return_type: "STRING",
+    }).then((generatedText) => {
+      msg.editReply({ content: `${generatedText}`, ephemeral: false });
+    });
   },
 };

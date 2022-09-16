@@ -150,10 +150,7 @@ client.on("interactionCreate", async (interaction) => {
   }
 });
 
-const status = (queue) =>
-  `Volume: \`${queue.volume}%\` | Autoplay: \`${
-    queue.autoplay ? "On" : "Off"
-  }\``;
+const status = (queue) => `Volume: \`${queue.volume}%\`}\``;
 client.distube
   .on("playSong", (queue, song) =>
     queue.textChannel.send(

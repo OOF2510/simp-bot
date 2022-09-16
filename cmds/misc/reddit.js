@@ -32,7 +32,8 @@ module.exports = {
               text: `${post.subreddit_name_prefixed}`,
               iconURL:
                 "https://logodownload.org/wp-content/uploads/2018/02/reddit-logo-16.png",
-            });
+            })
+            .setURL(`https://www.reddit.com${post.permalink}`);
           msg.reply({ embeds: [em] });
           break;
         default:
@@ -45,13 +46,14 @@ module.exports = {
               text: `${post.subreddit_name_prefixed}`,
               iconURL:
                 "https://logodownload.org/wp-content/uploads/2018/02/reddit-logo-16.png",
-            });
+            })
+            .setURL(`https://www.reddit.com${post.permalink}`);
           msg.reply({ embeds: [em] });
           break;
       }
     } catch (e) {
       msg.reply({
-        content: `Are you sure that subreddit exists?\n\`${e}\``,
+        content: `Are you sure that subreddit exists?`,
         ephemeral: true,
       });
     }
