@@ -16,8 +16,6 @@ A Discord bot that is a simp
 
 ### [Join the support server!](https://discord.gg/zHtfa8GdPx)
 
-### [Music Portion](https://github.com/OOF2510/sbmusic)
-
 # Self-hosting the bot
 
 ## Universial
