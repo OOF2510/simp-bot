@@ -640,6 +640,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"consola@npm:^2.15.3":
+  version: 2.15.3
+  resolution: "consola@npm:2.15.3"
+  checksum: 8ef7a09b703ec67ac5c389a372a33b6dc97eda6c9876443a60d76a3076eea0259e7f67a4e54fd5a52f97df73690822d090cf8b7e102b5761348afef7c6d03e28
+  languageName: node
+  linkType: hard
+
 "console-control-strings@npm:^1.1.0":
   version: 1.1.0
   resolution: "console-control-strings@npm:1.1.0"
@@ -2144,6 +2151,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"random-reddit@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "random-reddit@npm:2.0.3"
+  dependencies:
+    consola: ^2.15.3
+    node-fetch: ^2.6.1
+  peerDependencies:
+    reddit-interfaces: ^1.0.7
+  checksum: 0d8d83deec2bef9cff8e5e45c7a503eacab238d67c4a658ab9e7905d10501c04084145fbd247f81c6a39902c30e525392e871866600fbdb7759a379c909049fd
+  languageName: node
+  linkType: hard
+
 "readable-stream@npm:^3.6.0":
   version: 3.6.0
   resolution: "readable-stream@npm:3.6.0"
@@ -2396,6 +2415,7 @@ __metadata:
     nodemon: ^2.0.15
     opusscript: ^0.0.8
     prettier: ^2.6.0
+    random-reddit: ^2.0.3
     sequelize: ^6.21.6
     uglify-js: ^3.15.3
     utf-8-validate: ^5.0.9

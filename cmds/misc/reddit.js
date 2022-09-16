@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
+const { getPost } = require('random-reddit')
 
 module.exports = {
   data: new SlashCommandBuilder()

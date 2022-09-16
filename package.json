@@ -38,6 +38,7 @@
     "mysql2": "^2.3.3",
     "node-url-shortener": "^2.0.1",
     "opusscript": "^0.0.8",
+    "random-reddit": "^2.0.3",
     "sequelize": "^6.21.6",
     "utf-8-validate": "^5.0.9",
     "whois-light": "^1.1.5"
