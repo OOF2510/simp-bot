@@ -130,6 +130,8 @@ client.on("interactionCreate", async (interaction) => {
   const { commandName } = interaction;
   const command = client.commands.get(commandName);
   if (!command) return;
+  if (!interaction.inGuild())
+    return interaction.reply(`You must use Simp Bot in a server`);
 
   interaction.author = interaction.user;
   interaction.send = interaction.reply;
