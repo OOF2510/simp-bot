@@ -19,6 +19,7 @@ module.exports = {
     try {
         let em = new Discord.EmbedBuilder()
         let post = await getPost(`${sub}`);
+        if (post.over_18 && !msg.channel.nsfw) return msg.reply({content: `Oops! That post is NSFW, and this channel is not!`, ephemeral: true})
         switch (post.selftext) {
           case "":
             em.setTitle(`${post.title? post.title : 'Error getting title'}`).setImage(`${post.url}`).setColor(config.embedColor).setFooter({ text: `${post.subreddit_name_prefixed}`, iconURL: 'https://logodownload.org/wp-content/uploads/2018/02/reddit-logo-16.png' })
@@ -30,7 +31,7 @@ module.exports = {
             break;
         }
       } catch (e) {
-        msg.reply(`Are you sure that subreddit exists?\n\`${e}\``);
+        msg.reply({content: `Are you sure that subreddit exists?\n\`${e}\``, ephemeral: true});
       }
   },
 };
