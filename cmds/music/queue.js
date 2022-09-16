@@ -2,8 +2,8 @@ const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("cmd_name")
-    .setDescription("cmd desc")
+    .setName("queue")
+    .setDescription("sends the current music queue")
     ,
   async execute(interaction, client, config, db, Discord, allowed) {
     let msg = interaction

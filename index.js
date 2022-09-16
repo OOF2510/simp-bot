@@ -151,18 +151,20 @@ client.on("interactionCreate", async (interaction) => {
 });
 
 const status = (queue) =>
-  `Volume: \`${queue.volume}%\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
+  `Volume: \`${queue.volume}%\` | Autoplay: \`${
+    queue.autoplay ? "On" : "Off"
+  }\``;
 client.distube
   .on("playSong", (queue, song) =>
     queue.textChannel.send(
       `${client.emotes.play} | Playing \`${song.name}\` - \`${
         song.formattedDuration
-      }\`\n${status(queue)}`
+      }\`\n\`Requested by ${song.user.tag}\`\n${status(queue)}`
     )
   )
   .on("addSong", (queue, song) =>
     queue.textChannel.send(
-      `${client.emotes.success} | Added ${song.name} - \`${song.formattedDuration}\` to the queue`
+      `${client.emotes.success} | Added ${song.name} - \`${song.formattedDuration}\` to the queue\n\`Requested by ${song.user.tag}\``
     )
   )
   .on("addList", (queue, playlist) =>
