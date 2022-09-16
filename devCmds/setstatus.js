@@ -37,12 +37,9 @@ module.exports = {
     }
 
     if (Type === "reset") {
-      await client.user.setActivity(
-        `${client.guilds.cache.size} servers!`,
-        {
-          type: ActivityType.Watching,
-        }
-      );
+      await client.user.setActivity(`${client.guilds.cache.size} servers!`, {
+        type: ActivityType.Watching,
+      });
       // delete last status file if exists
       if (existsSync("./temp/lastStatus.json")) {
         unlinkSync("./temp/lastStatus.json");
@@ -51,22 +48,22 @@ module.exports = {
       return msg.reply("done");
     }
 
-    var type
+    var type;
     switch (Type) {
-      case 'PLAYING':
-        type = ActivityType.Playing
+      case "PLAYING":
+        type = ActivityType.Playing;
         break;
-      case 'STREAMING':
-        type = ActivityType.Streaming
+      case "STREAMING":
+        type = ActivityType.Streaming;
         break;
-      case 'LISTENING':
-        type = ActivityType.Listening
+      case "LISTENING":
+        type = ActivityType.Listening;
         break;
-      case 'WATCHING':
-        type = ActivityType.Watching
+      case "WATCHING":
+        type = ActivityType.Watching;
         break;
-      case 'COMPETING':
-        type = ActivityType.Competing
+      case "COMPETING":
+        type = ActivityType.Competing;
         break;
 
       default:

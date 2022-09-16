@@ -3,6 +3,10 @@ const { existsSync } = require("fs");
 const Sequelize = require("sequelize");
 const { DiscordTogether } = require("discord-together");
 const { ActivityType } = require("discord.js");
+const { DisTube } = require("distube");
+const { SpotifyPlugin } = require("@distube/spotify");
+const { SoundCloudPlugin } = require("@distube/soundcloud");
+const { YtDlpPlugin } = require("@distube/yt-dlp");
 
 let config;
 var startupArgs = process.argv.slice(2);
@@ -21,6 +25,18 @@ const client = new Discord.Client({ intents: intents });
 
 client.commands = new Discord.Collection();
 client.discordTogether = new DiscordTogether(client);
+client.distube = new DisTube(client, {
+  leaveOnStop: false,
+  emitNewSongOnly: true,
+  emitAddSongWhenCreatingQueue: false,
+  emitAddListWhenCreatingQueue: false,
+  plugins: [
+    new SpotifyPlugin({ emitEventsAfterFetching: true }),
+    new SoundCloudPlugin(),
+    new YtDlpPlugin(),
+  ],
+});
+client.emotes = require("./distube.json").emoji;
 
 const cmdFiles = require("./util/getAllFiles")("./cmds/").filter((file) =>
   file.endsWith(".js")
@@ -48,10 +64,9 @@ client.on("ready", () => {
   console.log(client);
   if (existsSync("./temp/lastStatus.json")) require("./util/setStatus")(client);
   else
-    client.user.setActivity(
-      `${client.guilds.cache.size} servers!`,
-      { type: ActivityType.Watching }
-    );
+    client.user.setActivity(`${client.guilds.cache.size} servers!`, {
+      type: ActivityType.Watching,
+    });
   const auth = config.mysql; // bartholemew was here
   const options = {
     host: auth.ip,
@@ -134,6 +149,47 @@ client.on("interactionCreate", async (interaction) => {
     });
   }
 });
+
+const status = (queue) =>
+  `Volume: \`${queue.volume}%\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
+client.distube
+  .on("playSong", (queue, song) =>
+    queue.textChannel.send(
+      `${client.emotes.play} | Playing \`${song.name}\` - \`${
+        song.formattedDuration
+      }\`\n${status(queue)}`
+    )
+  )
+  .on("addSong", (queue, song) =>
+    queue.textChannel.send(
+      `${client.emotes.success} | Added ${song.name} - \`${song.formattedDuration}\` to the queue`
+    )
+  )
+  .on("addList", (queue, playlist) =>
+    queue.textChannel.send(
+      `${client.emotes.success} | Added \`${playlist.name}\` playlist (${
+        playlist.songs.length
+      } songs) to queue\n${status(queue)}`
+    )
+  )
+  .on("error", (channel, e) => {
+    if (channel)
+      channel.send(
+        `${client.emotes.error} | An error encountered: ${e
+          .toString()
+          .slice(0, 1974)}`
+      );
+    else console.error(e);
+  })
+  .on("empty", (channel) =>
+    channel.send("Voice channel is empty! Leaving the channel...")
+  )
+  .on("searchNoResult", (message, query) =>
+    message.channel.send(
+      `${client.emotes.error} | No result found for \`${query}\`!`
+    )
+  )
+  .on("finish", (queue) => queue.textChannel.send("Finished!"));
 
 // client.on('messageCreate', async (msg) => {
 //   if (msg.channel.type == Discord.ChannelType.GuildNews) {

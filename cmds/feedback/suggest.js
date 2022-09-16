@@ -21,7 +21,10 @@ module.exports = {
     const sugEm = new Discord.EmbedBuilder()
       .setTitle(`New suggestion`)
       .addFields({ name: `Suggestion:`, value: `${sug}` })
-      .setFooter({ text: `Suggested by: ${msg.author.tag}`, iconURL: `${msg.author.avatarURL()}` })
+      .setFooter({
+        text: `Suggested by: ${msg.author.tag}`,
+        iconURL: `${msg.author.avatarURL()}`,
+      })
       .setColor(config.embedColor)
       .setTimestamp();
 
