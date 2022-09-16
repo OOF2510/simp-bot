@@ -17,7 +17,7 @@ module.exports = {
     let sub = interaction.options.getString("subreddit");
     
     try {
-        let em = new Discord.embedBuilder()
+        let em = new Discord.EmbedBuilder()
         let post = await getPost(`${sub}`);
         switch (post.selftext) {
           case "":
