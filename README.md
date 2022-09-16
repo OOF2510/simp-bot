@@ -65,4 +65,4 @@ docker run -it simpbot
 # The original simp bot
 
 I reworte [Simp bot 10000](https://glitch.com/~simpbota) because it wouldn't let me add it to my server, I tried hosting it myself, but it
-kept crashing, so I rewrote the code and added a bunch of stuff of my own onto it. Simp bot 10000 seems to be abandoned now and is never online.
+kept crashing, so I rewrote the code and added a bunch of stuff of my own onto it. Simp bot 10000 seems to be abandoned now and is never online. I have reached out to the creator of Simp Bot 10000 via google fourms asking them if they would be interested in working on simp bot with me, no response yet.
