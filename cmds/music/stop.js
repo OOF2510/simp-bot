@@ -13,7 +13,6 @@ module.exports = {
     if (!queue)
       return msg.reply(`${client.emotes.error} | There is nothing playing!`);
     queue.stop();
-    client.distube.voices.leave(message);
     msg.reply(`${client.emotes.success} | Stopped & left!`);
   },
 };

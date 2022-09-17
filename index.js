@@ -26,7 +26,7 @@ const client = new Discord.Client({ intents: intents });
 client.commands = new Discord.Collection();
 client.discordTogether = new DiscordTogether(client);
 client.distube = new DisTube(client, {
-  leaveOnStop: false,
+  leaveOnStop: true,
   emitNewSongOnly: true,
   emitAddSongWhenCreatingQueue: false,
   emitAddListWhenCreatingQueue: false,
@@ -151,7 +151,7 @@ client.on("interactionCreate", async (interaction) => {
   }
 });
 
-const status = (queue) => `Volume: \`${queue.volume}%\`}\``;
+const status = (queue) => `Volume: \`${queue.volume}%\``;
 client.distube
   .on("playSong", (queue, song) =>
     queue.textChannel.send(
@@ -181,9 +181,6 @@ client.distube
       );
     else console.error(e);
   })
-  .on("empty", (channel) =>
-    channel.send("Voice channel is empty! Leaving the channel...")
-  )
   .on("searchNoResult", (message, query) =>
     message.channel.send(
       `${client.emotes.error} | No result found for \`${query}\`!`
