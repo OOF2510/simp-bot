@@ -16,12 +16,12 @@ module.exports = {
     if (!msg.member.voice.channel)
       return msg.reply("You must be in a voice channel to do that!");
 
+    await msg.reply({ content: `Searching \`${song}\``, ephemeral: true });
+
     client.distube.play(msg.member.voice.channel, song, {
       member: msg.member,
       textChannel: msg.channel,
       msg,
     });
-
-    interaction.reply({ content: `Searching \`${song}\``, ephemeral: true });
   },
 };
