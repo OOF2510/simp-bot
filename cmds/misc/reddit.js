@@ -16,8 +16,18 @@ module.exports = {
     let sub = interaction.options.getString("subreddit");
 
     try {
-      let em = new Discord.EmbedBuilder();
       let post = await getPost(`${sub}`);
+
+      let em = new Discord.EmbedBuilder()
+        .setTitle(`${post.title ? post.title : "Error getting title"}`)
+        .setColor(config.embedColor)
+        .setFooter({
+          text: `${post.subreddit_name_prefixed}`,
+          iconURL:
+            "https://logodownload.org/wp-content/uploads/2018/02/reddit-logo-16.png",
+        })
+        .setURL(`https://www.reddit.com${post.permalink}`);
+
       if (post.over_18 && !msg.channel.nsfw)
         return msg.reply({
           content: `Oops! That post is NSFW, and this channel is not!`,
@@ -25,29 +35,22 @@ module.exports = {
         });
       switch (post.selftext) {
         case "":
-          em.setTitle(`${post.title ? post.title : "Error getting title"}`)
-            .setImage(`${post.url}`)
-            .setColor(config.embedColor)
-            .setFooter({
-              text: `${post.subreddit_name_prefixed}`,
-              iconURL:
-                "https://logodownload.org/wp-content/uploads/2018/02/reddit-logo-16.png",
-            })
-            .setURL(`https://www.reddit.com${post.permalink}`);
-          msg.reply({ embeds: [em] });
+          em.setImage(`${post.url}`);
+
+          let row = new Discord.MessageActionRow().addComponents(
+            new Discord.ButtonBuilder()
+              .setStyle("LINK")
+              .setLabel("Not loading?")
+              .setURL(`${post.url}`)
+          );
+
+          msg.reply({ embeds: [em], components: [row] });
           break;
         default:
-          em.setTitle(`${post.title ? post.title : "Error getting title"}`)
-            .setDescription(
-              `${post.selftext ? post.selftext : "Error getting post content"}`
-            )
-            .setColor(config.embedColor)
-            .setFooter({
-              text: `${post.subreddit_name_prefixed}`,
-              iconURL:
-                "https://logodownload.org/wp-content/uploads/2018/02/reddit-logo-16.png",
-            })
-            .setURL(`https://www.reddit.com${post.permalink}`);
+          em.setDescription(
+            `${post.selftext ? post.selftext : "Error getting post content"}`
+          );
+
           msg.reply({ embeds: [em] });
           break;
       }
