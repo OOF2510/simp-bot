@@ -37,14 +37,7 @@ module.exports = {
         case "":
           em.setImage(`${post.url}`);
 
-          let row = new Discord.MessageActionRow().addComponents(
-            new Discord.ButtonBuilder()
-              .setStyle("LINK")
-              .setLabel("Not loading?")
-              .setURL(`${post.url}`)
-          );
-
-          msg.reply({ embeds: [em], components: [row] });
+          msg.reply({ embeds: [em] });
           break;
         default:
           em.setDescription(
