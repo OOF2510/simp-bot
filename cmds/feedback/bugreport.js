@@ -23,7 +23,7 @@ module.exports = {
       .addFields({ name: `Report:`, value: `${rep}` })
       .setFooter({
         text: `Reported by: ${msg.author.tag}`,
-        iconUrl: `${msg.author.avatarURL()}`,
+        iconUrl: `${msg.author.displayAvatarURL()}`,
       })
       .setColor(config.embedColor)
       .setTimestamp();

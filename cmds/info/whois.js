@@ -36,7 +36,7 @@ module.exports = {
     var MemAge = today.getTime() - MemJoined.getTime();
     let memAge = milsecConvert(MemAge);
 
-    let av = user.avatarURL();
+    let av = user.displayAvatarURL();
 
     let flags = await user.fetchFlags();
     var Badges = flags.toArray();

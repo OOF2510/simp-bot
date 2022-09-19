@@ -23,7 +23,7 @@ module.exports = {
       .addFields({ name: `Suggestion:`, value: `${sug}` })
       .setFooter({
         text: `Suggested by: ${msg.author.tag}`,
-        iconURL: `${msg.author.avatarURL()}`,
+        iconURL: `${msg.author.displayAvatarURL()}`,
       })
       .setColor(config.embedColor)
       .setTimestamp();
