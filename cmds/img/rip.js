@@ -16,7 +16,7 @@ module.exports = {
     let user = interaction.options.getUser("user");
     await msg.deferReply();
 
-    let av = user.displayAvatarURL();
+    let av = user.displayAvatarURL({ size: 512 });
 
     let image = await Canvacord.rip(av);
     let file = new Discord.AttachmentBuilder(image, {
