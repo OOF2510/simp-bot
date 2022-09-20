@@ -16,7 +16,7 @@ module.exports = {
 
     let userNick = mem ? mem.displayName : user.username;
 
-    let av = user.displaydisplayAvatarURL({ size: 512 });
+    let av = user.displayAvatarURL({ size: 512 });
 
     let avEm = new Discord.EmbedBuilder()
       .setTitle(`${userNick}'s Avatar`)
