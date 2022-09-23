@@ -56,6 +56,6 @@ module.exports = {
       player.stop();
     });
 
-    setTimeout(voice.getVoiceConnection(msg.guild.id).disconnect(), 300000);
+    voice.getVoiceConnection(msg.guild.id).disconnect();
   },
 };
