@@ -7,7 +7,7 @@ module.exports = {
   async execute(interaction, client, config, db, Discord, allowed) {
     let msg = interaction;
 
-    const row = new Discord.MessageActionRow().addComponents(
+    const row = new Discord.ActionRowBuilder().addComponents(
       new Discord.ButtonBuilder()
         .setStyle("LINK")
         .setLabel("GitHub")
