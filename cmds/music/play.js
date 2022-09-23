@@ -11,17 +11,24 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction, client, config, db, Discord, allowed) {
-    let msg = interaction;
-    let song = interaction.options.getString("song");
-    if (!msg.member.voice.channel)
-      return msg.reply("You must be in a voice channel to do that!");
+    try {
+      let msg = interaction;
+      let song = interaction.options.getString("song");
+      if (!msg.member.voice.channel)
+        return msg.reply("You must be in a voice channel to do that!");
 
-    await msg.reply({ content: `Searching \`${song}\``, ephemeral: true });
+      await msg.reply({ content: `Searching \`${song}\``, ephemeral: true });
 
-    client.distube.play(msg.member.voice.channel, song, {
-      member: msg.member,
-      textChannel: msg.channel,
-      msg,
-    });
+      client.distube.play(msg.member.voice.channel, song, {
+        member: msg.member,
+        textChannel: msg.channel,
+        msg,
+      });
+    } catch (e) {
+      msg.reply({
+        content: `Error! If Simp Bot is already in this voice channel from using \`tts\`, diconnect it, then try again`,
+        ephemeral: true,
+      });
+    }
   },
 };

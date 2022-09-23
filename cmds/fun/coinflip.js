@@ -29,7 +29,7 @@ module.exports = {
     let embed = new Discord.EmbedBuilder()
       .setTitle(`${result}`)
       .setImage(`${img}`)
-      .setColor(config.embedColor)
+      .setColor(config.embedColor);
 
     msg.reply({ embeds: [embed] });
   },

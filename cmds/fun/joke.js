@@ -17,7 +17,7 @@ module.exports = {
       } else if (joke.joke) {
         msg.reply(`${joke.joke}`);
       } else {
-        msg.reply({ content: "Error!", ephemeral: true })
+        msg.reply({ content: "Error!", ephemeral: true });
       }
     } catch (e) {
       msg.reply({ content: "Error!", ephemeral: true });

@@ -55,5 +55,7 @@ module.exports = {
     player.on(voice.AudioPlayerStatus.Idle, async () => {
       player.stop();
     });
+
+    setTimeout(voice.getVoiceConnection(msg.guild.id).disconnect(), 300000);
   },
 };
