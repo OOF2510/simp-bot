@@ -150,13 +150,21 @@ client.on("interactionCreate", async (interaction) => {
     });
   }
 
-  // command usage stats
-  try {
-    db.query(
-      `INSERT INTO ${config.mysql.schema}.command_usage (command,date) values ("${commandName}",CURRENT_DATE())`
-    );
-  } catch (e) {
-    console.log(`errror with command usage stats ${e}`);
+  // command usage stats | dont run in dev mode
+  var startupArgs = process.argv.slice(2);
+  switch (startupArgs[0]) {
+    case "--dev":
+      break;
+
+    default:
+      try {
+        db.query(
+          `INSERT INTO ${config.mysql.schema}.command_usage (command,date) values ("${commandName}",CURRENT_DATE())`
+        );
+      } catch (e) {
+        console.log(`errror with command usage stats ${e}`);
+      }
+      break;
   }
 });
 
