@@ -149,6 +149,15 @@ client.on("interactionCreate", async (interaction) => {
       ephemeral: true,
     });
   }
+
+  // command usage stats
+  try {
+    db.query(
+      `INSERT INTO ${config.mysql.schema}.command_usage (command,date) values ("${commandName}",CURRENT_TIMESTAMP())`
+    );
+  } catch (e) {
+    console.log(`errror with command usage stats ${e}`);
+  }
 });
 
 const status = (queue) => `Volume: \`${queue.volume}%\``;
