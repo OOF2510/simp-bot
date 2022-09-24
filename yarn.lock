@@ -733,9 +733,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"canvacord@npm:^5.4.7":
-  version: 5.4.7
-  resolution: "canvacord@npm:5.4.7"
+"canvacord@npm:^5.4.8":
+  version: 5.4.8
+  resolution: "canvacord@npm:5.4.8"
   dependencies:
     "@napi-rs/canvas": ^0.1.29
     "@skyra/gifenc": ^1.0.0
@@ -745,7 +745,7 @@ __metadata:
     node-fetch: 2.6.7
   bin:
     canvacord: bin/canvacord.js
-  checksum: 3400288e2cb19004eac8191f85170f408a573344d3a6d6c054c07f343a0f9ac3489dade995a8aaed4d9b3045cec1fa87935d8d2532795f7669e7831865e6121d
+  checksum: 22df165658499f061cd8c99d0d5448971df8d392490958930d2c8e5bda83309355891946bc2922d66f8cc40c65533d79a4d10d8b8468431f91e5f6fd76ba7cb1
   languageName: node
   linkType: hard
 
@@ -1000,14 +1000,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-api-types@npm:^0.37.3, discord-api-types@npm:^0.37.8":
+"discord-api-types@npm:^0.37.10":
+  version: 0.37.10
+  resolution: "discord-api-types@npm:0.37.10"
+  checksum: a09460953a02adf3c40a486e3946c6ca0dd6c76d279444a4595abecfe8b5b88ad49d48b5eeb85e2cb95256a0824ee075cb7550d371c13e64e37ec703206c092b
+  languageName: node
+  linkType: hard
+
+"discord-api-types@npm:^0.37.3":
   version: 0.37.8
   resolution: "discord-api-types@npm:0.37.8"
   checksum: c40ea3d4bda18d508978478ce3e0ef14c62ade1e5f0c21812bbcb81b81073118f4ded646b4eca9f88b636a7fc424e6eb1cc0e0d5189d327ec4014c079332f761
   languageName: node
   linkType: hard
 
-"discord-together@npm:^1.3.25":
+"discord-together@npm:^1.3.31":
   version: 1.3.31
   resolution: "discord-together@npm:1.3.31"
   dependencies:
@@ -1036,28 +1043,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:^14.3.0":
-  version: 14.3.0
-  resolution: "discord.js@npm:14.3.0"
+"discord.js@npm:^14.4.0":
+  version: 14.4.0
+  resolution: "discord.js@npm:14.4.0"
   dependencies:
     "@discordjs/builders": ^1.2.0
     "@discordjs/collection": ^1.1.0
     "@discordjs/rest": ^1.1.0
     "@sapphire/snowflake": ^3.2.2
     "@types/ws": ^8.5.3
-    discord-api-types: ^0.37.3
+    discord-api-types: ^0.37.10
     fast-deep-equal: ^3.1.3
     lodash.snakecase: ^4.1.1
     tslib: ^2.4.0
-    undici: ^5.9.1
+    undici: ^5.10.0
     ws: ^8.8.1
-  checksum: e45117549d8d504eae958cb104a42dd3903f67ae0c3062fdc60c748a2a21da14a32ec3c9643edcebe568d82602f0b2efc3b9af59d1482ac1304ce4aaeda944a2
+  checksum: 0005332da88c130fb5fb144817cfb10323b0c57d0c7c20ec456a4b217b7127844dcd71107c58ef10d83f46af7edb2ba41610c107736a1a08cffc9683d548764b
   languageName: node
   linkType: hard
 
-"distube@npm:^4.0.3":
-  version: 4.0.3
-  resolution: "distube@npm:4.0.3"
+"distube@npm:^4.0.4":
+  version: 4.0.4
+  resolution: "distube@npm:4.0.4"
   dependencies:
     "@distube/ytdl-core": ^4.11.3
     "@distube/ytpl": ^1.1.1
@@ -1073,7 +1080,7 @@ __metadata:
   peerDependenciesMeta:
     "@discordjs/opus":
       optional: true
-  checksum: 513cae6d7eefcf3944b91c9887b77beae43c44cb881f7ad31b604706f276b5a33de866f6d023f27857e5e5729bc71ccfa70aac72fcb4dd8b5502534ac7e8f646
+  checksum: e47f5551a3e0c1b73216cf4dc28f22c53a34aee2d52ebfea95125d6fa75ff51c2cb24004456dfa63067e4524db173a09d5855d77f4cc032410471e72345e33b8
   languageName: node
   linkType: hard
 
@@ -1816,7 +1823,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"libsodium-wrappers@npm:^0.7.9":
+"libsodium-wrappers@npm:^0.7.10":
   version: 0.7.10
   resolution: "libsodium-wrappers@npm:0.7.10"
   dependencies:
@@ -2001,7 +2008,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:^3.0.4, minimatch@npm:^3.1.1":
+"minimatch@npm:^3.1.1, minimatch@npm:^3.1.2":
   version: 3.1.2
   resolution: "minimatch@npm:3.1.2"
   dependencies:
@@ -2226,7 +2233,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-url-shortener@npm:^2.0.1":
+"node-url-shortener@npm:^2.0.3":
   version: 2.0.3
   resolution: "node-url-shortener@npm:2.0.3"
   dependencies:
@@ -2235,14 +2242,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nodemon@npm:^2.0.15":
-  version: 2.0.19
-  resolution: "nodemon@npm:2.0.19"
+"nodemon@npm:^2.0.20":
+  version: 2.0.20
+  resolution: "nodemon@npm:2.0.20"
   dependencies:
     chokidar: ^3.5.2
     debug: ^3.2.7
     ignore-by-default: ^1.0.1
-    minimatch: ^3.0.4
+    minimatch: ^3.1.2
     pstree.remy: ^1.1.8
     semver: ^5.7.1
     simple-update-notifier: ^1.0.7
@@ -2251,7 +2258,7 @@ __metadata:
     undefsafe: ^2.0.5
   bin:
     nodemon: bin/nodemon.js
-  checksum: c6cf89435a8945693fac2701285eb1f539b5003d943a1be89a9ffbfc9d0275aa7779f85a9eee509e9f19a988d53ce293266d8b35b91010e36ad9e78683f8eb07
+  checksum: 9fe858682414fe703179f4fe36c86e71f40d2693b5345c09803d7b191816a6589c5df8f1f9873bffee92893880183b95a031c86340e46b364ef1b0b7f619edbf
   languageName: node
   linkType: hard
 
@@ -2409,7 +2416,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.6.0":
+"prettier@npm:^2.7.1":
   version: 2.7.1
   resolution: "prettier@npm:2.7.1"
   bin:
@@ -2712,9 +2719,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sequelize@npm:^6.21.6":
-  version: 6.21.6
-  resolution: "sequelize@npm:6.21.6"
+"sequelize@npm:^6.23.1":
+  version: 6.23.1
+  resolution: "sequelize@npm:6.23.1"
   dependencies:
     "@types/debug": ^4.1.7
     "@types/validator": ^13.7.1
@@ -2739,6 +2746,8 @@ __metadata:
       optional: true
     mysql2:
       optional: true
+    oracledb:
+      optional: true
     pg:
       optional: true
     pg-hstore:
@@ -2749,7 +2758,7 @@ __metadata:
       optional: true
     tedious:
       optional: true
-  checksum: 0e2c9e1141200464cf4a959396ea554668f1c4444afdfa16b81b253c6dd61da7dba635b1547d6833b4575ecda9395ea50b58e052fd6e05e5afff5f6d682355e4
+  checksum: cb34d8b6cd4c3aba19bb1d6c6af4904d6526053fab611e1ae39cc5ba8f949b5e0c581806bf02aef07bd4a87782ec7096d6f0df77bcb3c46cc1361ac04818141e
   languageName: node
   linkType: hard
 
@@ -2807,25 +2816,25 @@ __metadata:
     aki-api: ^5.2.1
     axios: 0.19.2
     bufferutil: ^4.0.6
-    canvacord: ^5.4.7
-    discord-api-types: ^0.37.8
-    discord-together: ^1.3.25
-    discord.js: ^14.3.0
-    distube: ^4.0.3
+    canvacord: ^5.4.8
+    discord-api-types: ^0.37.10
+    discord-together: ^1.3.31
+    discord.js: ^14.4.0
+    distube: ^4.0.4
     got: 11.8.3
     huggingface-api: ^1.0.3
     kanye.js: ^1.0.1
-    libsodium-wrappers: ^0.7.9
+    libsodium-wrappers: ^0.7.10
     mysql2: ^2.3.3
-    node-url-shortener: ^2.0.1
-    nodemon: ^2.0.15
+    node-url-shortener: ^2.0.3
+    nodemon: ^2.0.20
     opusscript: ^0.0.8
-    prettier: ^2.6.0
+    prettier: ^2.7.1
     random-reddit: ^2.0.3
-    sequelize: ^6.21.6
-    uglify-js: ^3.15.3
+    sequelize: ^6.23.1
+    uglify-js: ^3.17.1
     utf-8-validate: ^5.0.9
-    whois-light: ^1.1.5
+    whois-light: ^1.1.7
   languageName: unknown
   linkType: soft
 
@@ -3118,12 +3127,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uglify-js@npm:^3.15.3":
-  version: 3.17.0
-  resolution: "uglify-js@npm:3.17.0"
+"uglify-js@npm:^3.17.1":
+  version: 3.17.1
+  resolution: "uglify-js@npm:3.17.1"
   bin:
     uglifyjs: bin/uglifyjs
-  checksum: 20d1fcac05e74db949a9579a36f9a1af88430e590bc9c22410b76686035c55cef65247ca1935d2f6440c78928227684219c8b1ddfcd858213049cb2890821392
+  checksum: 5e24ad48e096d309e77a462fa0508a9bfe33e2ab00e1bd21dc8bd5d035cf0b58063914bef1c6d6aca78e9e5bbe619714b142ffc646165702e3714f4cfbc7151c
   languageName: node
   linkType: hard
 
@@ -3134,7 +3143,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^5.7.0, undici@npm:^5.8.0, undici@npm:^5.8.2, undici@npm:^5.9.1":
+"undici@npm:^5.10.0, undici@npm:^5.7.0, undici@npm:^5.8.0, undici@npm:^5.8.2, undici@npm:^5.9.1":
   version: 5.10.0
   resolution: "undici@npm:5.10.0"
   checksum: 7ba2b71dccc74cd2bdf645b83e9aaef374ae04855943d0a2f42a3d0b9e5556f37cc9b5156fb5288277a2fa95fd46a56f3ae0d5cf73db3f008d75ec41104b136c
@@ -3267,7 +3276,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"whois-light@npm:^1.1.5":
+"whois-light@npm:^1.1.7":
   version: 1.1.7
   resolution: "whois-light@npm:1.1.7"
   checksum: ad712b52b31ca43476cb371b2aa293383d725ae08487cd7e588fe2bf86fa1763193afca418f3345556b4d6467a1581ef1262a9a26e3e382193479d6d40a4283d
