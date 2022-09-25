@@ -205,11 +205,16 @@ client.distube
   )
   .on("finish", (queue) => queue.textChannel.send("Finished!"));
 
-// client.on('messageCreate', async (msg) => {
-//   if (msg.channel.type == Discord.ChannelType.GuildNews) {
-//     if (msg.crosspostable) return msg.crosspost()
-//     else return
-//   } else return
-// })
+client.on("messageCreate", async (msg) => {
+  let status = await db.query(
+    `SELECT status FROM ${config.mysql.schema}.autopub WHERE status = TRUE AND serverid = ${msg.guild.id} LIMIT 1;`,
+    { plain: true, type: Sequelize.QueryTypes.SELECT }
+  );
+  if (!status) return;
+  if (msg.channel.type == Discord.ChannelType.GuildAnnouncement) {
+    if (msg.crosspostable) return msg.crosspost();
+    else return;
+  } else return;
+});
 
 client.login(config.token);
