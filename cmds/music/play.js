@@ -25,7 +25,7 @@ module.exports = {
         msg,
       });
     } catch (e) {
-      msg.reply({
+      msg.editReply({
         content: `Error! If Simp Bot is already in this voice channel from using \`tts\`, diconnect it, then try again`,
         ephemeral: true,
       });
