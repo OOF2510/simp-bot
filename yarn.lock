@@ -53,6 +53,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@discordjs/rest@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@discordjs/rest@npm:1.2.0"
+  dependencies:
+    "@discordjs/collection": ^1.1.0
+    "@sapphire/async-queue": ^1.5.0
+    "@sapphire/snowflake": ^3.2.2
+    discord-api-types: ^0.37.10
+    file-type: ^18.0.0
+    tslib: ^2.4.0
+    undici: ^5.10.0
+  checksum: fa414f2a92e94ad587c0a793e5a378cc0597ed062fe1509314b7c29f925b7a9cc013efad8f572f589d520a9dca4f19a4cc2403f14b89d38e6c61aa2292d96cfe
+  languageName: node
+  linkType: hard
+
 "@discordjs/voice@npm:^0.11.0":
   version: 0.11.0
   resolution: "@discordjs/voice@npm:0.11.0"
@@ -1114,7 +1129,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:^14.0.3, discord.js@npm:^14.4.0":
+"discord.js@npm:^14.0.3":
   version: 14.4.0
   resolution: "discord.js@npm:14.4.0"
   dependencies:
@@ -1149,6 +1164,25 @@ __metadata:
     undici: ^5.8.2
     ws: ^8.8.1
   checksum: 37ab9b68f3749c78049edc00f30d1662a0cc3fea27e6b23630559a9d3b794cd6e3b2e2cf69cf9f01087f0477e307cf8e3781d88e35e564debb720cfc0c8b423d
+  languageName: node
+  linkType: hard
+
+"discord.js@npm:^14.5.0":
+  version: 14.5.0
+  resolution: "discord.js@npm:14.5.0"
+  dependencies:
+    "@discordjs/builders": ^1.2.0
+    "@discordjs/collection": ^1.1.0
+    "@discordjs/rest": ^1.2.0
+    "@sapphire/snowflake": ^3.2.2
+    "@types/ws": ^8.5.3
+    discord-api-types: ^0.37.10
+    fast-deep-equal: ^3.1.3
+    lodash.snakecase: ^4.1.1
+    tslib: ^2.4.0
+    undici: ^5.10.0
+    ws: ^8.9.0
+  checksum: 1534ac6a36966c448580a8e26ddde65d6a17dd0874c9b6e99b6534f3a41f97ad0a87e79af852b8e483a2c1d25924476a58be951bb67878a4c268153b099f3f24
   languageName: node
   linkType: hard
 
@@ -1320,6 +1354,17 @@ __metadata:
     strtok3: ^7.0.0-alpha.9
     token-types: ^5.0.0-alpha.2
   checksum: 797e0d155ecaf4b575d4569a0188bfed85af19d18cf3d93ec8bb66d797172a1fde9f13d56135c6a0b471cacd7ecc1adb0c9a45c6e3a19436f682a275d0be16cc
+  languageName: node
+  linkType: hard
+
+"file-type@npm:^18.0.0":
+  version: 18.0.0
+  resolution: "file-type@npm:18.0.0"
+  dependencies:
+    readable-web-to-node-stream: ^3.0.2
+    strtok3: ^7.0.0
+    token-types: ^5.0.1
+  checksum: 67f5a927b8030e35a4faf9dd9dea9e17bcb042fb61b9851b7dd1b1b3bb3ecfdd9f83bc3bc72686316ea2bac70df652c61e10affa9b5957b1a3d731df4925e3cb
   languageName: node
   linkType: hard
 
@@ -3019,7 +3064,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "simp-bot@workspace:."
   dependencies:
-    "@discordjs/rest": ^1.1.0
+    "@discordjs/rest": ^1.2.0
     "@discordjs/voice": ^0.11.0
     "@distube/soundcloud": ^1.2.2
     "@distube/spotify": ^1.4.2
@@ -3030,7 +3075,7 @@ __metadata:
     canvacord: ^5.4.8
     discord-api-types: ^0.37.10
     discord-together: ^1.3.31
-    discord.js: ^14.4.0
+    discord.js: ^14.5.0
     discord.js-akinator: ^4.0.1
     distube: ^4.0.4
     got: 11.8.3
@@ -3044,7 +3089,7 @@ __metadata:
     prettier: ^2.7.1
     random-reddit: ^2.0.3
     sequelize: ^6.23.1
-    uglify-js: ^3.17.1
+    uglify-js: ^3.17.2
     utf-8-validate: ^5.0.9
     whois-light: ^1.1.7
   languageName: unknown
@@ -3196,7 +3241,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"strtok3@npm:^7.0.0-alpha.9":
+"strtok3@npm:^7.0.0, strtok3@npm:^7.0.0-alpha.9":
   version: 7.0.0
   resolution: "strtok3@npm:7.0.0"
   dependencies:
@@ -3271,7 +3316,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"token-types@npm:^5.0.0-alpha.2":
+"token-types@npm:^5.0.0-alpha.2, token-types@npm:^5.0.1":
   version: 5.0.1
   resolution: "token-types@npm:5.0.1"
   dependencies:
@@ -3355,12 +3400,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uglify-js@npm:^3.17.1":
-  version: 3.17.1
-  resolution: "uglify-js@npm:3.17.1"
+"uglify-js@npm:^3.17.2":
+  version: 3.17.2
+  resolution: "uglify-js@npm:3.17.2"
   bin:
     uglifyjs: bin/uglifyjs
-  checksum: 5e24ad48e096d309e77a462fa0508a9bfe33e2ab00e1bd21dc8bd5d035cf0b58063914bef1c6d6aca78e9e5bbe619714b142ffc646165702e3714f4cfbc7151c
+  checksum: 128233638176abe6cc0ec0f1dbae7bcb3f02edd78eb5c7752b4f379ec9d29032cd2edf06b2522dbeba0a1f05afb25f6eaffe638581da6d8554bd4c060d6622b1
   languageName: node
   linkType: hard
 
@@ -3578,6 +3623,21 @@ __metadata:
     utf-8-validate:
       optional: true
   checksum: 2152cf862cae0693f3775bc688a6afb2e989d19d626d215e70f5fcd8eb55b1c3b0d3a6a4052905ec320e2d7734e20aeedbf9744496d62f15a26ad79cf4cf7dae
+  languageName: node
+  linkType: hard
+
+"ws@npm:^8.9.0":
+  version: 8.9.0
+  resolution: "ws@npm:8.9.0"
+  peerDependencies:
+    bufferutil: ^4.0.1
+    utf-8-validate: ^5.0.2
+  peerDependenciesMeta:
+    bufferutil:
+      optional: true
+    utf-8-validate:
+      optional: true
+  checksum: 23aa0f021b2eb65c108ec4c3e08c0d81ba01f82b500432dfe327fd6be36079c1d81fdb0eac6464d2a0eb49904d34a9ab8c59619d673fa07b8346f83aeb0cbf12
   languageName: node
   linkType: hard
 
