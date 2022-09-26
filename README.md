@@ -16,6 +16,10 @@ A Discord bot that is a simp
 
 ### [Join the support server!](https://discord.gg/zHtfa8GdPx)
 
+# Contributing
+
+Feel free to fork & open a pull request
+
 # Self-hosting the bot
 
 ## Universial
