@@ -226,8 +226,7 @@ client.on('messageDelete', async (msg) => {
     `SELECT channelid FROM ${config.mysql.schema}.dellog WHERE serverid = ${msg.guild.id} LIMIT 1;`,
     { plain: true, type: Sequelize.QueryTypes.SELECT }
   );
-  console.log(chid)
-  let ch = msg.guild.channels.cache.get(chid)
+  let ch = msg.guild.channels.cache.get(chid.channelid)
 
   let em = new Discord.EmbedBuilder().setTitle(`Deleted message by ${msg.author.tag}:`).setDescription(`${msg.content? msg.content : 'ERROR!'}`)
   ch.send({ embeds: [ em ] })
