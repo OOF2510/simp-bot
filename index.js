@@ -16,12 +16,12 @@ else config = require("./config.json");
 var allowed = config.allowed;
 
 // NORMAL
-intents = new Discord.IntentsBitField(3243773);
-const client = new Discord.Client({ intents: intents });
+// intents = new Discord.IntentsBitField(3243773);
+// const client = new Discord.Client({ intents: intents });
 
 // NORMAL + MESSAGE CONTENT
-// intents = new Discord.IntentsBitField(3276541);
-// const client = new Discord.Client({ intents: intents });
+intents = new Discord.IntentsBitField(3276541);
+const client = new Discord.Client({ intents: intents });
 
 client.commands = new Discord.Collection();
 client.discordTogether = new DiscordTogether(client);
@@ -216,5 +216,20 @@ client.on("messageCreate", async (msg) => {
     else return;
   } else return;
 });
+
+client.on('messageDelete', async (msg) => {
+  let status = await db.query(
+    `SELECT status FROM ${config.mysql.schema}.dellog WHERE status = TRUE AND serverid = ${msg.guild.id} LIMIT 1;`,
+    { plain: true, type: Sequelize.QueryTypes.SELECT }
+  );
+  if (!status) return;
+  let ch = await db.query(
+    `SELECT channelid FROM ${config.mysql.schema}.dellog WHERE serverid = ${msg.guild.id} LIMIT 1;`,
+    { plain: true, type: Sequelize.QueryTypes.SELECT }
+  );
+
+  let em = new Discord.EmbedBuilder().setAuthor({ name: `${msg.author.tag}}`, iconURL: `${msg.author.displayAvatarURL}` }).setTitle(`Deleted message by ${msg.author.tag}:`).setDescription(`${msg.content? msg.content : 'ERROR!'}`)
+  ch.send({ embeds: [ em ] })
+})
 
 client.login(config.token);
