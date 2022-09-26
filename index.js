@@ -222,7 +222,7 @@ client.on("messageDelete", async (msg) => {
       `SELECT status FROM ${config.mysql.schema}.dellog WHERE status = TRUE AND serverid = ${msg.guild.id} LIMIT 1;`,
       { plain: true, type: Sequelize.QueryTypes.SELECT }
     );
-    if (!status) return console.log("not");
+    if (status.status != 1) return;
     let chid = await db.query(
       `SELECT channelid FROM ${config.mysql.schema}.dellog WHERE serverid = ${msg.guild.id} LIMIT 1;`,
       { plain: true, type: Sequelize.QueryTypes.SELECT }
