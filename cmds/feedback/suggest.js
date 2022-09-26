@@ -24,10 +24,10 @@ module.exports = {
       .setColor(config.embedColor)
       .setTimestamp();
 
-      config.feedbackChannels.suggestions.forEach((chid) => {
-        let ch = client.channels.cache.get(chid)
-        ch.send({ embeds: [sugEm] })
-      })
+    config.feedbackChannels.suggestions.forEach((chid) => {
+      let ch = client.channels.cache.get(chid);
+      ch.send({ embeds: [sugEm] });
+    });
 
     msg.reply(
       `I have sent your suggestion, queen! Join our server to see when it's responded to! https://discord.gg/zHtfa8GdPx`
