@@ -138,10 +138,12 @@ client.on("interactionCreate", async (interaction) => {
     await command.execute(interaction, client, config, db, Discord, allowed);
   } catch (error) {
     console.error(error);
-    bugChannel = client.channels.cache.get("825841694712004669");
-    bugChannel.send(
-      `An error occured when **${interaction.author.tag}** tried to run **${commandName}**: \`\`\`${error}\`\`\``
-    );
+    config.feedbackChannels.bugs.forEach((chid) => {
+      let bugChannel = client.channels.cache.get(chid);
+      bugChannel.send(
+        `An error occured when **${interaction.author.tag}** tried to run **${commandName}**: \`\`\`${error}\`\`\``
+      );
+    });
     await interaction.reply({
       content:
         "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",

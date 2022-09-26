@@ -12,10 +12,6 @@ module.exports = {
     ),
   async execute(interaction, client, config, db, Discord, allowed) {
     let msg = interaction;
-
-    const sugCh = client.channels.cache.get("816823026384633887");
-    const sugCh2 = client.channels.cache.get("816828453110022166");
-    const sugCh3 = client.channels.cache.get("825840766769299527");
     const sug = interaction.options.getString("suggestion");
 
     const sugEm = new Discord.EmbedBuilder()
@@ -28,9 +24,10 @@ module.exports = {
       .setColor(config.embedColor)
       .setTimestamp();
 
-    sugCh.send({ embeds: [sugEm] });
-    sugCh2.send({ embeds: [sugEm] });
-    sugCh3.send({ embeds: [sugEm] });
+      config.feedbackChannels.suggestions.forEach((chid) => {
+        let ch = client.channels.cache.get(chid)
+        ch.send({ embeds: [sugEm] })
+      })
 
     msg.reply(
       `I have sent your suggestion, queen! Join our server to see when it's responded to! https://discord.gg/zHtfa8GdPx`

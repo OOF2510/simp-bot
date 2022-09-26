@@ -52,7 +52,11 @@ Feel free to fork & open a pull request
   },
   "embedColor": "hex-color-code",
   "hfkey": "your-huggingface-api-key",
-  "allowed": ["your-user-id"]
+  "allowed": ["your-user-id"],
+  "feedbackChannels": {
+    "bugs": ["bug-channel-id"],
+    "suggestions": ["sug-channel-id"]
+  }
 }
 ```
 
