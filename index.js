@@ -222,12 +222,14 @@ client.on('messageDelete', async (msg) => {
     { plain: true, type: Sequelize.QueryTypes.SELECT }
   );
   if (!status) return;
-  let ch = await db.query(
+  let chid = await db.query(
     `SELECT channelid FROM ${config.mysql.schema}.dellog WHERE serverid = ${msg.guild.id} LIMIT 1;`,
     { plain: true, type: Sequelize.QueryTypes.SELECT }
   );
+  console.log(chid)
+  let ch = msg.guild.channels.cache.get(chid)
 
-  let em = new Discord.EmbedBuilder().setAuthor({ name: `${msg.author.tag}}`, iconURL: `${msg.author.displayAvatarURL}` }).setTitle(`Deleted message by ${msg.author.tag}:`).setDescription(`${msg.content? msg.content : 'ERROR!'}`)
+  let em = new Discord.EmbedBuilder().setTitle(`Deleted message by ${msg.author.tag}:`).setDescription(`${msg.content? msg.content : 'ERROR!'}`)
   ch.send({ embeds: [ em ] })
 })
 
