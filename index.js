@@ -210,7 +210,7 @@ client.on("messageCreate", async (msg) => {
     `SELECT status FROM ${config.mysql.schema}.autopub WHERE status = TRUE AND serverid = ${msg.guild.id} LIMIT 1;`,
     { plain: true, type: Sequelize.QueryTypes.SELECT }
   );
-  if (!status) return;
+  if (status.status != 1) return;
   if (msg.channel.type == Discord.ChannelType.GuildAnnouncement) {
     if (msg.crosspostable) return msg.crosspost();
     else return;
