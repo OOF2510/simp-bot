@@ -81,7 +81,6 @@ client.on("ready", () => {
     logging: false,
   };
   db = new Sequelize(auth.schema, auth.username, auth.password, options);
-  db.get = require("./util/getValueFromDB");
   console.log("Connected to DB");
 
   // start loadin them slash commands
