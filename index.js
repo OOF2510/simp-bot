@@ -81,7 +81,6 @@ client.on("ready", () => {
     logging: false,
   };
   db = new Sequelize(auth.schema, auth.username, auth.password, options);
-  db.get = require("./util/getValueFromDB");
   console.log("Connected to DB");
 
   // start loadin them slash commands
@@ -206,15 +205,19 @@ client.distube
   .on("finish", (queue) => queue.textChannel.send("Finished!"));
 
 client.on("messageCreate", async (msg) => {
-  let status = await db.query(
-    `SELECT status FROM ${config.mysql.schema}.autopub WHERE status = TRUE AND serverid = ${msg.guild.id} LIMIT 1;`,
-    { plain: true, type: Sequelize.QueryTypes.SELECT }
-  );
-  if (status.status != 1) return;
-  if (msg.channel.type == Discord.ChannelType.GuildAnnouncement) {
-    if (msg.crosspostable) return msg.crosspost();
-    else return;
-  } else return;
+  try {
+    let status = await db.query(
+      `SELECT status FROM ${config.mysql.schema}.autopub WHERE status = TRUE AND serverid = ${msg.guild.id} LIMIT 1;`,
+      { plain: true, type: Sequelize.QueryTypes.SELECT }
+    );
+    if (!status) return;
+    if (msg.channel.type == Discord.ChannelType.GuildAnnouncement) {
+      if (msg.crosspostable) return msg.crosspost();
+      else return;
+    } else return;
+  } catch (e) {
+    return;
+  }
 });
 
 client.login(config.token);
