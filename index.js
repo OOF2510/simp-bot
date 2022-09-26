@@ -217,22 +217,28 @@ client.on("messageCreate", async (msg) => {
 });
 
 client.on("messageDelete", async (msg) => {
-  let status = await db.query(
-    `SELECT status FROM ${config.mysql.schema}.dellog WHERE status = TRUE AND serverid = ${msg.guild.id} LIMIT 1;`,
-    { plain: true, type: Sequelize.QueryTypes.SELECT }
-  );
-  if (!status) return;
-  let chid = await db.query(
-    `SELECT channelid FROM ${config.mysql.schema}.dellog WHERE serverid = ${msg.guild.id} LIMIT 1;`,
-    { plain: true, type: Sequelize.QueryTypes.SELECT }
-  );
-  let ch = msg.guild.channels.cache.get(chid.channelid);
+  try {
+    let status = await db.query(
+      `SELECT status FROM ${config.mysql.schema}.dellog WHERE status = TRUE AND serverid = ${msg.guild.id} LIMIT 1;`,
+      { plain: true, type: Sequelize.QueryTypes.SELECT }
+    );
+    if (!status) return console.log("not");
+    let chid = await db.query(
+      `SELECT channelid FROM ${config.mysql.schema}.dellog WHERE serverid = ${msg.guild.id} LIMIT 1;`,
+      { plain: true, type: Sequelize.QueryTypes.SELECT }
+    );
+    let ch = msg.guild.channels.cache.get(chid.channelid);
 
-  let em = new Discord.EmbedBuilder()
-    .setTitle(`Deleted message by ${msg.author.tag}:`)
-    .setDescription(`${msg.content ? msg.content : "ERROR!"}`)
-    .setColor(Discord.Colors.Red);
-  ch.send({ embeds: [em] });
+    let em = new Discord.EmbedBuilder()
+      .setTitle(`Deleted message by ${msg.author.tag}:`)
+      .setDescription(`${msg.content ? msg.content : "ERROR!"}`)
+      .setColor(Discord.Colors.Red);
+    ch.send({ embeds: [em] }).catch((e) => {
+      return;
+    });
+  } catch (e) {
+    return;
+  }
 });
 
 client.login(config.token);

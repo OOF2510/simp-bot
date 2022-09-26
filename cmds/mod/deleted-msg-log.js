@@ -1,4 +1,8 @@
-const { SlashCommandBuilder, ChannelType } = require("discord.js");
+const {
+  SlashCommandBuilder,
+  ChannelType,
+  PermissionFlagsBits,
+} = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -24,7 +28,20 @@ module.exports = {
     let msg = interaction;
     let status = interaction.options.getString("status");
     let channel = interaction.options.getChannel("channel");
-    if (channel.type != ChannelType.GuildText) return msg.reply({content: 'Please provie a text channel', ephemeral: true })
+    if (channel.type != ChannelType.GuildText)
+      return msg.reply({
+        content: "Please provie a text channel",
+        ephemeral: true,
+      });
+    let bot = msg.guild.members.cache.get(client.user.id);
+    if (
+      !bot.permissionsIn(channel).has(PermissionFlagsBits.ViewChannel) ||
+      !bot.permissionsIn(channel).has(PermissionFlagsBits.SendMessages)
+    )
+      return msg.reply({
+        content: "I do not have proper permissions in that channel",
+        ephemeral: true,
+      });
 
     try {
       await db.query(
