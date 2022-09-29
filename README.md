@@ -33,7 +33,7 @@ Feel free to fork & open a pull request
  yarn run start
 ```
 
-## Docker (x86_64 only)
+## Docker
 
 - Install docker
 - Create a file named "config.json" using the format below:
@@ -63,7 +63,7 @@ Feel free to fork & open a pull request
 - Build and run the docker container
 
 ```bash
-docker build -t simpbot .
+docker build -t simpbot . --network=host
 docker run -it simpbot
 ```
 

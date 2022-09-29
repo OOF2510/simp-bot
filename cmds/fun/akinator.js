@@ -27,6 +27,8 @@ module.exports = {
         gameType: `${gameType ? gameType : "character"}`,
         useButtons: true,
         embedColor: config.embedColor,
+      }).catch((e) => {
+        msg.channel.send("Error! Try again!");
       });
     } catch (e) {
       msg.channel.send("Error! Try again!");
