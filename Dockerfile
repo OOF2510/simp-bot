@@ -1,4 +1,4 @@
-FROM oof2510/discordbot-base:v1
+FROM oof2510/discordbot-base:manifest-latest
 
 RUN mkdir -p /usr/src/SimpBot \
 && pip3 install --no-cache-dir --upgrade pip \

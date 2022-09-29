@@ -33,7 +33,7 @@ Feel free to fork & open a pull request
  yarn run start
 ```
 
-## Docker (x86_64 only)
+## Docker
 
 - Install docker
 - Create a file named "config.json" using the format below:
