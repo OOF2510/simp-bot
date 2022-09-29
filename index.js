@@ -135,9 +135,24 @@ client.on("interactionCreate", async (interaction) => {
   interaction.send = interaction.reply;
 
   try {
-    await command.execute(interaction, client, config, db, Discord, allowed);
+    await command
+      .execute(interaction, client, config, db, Discord, allowed)
+      .catch(async (error) => {
+        console.log(error);
+        config.feedbackChannels.bugs.forEach((chid) => {
+          let bugChannel = client.channels.cache.get(chid);
+          bugChannel.send(
+            `An error occured when **${interaction.author.tag}** tried to run **${commandName}**: \`\`\`${error}\`\`\``
+          );
+        });
+        await interaction.reply({
+          content:
+            "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
+          ephemeral: true,
+        });
+      });
   } catch (error) {
-    console.error(error);
+    console.log(error);
     config.feedbackChannels.bugs.forEach((chid) => {
       let bugChannel = client.channels.cache.get(chid);
       bugChannel.send(
