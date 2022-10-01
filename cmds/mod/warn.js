@@ -19,12 +19,23 @@ module.exports = {
     let reason = interaction.options.getString("reason");
     let user = interaction.options.getUser("user");
 
+    await msg.deferReply();
+
+    async function addToDB(user, guild, reason) {
+      if (!reason) reason = "No reason provided!";
+
+      await db.query(
+        `INSERT INTO ${config.mysql.schema}.warns (userid, serverid, reason) VALUES (${user.id}, ${guild.id}, '${reason}')`
+      );
+    }
+
     if (reason) {
       try {
         await user.send(
           `You have been warned in **${msg.guild}** by **${msg.author.tag}** for \`${reason}\``
         );
-        msg.reply(`${user.tag} has been warned!`);
+        await addToDB(user, msg.guild, reason);
+        msg.editReply(`\`${user.tag}\` has been warned!`);
       } catch (e) {
         return msg.reply(
           "Cannot warn this user! They probably have me blocked :("
@@ -35,7 +46,8 @@ module.exports = {
         await user.send(
           `You have been warned in **${msg.guild}** by **${msg.author.tag}`
         );
-        msg.reply(`${user.tag} has been warned!`);
+        await addToDB(user, msg.guild);
+        msg.editReply(`${user.tag} has been warned!`);
       } catch (e) {
         return msg.reply(
           "Cannot warn this user! They probably have me blocked :("
