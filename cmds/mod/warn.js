@@ -37,7 +37,7 @@ module.exports = {
         await addToDB(user, msg.guild, reason);
         msg.editReply(`\`${user.tag}\` has been warned!`);
       } catch (e) {
-        return msg.reply(
+        return msg.editReply(
           "Cannot warn this user! They probably have me blocked :("
         );
       }
@@ -49,7 +49,7 @@ module.exports = {
         await addToDB(user, msg.guild);
         msg.editReply(`${user.tag} has been warned!`);
       } catch (e) {
-        return msg.reply(
+        return msg.editReply(
           "Cannot warn this user! They probably have me blocked :("
         );
       }
