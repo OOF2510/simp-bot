@@ -24,7 +24,7 @@ module.exports = {
       `SELECT reason FROM ${config.mysql.schema}.warns WHERE userid = ${user.id} AND serverid = ${msg.guild.id}`,
       { type: QueryTypes.SELECT }
     );
-    if (!reasons)
+    if (!reasons[0])
       return msg.reply(`Could not find any warnings for \`${user.tag}\``);
 
     await msg.deferReply();
