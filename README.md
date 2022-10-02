@@ -22,17 +22,6 @@ Feel free to fork & open a pull request
 
 # Self-hosting the bot
 
-## Universial
-
-- Install git, nodejs, python3, python3-pip & yarn
-
-```bash
- git clone https://github.com/OOF2510/simp-bot-rewritten.git
- cd simp-bot-rewritten
- yarn run setup
- yarn run start
-```
-
 ## Docker
 
 - Install docker
@@ -64,7 +53,18 @@ Feel free to fork & open a pull request
 
 ```bash
 docker build -t simpbot . --network=host
-docker run -it simpbot
+docker run --restart unless-stopped -it simpbot
+```
+
+## Manual
+
+- Install git, nodejs, python3, python3-pip & yarn
+
+```bash
+ git clone https://github.com/OOF2510/simp-bot-rewritten.git
+ cd simp-bot-rewritten
+ yarn run setup
+ yarn run start
 ```
 
 # The original simp bot
