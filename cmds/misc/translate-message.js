@@ -148,7 +148,7 @@ module.exports = {
     let msg = interaction;
     let mesID = interaction.options.getString("message-id");
     let resLang = interaction.options.getString("result-lang");
-    let mes = msg.channel.messages.fetch(mesID)
+    let mes = await msg.channel.messages.fetch(mesID)
     if (!mes) return msg.reply({ content: "Could not get that message, make sure it's in the same channel as the one you're using this command in!", ephemeral: true })
     let text = mes.content;
 
@@ -167,7 +167,7 @@ module.exports = {
       let result = await translate(text, { to: resLang });
       msg.reply(`${result}`);
     } catch (e) {
-      msg.reply({ content: "Error, try again!", ephemeral: true });
+      msg.reply({ content: `Error, try again!\n$${e}`, ephemeral: true });
     }
   },
 };
