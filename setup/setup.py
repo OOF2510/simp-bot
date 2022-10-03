@@ -10,7 +10,9 @@ sqlPass = input("MySQL Password: ")
 sqlSchema = input("MySQL Schema Name: ")
 embedColor = input("Embed Color (hex without the #): ")
 hfKey = input("Huggingface API Key: ")
-uID = input("Your Discord User Id: ")
+uID = input("Your Discord User ID: ")
+bug = input("Bug channel ID: ")
+sug = input("Suggestion channel ID: ")
 
 configJson = "{" + f"""
   \"token\": \"{token}\",
@@ -27,7 +29,11 @@ configJson = "{" + f"""
   \"hfKey\": \"{hfKey}\",
   \"allowed\": [
     \"{uID}\"
-  ]
+  ],
+  \"feedbackChannels\":""" + "{" + f"""
+    \"bugs\": \"{bug}\",
+    \"sug\": \"{sug}\"
+  """ + "}" + f"""
 """ + "}"
 
 config = open("config.json", "w")

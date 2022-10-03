@@ -27,6 +27,8 @@ module.exports = {
 
     message = message.replaceAll("'", "");
 
+    await msg.deferReply({ ephemeral: true });
+
     await exec(`gtts-cli '${message}' --output "${filename}"`);
 
     const channelID = msg.member.voice.channelId;
@@ -56,6 +58,6 @@ module.exports = {
       player.stop();
     });
 
-    voice.getVoiceConnection(msg.guild.id).disconnect();
+    msg.editReply("I have spoken!");
   },
 };

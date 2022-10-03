@@ -16,20 +16,13 @@ A Discord bot that is a simp
 
 ### [Join the support server!](https://discord.gg/zHtfa8GdPx)
 
+# Contributing
+
+Feel free to fork & open a pull request
+
 # Self-hosting the bot
 
-## Universial
-
-- Install git, nodejs, python3, python3-pip & yarn
-
-```bash
- git clone https://github.com/OOF2510/simp-bot-rewritten.git
- cd simp-bot-rewritten
- yarn run setup
- yarn run start
-```
-
-## Docker (x86_64 only)
+## Docker
 
 - Install docker
 - Create a file named "config.json" using the format below:
@@ -48,15 +41,30 @@ A Discord bot that is a simp
   },
   "embedColor": "hex-color-code",
   "hfkey": "your-huggingface-api-key",
-  "allowed": ["your-user-id"]
+  "allowed": ["your-user-id"],
+  "feedbackChannels": {
+    "bugs": ["bug-channel-id"],
+    "suggestions": ["sug-channel-id"]
+  }
 }
 ```
 
 - Build and run the docker container
 
 ```bash
-docker build -t simpbot .
-docker run -it simpbot
+docker build -t simpbot . --network=host
+docker run --restart unless-stopped -it simpbot
+```
+
+## Manual
+
+- Install git, nodejs, python3, python3-pip & yarn
+
+```bash
+ git clone https://github.com/OOF2510/simp-bot-rewritten.git
+ cd simp-bot-rewritten
+ yarn run setup
+ yarn run start
 ```
 
 # The original simp bot

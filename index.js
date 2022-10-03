@@ -135,13 +135,30 @@ client.on("interactionCreate", async (interaction) => {
   interaction.send = interaction.reply;
 
   try {
-    await command.execute(interaction, client, config, db, Discord, allowed);
+    await command
+      .execute(interaction, client, config, db, Discord, allowed)
+      .catch(async (error) => {
+        console.log(error);
+        config.feedbackChannels.bugs.forEach((chid) => {
+          let bugChannel = client.channels.cache.get(chid);
+          bugChannel.send(
+            `An error occured when **${interaction.author.tag}** tried to run **${commandName}**: \`\`\`${error}\`\`\``
+          );
+        });
+        await interaction.reply({
+          content:
+            "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
+          ephemeral: true,
+        });
+      });
   } catch (error) {
-    console.error(error);
-    bugChannel = client.channels.cache.get("825841694712004669");
-    bugChannel.send(
-      `An error occured when **${interaction.author.tag}** tried to run **${commandName}**: \`\`\`${error}\`\`\``
-    );
+    console.log(error);
+    config.feedbackChannels.bugs.forEach((chid) => {
+      let bugChannel = client.channels.cache.get(chid);
+      bugChannel.send(
+        `An error occured when **${interaction.author.tag}** tried to run **${commandName}**: \`\`\`${error}\`\`\``
+      );
+    });
     await interaction.reply({
       content:
         "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
@@ -205,15 +222,19 @@ client.distube
   .on("finish", (queue) => queue.textChannel.send("Finished!"));
 
 client.on("messageCreate", async (msg) => {
-  let status = await db.query(
-    `SELECT status FROM ${config.mysql.schema}.autopub WHERE status = TRUE AND serverid = ${msg.guild.id} LIMIT 1;`,
-    { plain: true, type: Sequelize.QueryTypes.SELECT }
-  );
-  if (!status) return;
-  if (msg.channel.type == Discord.ChannelType.GuildAnnouncement) {
-    if (msg.crosspostable) return msg.crosspost();
-    else return;
-  } else return;
+  try {
+    let status = await db.query(
+      `SELECT status FROM ${config.mysql.schema}.autopub WHERE status = TRUE AND serverid = ${msg.guild.id} LIMIT 1;`,
+      { plain: true, type: Sequelize.QueryTypes.SELECT }
+    );
+    if (!status) return;
+    if (msg.channel.type == Discord.ChannelType.GuildAnnouncement) {
+      if (msg.crosspostable) return msg.crosspost();
+      else return;
+    } else return;
+  } catch (e) {
+    return;
+  }
 });
 
 client.on("messageDelete", async (msg) => {

@@ -19,11 +19,18 @@ module.exports = {
 
       await msg.reply({ content: `Searching \`${song}\``, ephemeral: true });
 
-      client.distube.play(msg.member.voice.channel, song, {
-        member: msg.member,
-        textChannel: msg.channel,
-        msg,
-      });
+      client.distube
+        .play(msg.member.voice.channel, song, {
+          member: msg.member,
+          textChannel: msg.channel,
+          msg,
+        })
+        .catch((e) => {
+          msg.editReply({
+            content: `Error! If Simp Bot is already in this voice channel from using \`tts\`, diconnect it, then try again`,
+            ephemeral: true,
+          });
+        });
     } catch (e) {
       msg.editReply({
         content: `Error! If Simp Bot is already in this voice channel from using \`tts\`, diconnect it, then try again`,
