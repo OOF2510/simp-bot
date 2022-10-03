@@ -1,4 +1,3 @@
-const { ping } = require("@oof2510/ping");
 const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
