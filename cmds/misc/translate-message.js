@@ -167,7 +167,7 @@ module.exports = {
       let result = await translate(text, { to: resLang });
       msg.reply(`${result}`);
     } catch (e) {
-      msg.reply({ content: `Error, try again!\n$${e}`, ephemeral: true });
+      msg.reply({ content: `Error, try again!`, ephemeral: true });
     }
   },
 };
