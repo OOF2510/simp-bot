@@ -29,7 +29,7 @@ module.exports = {
 
     await msg.editReply({ files: [attachment] });
     } catch (e) {
-      await msg.editReply('Error! Try again')
+      return
     }
   },
 };
