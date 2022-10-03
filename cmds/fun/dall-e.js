@@ -19,6 +19,7 @@ module.exports = {
 
     await msg.deferReply();
 
+    try {
     const craiyon = new Craiyon.Client();
 
     let result = await craiyon.generate({ prompt: `${prompt}` });
@@ -26,6 +27,9 @@ module.exports = {
 
     let attachment = new AttachmentBuilder(buffer, { name: `${prompt}.jpg` });
 
-    msg.editReply({ files: [attachment] });
+    await msg.editReply({ files: [attachment] });
+    } catch (e) {
+      await msg.editReply('Error! Try again')
+    }
   },
 };
