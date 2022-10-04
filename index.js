@@ -30,6 +30,7 @@ client.distube = new DisTube(client, {
   emitNewSongOnly: true,
   emitAddSongWhenCreatingQueue: false,
   emitAddListWhenCreatingQueue: false,
+  leaveOnFinish: true,
   plugins: [
     new SpotifyPlugin({ emitEventsAfterFetching: true }),
     new SoundCloudPlugin(),
