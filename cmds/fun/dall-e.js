@@ -1,4 +1,8 @@
-const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
+const {
+  SlashCommandBuilder,
+  AttachmentBuilder,
+  EmbedBuilder,
+} = require("discord.js");
 const Craiyon = require("craiyon");
 
 module.exports = {
@@ -20,16 +24,16 @@ module.exports = {
     await msg.deferReply();
 
     try {
-    const craiyon = new Craiyon.Client();
+      const craiyon = new Craiyon.Client();
 
-    let result = await craiyon.generate({ prompt: `${prompt}` });
-    let buffer = result.images[0].asBuffer();
+      let result = await craiyon.generate({ prompt: `${prompt}` });
+      let buffer = result.images[0].asBuffer();
 
-    let attachment = new AttachmentBuilder(buffer, { name: `${prompt}.jpg` });
+      let attachment = new AttachmentBuilder(buffer, { name: `${prompt}.jpg` });
 
-    await msg.editReply({ files: [attachment] });
+      await msg.editReply({ content: `Prompt: **${prompt}**`, files: [attachment] });
     } catch (e) {
-      return
+      return console.log(e)
     }
   },
 };

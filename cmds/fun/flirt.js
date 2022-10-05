@@ -14,15 +14,16 @@ module.exports = {
   async execute(interaction, client, config, db, Discord, allowed) {
     let msg = interaction;
     let recipient = interaction.options.getUser("user");
+    await msg.deferReply()
 
     try {
       let { data } = await axios.get(
         "https://getpickuplines.herokuapp.com/lines/random"
       );
       let { line } = data;
-      msg.reply(`${recipient ? recipient : ""} ${line}`);
+      return msg.editReply(`${recipient ? recipient : ""} ${line}`);
     } catch (e) {
-      msg.reply({ content: "Error!", ephemeral: true });
+      return msg.editReply({ content: "Error!", ephemeral: true });
     }
   },
 };
