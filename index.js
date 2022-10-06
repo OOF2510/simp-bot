@@ -146,11 +146,23 @@ client.on("interactionCreate", async (interaction) => {
             `An error occured when **${interaction.author.tag}** tried to run **${commandName}**: \`\`\`${error}\`\`\``
           );
         });
+        try {
         await interaction.reply({
           content:
             "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
           ephemeral: true,
         });
+        } catch (e) {
+          try {
+            await interaction.editReply({
+          content:
+            "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
+          ephemeral: true,
+        });
+          } catch (e) {
+            return
+          }
+        }
       });
   } catch (error) {
     console.log(error);
@@ -160,11 +172,23 @@ client.on("interactionCreate", async (interaction) => {
         `An error occured when **${interaction.author.tag}** tried to run **${commandName}**: \`\`\`${error}\`\`\``
       );
     });
-    await interaction.reply({
-      content:
-        "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
-      ephemeral: true,
-    });
+    try {
+        await interaction.reply({
+          content:
+            "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
+          ephemeral: true,
+        });
+        } catch (e) {
+          try {
+            await interaction.editReply({
+          content:
+            "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
+          ephemeral: true,
+        });
+          } catch (e) {
+            return
+          }
+        }
   }
 
   // command usage stats | dont run in dev mode
