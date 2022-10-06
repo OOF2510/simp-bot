@@ -14,7 +14,7 @@ module.exports = {
   async execute(interaction, client, config, db, Discord, allowed) {
     let msg = interaction;
     let recipient = interaction.options.getUser("user");
-    await msg.deferReply()
+    await msg.deferReply();
 
     try {
       let { data } = await axios.get(

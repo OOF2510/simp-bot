@@ -42,6 +42,7 @@
     "node-url-shortener": "^2.0.3",
     "opusscript": "^0.0.8",
     "random-reddit": "^2.0.3",
+    "relevant-urban": "^2.0.0",
     "sequelize": "^6.23.1",
     "translate-google": "^1.5.0",
     "utf-8-validate": "^5.0.9",

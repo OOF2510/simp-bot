@@ -31,9 +31,12 @@ module.exports = {
 
       let attachment = new AttachmentBuilder(buffer, { name: `${prompt}.jpg` });
 
-      await msg.editReply({ content: `Prompt: **${prompt}**`, files: [attachment] });
+      await msg.editReply({
+        content: `Prompt: **${prompt}**`,
+        files: [attachment],
+      });
     } catch (e) {
-      return console.log(e)
+      return console.log(e);
     }
   },
 };

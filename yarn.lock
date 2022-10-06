@@ -2798,6 +2798,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"relevant-urban@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "relevant-urban@npm:2.0.0"
+  dependencies:
+    snekfetch: ^3.0.1
+  checksum: a34632bc36fd44ae9adc7996740d454c0ca11bb44c0cdda07d8e25ee1e37c6bb9ce0df920111e9f466e8761e5a87d3b3034a3a78514ede8d81e516679f6a6877
+  languageName: node
+  linkType: hard
+
 "request@npm:^2.81.0":
   version: 2.88.2
   resolution: "request@npm:2.88.2"
@@ -3068,6 +3077,7 @@ __metadata:
     opusscript: ^0.0.8
     prettier: ^2.7.1
     random-reddit: ^2.0.3
+    relevant-urban: ^2.0.0
     sequelize: ^6.23.1
     translate-google: ^1.5.0
     uglify-js: ^3.17.2
@@ -3089,6 +3099,13 @@ __metadata:
   version: 4.2.0
   resolution: "smart-buffer@npm:4.2.0"
   checksum: b5167a7142c1da704c0e3af85c402002b597081dd9575031a90b4f229ca5678e9a36e8a374f1814c8156a725d17008ae3bde63b92f9cfd132526379e580bec8b
+  languageName: node
+  linkType: hard
+
+"snekfetch@npm:^3.0.1":
+  version: 3.6.4
+  resolution: "snekfetch@npm:3.6.4"
+  checksum: e64b383a19ced759f061ecd43bc9a75bcc9b996d1909f9b94e6aaf66b6579024340c904af05aeba6261a8dd4ad9f71763f47e134c8089707d4be10fcfc682ed9
   languageName: node
   linkType: hard
 
