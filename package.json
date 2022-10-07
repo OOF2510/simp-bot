@@ -11,13 +11,11 @@
     "start": "nodemon --ignore temp/ -x 'node index.js || touch index.js'",
     "dev": "nodemon -x 'node index.js --dev'",
     "setup": "python3 setup/setup.py",
-    "minify": "node minify.js",
     "format": "prettier --no-config --write . --ignore-unknown"
   },
   "devDependencies": {
     "nodemon": "^2.0.20",
-    "prettier": "^2.7.1",
-    "uglify-js": "^3.17.2"
+    "prettier": "^2.7.1"
   },
   "dependencies": {
     "@discordjs/rest": "^1.2.0",

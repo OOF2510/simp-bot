@@ -3081,7 +3081,6 @@ __metadata:
     relevant-urban: ^2.0.0
     sequelize: ^6.23.1
     translate-google: ^1.5.0
-    uglify-js: ^3.17.2
     utf-8-validate: ^5.0.9
     whois-light: ^1.1.7
   languageName: unknown
@@ -3433,15 +3432,6 @@ __metadata:
   dependencies:
     is-typedarray: ^1.0.0
   checksum: 99c11aaa8f45189fcfba6b8a4825fd684a321caa9bd7a76a27cf0c7732c174d198b99f449c52c3818107430b5f41c0ccbbfb75cb2ee3ca4a9451710986d61a60
-  languageName: node
-  linkType: hard
-
-"uglify-js@npm:^3.17.2":
-  version: 3.17.2
-  resolution: "uglify-js@npm:3.17.2"
-  bin:
-    uglifyjs: bin/uglifyjs
-  checksum: 128233638176abe6cc0ec0f1dbae7bcb3f02edd78eb5c7752b4f379ec9d29032cd2edf06b2522dbeba0a1f05afb25f6eaffe638581da6d8554bd4c060d6622b1
   languageName: node
   linkType: hard
 
