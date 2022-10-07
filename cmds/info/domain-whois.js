@@ -1,5 +1,10 @@
 const whois = require("whois-light");
 
+/**
+ * Checks if the string is a valid domain
+ * @param {string} domain
+ * @returns {boolean}
+ */
 function checkDomain(domain) {
   const regex = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/;
   return regex.test(domain);

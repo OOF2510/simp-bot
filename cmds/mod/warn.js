@@ -1,4 +1,9 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
+const {
+  SlashCommandBuilder,
+  PermissionFlagsBits,
+  User,
+  Guild,
+} = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -20,7 +25,12 @@ module.exports = {
     let user = interaction.options.getUser("user");
 
     await msg.deferReply();
-
+    /**
+     * Adds warning to database
+     * @param {User} user
+     * @param {Guild} guild
+     * @param {String} reason
+     */
     async function addToDB(user, guild, reason) {
       if (!reason) reason = "No reason provided!";
 

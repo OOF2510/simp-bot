@@ -1,5 +1,10 @@
 const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
 const Canvas = require("@napi-rs/canvas");
+/**
+ * Add spooky scary skeleton to image
+ * @param {string|Buffer} image
+ * @returns {Promise<Buffer>}
+ */
 async function skel(image) {
   if (!image) throw new Error("image was not provided!");
 

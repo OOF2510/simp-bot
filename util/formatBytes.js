@@ -1,3 +1,9 @@
+/**
+ * Converts bytes to appropriate format
+ * @param {Number} bytes
+ * @param {Number} decimals
+ * @returns {string}
+ */
 module.exports = function (bytes, decimals = 2) {
   if (bytes === 0) return "0 Bytes";
 
