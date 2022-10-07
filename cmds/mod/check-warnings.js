@@ -4,7 +4,6 @@ const {
   AttachmentBuilder,
   EmbedBuilder,
 } = require("discord.js");
-// for jsdoc
 const { CommandInteraction, Client } = require("discord.js"),
   Sequelize = require("sequelize");
 let { QueryTypes } = require("sequelize");

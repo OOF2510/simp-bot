@@ -1,6 +1,5 @@
 const milsecConvert = require("../../util/convertMilsec");
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-// for jsdoc
 const { CommandInteraction, Client } = require("discord.js"),
   Sequelize = require("sequelize");
 

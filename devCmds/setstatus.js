@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, ActivityType } = require("discord.js");
-// for jsdoc
 const { CommandInteraction, Client } = require("discord.js"),
   Sequelize = require("sequelize");
 const { existsSync, mkdirSync, unlinkSync, writeFileSync } = require("fs");

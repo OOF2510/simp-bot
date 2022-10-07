@@ -4,7 +4,6 @@ const {
   ActionRowBuilder,
   ButtonBuilder,
 } = require("discord.js");
-// for jsdoc
 const { CommandInteraction, Client } = require("discord.js"),
   Sequelize = require("sequelize");
 

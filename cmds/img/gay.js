@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
-// for jsdoc
 const { CommandInteraction, Client } = require("discord.js"),
   Sequelize = require("sequelize");
 const { Canvacord } = require("canvacord");

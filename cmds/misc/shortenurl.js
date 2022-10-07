@@ -1,5 +1,4 @@
 const { SlashCommandBuilder } = require("discord.js");
-// for jsdoc
 const { CommandInteraction, Client } = require("discord.js"),
   Sequelize = require("sequelize");
 var shortUrl = require("node-url-shortener");

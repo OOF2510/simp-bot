@@ -10,7 +10,6 @@ function checkDomain(domain) {
   return regex.test(domain);
 }
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-// for jsdoc
 const { CommandInteraction, Client } = require("discord.js"),
   Sequelize = require("sequelize");
 

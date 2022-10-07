@@ -3,7 +3,6 @@ const {
   AttachmentBuilder,
   EmbedBuilder,
 } = require("discord.js");
-// for jsdoc
 const { CommandInteraction, Client } = require("discord.js"),
   Sequelize = require("sequelize");
 const Craiyon = require("craiyon");
