@@ -25,8 +25,15 @@ module.exports = {
       model: "gpt2",
       api_key: `${config.hfKey}`,
       return_type: "STRING",
-    }).then((generatedText) => {
-      msg.editReply({ content: `${generatedText}`, ephemeral: false });
-    });
+    })
+      .then((generatedText) => {
+        msg.editReply({ content: `${generatedText}`, ephemeral: false });
+      })
+      .catch((e) => {
+        msg.editReply({
+          content: `That didn't work, try again later!`,
+          ephemeral: true,
+        });
+      });
   },
 };

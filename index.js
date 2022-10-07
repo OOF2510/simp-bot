@@ -147,20 +147,20 @@ client.on("interactionCreate", async (interaction) => {
           );
         });
         try {
-        await interaction.reply({
-          content:
-            "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
-          ephemeral: true,
-        });
+          await interaction.reply({
+            content:
+              "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
+            ephemeral: true,
+          });
         } catch (e) {
           try {
             await interaction.editReply({
-          content:
-            "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
-          ephemeral: true,
-        });
+              content:
+                "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
+              ephemeral: true,
+            });
           } catch (e) {
-            return
+            return;
           }
         }
       });
@@ -173,22 +173,22 @@ client.on("interactionCreate", async (interaction) => {
       );
     });
     try {
-        await interaction.reply({
+      await interaction.reply({
+        content:
+          "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
+        ephemeral: true,
+      });
+    } catch (e) {
+      try {
+        await interaction.editReply({
           content:
             "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
           ephemeral: true,
         });
-        } catch (e) {
-          try {
-            await interaction.editReply({
-          content:
-            "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
-          ephemeral: true,
-        });
-          } catch (e) {
-            return
-          }
-        }
+      } catch (e) {
+        return;
+      }
+    }
   }
 
   // command usage stats | dont run in dev mode
