@@ -1,4 +1,7 @@
 const { SlashCommandBuilder, ActivityType } = require("discord.js");
+// for jsdoc
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 const { existsSync, mkdirSync, unlinkSync, writeFileSync } = require("fs");
 
 module.exports = {
@@ -22,6 +25,14 @@ module.exports = {
     .addStringOption((option) =>
       option.setName("content").setDescription("content").setRequired(true)
     ),
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
   async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     if (!allowed.includes(msg.author.id))

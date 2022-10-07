@@ -1,4 +1,7 @@
 const { SlashCommandBuilder } = require("discord.js");
+// for jsdoc
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 const akinator = require("discord.js-akinator");
 
 module.exports = {
@@ -16,6 +19,14 @@ module.exports = {
         )
         .setRequired(false)
     ),
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
   async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let gameType = interaction.options.getString("game-type");

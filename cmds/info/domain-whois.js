@@ -10,6 +10,9 @@ function checkDomain(domain) {
   return regex.test(domain);
 }
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+// for jsdoc
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -21,6 +24,14 @@ module.exports = {
         .setDescription("domain to get info of")
         .setRequired(true)
     ),
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
   async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let domain = interaction.options.getString("domain");

@@ -1,4 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+// for jsdoc
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -10,6 +13,14 @@ module.exports = {
         .setDescription("User to get avatar of")
         .setRequired(false)
     ),
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
   async execute(interaction, client, config, db, allowed) {
     let user = interaction.options.getUser("user") || interaction.author;
     let mem = interaction.guild.members.cache.get(user.id);

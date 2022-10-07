@@ -1,4 +1,7 @@
 const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
+// for jsdoc
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 const Canvas = require("@napi-rs/canvas");
 /**
  * Add spooky scary skeleton to image
@@ -32,6 +35,14 @@ module.exports = {
     .addUserOption((option) =>
       option.setName("user").setDescription("who?").setRequired(true)
     ),
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
   async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let user = interaction.options.getUser("user");

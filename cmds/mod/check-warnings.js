@@ -4,6 +4,9 @@ const {
   AttachmentBuilder,
   EmbedBuilder,
 } = require("discord.js");
+// for jsdoc
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 let { QueryTypes } = require("sequelize");
 
 module.exports = {
@@ -17,6 +20,14 @@ module.exports = {
         .setDescription("User to check warnings for")
         .setRequired(true)
     ),
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
   async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let user = interaction.options.getUser("user");

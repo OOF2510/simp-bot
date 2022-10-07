@@ -4,11 +4,22 @@ const {
   ActionRowBuilder,
   ButtonBuilder,
 } = require("discord.js");
+// for jsdoc
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("github")
     .setDescription("Sends link to Simp Bot's Github page"),
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
   async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
 

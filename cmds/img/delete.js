@@ -1,4 +1,7 @@
 const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
+// for jsdoc
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 const { Canvacord } = require("canvacord");
 
 module.exports = {
@@ -8,6 +11,14 @@ module.exports = {
     .addUserOption((option) =>
       option.setName("user").setDescription("user to delete").setRequired(true)
     ),
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
   async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let user = interaction.options.getUser("user");

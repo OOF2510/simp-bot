@@ -1,4 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+// for jsdoc
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -7,6 +10,14 @@ module.exports = {
     .addUserOption((option) =>
       option.setName("user").setDescription("description").setRequired(false)
     ),
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
   async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let recipient = interaction.options.getUser("user") || interaction.author;

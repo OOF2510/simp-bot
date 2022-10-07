@@ -1,4 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+// for jsdoc
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 const { promisify } = require("util");
 const exec = promisify(require("child_process").exec);
 let os = require("os");
@@ -9,6 +12,14 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("info")
     .setDescription("Info about the bot and server"),
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
   async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let guild = msg.guild;
