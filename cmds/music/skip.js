@@ -4,7 +4,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("skip")
     .setDescription("skip the playing song"),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     if (!msg.member.voice.channel)
       return msg.reply("You must be in a voice channel to do that!");

@@ -1,10 +1,10 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("coinflip")
     .setDescription("flip a coin"),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
 
     let sides = ["Heads", "Tails"];
@@ -26,7 +26,7 @@ module.exports = {
         break;
     }
 
-    let embed = new Discord.EmbedBuilder()
+    let embed = new EmbedBuilder()
       .setTitle(`${result}`)
       .setImage(`${img}`)
       .setColor(config.embedColor);

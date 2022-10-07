@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const { getPost } = require("random-reddit");
 
 module.exports = {
@@ -11,14 +11,14 @@ module.exports = {
         .setDescription("subreddit name (without 'r/')")
         .setRequired(true)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let sub = interaction.options.getString("subreddit");
 
     try {
       let post = await getPost(`${sub}`);
 
-      let em = new Discord.EmbedBuilder()
+      let em = new EmbedBuilder()
         .setTitle(`${post.title ? post.title : "Error getting title"}`)
         .setColor(config.embedColor)
         .setFooter({

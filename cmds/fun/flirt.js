@@ -11,7 +11,7 @@ module.exports = {
         .setDescription("user to direct pick up line at")
         .setRequired(false)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let recipient = interaction.options.getUser("user");
     await msg.deferReply();

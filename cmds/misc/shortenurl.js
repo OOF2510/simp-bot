@@ -12,7 +12,7 @@ module.exports = {
         .setDescription("URL (link) to shorten")
         .setRequired(true)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
 
     let url = interaction.options.getString("url");

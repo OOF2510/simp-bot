@@ -17,7 +17,7 @@ module.exports = {
           { name: "Disable", value: "FALSE" }
         )
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let status = interaction.options.getString("status");
     try {

@@ -26,7 +26,7 @@ module.exports = {
           { name: "Ocho", value: "ocho" }
         )
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let activity = interaction.options.getString("activity");
     let member = msg.guild.members.cache.get(`${msg.author.id}`);

@@ -5,7 +5,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("restart")
     .setDescription("[DEV] Restarts the bot"),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     if (!allowed.includes(msg.author.id))
       return msg.reply(

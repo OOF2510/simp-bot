@@ -10,7 +10,7 @@ module.exports = {
         .setDescription("song name or link")
         .setRequired(true)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     try {
       let msg = interaction;
       let song = interaction.options.getString("song");

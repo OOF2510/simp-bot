@@ -14,7 +14,7 @@ module.exports = {
         .setDescription("Reason for warn")
         .setRequired(false)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let reason = interaction.options.getString("reason");
     let user = interaction.options.getUser("user");

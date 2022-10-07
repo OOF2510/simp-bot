@@ -16,7 +16,7 @@ module.exports = {
         )
         .setRequired(false)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let gameType = interaction.options.getString("game-type");
 

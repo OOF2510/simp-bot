@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -10,11 +10,11 @@ module.exports = {
         .setDescription("Your suggestion for simp bot")
         .setRequired(true)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     const sug = interaction.options.getString("suggestion");
 
-    const sugEm = new Discord.EmbedBuilder()
+    const sugEm = new EmbedBuilder()
       .setTitle(`New suggestion`)
       .addFields({ name: `Suggestion:`, value: `${sug}` })
       .setFooter({

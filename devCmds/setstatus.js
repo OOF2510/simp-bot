@@ -22,7 +22,7 @@ module.exports = {
     .addStringOption((option) =>
       option.setName("content").setDescription("content").setRequired(true)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     if (!allowed.includes(msg.author.id))
       return msg.reply(

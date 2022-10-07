@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -10,11 +10,11 @@ module.exports = {
         .setDescription("Description of the bug")
         .setRequired(true)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     const rep = interaction.options.getString("bug");
 
-    const repEm = new Discord.EmbedBuilder()
+    const repEm = new EmbedBuilder()
       .setTitle(`New bug report`)
       .addFields({ name: `Report:`, value: `${rep}` })
       .setFooter({

@@ -150,7 +150,7 @@ module.exports = {
         .setDescription("Language to translate to")
         .setRequired(true)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let text = interaction.options.getString("text");
     let baseLang = interaction.options.getString("base-lang");

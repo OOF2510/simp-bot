@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const { promisify } = require("util");
 const exec = promisify(require("child_process").exec);
 let os = require("os");
@@ -9,7 +9,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("info")
     .setDescription("Info about the bot and server"),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let guild = msg.guild;
 
@@ -44,7 +44,7 @@ module.exports = {
 
     let serverOwner = await msg.guild.fetchOwner();
 
-    let infoEm = new Discord.EmbedBuilder()
+    let infoEm = new EmbedBuilder()
       .setTitle("Info")
       .addFields(
         { name: "Server Info", value: "Information about the server" },

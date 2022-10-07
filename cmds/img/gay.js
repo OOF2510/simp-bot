@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
 const { Canvacord } = require("canvacord");
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
         .setDescription("user to turn gay")
         .setRequired(true)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let user = interaction.options.getUser("user");
     await msg.deferReply();
@@ -19,7 +19,7 @@ module.exports = {
     let av = user.displayAvatarURL({ size: 512 });
 
     let image = await Canvacord.rainbow(av);
-    let file = new Discord.AttachmentBuilder(image, {
+    let file = new AttachmentBuilder(image, {
       name: `${user.tag}-gay.png`,
     });
 

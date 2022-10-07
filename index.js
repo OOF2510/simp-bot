@@ -137,7 +137,7 @@ client.on("interactionCreate", async (interaction) => {
 
   try {
     await command
-      .execute(interaction, client, config, db, Discord, allowed)
+      .execute(interaction, client, config, db, allowed)
       .catch(async (error) => {
         console.log(error);
         config.feedbackChannels.bugs.forEach((chid) => {

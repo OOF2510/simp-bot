@@ -1,5 +1,5 @@
 const milsecConvert = require("../../util/convertMilsec");
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -11,7 +11,7 @@ module.exports = {
         .setDescription("user to get info of")
         .setRequired(false)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let user = interaction.options.getUser("user") || interaction.author;
     let mem = interaction.guild.members.cache.get(user.id);
@@ -45,7 +45,7 @@ module.exports = {
     if (Badges.length == 0) badges = "No badges";
     else badges = Badges.join(", ");
 
-    let wiEm = new Discord.EmbedBuilder()
+    let wiEm = new EmbedBuilder()
       .setAuthor({ name: `${user.tag}`, iconURL: `${av}` })
       .setDescription(`${user}`)
       .setThumbnail(av)

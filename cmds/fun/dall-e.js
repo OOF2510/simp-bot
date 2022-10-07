@@ -17,7 +17,7 @@ module.exports = {
         .setDescription("prompt to base image off of")
         .setRequired(true)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let prompt = interaction.options.getString("prompt");
 

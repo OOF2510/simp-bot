@@ -8,7 +8,7 @@ module.exports = {
     .addUserOption((option) =>
       option.setName("user").setDescription("user to insult").setRequired(false)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let user = interaction.options.getUser("user");
 

@@ -11,7 +11,7 @@ module.exports = {
     .addStringOption((option) =>
       option.setName("text").setDescription("Text to say").setRequired(true)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let message = interaction.options.getString("text");
     let guild = interaction.guild;

@@ -12,7 +12,7 @@ module.exports = {
         .setMaxValue(parseInt(500))
         .setRequired(true)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let vol = parseInt(interaction.options.getInteger("percentage"));
     if (!msg.member.voice.channel)

@@ -11,7 +11,7 @@ module.exports = {
         .setDescription("Word or phrase to search for")
         .setRequired(true)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let word = interaction.options.getString("word");
     await msg.deferReply();
