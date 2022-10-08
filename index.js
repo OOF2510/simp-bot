@@ -139,7 +139,7 @@ client.on("ready", () => {
 });
 
 client.on("interactionCreate", async (interaction) => {
-  if (interaction.type != Discord.InteractionType.ApplicationCommand || !interaction.isContextMenuCommand()) return;
+  if (interaction.type != Discord.InteractionType.ApplicationCommand) return;
   const { commandName } = interaction;
   const command = client.commands.get(commandName);
   if (!command) return;
