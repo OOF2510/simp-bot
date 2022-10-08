@@ -158,34 +158,51 @@ module.exports = {
     let msg = interaction;
     let mesID = interaction.options.getString("message-id");
     let resLang = interaction.options.getString("result-lang");
-    if (isNaN(Number(mesID))) return msg.reply({ content: `It doesn't seem like that's a message ID, try again!`, ephemeral: true })
-    if (mesID.length < 18 || mesID > 9223372036854775807) return msg.reply({ content: `It doesn't seem like that's a message ID, try again!`, ephemeral: true })
-    let mes = await msg.channel.messages.fetch(mesID);
-    if (!mes)
+    if (isNaN(Number(mesID)))
       return msg.reply({
+        content: `It doesn't seem like that's a message ID, try again!`,
+        ephemeral: true,
+      });
+    if (mesID.length < 18 || mesID > 9223372036854775807)
+      return msg.reply({
+        content: `It doesn't seem like that's a message ID, try again!`,
+        ephemeral: true,
+      });
+    try {
+      let mes = await msg.channel.messages.fetch(mesID);
+      if (!mes)
+        return msg.reply({
+          content:
+            "Could not get that message, make sure it's in the same channel as the one you're using this command in!",
+          ephemeral: true,
+        });
+      let text = mes.content;
+
+      let langstring = JSON.stringify(langs);
+
+      if (!isSupported(resLang))
+        return msg.reply({
+          content: `Please use a supported language code:\n\`${langstring.replaceAll(
+            ",",
+            `\n`
+          )}\``,
+          ephemeral: true,
+        });
+
+      await msg.deferReply();
+      try {
+        let result = await translate(text, { to: resLang });
+        msg.editReply(`${result}`);
+      } catch (e) {
+        msg.editReply({ content: `Error, try again!`, ephemeral: true });
+      }
+    } catch (e) {
+      if (!msg.isRepliable()) return;
+      msg.reply({
         content:
           "Could not get that message, make sure it's in the same channel as the one you're using this command in!",
         ephemeral: true,
       });
-    let text = mes.content;
-
-    let langstring = JSON.stringify(langs);
-
-    if (!isSupported(resLang))
-      return msg.reply({
-        content: `Please use a supported language code:\n\`${langstring.replaceAll(
-          ",",
-          `\n`
-        )}\``,
-        ephemeral: true,
-      });
-
-    await msg.deferReply();
-    try {
-      let result = await translate(text, { to: resLang });
-      msg.editReply(`${result}`);
-    } catch (e) {
-      msg.editReply({ content: `Error, try again!`, ephemeral: true });
     }
   },
 };

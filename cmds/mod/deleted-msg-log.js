@@ -53,7 +53,7 @@ module.exports = {
         ephemeral: true,
       });
 
-    await msg.deferReply()
+    await msg.deferReply();
 
     try {
       await db.query(

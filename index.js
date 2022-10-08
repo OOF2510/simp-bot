@@ -267,6 +267,20 @@ client.on("messageCreate", async (msg) => {
   }
 });
 
+client.on("messageCreate", async (msg) => {
+  try {
+    let sbserver = client.guilds.cache.get(config.devCmdServerID);
+    let kanye = sbserver.emojis.cache.find(
+      (emoji) => emoji.name.toLowerCase() === "kanye"
+    );
+    let msgArray = msg.content.toLowerCase().split(" ");
+    if (msgArray.includes("ye")) return msg.react(kanye);
+    else if (msgArray.includes("kanye")) return msg.react(kanye);
+  } catch (e) {
+    return;
+  }
+});
+
 client.on("messageDelete", async (msg) => {
   try {
     let status = await db.query(
