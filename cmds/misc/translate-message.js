@@ -158,6 +158,8 @@ module.exports = {
     let msg = interaction;
     let mesID = interaction.options.getString("message-id");
     let resLang = interaction.options.getString("result-lang");
+    if (isNaN(Number(mesID))) return msg.reply({ content: `It doesn't seem like that's a message ID, try again!`, ephemeral: true })
+    if (mesID.length < 18 || mesID > 9223372036854775807) return msg.reply({ content: `It doesn't seem like that's a message ID, try again!`, ephemeral: true })
     let mes = await msg.channel.messages.fetch(mesID);
     if (!mes)
       return msg.reply({
