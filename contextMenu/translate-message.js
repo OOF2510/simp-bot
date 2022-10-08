@@ -5,6 +5,9 @@ const {
   TextInputBuilder,
   TextInputStyle,
   ActionRowBuilder,
+  EmbedBuilder,
+  ButtonBuilder,
+  ButtonStyle,
 } = require("discord.js");
 const { ContextMenuCommandInteraction, Client } = require("discord.js"),
   Sequelize = require("sequelize");
@@ -165,6 +168,10 @@ module.exports = {
     const action = new ActionRowBuilder().addComponents(question);
     modal.addComponents(action);
 
+    const em = new EmbedBuilder().setAuthor({ name: `${msg.author.tag}`, iconURL: `${msg.author.displayAvatarURL()}` })
+    const button = new ButtonBuilder().setLabel('Original Message').setStyle(ButtonStyle.Link).setURL(msg.url)
+    const row = new ActionRowBuilder().addComponents(button)
+
     await interaction.showModal(modal);
     const filter = (interaction) => interaction.customId === "translatemessage";
     interaction
@@ -184,7 +191,8 @@ module.exports = {
 
         try {
           let result = await translate(text, { to: resLang });
-          int.editReply(`${result}`);
+          em.setDescription(`${result}`)
+          int.editReply({ embeds: [em], components: [row] });
         } catch (e) {
           int.editReply({ content: `Error, try again!`, ephemeral: true });
         }
