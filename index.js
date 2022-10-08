@@ -57,8 +57,8 @@ for (const file of devCmdFiles) {
   client.commands.set(cmd.data.name, cmd);
 }
 
-const menuCmdFiles = require("./util/getAllFiles")("./contextMenu/").filter((file) =>
-  file.endsWith(".js")
+const menuCmdFiles = require("./util/getAllFiles")("./contextMenu/").filter(
+  (file) => file.endsWith(".js")
 );
 
 for (const file of menuCmdFiles) {
@@ -106,8 +106,8 @@ client.on("ready", () => {
     commands.push(command.data.toJSON());
   }
   for (const file of menuCmdFiles) {
-    const command = require(`${file}`)
-    commands.push(command.data.toJSON())
+    const command = require(`${file}`);
+    commands.push(command.data.toJSON());
   }
   for (const file of devCmdFiles) {
     const command = require(`${file}`);
