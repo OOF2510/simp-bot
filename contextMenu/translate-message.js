@@ -199,7 +199,9 @@ module.exports = {
 
         try {
           let result = await translate(text, { to: resLang });
-          em.setDescription(`${result}`);
+          em.setDescription(`${result}`).setFooter({
+            text: `(Translated to ${resLang})`,
+          });
           int.editReply({ embeds: [em], components: [row] });
         } catch (e) {
           int.editReply({ content: `Error, try again!`, ephemeral: true });
