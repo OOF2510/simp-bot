@@ -57,6 +57,15 @@ for (const file of devCmdFiles) {
   client.commands.set(cmd.data.name, cmd);
 }
 
+const menuCmdFiles = require("./util/getAllFiles")("./contextMenu/").filter((file) =>
+  file.endsWith(".js")
+);
+
+for (const file of menuCmdFiles) {
+  const cmd = require(`${file}`);
+  client.commands.set(cmd.data.name, cmd);
+}
+
 let db;
 
 client.on("ready", () => {
@@ -96,6 +105,10 @@ client.on("ready", () => {
     const command = require(`${file}`);
     commands.push(command.data.toJSON());
   }
+  for (const file of menuCmdFiles) {
+    const command = require(`${file}`)
+    commands.push(command.data.toJSON())
+  }
   for (const file of devCmdFiles) {
     const command = require(`${file}`);
     devCmds.push(command.data.toJSON());
@@ -126,7 +139,7 @@ client.on("ready", () => {
 });
 
 client.on("interactionCreate", async (interaction) => {
-  if (interaction.type != Discord.InteractionType.ApplicationCommand) return;
+  if (interaction.type != Discord.InteractionType.ApplicationCommand || !interaction.isContextMenuCommand()) return;
   const { commandName } = interaction;
   const command = client.commands.get(commandName);
   if (!command) return;
