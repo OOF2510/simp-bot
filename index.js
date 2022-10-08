@@ -16,12 +16,12 @@ else config = require("./config.json");
 var allowed = config.allowed;
 
 // NORMAL
-intents = new Discord.IntentsBitField(3243773);
-const client = new Discord.Client({ intents: intents });
+// intents = new Discord.IntentsBitField(3243773);
+// const client = new Discord.Client({ intents: intents });
 
 // NORMAL + MESSAGE CONTENT
-// intents = new Discord.IntentsBitField(3276541);
-// const client = new Discord.Client({ intents: intents });
+intents = new Discord.IntentsBitField(3276541);
+const client = new Discord.Client({ intents: intents });
 
 client.commands = new Discord.Collection();
 client.discordTogether = new DiscordTogether(client);
@@ -172,6 +172,11 @@ client.on("interactionCreate", async (interaction) => {
         `An error occured when **${interaction.author.tag}** tried to run **${commandName}**: \`\`\`${error}\`\`\``
       );
     });
+    await interaction.reply({
+      content:
+        "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
+      ephemeral: true,
+    });
     try {
       await interaction.reply({
         content:
@@ -257,6 +262,31 @@ client.on("messageCreate", async (msg) => {
       if (msg.crosspostable) return msg.crosspost();
       else return;
     } else return;
+  } catch (e) {
+    return;
+  }
+});
+
+client.on("messageDelete", async (msg) => {
+  try {
+    let status = await db.query(
+      `SELECT status FROM ${config.mysql.schema}.dellog WHERE status = TRUE AND serverid = ${msg.guild.id} LIMIT 1;`,
+      { plain: true, type: Sequelize.QueryTypes.SELECT }
+    );
+    if (status.status != 1) return;
+    let chid = await db.query(
+      `SELECT channelid FROM ${config.mysql.schema}.dellog WHERE serverid = ${msg.guild.id} LIMIT 1;`,
+      { plain: true, type: Sequelize.QueryTypes.SELECT }
+    );
+    let ch = msg.guild.channels.cache.get(chid.channelid);
+
+    let em = new Discord.EmbedBuilder()
+      .setTitle(`Deleted message by ${msg.author.tag}:`)
+      .setDescription(`${msg.content ? msg.content : "ERROR!"}`)
+      .setColor(Discord.Colors.Red);
+    ch.send({ embeds: [em] }).catch((e) => {
+      return;
+    });
   } catch (e) {
     return;
   }

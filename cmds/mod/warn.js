@@ -35,6 +35,7 @@ module.exports = {
     let user = interaction.options.getUser("user");
 
     await msg.deferReply();
+
     /**
      * Adds warning to database
      * @param {User} user
