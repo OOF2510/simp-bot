@@ -24,7 +24,7 @@ module.exports = {
   async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let recipient = interaction.options.getUser("user");
-    
+
     await msg.deferReply();
 
     try {
@@ -32,7 +32,7 @@ module.exports = {
         "https://getpickuplines.herokuapp.com/lines/random"
       );
       let { line } = data;
-      
+
       return msg.editReply(`${recipient ? recipient : ""} ${line}`);
     } catch (e) {
       return msg.editReply({ content: "Error!", ephemeral: true });

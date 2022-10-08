@@ -1,5 +1,7 @@
 const { SlashCommandBuilder } = require("discord.js");
 const translate = require("translate-google");
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 //https://github.com/shikar/NODE_GOOGLE_TRANSLATE/blob/master/languages.js
 const langs = {
   auto: "Automatic",
@@ -144,12 +146,25 @@ module.exports = {
         .setDescription("Language to translate to")
         .setRequired(true)
     ),
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
   async execute(interaction, client, config, db, Discord, allowed) {
     let msg = interaction;
     let mesID = interaction.options.getString("message-id");
     let resLang = interaction.options.getString("result-lang");
-    let mes = await msg.channel.messages.fetch(mesID)
-    if (!mes) return msg.reply({ content: "Could not get that message, make sure it's in the same channel as the one you're using this command in!", ephemeral: true })
+    let mes = await msg.channel.messages.fetch(mesID);
+    if (!mes)
+      return msg.reply({
+        content:
+          "Could not get that message, make sure it's in the same channel as the one you're using this command in!",
+        ephemeral: true,
+      });
     let text = mes.content;
 
     let langstring = JSON.stringify(langs);
@@ -163,11 +178,12 @@ module.exports = {
         ephemeral: true,
       });
 
+    await msg.deferReply();
     try {
       let result = await translate(text, { to: resLang });
-      msg.reply(`${result}`);
+      msg.editReply(`${result}`);
     } catch (e) {
-      msg.reply({ content: `Error, try again!`, ephemeral: true });
+      msg.editReply({ content: `Error, try again!`, ephemeral: true });
     }
   },
 };

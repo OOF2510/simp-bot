@@ -3,6 +3,8 @@ const {
   ChannelType,
   PermissionFlagsBits,
 } = require("discord.js");
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -24,6 +26,14 @@ module.exports = {
         .setDescription("Logging channel")
         .setRequired(true)
     ),
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
   async execute(interaction, client, config, db, Discord, allowed) {
     let msg = interaction;
     let status = interaction.options.getString("status");
@@ -43,13 +53,15 @@ module.exports = {
         ephemeral: true,
       });
 
+    await msg.deferReply()
+
     try {
       await db.query(
         `REPLACE INTO ${config.mysql.schema}.dellog (serverid, status, channelid) VALUES (${msg.guild.id}, ${status}, ${channel.id}) ;`
       );
-      msg.reply(`Deleted message log: ${status} in ${channel}`);
+      msg.editReply(`Deleted message log: ${status} in ${channel}`);
     } catch (e) {
-      msg.reply({ content: `Error!`, ephemeral: true });
+      msg.editReply({ content: `Error!`, ephemeral: true });
     }
   },
 };
