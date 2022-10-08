@@ -1,10 +1,20 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("coinflip")
     .setDescription("flip a coin"),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
 
     let sides = ["Heads", "Tails"];
@@ -26,7 +36,7 @@ module.exports = {
         break;
     }
 
-    let embed = new Discord.EmbedBuilder()
+    let embed = new EmbedBuilder()
       .setTitle(`${result}`)
       .setImage(`${img}`)
       .setColor(config.embedColor);

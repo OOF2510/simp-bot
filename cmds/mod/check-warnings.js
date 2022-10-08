@@ -2,7 +2,10 @@ const {
   SlashCommandBuilder,
   PermissionFlagsBits,
   AttachmentBuilder,
+  EmbedBuilder,
 } = require("discord.js");
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 let { QueryTypes } = require("sequelize");
 
 module.exports = {
@@ -16,7 +19,15 @@ module.exports = {
         .setDescription("User to check warnings for")
         .setRequired(true)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let user = interaction.options.getUser("user");
 
@@ -39,7 +50,7 @@ module.exports = {
       });
       return;
     }
-    let em = new Discord.EmbedBuilder()
+    let em = new EmbedBuilder()
       .setTitle(`Warnings for ${user.tag}:`)
       .setColor(config.embedColor);
 

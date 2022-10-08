@@ -1,3 +1,8 @@
+/**
+ * Checks if a string is a URL
+ * @param {string} str
+ * @returns {boolean}
+ */
 module.exports = function isURL(str) {
   var pattern = new RegExp(
     "^(https?:\\/\\/)?" + // protocol

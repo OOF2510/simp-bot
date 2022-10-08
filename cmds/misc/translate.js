@@ -1,4 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 const translate = require("translate-google");
 //https://github.com/shikar/NODE_GOOGLE_TRANSLATE/blob/master/languages.js
 const langs = {
@@ -150,7 +152,15 @@ module.exports = {
         .setDescription("Language to translate to")
         .setRequired(true)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let text = interaction.options.getString("text");
     let baseLang = interaction.options.getString("base-lang");

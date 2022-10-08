@@ -1,4 +1,11 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
+const {
+  SlashCommandBuilder,
+  PermissionFlagsBits,
+  User,
+  Guild,
+} = require("discord.js");
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -14,13 +21,27 @@ module.exports = {
         .setDescription("Reason for warn")
         .setRequired(false)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let reason = interaction.options.getString("reason");
     let user = interaction.options.getUser("user");
 
     await msg.deferReply();
 
+    /**
+     * Adds warning to database
+     * @param {User} user
+     * @param {Guild} guild
+     * @param {String} reason
+     */
     async function addToDB(user, guild, reason) {
       if (!reason) reason = "No reason provided!";
 

@@ -1,10 +1,17 @@
 const whois = require("whois-light");
 
+/**
+ * Checks if the string is a valid domain
+ * @param {string} domain
+ * @returns {boolean}
+ */
 function checkDomain(domain) {
   const regex = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/;
   return regex.test(domain);
 }
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -16,7 +23,15 @@ module.exports = {
         .setDescription("domain to get info of")
         .setRequired(true)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let domain = interaction.options.getString("domain");
 
@@ -40,7 +55,7 @@ module.exports = {
     let abuseEmail = domainInfo["Registrar Abuse Contact Email"];
     let regOrg = domainInfo["Registrant Organization"];
 
-    let widEm = new Discord.EmbedBuilder()
+    let widEm = new EmbedBuilder()
       .setTitle(`Domain info for ${domainName}`)
       .setColor(config.embedColor)
       .addFields(

@@ -1,11 +1,21 @@
 const { SlashCommandBuilder } = require("discord.js");
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 const { existsSync } = require("fs");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("restart")
     .setDescription("[DEV] Restarts the bot"),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     if (!allowed.includes(msg.author.id))
       return msg.reply(

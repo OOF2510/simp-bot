@@ -1,6 +1,12 @@
 const { readdirSync, statSync } = require("fs");
 const path = require("path");
 
+/**
+ * Returns an array of all the files in given directory and subdirectories
+ * @param {string} dirPath
+ * @param {Array} arrayOfFiles
+ * @returns {Array}
+ */
 module.exports = function getAllFiles(dirPath, arrayOfFiles) {
   files = readdirSync(dirPath);
 

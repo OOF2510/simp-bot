@@ -30,6 +30,7 @@ client.distube = new DisTube(client, {
   emitNewSongOnly: true,
   emitAddSongWhenCreatingQueue: false,
   emitAddListWhenCreatingQueue: false,
+  leaveOnFinish: true,
   plugins: [
     new SpotifyPlugin({ emitEventsAfterFetching: true }),
     new SoundCloudPlugin(),
@@ -136,7 +137,7 @@ client.on("interactionCreate", async (interaction) => {
 
   try {
     await command
-      .execute(interaction, client, config, db, Discord, allowed)
+      .execute(interaction, client, config, db, allowed)
       .catch(async (error) => {
         console.log(error);
         config.feedbackChannels.bugs.forEach((chid) => {
@@ -145,11 +146,23 @@ client.on("interactionCreate", async (interaction) => {
             `An error occured when **${interaction.author.tag}** tried to run **${commandName}**: \`\`\`${error}\`\`\``
           );
         });
-        await interaction.reply({
-          content:
-            "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
-          ephemeral: true,
-        });
+        try {
+          await interaction.reply({
+            content:
+              "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
+            ephemeral: true,
+          });
+        } catch (e) {
+          try {
+            await interaction.editReply({
+              content:
+                "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
+              ephemeral: true,
+            });
+          } catch (e) {
+            return;
+          }
+        }
       });
   } catch (error) {
     console.log(error);
@@ -164,6 +177,23 @@ client.on("interactionCreate", async (interaction) => {
         "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
       ephemeral: true,
     });
+    try {
+      await interaction.reply({
+        content:
+          "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
+        ephemeral: true,
+      });
+    } catch (e) {
+      try {
+        await interaction.editReply({
+          content:
+            "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
+          ephemeral: true,
+        });
+      } catch (e) {
+        return;
+      }
+    }
   }
 
   // command usage stats | dont run in dev mode

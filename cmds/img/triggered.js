@@ -5,10 +5,13 @@ const { Canvacord } = require("canvacord");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("jail")
-    .setDescription("[IMG] puts specified user in jail")
+    .setName("triggered")
+    .setDescription("[IMG] TRIGGERED")
     .addUserOption((option) =>
-      option.setName("user").setDescription("user to jail").setRequired(true)
+      option
+        .setName("user")
+        .setDescription("user to trigger")
+        .setRequired(true)
     ),
   /**
    * Executes the command
@@ -25,9 +28,9 @@ module.exports = {
 
     let av = user.displayAvatarURL({ size: 512 });
 
-    let image = await Canvacord.jail(av, true);
+    let image = await Canvacord.trigger(av);
     let file = new AttachmentBuilder(image, {
-      name: `${user.tag}-jail.png`,
+      name: `${user.tag}-rip.gif`,
     });
 
     msg.editReply({ files: [file] });

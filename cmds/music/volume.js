@@ -1,4 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -12,7 +14,15 @@ module.exports = {
         .setMaxValue(parseInt(500))
         .setRequired(true)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let vol = parseInt(interaction.options.getInteger("percentage"));
     if (!msg.member.voice.channel)

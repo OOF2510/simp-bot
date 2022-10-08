@@ -1,3 +1,8 @@
+/**
+ * Converts milliseconds to appropriate format
+ * @param {Number} milliseconds
+ * @returns {string}
+ */
 module.exports = function (milliseconds) {
   if (milliseconds < 1000) return `${milliseconds}ms`;
 

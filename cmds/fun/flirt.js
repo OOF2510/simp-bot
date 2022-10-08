@@ -1,4 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 const axios = require("axios");
 
 module.exports = {
@@ -11,18 +13,29 @@ module.exports = {
         .setDescription("user to direct pick up line at")
         .setRequired(false)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let recipient = interaction.options.getUser("user");
+    
+    await msg.deferReply();
 
     try {
       let { data } = await axios.get(
         "https://getpickuplines.herokuapp.com/lines/random"
       );
       let { line } = data;
-      msg.reply(`${recipient ? recipient : ""} ${line}`);
+      
+      return msg.editReply(`${recipient ? recipient : ""} ${line}`);
     } catch (e) {
-      msg.reply({ content: "Error!", ephemeral: true });
+      return msg.editReply({ content: "Error!", ephemeral: true });
     }
   },
 };

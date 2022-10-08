@@ -1,4 +1,6 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 const { Canvacord } = require("canvacord");
 
 module.exports = {
@@ -8,7 +10,15 @@ module.exports = {
     .addUserOption((option) =>
       option.setName("user").setDescription("user to delete").setRequired(true)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let user = interaction.options.getUser("user");
     await msg.deferReply();
@@ -16,7 +26,7 @@ module.exports = {
     let av = user.displayAvatarURL({ size: 512 });
 
     let image = await Canvacord.delete(av, true);
-    let file = new Discord.AttachmentBuilder(image, {
+    let file = new AttachmentBuilder(image, {
       name: `${user.tag}-deleted.png`,
     });
 

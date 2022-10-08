@@ -1,4 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 const hf = require("huggingface-api");
 
 module.exports = {
@@ -11,7 +13,15 @@ module.exports = {
         .setDescription("Text for the ai to work with")
         .setRequired(true)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let text = interaction.options.getString("startingtext");
 
@@ -25,8 +35,15 @@ module.exports = {
       model: "gpt2",
       api_key: `${config.hfKey}`,
       return_type: "STRING",
-    }).then((generatedText) => {
-      msg.editReply({ content: `${generatedText}`, ephemeral: false });
-    });
+    })
+      .then((generatedText) => {
+        msg.editReply({ content: `${generatedText}`, ephemeral: false });
+      })
+      .catch((e) => {
+        msg.editReply({
+          content: `That didn't work, try again later!`,
+          ephemeral: true,
+        });
+      });
   },
 };

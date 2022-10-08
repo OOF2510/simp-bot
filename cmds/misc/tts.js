@@ -1,4 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
+const { CommandInteraction, Client } = require("discord.js"),
+  Sequelize = require("sequelize");
 const { existsSync, mkdirSync } = require("fs");
 const { promisify } = require("util");
 const exec = promisify(require("child_process").exec);
@@ -11,7 +13,15 @@ module.exports = {
     .addStringOption((option) =>
       option.setName("text").setDescription("Text to say").setRequired(true)
     ),
-  async execute(interaction, client, config, db, Discord, allowed) {
+  /**
+   * Executes the command
+   * @param {CommandInteraction} interaction
+   * @param {Client} client
+   * @param {*} config
+   * @param {Sequelize} db
+   * @param {Array} allowed
+   */
+  async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let message = interaction.options.getString("text");
     let guild = interaction.guild;
