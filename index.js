@@ -287,8 +287,8 @@ client.on("messageCreate", async (msg) => {
       (emoji) => emoji.name.toLowerCase() === "kanye"
     );
     let msgArray = msg.content.toLowerCase().split(" ");
-    if (msgArray.includes("ye")) return msg.react(kanye).catch((e) => return)
-    else if (msgArray.includes("kanye")) return msg.react(kanye).catch((e) => return)
+    if (msgArray.includes("ye")) return msg.react(kanye).catch((e) => {return})
+    else if (msgArray.includes("kanye")) return msg.react(kanye).catch((e) => {return})
   } catch (e) {
     return;
   }
