@@ -37,7 +37,14 @@ client.distube = new DisTube(client, {
     new YtDlpPlugin(),
   ],
 });
-client.emotes = require("./distube.json").emoji;
+client.emotes = {
+  play: "▶️",
+  stop: "⏹️",
+  queue: "📄",
+  success: "☑️",
+  repeat: "🔁",
+  error: "❌",
+};
 
 const cmdFiles = require("./util/getAllFiles")("./cmds/").filter((file) =>
   file.endsWith(".js")
@@ -287,8 +294,14 @@ client.on("messageCreate", async (msg) => {
       (emoji) => emoji.name.toLowerCase() === "kanye"
     );
     let msgArray = msg.content.toLowerCase().split(" ");
-    if (msgArray.includes("ye")) return msg.react(kanye).catch((e) => {return})
-    else if (msgArray.includes("kanye")) return msg.react(kanye).catch((e) => {return})
+    if (msgArray.includes("ye"))
+      return msg.react(kanye).catch((e) => {
+        return;
+      });
+    else if (msgArray.includes("kanye"))
+      return msg.react(kanye).catch((e) => {
+        return;
+      });
   } catch (e) {
     return;
   }
