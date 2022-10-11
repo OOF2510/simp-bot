@@ -290,9 +290,9 @@ client.on("messageCreate", async (msg) => {
 client.on("messageCreate", async (msg) => {
   let cmdsArray = Array.from(client.commands.keys())
   cmdsArray.forEach(async (cmdName) => {
-    if (msg.content === `s!${cmdName}`) {
+    if (msg.content.startsWith(`s!${cmdName}`)) {
       try {
-      return msg.reply(`Text commands are no longer supported! Please use slash commands, if you don't see any when you type \`/\`, re-auth the bot (or ask admins to) with this link: https://discord.com/api/oauth2/authorize?client_id=${config.clientID}&permissions=8&scope=bot%20applications.commands`)
+      return msg.reply(`Text commands are no longer supported! Please use slash commands! If you don't see any when you type \`/\`, re-auth the bot (or ask admins to) with this link: https://discord.com/api/oauth2/authorize?client_id=${config.clientID}&permissions=8&scope=bot%20applications.commands`)
       } catch (e) {
         return
       }
