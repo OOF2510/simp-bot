@@ -5,7 +5,7 @@ const { CommandInteraction, Client } = require("discord.js"),
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("divorce")
-    .setDescription("End your current marrige"),
+    .setDescription("End your current marriage"),
   /**
    * Executes the command
    * @param {CommandInteraction} interaction
@@ -27,7 +27,7 @@ module.exports = {
     );
     if (!married)
       return msg.editReply(
-        `You're not married! You can't end a marrige that doesn't exist!`
+        `You're not married! You can't end a marriage that doesn't exist!`
       );
 
     await db.query(

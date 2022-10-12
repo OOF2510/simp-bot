@@ -4,8 +4,8 @@ const { CommandInteraction, Client } = require("discord.js"),
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("check-marrige")
-    .setDescription("Check your current marrige"),
+    .setName("check-marriage")
+    .setDescription("Check your current marriage"),
   /**
    * Executes the command
    * @param {CommandInteraction} interaction
