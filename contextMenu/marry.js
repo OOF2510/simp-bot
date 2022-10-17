@@ -21,6 +21,10 @@ module.exports = {
   async execute(interaction, client, config, db, allowed) {
     let user = interaction.targetUser;
 
-    await marry(user, db, config, interaction);
+    try {
+      await marry(user, db, config, interaction);
+    } catch (e) {
+      return
+    }
   },
 };
