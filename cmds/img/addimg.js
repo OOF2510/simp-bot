@@ -18,7 +18,7 @@ async function skel(image, type) {
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
   ctx.drawImage(
     spooky,
-    (canvas.width / 2) - 50,
+    canvas.width / 2 - 50,
     canvas.height / 2,
     canvas.width,
     canvas.height
@@ -34,28 +34,37 @@ module.exports = {
       option.setName("user").setDescription("who?").setRequired(true)
     )
     .addStringOption((option) =>
-      option.setName("type").setDescription("Image you want to add").addChoices(
-        {
-          name: "skeleton",
-          value:
-            "https://cdn.discordapp.com/attachments/1021763955099717664/1027923627842207864/skeleton.png",
-        },
-        {
-          name: "rover",
-          value:
-            "https://cdn.discordapp.com/attachments/1021763955099717664/1030522543121109104/rover.png",
-        },
-        {
-          name: "timmy",
-          value:
-            "https://cdn.discordapp.com/attachments/1021763955099717664/1030523158387773461/timmy.png",
-        },
-        {
-          name: "cow",
-          value:
-            "https://cdn.discordapp.com/attachments/1021763955099717664/1030523692725325945/pfp-transparent.png",
-        }
-      ).setRequired(true)
+      option
+        .setName("type")
+        .setDescription("Image you want to add")
+        .addChoices(
+          {
+            name: "skeleton",
+            value:
+              "https://cdn.discordapp.com/attachments/1021763955099717664/1027923627842207864/skeleton.png",
+          },
+          {
+            name: "rover",
+            value:
+              "https://cdn.discordapp.com/attachments/1021763955099717664/1030522543121109104/rover.png",
+          },
+          {
+            name: "timmy",
+            value:
+              "https://cdn.discordapp.com/attachments/1021763955099717664/1030523158387773461/timmy.png",
+          },
+          {
+            name: "cow",
+            value:
+              "https://cdn.discordapp.com/attachments/1021763955099717664/1030523692725325945/pfp-transparent.png",
+          },
+          {
+            name: "mtndew",
+            value:
+              "https://cdn.discordapp.com/attachments/1021763955099717664/1031692772354297887/dew.png",
+          }
+        )
+        .setRequired(true)
     ),
   /**
    * Executes the command
@@ -68,7 +77,7 @@ module.exports = {
   async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let user = interaction.options.getUser("user");
-    let type = interaction.options.getString('type')
+    let type = interaction.options.getString("type");
     await msg.deferReply();
 
     let av = user.displayAvatarURL({ size: 512 });

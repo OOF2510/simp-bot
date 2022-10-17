@@ -18,8 +18,8 @@ module.exports = {
     let msg = interaction;
     let author = msg.author;
     let serverId = msg.guild.id;
-    
-    await msg.deferReply()
+
+    await msg.deferReply();
 
     let married = await db.query(
       `SELECT id FROM ${config.mysql.schema}.marriges WHERE serverid = ${serverId} AND (userid = ${author.id} OR spouseid = ${author.id});`,
@@ -33,6 +33,6 @@ module.exports = {
     await db.query(
       `DELETE FROM ${config.mysql.schema}.marriges WHERE serverid = ${serverId} AND (userid = ${author.id} OR spouseid = ${author.id})`
     );
-    msg.editReply('You are now successfully divorced!')
+    msg.editReply("You are now successfully divorced!");
   },
 };

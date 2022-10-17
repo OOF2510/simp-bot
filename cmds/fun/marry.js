@@ -121,7 +121,7 @@ module.exports = {
     try {
       await marry(user, db, config, msg);
     } catch (e) {
-      return
+      return;
     }
   },
 };

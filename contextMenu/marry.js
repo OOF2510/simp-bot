@@ -24,7 +24,7 @@ module.exports = {
     try {
       await marry(user, db, config, interaction);
     } catch (e) {
-      return
+      return;
     }
   },
 };
