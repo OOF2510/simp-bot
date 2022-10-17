@@ -25,9 +25,13 @@ async function marry(user, db, config, msg) {
     { plain: true, type: Sequelize.QueryTypes.SELECT }
   );
   if (married)
-    return msg.reply(
-      `You're already married! You must divorce your current partner if you want to do that!`
-    );
+    return msg
+      .reply(
+        `You're already married! You must divorce your current partner if you want to do that!`
+      )
+      .catch((e) => {
+        return;
+      });
 
   let userMarried = await db.query(
     `SELECT id FROM ${config.mysql.schema}.marriges WHERE serverid = ${serverId} AND (userid = ${user.id} OR spouseid = ${user.id});`,
@@ -114,6 +118,10 @@ module.exports = {
     let msg = interaction;
     let user = interaction.options.getUser("user");
 
-    await marry(user, db, config, msg);
+    try {
+      await marry(user, db, config, msg);
+    } catch (e) {
+      return
+    }
   },
 };
