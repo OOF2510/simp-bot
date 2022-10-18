@@ -159,6 +159,7 @@ client.on("interactionCreate", async (interaction) => {
     await command
       .execute(interaction, client, config, db, allowed)
       .catch(async (error) => {
+        if (error === 'DiscordAPIError[10062]: Unknown interaction') return;
         console.log(error);
         config.feedbackChannels.bugs.forEach((chid) => {
           let bugChannel = client.channels.cache.get(chid);
@@ -185,6 +186,7 @@ client.on("interactionCreate", async (interaction) => {
         }
       });
   } catch (error) {
+    if (error === 'DiscordAPIError[10062]: Unknown interaction') return;
     console.log(error);
     config.feedbackChannels.bugs.forEach((chid) => {
       let bugChannel = client.channels.cache.get(chid);
