@@ -11,12 +11,7 @@ let config;
 var startupArgs = process.argv.slice(2);
 if (startupArgs[0] == "--dev") config = require("./config.dev.json");
 else config = require("./config.json");
-
-var allowed = config.allowed;
-
-// NORMAL
-// intents = new Discord.IntentsBitField(3243773);
-// const client = new Discord.Client({ intents: intents });
+var { allowed } = config;
 
 // NORMAL + MESSAGE CONTENT
 intents = new Discord.IntentsBitField(3276541);
@@ -158,7 +153,7 @@ client.on("interactionCreate", async (interaction) => {
     await command
       .execute(interaction, client, config, db, allowed)
       .catch(async (error) => {
-        if (error === 'DiscordAPIError[10062]: Unknown interaction') return;
+        if (error === "DiscordAPIError[10062]: Unknown interaction") return;
         console.log(error);
         config.feedbackChannels.bugs.forEach((chid) => {
           let bugChannel = client.channels.cache.get(chid);
@@ -185,7 +180,7 @@ client.on("interactionCreate", async (interaction) => {
         }
       });
   } catch (error) {
-    if (error === 'DiscordAPIError[10062]: Unknown interaction') return;
+    if (error === "DiscordAPIError[10062]: Unknown interaction") return;
     console.log(error);
     config.feedbackChannels.bugs.forEach((chid) => {
       let bugChannel = client.channels.cache.get(chid);
