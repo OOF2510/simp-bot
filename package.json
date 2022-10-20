@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "A discord bot that is a simp",
   "main": "index.js",
-  "repository": "https://github.com/OOF2510/simp-bot-rewritten.git",
+  "repository": "https://github.com/OOF2510/simp-bot.git",
   "author": "OOF2510 <64423517+OOF2510@users.noreply.github.com>",
   "license": "MPL-2.0",
   "scripts": {

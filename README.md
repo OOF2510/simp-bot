@@ -1,12 +1,12 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/oof2510/simp-bot-rewritten/badge)](https://www.codefactor.io/repository/github/oof2510/simp-bot-rewritten)
-[![Maintainability](https://api.codeclimate.com/v1/badges/4c542ad2130b91018c63/maintainability)](https://codeclimate.com/github/OOF2510/simp-bot-rewritten/maintainability)
-[![Forks](https://img.shields.io/github/forks/oof2510/simp-bot-rewritten.svg)](https://github.com/oof2510/simp-bot-rewritten)
-[![Stars](https://img.shields.io/github/stars/oof2510/simp-bot-rewritten.svg)](https://github.com/oof2510/simp-bot-rewritten)
-[![License](https://img.shields.io/github/license/oof2510/simp-bot-rewritten.svg)](https://github.com/oof2510/simp-bot-rewritten)
-![Lines of code](https://img.shields.io/tokei/lines/github/oof2510/simp-bot-rewritten)
-![GitHub repo size](https://img.shields.io/github/repo-size/oof2510/simp-bot-rewritten)
-![GitHub last commit](https://img.shields.io/github/last-commit/oof2510/simp-bot-rewritten)
-[![Build Docker Image](https://github.com/OOF2510/simp-bot-rewritten/actions/workflows/docker.yml/badge.svg)](https://github.com/OOF2510/simp-bot-rewritten/actions/workflows/docker.yml)
+[![CodeFactor](https://www.codefactor.io/repository/github/oof2510/simp-bot/badge)](https://www.codefactor.io/repository/github/oof2510/simp-bot)
+[![Maintainability](https://api.codeclimate.com/v1/badges/4c542ad2130b91018c63/maintainability)](https://codeclimate.com/github/OOF2510/simp-bot/maintainability)
+[![Forks](https://img.shields.io/github/forks/oof2510/simp-bot.svg)](https://github.com/oof2510/simp-bot)
+[![Stars](https://img.shields.io/github/stars/oof2510/simp-bot.svg)](https://github.com/oof2510/simp-bot)
+[![License](https://img.shields.io/github/license/oof2510/simp-bot.svg)](https://github.com/oof2510/simp-bot)
+![Lines of code](https://img.shields.io/tokei/lines/github/oof2510/simp-bot)
+![GitHub repo size](https://img.shields.io/github/repo-size/oof2510/simp-bot)
+![GitHub last commit](https://img.shields.io/github/last-commit/oof2510/simp-bot)
+[![Build Docker Image](https://github.com/OOF2510/simp-bot/actions/workflows/docker.yml/badge.svg)](https://github.com/OOF2510/simp-bot/actions/workflows/docker.yml)
 
 # Simp Bot
 
@@ -61,8 +61,8 @@ docker run --restart unless-stopped -it simpbot
 - Install git, nodejs, python3, python3-pip & yarn
 
 ```bash
- git clone https://github.com/OOF2510/simp-bot-rewritten.git
- cd simp-bot-rewritten
+ git clone https://github.com/OOF2510/simp-bot.git
+ cd simp-bot
  yarn run setup
  yarn run start
 ```
