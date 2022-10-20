@@ -1106,16 +1106,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-together@npm:^1.3.31":
-  version: 1.3.31
-  resolution: "discord-together@npm:1.3.31"
-  dependencies:
-    discord.js: ^14.2.0
-    node-fetch: ^2.6.1
-  checksum: 6308e25f3445285d7b6233f3511eeae04faa58c06d5735e9d6bc36e7c7591eb1f5c2149396a5be7558f4808ce23bc473bd2d74b1e5d686f2fa0113d82814cac4
-  languageName: node
-  linkType: hard
-
 "discord.js-akinator@npm:^4.0.3":
   version: 4.0.3
   resolution: "discord.js-akinator@npm:4.0.3"
@@ -1127,7 +1117,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:^14.2.0, discord.js@npm:^14.5.0":
+"discord.js@npm:^14.5.0":
   version: 14.5.0
   resolution: "discord.js@npm:14.5.0"
   dependencies:
@@ -3128,7 +3118,6 @@ __metadata:
     canvacord: ^5.4.8
     craiyon: ^1.0.0
     discord-api-types: ^0.37.12
-    discord-together: ^1.3.31
     discord.js: ^14.6.0
     discord.js-akinator: ^4.0.3
     distube: ^4.0.4

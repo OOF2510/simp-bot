@@ -2,7 +2,6 @@ const Discord = require("discord.js");
 const { existsSync } = require("fs");
 const Sequelize = require("sequelize");
 const { DiscordTogether } = require("discord-together");
-const { ActivityType } = require("discord.js");
 const { DisTube } = require("distube");
 const { SpotifyPlugin } = require("@distube/spotify");
 const { SoundCloudPlugin } = require("@distube/soundcloud");
@@ -82,7 +81,7 @@ client.on("ready", () => {
   if (existsSync("./temp/lastStatus.json")) require("./util/setStatus")(client);
   else
     client.user.setActivity(`${client.guilds.cache.size} servers!`, {
-      type: ActivityType.Watching,
+      type: Discord.ActivityType.Watching,
     });
   const auth = config.mysql; // bartholemew was here
   const options = {
