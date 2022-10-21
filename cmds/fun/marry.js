@@ -88,10 +88,14 @@ async function marry(user, db, config, msg) {
   collector.on("end", async (col) => {
     let colA = Array.from(col);
     if (!colA[0])
-      return msg.editReply({
-        content: `Nothing was selected! Try again!`,
-        components: [],
-      });
+      return msg
+        .editReply({
+          content: `Nothing was selected! Try again!`,
+          components: [],
+        })
+        .catch((e) => {
+          return;
+        });
   });
 }
 
