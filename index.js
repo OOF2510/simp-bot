@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 const { existsSync } = require("fs");
 const Sequelize = require("sequelize");
-const { DiscordTogether } = require("discord-together");
 const { DisTube } = require("distube");
 const { SpotifyPlugin } = require("@distube/spotify");
 const { SoundCloudPlugin } = require("@distube/soundcloud");
@@ -18,7 +17,6 @@ intents = new Discord.IntentsBitField(3276541);
 const client = new Discord.Client({ intents: intents });
 
 client.commands = new Discord.Collection();
-client.discordTogether = new DiscordTogether(client);
 client.distube = new DisTube(client, {
   leaveOnStop: true,
   emitNewSongOnly: true,
