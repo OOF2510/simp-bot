@@ -228,6 +228,7 @@ client.on("interactionCreate", async (interaction) => {
   }
 });
 
+try {
 const status = (queue) => `Volume: \`${queue.volume}%\``;
 client.distube
   .on("playSong", (queue, song) =>
@@ -264,7 +265,10 @@ client.distube
     )
   )
   .on("finish", (queue) => queue.textChannel.send("Finished!"));
-
+} catch (e) {
+  return
+}
+  
 client.on("messageCreate", async (msg) => {
   try {
     let status = await db.query(
