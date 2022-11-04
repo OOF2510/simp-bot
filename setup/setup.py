@@ -10,6 +10,7 @@ sqlPass = input("MySQL Password: ")
 sqlSchema = input("MySQL Schema Name: ")
 embedColor = input("Embed Color (hex without the #): ")
 hfKey = input("Huggingface API Key: ")
+openaiKey = input("OpenAI API Key: ")
 uID = input("Your Discord User ID: ")
 bug = input("Bug channel ID: ")
 sug = input("Suggestion channel ID: ")
@@ -27,6 +28,7 @@ configJson = "{" + f"""
   """ + "}," + f"""
   \"embedColor\": \"0x{embedColor}\",
   \"hfKey\": \"{hfKey}\",
+  \"openaiApiKey\": \"{openaiKey}\",
   \"allowed\": [
     \"{uID}\"
   ],

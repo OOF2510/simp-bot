@@ -41,6 +41,7 @@ Feel free to fork & open a pull request
   },
   "embedColor": "hex-color-code",
   "hfkey": "your-huggingface-api-key",
+  "openaiApiKey": "your-openai-api-key",
   "allowed": ["your-user-id"],
   "feedbackChannels": {
     "bugs": ["bug-channel-id"],

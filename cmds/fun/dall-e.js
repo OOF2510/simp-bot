@@ -1,17 +1,16 @@
-const {
-  SlashCommandBuilder,
-  AttachmentBuilder,
-  EmbedBuilder,
-} = require("discord.js");
+const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
 const { CommandInteraction, Client } = require("discord.js"),
   Sequelize = require("sequelize");
 const Craiyon = require("craiyon");
+const { Configuration, OpenAIApi } = require("openai");
+const fs = require("fs");
+const https = require("https");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("craiyon")
+    .setName("craiyon-dalle")
     .setDescription(
-      "Uses Craiyon to grenerate an image based on a prompt. This can take up to 3 mins to run."
+      "Uses Dalle-2 or Craiyon to grenerate an image based on a prompt. This can take up to 3 mins to run."
     )
     .addStringOption((option) =>
       option
@@ -33,20 +32,80 @@ module.exports = {
 
     await msg.deferReply();
 
+    const imgId = Math.random().toString(36).substring(2, 15);
+
     try {
-      const craiyon = new Craiyon.Client();
+      const configuration = new Configuration({ apiKey: config.openaiApiKey });
+      const openai = new OpenAIApi(configuration);
 
-      let result = await craiyon.generate({ prompt: `${prompt}` });
-      let buffer = result.images[0].asBuffer();
+      const response = await openai.createImage({
+        prompt: `${prompt}`,
+        n: 1,
+        size: "1024x1024",
+      });
+      let imageUrl = response.data.data[0].url;
 
-      let attachment = new AttachmentBuilder(buffer, { name: `${prompt}.jpg` });
+      if (!fs.existsSync("./temp")) fs.mkdirSync("./temp");
+      if (!fs.existsSync("./temp/dall-e")) fs.mkdirSync("./temp/dall-e");
+      const file = fs.createWriteStream(
+        `./temp/dall-e/${prompt}-${msg.guildId}_${imgId}.png`
+      );
+
+      // save image to file asynchronusly using await
+      await new Promise((resolve, reject) => {
+        https.get(imageUrl, (response) => {
+          response.pipe(file);
+          file
+            .on("finish", () => {
+              file.close();
+              resolve();
+            })
+            .on("error", (err) => {
+              reject(err.message);
+            });
+        });
+      });
+
+      let dalleAttach = new AttachmentBuilder()
+        .setFile(`./temp/dall-e/${prompt}-${msg.guildId}_${imgId}.png`)
+        .setName(`${prompt}.png`);
 
       await msg.editReply({
-        content: `Prompt: **${prompt}**`,
-        files: [attachment],
+        content: `Prompt: **${prompt}**\nGenerated using: \`OpenAI Dalle-2\``,
+        files: [dalleAttach],
       });
     } catch (e) {
-      return console.log(e);
+      try {
+        const craiyon = new Craiyon.Client();
+
+        let result = await craiyon.generate({ prompt: `${prompt}` });
+        let buffer = result.images[0].asBuffer();
+
+        if (!fs.existsSync("./temp")) fs.mkdirSync("./temp");
+        if (!fs.existsSync("./temp/craiyon")) fs.mkdirSync("./temp/craiyon");
+        // save image to file asynchronusly using await
+        await new Promise((resolve, reject) => {
+          fs.writeFile(
+            `./temp/craiyon/${prompt}-${msg.guildId}_${imgId}.png`,
+            buffer,
+            (err) => {
+              if (err) reject(err.message);
+              resolve();
+            }
+          );
+        });
+
+        let craiyonAttach = new AttachmentBuilder()
+          .setFile(`./temp/craiyon/${prompt}-${msg.guildId}_${imgId}.png`)
+          .setName(`${prompt}.png`);
+
+        await msg.editReply({
+          content: `Prompt: **${prompt}**\nGenerated using: \`Craiyon\``,
+          files: [craiyonAttach],
+        });
+      } catch (e) {
+        return console.log(e);
+      }
     }
   },
 };
