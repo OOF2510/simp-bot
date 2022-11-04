@@ -86,7 +86,7 @@ module.exports = {
         // save image to file asynchronusly using await
         await new Promise((resolve, reject) => {
           fs.writeFile(
-            `./temp/craiyon/${prompt}-${msg.guildId}_${imgId}.png`,
+            `./temp/craiyon/${prompt}-${msg.guildId}_${imgId}.jpg`,
             buffer,
             (err) => {
               if (err) reject(err.message);
@@ -96,8 +96,8 @@ module.exports = {
         });
 
         let craiyonAttach = new AttachmentBuilder()
-          .setFile(`./temp/craiyon/${prompt}-${msg.guildId}_${imgId}.png`)
-          .setName(`${prompt}.png`);
+          .setFile(`./temp/craiyon/${prompt}-${msg.guildId}_${imgId}.jpg`)
+          .setName(`${prompt}.jpg`);
 
         await msg.editReply({
           content: `Prompt: **${prompt}**\nGenerated using: \`Craiyon\``,
