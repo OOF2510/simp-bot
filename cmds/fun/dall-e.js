@@ -53,17 +53,21 @@ module.exports = {
 
       // save image to file asynchronusly using await
       await new Promise((resolve, reject) => {
-        https.get(imageUrl, (response) => {
-          response.pipe(file);
-          file
-            .on("finish", () => {
-              file.close();
-              resolve();
-            })
-            .on("error", (err) => {
-              reject(err.message);
-            });
-        });
+        https
+          .get(imageUrl, (response) => {
+            response.pipe(file);
+            file
+              .on("finish", () => {
+                file.close();
+                resolve();
+              })
+              .on("error", (err) => {
+                reject(err.message);
+              });
+          })
+          .on("error", (err) => {
+            reject(err.message);
+          });
       });
 
       let dalleAttach = new AttachmentBuilder()
@@ -92,7 +96,9 @@ module.exports = {
               if (err) reject(err.message);
               resolve();
             }
-          );
+          ).catch((e) => {
+            reject(e);
+          });
         });
 
         let craiyonAttach = new AttachmentBuilder()
