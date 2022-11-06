@@ -104,7 +104,7 @@ module.exports = {
           files: [craiyonAttach],
         });
       } catch (e) {
-        return console.log(e);
+        return;
       }
     }
   },

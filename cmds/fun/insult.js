@@ -34,7 +34,11 @@ module.exports = {
         msg.reply(`${insult}`);
       }
     } catch (e) {
-      msg.reply({ content: "Error!", ephemeral: true });
+      try {
+        await msg.reply({ content: "Error!", ephemeral: true });
+      } catch (e) {
+        return;
+      }
     }
   },
 };
