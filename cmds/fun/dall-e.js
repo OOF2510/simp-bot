@@ -35,6 +35,8 @@ module.exports = {
     const imgId = Math.random().toString(36).substring(2, 15);
 
     try {
+      // for testing - throw an error so that craiyon will be used
+      // throw new Error("test");
       const configuration = new Configuration({ apiKey: config.openaiApiKey });
       const openai = new OpenAIApi(configuration);
 
@@ -89,16 +91,18 @@ module.exports = {
         if (!fs.existsSync("./temp/craiyon")) fs.mkdirSync("./temp/craiyon");
         // save image to file asynchronusly using await
         await new Promise((resolve, reject) => {
-          fs.writeFile(
-            `./temp/craiyon/${prompt}-${msg.guildId}_${imgId}.jpg`,
-            buffer,
-            (err) => {
-              if (err) reject(err.message);
-              resolve();
-            }
-          ).catch((e) => {
+          try {
+            fs.writeFile(
+              `./temp/craiyon/${prompt}-${msg.guildId}_${imgId}.jpg`,
+              buffer,
+              (err) => {
+                if (err) reject(err);
+                resolve();
+              }
+            );
+          } catch (e) {
             reject(e);
-          });
+          }
         });
 
         let craiyonAttach = new AttachmentBuilder()
@@ -110,7 +114,7 @@ module.exports = {
           files: [craiyonAttach],
         });
       } catch (e) {
-        return;
+        return console.log(e);
       }
     }
   },
