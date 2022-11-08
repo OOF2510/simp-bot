@@ -50,7 +50,7 @@ module.exports = {
       if (!fs.existsSync("./temp")) fs.mkdirSync("./temp");
       if (!fs.existsSync("./temp/dall-e")) fs.mkdirSync("./temp/dall-e");
       const file = fs.createWriteStream(
-        `./temp/dall-e/${prompt}-${msg.guildId}_${imgId}.png`
+        `./temp/dall-e/${prompt.replaceAll('/', '--')}-${msg.guildId}_${imgId}.png`
       );
 
       // save image to file asynchronusly using await
@@ -73,8 +73,8 @@ module.exports = {
       });
 
       let dalleAttach = new AttachmentBuilder()
-        .setFile(`./temp/dall-e/${prompt}-${msg.guildId}_${imgId}.png`)
-        .setName(`${prompt}.png`);
+        .setFile(`./temp/dall-e/${prompt.replaceAll('/', '--')}-${msg.guildId}_${imgId}.png`)
+        .setName(`${prompt.replaceAll('/', '--')}.png`);
 
       await msg.editReply({
         content: `Prompt: **${prompt}**\nGenerated using: \`OpenAI Dalle-2\``,
@@ -93,7 +93,7 @@ module.exports = {
         await new Promise((resolve, reject) => {
           try {
             fs.writeFile(
-              `./temp/craiyon/${prompt}-${msg.guildId}_${imgId}.jpg`,
+              `./temp/craiyon/${prompt.replaceAll('/', '--')}-${msg.guildId}_${imgId}.jpg`,
               buffer,
               (err) => {
                 if (err) reject(err);
@@ -106,8 +106,8 @@ module.exports = {
         });
 
         let craiyonAttach = new AttachmentBuilder()
-          .setFile(`./temp/craiyon/${prompt}-${msg.guildId}_${imgId}.jpg`)
-          .setName(`${prompt}.jpg`);
+          .setFile(`./temp/craiyon/${prompt.replaceAll('/', '--')}-${msg.guildId}_${imgId}.jpg`)
+          .setName(`${prompt.replaceAll('/', '--')}.jpg`);
 
         await msg.editReply({
           content: `Prompt: **${prompt}**\nGenerated using: \`Craiyon\``,
