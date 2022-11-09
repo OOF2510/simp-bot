@@ -23,14 +23,18 @@ module.exports = {
       let joke = response.data;
 
       if (joke.setup && joke.delivery) {
-        msg.reply(`${joke.setup}\n||${joke.delivery}||`);
+        await msg.reply(`${joke.setup}\n||${joke.delivery}||`);
       } else if (joke.joke) {
-        msg.reply(`${joke.joke}`);
+        await msg.reply(`${joke.joke}`);
       } else {
-        msg.reply({ content: "Error!", ephemeral: true });
+        await msg.reply({ content: "Error!", ephemeral: true });
       }
     } catch (e) {
-      msg.reply({ content: "Error!", ephemeral: true });
+      try {
+        await msg.reply({ content: "Error!", ephemeral: true });
+      } catch (e) {
+        return;
+      }
     }
   },
 };
