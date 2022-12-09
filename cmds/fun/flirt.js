@@ -28,14 +28,12 @@ module.exports = {
     await msg.deferReply();
 
     try {
-      let { data } = await axios.get(
-        "https://getpickuplines.herokuapp.com/lines/random"
-      );
-      let { line } = data;
+      let res = await axios.get("https://api.jcwyt.com/pickup");
+      let { data } = res;
 
-      return msg.editReply(`${recipient ? recipient : ""} ${line}`);
+      return msg.editReply(`${recipient ? recipient : ""} ${data}`);
     } catch (e) {
-      return msg.editReply({ content: "Error!", ephemeral: true });
+      return msg.editReply({ content: `Error!`, ephemeral: true });
     }
   },
 };
