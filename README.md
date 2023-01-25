@@ -70,6 +70,6 @@ docker run --restart unless-stopped -it simpbot
 
 # The original simp bot
 
-This bot was originally just a rewrite of [Simp bot 10000](https://glitch.com/~simpbota) but no longer contains any of the original code.
+This bot was originally just a rewrite of [Simp bot 10000](https://glitch.com/~simpbota) but no longer contains any of the original code. Simp Bot 10000 has been abandoned for about 1 and a half years now.
 
 ok
