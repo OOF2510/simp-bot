@@ -1,10 +1,6 @@
 const Discord = require("discord.js");
 const { existsSync } = require("fs");
 const Sequelize = require("sequelize");
-const { DisTube } = require("distube");
-const { SpotifyPlugin } = require("@distube/spotify");
-const { SoundCloudPlugin } = require("@distube/soundcloud");
-const { YtDlpPlugin } = require("@distube/yt-dlp");
 
 let config;
 var startupArgs = process.argv.slice(2);
@@ -17,26 +13,6 @@ intents = new Discord.IntentsBitField(3276541);
 const client = new Discord.Client({ intents: intents });
 
 client.commands = new Discord.Collection();
-client.distube = new DisTube(client, {
-  leaveOnStop: true,
-  emitNewSongOnly: true,
-  emitAddSongWhenCreatingQueue: false,
-  emitAddListWhenCreatingQueue: false,
-  leaveOnFinish: true,
-  plugins: [
-    new SpotifyPlugin({ emitEventsAfterFetching: true }),
-    new SoundCloudPlugin(),
-    new YtDlpPlugin(),
-  ],
-});
-client.emotes = {
-  play: "▶️",
-  stop: "⏹️",
-  queue: "📄",
-  success: "☑️",
-  repeat: "🔁",
-  error: "❌",
-};
 
 const cmdFiles = require("./util/getAllFiles")("./cmds/").filter((file) =>
   file.endsWith(".js")
@@ -227,47 +203,6 @@ client.on("interactionCreate", async (interaction) => {
       break;
   }
 });
-
-try {
-const status = (queue) => `Volume: \`${queue.volume}%\``;
-client.distube
-  .on("playSong", (queue, song) =>
-    queue.textChannel.send(
-      `${client.emotes.play} | Playing \`${song.name}\` - \`${
-        song.formattedDuration
-      }\`\n\`Requested by ${song.user.tag}\`\n${status(queue)}`
-    )
-  )
-  .on("addSong", (queue, song) =>
-    queue.textChannel.send(
-      `${client.emotes.success} | Added \`${song.name}\` - \`${song.formattedDuration}\` to the queue\n\`Requested by ${song.user.tag}\``
-    )
-  )
-  .on("addList", (queue, playlist) =>
-    queue.textChannel.send(
-      `${client.emotes.success} | Added \`${playlist.name}\` playlist (${
-        playlist.songs.length
-      } songs) to queue\n${status(queue)}`
-    )
-  )
-  .on("error", (channel, e) => {
-    if (channel)
-      channel.send(
-        `${client.emotes.error} | An error encountered: ${e
-          .toString()
-          .slice(0, 1974)}`
-      );
-    else console.error(e);
-  })
-  .on("searchNoResult", (message, query) =>
-    message.channel.send(
-      `${client.emotes.error} | No result found for \`${query}\`!`
-    )
-  )
-  .on("finish", (queue) => queue.textChannel.send("Finished!"));
-} catch (e) {
-  return
-}
   
 client.on("messageCreate", async (msg) => {
   try {
