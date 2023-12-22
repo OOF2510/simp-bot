@@ -49,10 +49,10 @@ module.exports = {
       player.stop();
     });
 
-    player.on(voice.AudioPlayerStatus.Idle, async () => {
-      player.stop();
-      connection.destroy();
-    });
+    // player.on(voice.AudioPlayerStatus.Idle, async () => {
+    //   player.stop();
+    //   connection.destroy();
+    // });
 
     msg.editReply("I have spoken!");
   },
