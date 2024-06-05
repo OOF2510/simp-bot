@@ -50,7 +50,7 @@ module.exports = {
 
       msg.reply({ embeds: [ppEm] });
     } else if (recipient.id == "463119267832004620") {
-      //noah
+      //n
       response = ".";
       const ppEm = new EmbedBuilder()
         .setColor(config.embedColor)
@@ -58,8 +58,16 @@ module.exports = {
 
       msg.reply({ embeds: [ppEm] });
     } else if (recipient.id == "763480802511945789") {
-      //gerrardo
+      //g
       response = "8===================================================D";
+      const ppEm = new EmbedBuilder()
+        .setColor(config.embedColor)
+        .addFields({ name: `${recNick}'s pp`, value: `${response}` });
+
+      msg.reply({ embeds: [ppEm] });
+    } else if (recipient.id == "466467211545018369") {
+      //c
+      response = "8D";
       const ppEm = new EmbedBuilder()
         .setColor(config.embedColor)
         .addFields({ name: `${recNick}'s pp`, value: `${response}` });
