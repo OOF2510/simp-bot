@@ -27,12 +27,20 @@ module.exports = {
     await msg.deferReply();
 
     try {
-      let res = await axios.get("https://api.jcwyt.com/pickup");
-      let { data } = res;
+      const res = await axios.get("https://rizzapi.vercel.app/random");
+      let line = res.data?.text || "You're cute, let's get waffles.";
 
-      return msg.editReply(`${recipient ? recipient : ""} ${data}`);
+      if (recipient) {
+        line = `${recipient}, ${line}`;
+      }
+
+      return msg.editReply(line);
     } catch (e) {
-      return msg.editReply({ content: `Error!`, ephemeral: true });
+      console.error("[flirt] fetch failed:", e?.message || e);
+      return msg.editReply({
+        content: "I couldn't fetch a pickup line right now. Try again later.",
+        ephemeral: true,
+      });
     }
   },
 };

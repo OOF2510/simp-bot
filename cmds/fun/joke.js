@@ -18,7 +18,9 @@ module.exports = {
     let msg = interaction;
 
     try {
-      let response = await axios.get("https://v2.jokeapi.dev/joke/Any");
+      let response = await axios.get(
+        "https://v2.jokeapi.dev/joke/Miscellaneous,Dark,Pun,Spooky,Christmas",
+      );
       let joke = response.data;
 
       if (joke.setup && joke.delivery) {
@@ -26,14 +28,20 @@ module.exports = {
       } else if (joke.joke) {
         await msg.reply(`${joke.joke}`);
       } else {
-        await msg.reply({ content: "Error!", ephemeral: true });
+        console.warn("[joke] Unexpected payload", joke);
+        await msg.reply({
+          content: "Couldn't fetch a joke right now. Try again later.",
+          ephemeral: true,
+        });
       }
     } catch (e) {
-      try {
-        await msg.reply({ content: "Error!", ephemeral: true });
-      } catch (e) {
-        return;
-      }
+      console.error("[joke] fetch failed:", e?.message || e);
+      await msg
+        .reply({
+          content: "Failed to fetch a joke. Please try again later.",
+          ephemeral: true,
+        })
+        .catch(() => {});
     }
   },
 };
