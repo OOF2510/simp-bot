@@ -32,20 +32,17 @@ Feel free to fork & open a pull request
   "token": "your-bot-token",
   "clientID": "your-bot-clientid",
   "devCmdServerID": "your-server-id",
-  "mysql": {
-    "ip": "sql-host-ip/domain",
-    "port": "sql-port",
-    "username": "sql-username",
-    "password": "sql-password",
-    "schema": "sql-schema-name"
+  "mongodb": {
+    "url": "mongodb-connection-string",
+    "database": "simpbot"
   },
-  "embedColor": "hex-color-code",
-  "hfkey": "your-huggingface-api-key",
-  "openaiApiKey": "your-openai-api-key",
+  "embedColor": "0xhex-color-code",
+  "openrouterKey": "your-openrouter-api-key",
+  "groqKey": "your-groq-api-key",
   "allowed": ["your-user-id"],
   "feedbackChannels": {
     "bugs": ["bug-channel-id"],
-    "suggestions": ["sug-channel-id"]
+    "suggestions": ["suggestion-channel-id"]
   }
 }
 ```

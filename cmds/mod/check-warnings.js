@@ -4,9 +4,7 @@ const {
   AttachmentBuilder,
   EmbedBuilder,
 } = require("discord.js");
-const { CommandInteraction, Client } = require("discord.js"),
-  Sequelize = require("sequelize");
-let { QueryTypes } = require("sequelize");
+const { CommandInteraction, Client } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -24,24 +22,32 @@ module.exports = {
    * @param {CommandInteraction} interaction
    * @param {Client} client
    * @param {*} config
-   * @param {Sequelize} db
+   * @param {{collections: import("mongodb").Collection}} dbContext
    * @param {Array} allowed
    */
-  async execute(interaction, client, config, db, allowed) {
+  async execute(interaction, client, config, dbContext, allowed) {
     let msg = interaction;
     let user = interaction.options.getUser("user");
 
-    let reasons = await db.query(
-      `SELECT reason FROM ${config.mysql.schema}.warns WHERE userid = ${user.id} AND serverid = ${msg.guild.id}`,
-      { type: QueryTypes.SELECT }
-    );
-    if (!reasons[0])
-      return msg.reply(`Could not find any warnings for \`${user.tag}\``);
-
     await msg.deferReply();
 
+    const collections = dbContext?.collections;
+
+    if (!collections?.warnings) {
+      return msg.editReply({
+        content: "Database not ready. Please try again shortly.",
+        ephemeral: true,
+      });
+    }
+
+    let reasons = await collections.warnings
+      .find({ userId: String(user.id), serverId: String(msg.guild.id) })
+      .toArray();
+    if (!reasons[0])
+      return msg.editReply(`Could not find any warnings for \`${user.tag}\``);
+
     if (reasons.length > 25) {
-      let rJSON = JSON.stringify(reasons);
+      let rJSON = JSON.stringify(reasons.map(({ reason }) => ({ reason })));
       let buffer = Buffer.from(rJSON, "utf-8");
       let attachment = new AttachmentBuilder(buffer, { name: "warnings.json" });
       await msg.editReply({

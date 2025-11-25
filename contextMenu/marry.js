@@ -2,9 +2,8 @@ const {
   ContextMenuCommandBuilder,
   ApplicationCommandType,
 } = require("discord.js");
-const { ContextMenuCommandInteraction, Client } = require("discord.js"),
-  Sequelize = require("sequelize");
-const marry = require("../cmds/fun/marry").marry;
+const { ContextMenuCommandInteraction, Client } = require("discord.js");
+const marryCommand = require("../cmds/fun/marry");
 
 module.exports = {
   data: new ContextMenuCommandBuilder()
@@ -15,16 +14,10 @@ module.exports = {
    * @param {ContextMenuCommandInteraction} interaction
    * @param {Client} client
    * @param {*} config
-   * @param {Sequelize} db
+   * @param {{collections: import("mongodb").Collection}} dbContext
    * @param {Array} allowed
    */
-  async execute(interaction, client, config, db, allowed) {
-    let user = interaction.targetUser;
-
-    try {
-      await marry(user, db, config, interaction);
-    } catch (e) {
-      return;
-    }
+  async execute(interaction, client, config, dbContext, allowed) {
+    return marryCommand.execute(interaction, client, config, dbContext, allowed);
   },
 };

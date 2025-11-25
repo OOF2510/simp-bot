@@ -1,7 +1,6 @@
 const milsecConvert = require("../../util/convertMilsec");
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { CommandInteraction, Client } = require("discord.js"),
-  Sequelize = require("sequelize");
+const { CommandInteraction, Client } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -18,7 +17,7 @@ module.exports = {
    * @param {CommandInteraction} interaction
    * @param {Client} client
    * @param {*} config
-   * @param {Sequelize} db
+   * @param {*} dbContext
    * @param {Array} allowed
    */
   async execute(interaction, client, config, db, allowed) {

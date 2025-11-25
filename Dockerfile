@@ -1,8 +1,7 @@
 FROM oof2510/discordbot-base:latest
 
 RUN mkdir -p /usr/src/SimpBot \
-&& pip3 install --no-cache-dir --upgrade pip \
-&& pip3 install --no-cache-dir gTTS
+&& pip3 install --no-cache-dir --upgrade pip
 
 WORKDIR /usr/src/SimpBot
 COPY . ./

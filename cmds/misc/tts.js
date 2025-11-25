@@ -18,7 +18,7 @@ module.exports = {
    * @param {CommandInteraction} interaction
    * @param {Client} client
    * @param {*} config
-   * @param {Sequelize} db
+   * @param {*} dbContext
    * @param {Array} allowed
    */
   async execute(interaction, client, config, db, allowed) {

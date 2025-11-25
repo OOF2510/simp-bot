@@ -4,8 +4,7 @@ const {
   User,
   Guild,
 } = require("discord.js");
-const { CommandInteraction, Client } = require("discord.js"),
-  Sequelize = require("sequelize");
+const { CommandInteraction, Client } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -26,15 +25,23 @@ module.exports = {
    * @param {CommandInteraction} interaction
    * @param {Client} client
    * @param {*} config
-   * @param {Sequelize} db
+   * @param {{collections: import("mongodb").Collection}} dbContext
    * @param {Array} allowed
    */
-  async execute(interaction, client, config, db, allowed) {
+  async execute(interaction, client, config, dbContext, allowed) {
     let msg = interaction;
     let reason = interaction.options.getString("reason");
     let user = interaction.options.getUser("user");
+    const collections = dbContext?.collections;
 
     await msg.deferReply();
+
+    if (!collections?.warnings) {
+      return msg.editReply({
+        content: "Database not ready. Please try again shortly.",
+        ephemeral: true,
+      });
+    }
 
     /**
      * Adds warning to database
@@ -43,11 +50,15 @@ module.exports = {
      * @param {String} reason
      */
     async function addToDB(user, guild, reason) {
+      if (!collections?.warnings) return;
       if (!reason) reason = "No reason provided!";
 
-      await db.query(
-        `INSERT INTO ${config.mysql.schema}.warns (userid, serverid, reason) VALUES (${user.id}, ${guild.id}, '${reason}')`
-      );
+      await collections.warnings.insertOne({
+        userId: String(user.id),
+        serverId: String(guild.id),
+        reason,
+        createdAt: new Date(),
+      });
     }
 
     if (reason) {

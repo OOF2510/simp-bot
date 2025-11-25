@@ -1,6 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { CommandInteraction, Client } = require("discord.js"),
-  Sequelize = require("sequelize");
+const { CommandInteraction, Client } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -11,24 +10,33 @@ module.exports = {
    * @param {CommandInteraction} interaction
    * @param {Client} client
    * @param {*} config
-   * @param {Sequelize} db
+   * @param {{collections: import("mongodb").Collection}} dbContext
    * @param {Array} allowed
    */
-  async execute(interaction, client, config, db, allowed) {
+  async execute(interaction, client, config, dbContext, allowed) {
     let msg = interaction;
     let author = msg.author;
     let serverId = msg.guild.id;
 
     await msg.deferReply();
 
-    let married = await db.query(
-      `SELECT * FROM ${config.mysql.schema}.marriges WHERE serverid = ${serverId} AND (userid = ${author.id} OR spouseid = ${author.id});`,
-      { plain: true, type: Sequelize.QueryTypes.SELECT }
-    );
+    const collections = dbContext?.collections;
+
+    if (!collections?.marriages) {
+      return msg.editReply({
+        content: "Database not ready. Please try again shortly.",
+        ephemeral: true,
+      });
+    }
+
+    let married = await collections.marriages.findOne({
+      serverId: String(serverId),
+      $or: [{ userId: author.id }, { spouseId: author.id }],
+    });
     if (!married) return msg.editReply(`You're not married!`);
 
-    let user = msg.guild.members.cache.get(married.userid);
-    let spouse = msg.guild.members.cache.get(married.spouseid);
+    let user = msg.guild.members.cache.get(married.userId);
+    let spouse = msg.guild.members.cache.get(married.spouseId);
     if (!user || !spouse) {
       return msg.editReply(
         `It seems that the user you were married to is no longer in this server, you might wanna divorce...`

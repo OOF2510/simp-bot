@@ -1,7 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 const translate = require("translate-google");
-const { CommandInteraction, Client } = require("discord.js"),
-  Sequelize = require("sequelize");
+const { CommandInteraction, Client } = require("discord.js");
 //https://github.com/shikar/NODE_GOOGLE_TRANSLATE/blob/master/languages.js
 const langs = {
   auto: "Automatic",
@@ -151,7 +150,7 @@ module.exports = {
    * @param {CommandInteraction} interaction
    * @param {Client} client
    * @param {*} config
-   * @param {Sequelize} db
+   * @param {*} dbContext
    * @param {Array} allowed
    */
   async execute(interaction, client, config, db, Discord, allowed) {

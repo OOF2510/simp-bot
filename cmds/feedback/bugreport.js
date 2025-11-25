@@ -1,6 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { CommandInteraction, Client } = require("discord.js"),
-  Sequelize = require("sequelize");
+const { CommandInteraction, Client } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -17,7 +16,7 @@ module.exports = {
    * @param {CommandInteraction} interaction
    * @param {Client} client
    * @param {*} config
-   * @param {Sequelize} db
+   * @param {*} dbContext
    * @param {Array} allowed
    */
   async execute(interaction, client, config, db, allowed) {
@@ -29,14 +28,17 @@ module.exports = {
       .addFields({ name: `Report:`, value: `${rep}` })
       .setFooter({
         text: `Reported by: ${msg.author.tag}`,
-        iconUrl: `${msg.author.displayAvatarURL()}`,
+        iconURL: `${msg.author.displayAvatarURL()}`,
       })
       .setColor(config.embedColor)
       .setTimestamp();
 
-    config.feedbackChannels.bugs.forEach((chid) => {
+    const bugChannels = Array.isArray(config.feedbackChannels?.bugs)
+      ? config.feedbackChannels.bugs
+      : [];
+    bugChannels.forEach((chid) => {
       let ch = client.channels.cache.get(chid);
-      ch.send({ embeds: [repEm] });
+      if (ch) ch.send({ embeds: [repEm] });
     });
 
     msg.reply(

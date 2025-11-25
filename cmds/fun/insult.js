@@ -1,7 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { CommandInteraction, Client } = require("discord.js"),
-  Sequelize = require("sequelize");
-const got = require("got");
+const { CommandInteraction, Client } = require("discord.js");
+const axios = require("axios");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -15,7 +14,7 @@ module.exports = {
    * @param {CommandInteraction} interaction
    * @param {Client} client
    * @param {*} config
-   * @param {Sequelize} db
+   * @param {*} dbContext
    * @param {Array} allowed
    */
   async execute(interaction, client, config, db, allowed) {
@@ -23,10 +22,10 @@ module.exports = {
     let user = interaction.options.getUser("user");
 
     try {
-      let response = await got(
+      let response = await axios.get(
         "https://evilinsult.com/generate_insult.php?lang=en&type=text"
       );
-      let insult = response.body;
+      let insult = response.data;
 
       if (user) {
         msg.reply(`${user} ${insult}`);

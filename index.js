@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const { existsSync } = require("fs");
-const Sequelize = require("sequelize");
+const { MongoClient } = require("mongodb");
 
 let config;
 var startupArgs = process.argv.slice(2);
@@ -8,8 +8,32 @@ if (startupArgs[0] == "--dev") config = require("./config.dev.json");
 else config = require("./config.json");
 var { allowed } = config;
 
+function normalizeColor(value) {
+  if (typeof value === "number") return value;
+  if (typeof value === "string") {
+    const trimmed = value.trim();
+    if (!trimmed) return null;
+    if (trimmed.startsWith("#")) {
+      const parsed = Number.parseInt(trimmed.slice(1), 16);
+      return Number.isNaN(parsed) ? null : parsed;
+    }
+    if (trimmed.toLowerCase().startsWith("0x")) {
+      const parsed = Number.parseInt(trimmed, 16);
+      return Number.isNaN(parsed) ? null : parsed;
+    }
+    const parsed = Number(trimmed);
+    return Number.isNaN(parsed) ? null : parsed;
+  }
+  return null;
+}
+
+const normalizedEmbedColor = normalizeColor(config.embedColor);
+if (normalizedEmbedColor !== null) {
+  config.embedColor = normalizedEmbedColor;
+}
+
 // NORMAL + MESSAGE CONTENT
-intents = new Discord.IntentsBitField(3276541);
+const intents = new Discord.IntentsBitField(3276541);
 const client = new Discord.Client({ intents: intents });
 
 client.commands = new Discord.Collection();
@@ -41,7 +65,53 @@ for (const file of menuCmdFiles) {
   client.commands.set(cmd.data.name, cmd);
 }
 
+let mongoClient;
 let db;
+let collections = {};
+
+async function initDatabase() {
+  const mongoCfg = config.mongodb || {};
+  if (!mongoCfg.url || !mongoCfg.database) {
+    throw new Error("MongoDB connection details missing in config");
+  }
+
+  mongoClient = new MongoClient(mongoCfg.url);
+  await mongoClient.connect();
+  db = mongoClient.db(mongoCfg.database);
+  collections = {
+    autopub: db.collection("autopublish"),
+    dellog: db.collection("dellog"),
+    warnings: db.collection("warnings"),
+    marriages: db.collection("marriages"),
+    proposals: db.collection("proposals"),
+    commandLogs: db.collection("command_logs"),
+  };
+
+  await Promise.all([
+    collections.autopub.createIndex({ serverId: 1 }, { unique: true }),
+    collections.dellog.createIndex({ serverId: 1 }, { unique: true }),
+    collections.warnings.createIndex({ serverId: 1, userId: 1 }),
+    collections.marriages.createIndex({ serverId: 1, userId: 1 }),
+    collections.marriages.createIndex({ serverId: 1, spouseId: 1 }),
+    collections.proposals.createIndex({ serverId: 1, proposerId: 1 }),
+    collections.commandLogs.createIndex({ timestamp: 1 }),
+  ]);
+  console.log("Connected to MongoDB");
+}
+
+async function logCommandUsage(commandName, guildId, userId) {
+  if (!collections.commandLogs) return;
+  try {
+    await collections.commandLogs.insertOne({
+      command: commandName,
+      guildId: guildId ? String(guildId) : null,
+      userId: userId ? String(userId) : null,
+      timestamp: new Date(),
+    });
+  } catch (error) {
+    console.error("Failed to log command usage:", error);
+  }
+}
 
 client.on("ready", () => {
   console.log("Ready!");
@@ -52,21 +122,6 @@ client.on("ready", () => {
     client.user.setActivity(`${client.guilds.cache.size} servers!`, {
       type: Discord.ActivityType.Watching,
     });
-  const auth = config.mysql; // bartholemew was here
-  const options = {
-    host: auth.ip,
-    port: auth.port,
-    dialect: "mysql",
-    pool: {
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000,
-    },
-    logging: false,
-  };
-  db = new Sequelize(auth.schema, auth.username, auth.password, options);
-  console.log("Connected to DB");
 
   // start loadin them slash commands
   const { REST } = require("@discordjs/rest");
@@ -124,13 +179,18 @@ client.on("interactionCreate", async (interaction) => {
   interaction.send = interaction.reply;
 
   try {
+    const dbContext = { db, collections, client: mongoClient };
     await command
-      .execute(interaction, client, config, db, allowed)
+      .execute(interaction, client, config, dbContext, allowed)
       .catch(async (error) => {
         if (error === "DiscordAPIError[10062]: Unknown interaction") return;
         console.log(error);
-        config.feedbackChannels.bugs.forEach((chid) => {
+        const bugChannels = Array.isArray(config.feedbackChannels?.bugs)
+          ? config.feedbackChannels.bugs
+          : [];
+        bugChannels.forEach((chid) => {
           let bugChannel = client.channels.cache.get(chid);
+          if (!bugChannel) return;
           bugChannel.send(
             `An error occured when **${interaction.author.tag}** tried to run **${commandName}**: \`\`\`${error}\`\`\``
           );
@@ -156,8 +216,12 @@ client.on("interactionCreate", async (interaction) => {
   } catch (error) {
     if (error === "DiscordAPIError[10062]: Unknown interaction") return;
     console.log(error);
-    config.feedbackChannels.bugs.forEach((chid) => {
+    const bugChannels = Array.isArray(config.feedbackChannels?.bugs)
+      ? config.feedbackChannels.bugs
+      : [];
+    bugChannels.forEach((chid) => {
       let bugChannel = client.channels.cache.get(chid);
+      if (!bugChannel) return;
       bugChannel.send(
         `An error occured when **${interaction.author.tag}** tried to run **${commandName}**: \`\`\`${error}\`\`\``
       );
@@ -194,9 +258,7 @@ client.on("interactionCreate", async (interaction) => {
 
     default:
       try {
-        db.query(
-          `INSERT INTO ${config.mysql.schema}.command_usage (command,date) values ("${commandName}",CURRENT_DATE())`
-        );
+        await logCommandUsage(commandName, interaction.guildId, interaction.user?.id);
       } catch (e) {
         console.log(`errror with command usage stats ${e}`);
       }
@@ -206,10 +268,12 @@ client.on("interactionCreate", async (interaction) => {
   
 client.on("messageCreate", async (msg) => {
   try {
-    let status = await db.query(
-      `SELECT status FROM ${config.mysql.schema}.autopub WHERE status = TRUE AND serverid = ${msg.guild.id} LIMIT 1;`,
-      { plain: true, type: Sequelize.QueryTypes.SELECT }
-    );
+    if (!msg.guild) return;
+    if (!collections.autopub) return;
+    const status = await collections.autopub.findOne({
+      serverId: String(msg.guild.id),
+      status: true,
+    });
     if (!status) return;
     if (msg.channel.type == Discord.ChannelType.GuildAnnouncement) {
       if (msg.crosspostable) return msg.crosspost();
@@ -237,16 +301,15 @@ client.on("messageCreate", async (msg) => {
 
 client.on("messageDelete", async (msg) => {
   try {
-    let status = await db.query(
-      `SELECT status FROM ${config.mysql.schema}.dellog WHERE status = TRUE AND serverid = ${msg.guild.id} LIMIT 1;`,
-      { plain: true, type: Sequelize.QueryTypes.SELECT }
-    );
-    if (status.status != 1) return;
-    let chid = await db.query(
-      `SELECT channelid FROM ${config.mysql.schema}.dellog WHERE serverid = ${msg.guild.id} LIMIT 1;`,
-      { plain: true, type: Sequelize.QueryTypes.SELECT }
-    );
-    let ch = msg.guild.channels.cache.get(chid.channelid);
+    if (!msg.guild) return;
+    if (!collections.dellog) return;
+    const status = await collections.dellog.findOne({
+      serverId: String(msg.guild.id),
+      status: true,
+    });
+    if (!status) return;
+    const ch = msg.guild.channels.cache.get(status.channelId);
+    if (!ch) return;
 
     let em = new Discord.EmbedBuilder()
       .setTitle(`Deleted message by ${msg.author.tag}:`)
@@ -260,4 +323,29 @@ client.on("messageDelete", async (msg) => {
   }
 });
 
-client.login(config.token);
+async function start() {
+  try {
+    await initDatabase();
+  } catch (error) {
+    console.error("Failed to connect to MongoDB:", error);
+    process.exit(1);
+  }
+  await client.login(config.token);
+}
+
+start();
+
+async function shutdown() {
+  try {
+    if (mongoClient) {
+      await mongoClient.close();
+    }
+  } catch (error) {
+    console.error("Error closing Mongo connection:", error);
+  } finally {
+    process.exit(0);
+  }
+}
+
+process.on("SIGINT", shutdown);
+process.on("SIGTERM", shutdown);

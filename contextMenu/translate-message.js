@@ -9,8 +9,7 @@ const {
   ButtonBuilder,
   ButtonStyle,
 } = require("discord.js");
-const { ContextMenuCommandInteraction, Client } = require("discord.js"),
-  Sequelize = require("sequelize");
+const { ContextMenuCommandInteraction, Client } = require("discord.js");
 const translate = require("translate-google");
 //https://github.com/shikar/NODE_GOOGLE_TRANSLATE/blob/master/languages.js
 const langs = {
@@ -150,7 +149,7 @@ module.exports = {
    * @param {ContextMenuCommandInteraction} interaction
    * @param {Client} client
    * @param {*} config
-   * @param {Sequelize} db
+   * @param {*} dbContext
    * @param {Array} allowed
    */
   async execute(interaction, client, config, db, allowed) {

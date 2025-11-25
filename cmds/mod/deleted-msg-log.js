@@ -3,8 +3,7 @@ const {
   ChannelType,
   PermissionFlagsBits,
 } = require("discord.js");
-const { CommandInteraction, Client } = require("discord.js"),
-  Sequelize = require("sequelize");
+const { CommandInteraction, Client } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -31,10 +30,10 @@ module.exports = {
    * @param {CommandInteraction} interaction
    * @param {Client} client
    * @param {*} config
-   * @param {Sequelize} db
+   * @param {{collections: import("mongodb").Collection}} dbContext
    * @param {Array} allowed
    */
-  async execute(interaction, client, config, db, Discord, allowed) {
+  async execute(interaction, client, config, dbContext, Discord, allowed) {
     let msg = interaction;
     let status = interaction.options.getString("status");
     let channel = interaction.options.getChannel("channel");
@@ -53,13 +52,31 @@ module.exports = {
         ephemeral: true,
       });
 
+    const collections = dbContext?.collections;
+    if (!collections?.dellog) {
+      return msg.reply({
+        content: "Database not ready. Please try again shortly.",
+        ephemeral: true,
+      });
+    }
+
     await msg.deferReply();
 
     try {
-      await db.query(
-        `REPLACE INTO ${config.mysql.schema}.dellog (serverid, status, channelid) VALUES (${msg.guild.id}, ${status}, ${channel.id}) ;`
+      await collections.dellog.updateOne(
+        { serverId: String(msg.guild.id) },
+        {
+          $set: {
+            serverId: String(msg.guild.id),
+            status: status === "TRUE",
+            channelId: channel.id,
+          },
+        },
+        { upsert: true }
       );
-      msg.editReply(`Deleted message log: ${status} in ${channel}`);
+      msg.editReply(
+        `Deleted message log: ${status === "TRUE" ? "Enabled" : "Disabled"} in ${channel}`
+      );
     } catch (e) {
       msg.editReply({ content: `Error!`, ephemeral: true });
     }
