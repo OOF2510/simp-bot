@@ -19,7 +19,7 @@ module.exports = {
 
     try {
       let response = await axios.get(
-        "https://v2.jokeapi.dev/joke/Miscellaneous,Dark,Pun,Spooky,Christmas",
+        "https://v2.jokeapi.dev/joke/Miscellaneous,Pun,Spooky,Christmas",
       );
       let joke = response.data;
 
