@@ -3,7 +3,7 @@ const { AiWithHistory } = require("../../util/ai");
 
 const modelA = new AiWithHistory({
   model: "mistralai/mistral-small-3.2-24b-instruct:free",
-  fallbackModels: ["mistralai/mistral-nemo:free", "deepseek/deepseek-chat-v3.1:free"],
+  fallbackModels: ["mistralai/mistral-nemo:free", "google/gemma-3-27b-it:free"],
   temperature: 0.66,
   maxTokens: 700,
   historyLimit: 6,
