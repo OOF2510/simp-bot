@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const { AiWithHistory } = require("../../util/ai");
 
 const modelA = new AiWithHistory({
@@ -45,7 +45,7 @@ module.exports = {
         .setDescription("What should they argue about?")
         .setRequired(true),
     ),
-  async execute(interaction) {
+  async execute(interaction, client, config) {
     const topicRaw = interaction.options.getString("topic", true);
     const topic = topicRaw.trim();
     if (!topic) {
@@ -56,6 +56,8 @@ module.exports = {
     }
 
     await interaction.deferReply();
+    const embedColor =
+      typeof config?.embedColor === "number" ? config.embedColor : 0x5865f2;
 
     const systemPromptA = `
 You are Model A in an AI debate. Your job is to take a position on the TOPIC and argue for it.
@@ -104,6 +106,27 @@ CRITICAL: Debate the TOPIC. Attack their POSITION, not their delivery.
 
     const transcript = [];
 
+    const makeTranscriptText = () =>
+      transcript
+        .map(
+          (entry) =>
+            `**${entry.who} (${entry.model || "unknown model"})**: ${entry.text}`,
+        )
+        .join("\n\n");
+
+    const sendTranscript = async (footerText) => {
+      const description = makeTranscriptText().slice(0, 4000);
+      const embed = new EmbedBuilder()
+        .setTitle(`AI Argument`)
+        .setDescription(description || "…thinking…")
+        .addFields({ name: "Topic", value: topic.slice(0, 1024) || "Unknown topic" })
+        .setColor(embedColor);
+      if (footerText) {
+        embed.setFooter({ text: footerText });
+      }
+      await interaction.editReply({ embeds: [embed] });
+    };
+
     try {
       for (let round = 1; round <= 3; round += 1) {
         const lastB = transcript.filter((t) => t.who === "Model B").at(-1)?.text || "";
@@ -119,7 +142,7 @@ CRITICAL: Debate the TOPIC. Attack their POSITION, not their delivery.
         });
 
         transcript.push({ who: "Model A", model: modelA.lastUsedModel, text: aText });
-        await interaction.editReply(formatTranscript(topic, transcript).slice(0, 4000));
+        await sendTranscript();
 
         const bText = await modelB.ask(interaction.channelId, {
           system: systemPromptB,
@@ -127,12 +150,10 @@ CRITICAL: Debate the TOPIC. Attack their POSITION, not their delivery.
         });
 
         transcript.push({ who: "Model B", model: modelB.lastUsedModel, text: bText });
-        await interaction.editReply(formatTranscript(topic, transcript).slice(0, 4000));
+        await sendTranscript();
       }
 
-      return interaction.editReply(
-        `${formatTranscript(topic, transcript)}\n\n🏁 Argument over.`.slice(0, 4000),
-      );
+      return sendTranscript("🏁 Argument over.");
     } catch (error) {
       console.error("[aiargument] AI request failed:", error);
       return interaction.editReply("The debate fizzled out. Try again in a bit.");

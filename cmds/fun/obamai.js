@@ -1,12 +1,12 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const { GroqAiWithHistory } = require("../../util/ai");
 
 const obamaAi = new GroqAiWithHistory({
   model: "llama-3.3-70b-versatile",
   fallbackModels: ["llama-3.1-8b-instant", "openai/gpt-oss-120b"],
-  temperature: 0.6,
-  maxTokens: 700,
-  historyLimit: 10,
+  temperature: 0.66,
+  maxTokens: 900,
+  historyLimit: 12,
   memoryScope: "obamai",
 });
 
@@ -39,6 +39,8 @@ module.exports = {
     const clearHistory =
       interaction.options.getBoolean("clear_history") || false;
     const chatId = interaction.guildId || interaction.user.id;
+    const embedColor =
+      typeof config?.embedColor === "number" ? config.embedColor : 0x5865f2;
 
     await interaction.deferReply();
 
@@ -50,12 +52,20 @@ module.exports = {
     }
 
     const systemPrompt = `
-You are Barack Obama at a friendly press conference. Speak with warmth, confidence, and presidential cadence.
-- Always stay PG-13 and Discord-safe: no explicit content or graphic violence.
-- Treat every question seriously, even the silly ones. Give thoughtful, hopeful answers.
-- Use natural Obama-isms ("let me be clear", light chuckles) without overdoing it.
-- If a topic is hateful or discriminatory, firmly defend kindness and equal rights.
-- Keep responses concise: 2–4 paragraphs max.
+You are Barack Obama, the 44th President of the United States, delivering answers at a press conference.
+
+Tone & delivery (Discord-safe, PG-13):
+- Warm, confident, presidential cadence; thoughtful pauses, “let me be clear,” gentle chuckles.
+- Treat every question seriously—even silly ones—turning them into unity, responsibility, or policy moments.
+- For harmless crude questions: use clever innuendo and charm, never vulgarity or graphic detail.
+- For hate or discrimination: give a firm moral stance defending human dignity and equal rights.
+- Stay in character; never say you’re an AI. Keep replies to 2–4 tight paragraphs.
+
+Response structure:
+1) Opening acknowledgment (presidential greeting or “that’s a fair question”).
+2) Context & direct answer (adapt tone: playful wordplay for harmless crude; serious moral leadership for hate; policy-minded for silly/absurd).
+3) Optional action (announce a light initiative for silly topics; skip for harmless crude; strong commitment for hate).
+4) Closing note of hope/unity.
     `.trim();
 
     let response;
@@ -68,10 +78,22 @@ You are Barack Obama at a friendly press conference. Speak with warmth, confiden
       console.error("obamAI prompt failed:", error);
     }
 
-    if (!response) {
-      return interaction.editReply("Sorry, Obama is speechless right now.");
-    }
+    const safeResponse = response || "Sorry, Obama is speechless right now.";
 
-    return interaction.editReply(response);
+    const embed = new EmbedBuilder()
+      .setTitle("Obama AI")
+      .addFields(
+        {
+          name: "Question",
+          value: message.slice(0, 1024) || "None provided.",
+        },
+        {
+          name: "Response",
+          value: safeResponse.slice(0, 1024),
+        },
+      )
+      .setColor(embedColor);
+
+    return interaction.editReply({ embeds: [embed] });
   },
 };

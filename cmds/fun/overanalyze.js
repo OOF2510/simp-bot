@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const { Ai } = require("../../util/ai");
 
 const overanalyzer = new Ai({
@@ -35,6 +35,8 @@ module.exports = {
   async execute(interaction, client, config, dbContext, allowed) {
     const attachment = interaction.options.getAttachment("media", true);
     const contentType = (attachment.contentType || "").toLowerCase();
+    const embedColor =
+      typeof config?.embedColor === "number" ? config.embedColor : 0x5865f2;
 
     const isImage = contentType.startsWith("image/");
     const isVideo = contentType.startsWith("video/");
@@ -108,13 +110,26 @@ Keep everything PG-13 and avoid real-world hate or explicit material.
       return interaction.editReply("Error while overanalyzing that media.");
     }
 
-    if (!response) {
-      return interaction.editReply(
-        "I couldn't come up with anything. Try again?",
-      );
+    const safeResponse = response?.trim();
+    if (!safeResponse) {
+      return interaction.editReply("I couldn't come up with anything. Try again?");
     }
 
-    // Discord supports Markdown already; trim to keep replies manageable.
-    return interaction.editReply(response.slice(0, 4000));
+    const embed = new EmbedBuilder()
+      .setTitle("Overanalyze")
+      .setDescription(safeResponse.slice(0, 4000))
+      .setColor(embedColor)
+      .addFields({
+        name: "Media",
+        value: `[Open](${attachment.url})`,
+      });
+
+    if (isImage) {
+      embed.setImage(attachment.url);
+    } else if (isVideo) {
+      embed.setFooter({ text: "Attached video" });
+    }
+
+    return interaction.editReply({ embeds: [embed] });
   },
 };
