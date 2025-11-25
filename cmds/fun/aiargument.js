@@ -3,7 +3,7 @@ const { AiWithHistory } = require("../../util/ai");
 
 const modelA = new AiWithHistory({
   model: "mistralai/mistral-small-3.2-24b-instruct:free",
-  fallbackModels: ["mistralai/mistral-nemo:free", "google/gemma-3-27b-it:free"],
+  fallbackModels: ["mistralai/mistral-nemo:free", "google/gemma-3-27b-it:free", "openrouter/bert-nebulon-alpha", "deepseek/deepseek-chat-v3-0324:free"],
   temperature: 0.66,
   maxTokens: 700,
   historyLimit: 6,
@@ -16,7 +16,7 @@ const modelA = new AiWithHistory({
 
 const modelB = new AiWithHistory({
   model: "deepseek/deepseek-r1-distill-llama-70b:free",
-  fallbackModels: ["meta-llama/llama-3.3-70b-instruct:free", "tngtech/deepseek-r1t2-chimera:free"],
+  fallbackModels: ["meta-llama/llama-3.3-70b-instruct:free", "tngtech/deepseek-r1t2-chimera:free", "z-ai/glm-4.5-air:free", "microsoft/mai-ds-r1:free"],
   temperature: 0.66,
   maxTokens: 700,
   historyLimit: 6,
