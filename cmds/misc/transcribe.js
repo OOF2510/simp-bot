@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const axios = require("axios");
 const fs = require("fs");
 const path = require("path");
@@ -51,9 +51,11 @@ module.exports = {
         .setDescription("Audio or video file to transcribe (max 19.5MB)")
         .setRequired(true),
     ),
-  async execute(interaction) {
+  async execute(interaction, client, config) {
     const attachment = interaction.options.getAttachment("file", true);
     const ext = getExtension(attachment);
+    const embedColor =
+      typeof config?.embedColor === "number" ? config.embedColor : 0x5865f2;
 
     if (!ALLOWED_EXT.includes(ext)) {
       return interaction.reply({
@@ -91,7 +93,21 @@ module.exports = {
         return interaction.editReply("Groq returned an empty transcription.");
       }
 
-      return interaction.editReply(`🗣️ **Transcription:**\n\n${text.trim()}`.slice(0, 4000));
+      const embed = new EmbedBuilder()
+        .setTitle("Transcription")
+        .addFields(
+          { name: "File", value: `[Open attachment](${attachment.url})` },
+          { name: "Result", value: text.trim().slice(0, 1024) },
+        )
+        .setColor(embedColor);
+
+      if ((attachment.contentType || "").startsWith("image/")) {
+        embed.setImage(attachment.url);
+      } else if ((attachment.contentType || "").startsWith("video/")) {
+        embed.setFooter({ text: "Attached video" });
+      }
+
+      return interaction.editReply({ embeds: [embed] });
     } catch (error) {
       console.error("Transcribe error:", error);
       return interaction.editReply("Failed to transcribe that file.");
