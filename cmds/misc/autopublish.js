@@ -5,7 +5,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("autopublish")
     .setDescription(
-      "auto-publish (crosspost) your messages in announcement channels"
+      "auto-publish (crosspost) your messages in announcement channels",
     )
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
     .addStringOption((option) =>
@@ -15,8 +15,8 @@ module.exports = {
         .setRequired(true)
         .setChoices(
           { name: "Enable", value: "TRUE" },
-          { name: "Disable", value: "FALSE" }
-        )
+          { name: "Disable", value: "FALSE" },
+        ),
     ),
   /**
    * Executes the command
@@ -42,7 +42,7 @@ module.exports = {
       await collections.autopub.updateOne(
         { serverId: String(msg.guild.id) },
         { $set: { serverId: String(msg.guild.id), status: status === "TRUE" } },
-        { upsert: true }
+        { upsert: true },
       );
       msg.reply(`AutoPublish: ${status === "TRUE" ? "Enabled" : "Disabled"}`);
     } catch (e) {

@@ -7,7 +7,10 @@ module.exports = {
     .setName("insult")
     .setDescription("generate an insult")
     .addUserOption((option) =>
-      option.setName("user").setDescription("user to insult").setRequired(false)
+      option
+        .setName("user")
+        .setDescription("user to insult")
+        .setRequired(false),
     ),
   /**
    * Executes the command
@@ -23,7 +26,7 @@ module.exports = {
 
     try {
       let response = await axios.get(
-        "https://evilinsult.com/generate_insult.php?lang=en&type=text"
+        "https://evilinsult.com/generate_insult.php?lang=en&type=text",
       );
       let insult = response.data;
 

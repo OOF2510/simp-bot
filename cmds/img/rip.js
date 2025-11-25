@@ -10,7 +10,7 @@ module.exports = {
       option
         .setName("user")
         .setDescription("user to make gravestone for")
-        .setRequired(true)
+        .setRequired(true),
     ),
   /**
    * Executes the command

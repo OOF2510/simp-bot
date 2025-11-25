@@ -25,7 +25,7 @@ module.exports = {
       option
         .setName("question")
         .setDescription("What do you want to ask?")
-        .setRequired(true)
+        .setRequired(true),
     ),
   /**
    * Executes the command
@@ -94,20 +94,25 @@ Give a playful, confident explanation for why that answer is right.`;
 
     let explanation;
     try {
-      explanation = await aiClient.ask(interaction.guildId || interaction.user.id, {
-        system: systemPrompt,
-        user: prompt,
-      });
+      explanation = await aiClient.ask(
+        interaction.guildId || interaction.user.id,
+        {
+          system: systemPrompt,
+          user: prompt,
+        },
+      );
     } catch (error) {
       console.error("AI 8-ball explanation failed:", error);
     }
 
     if (!explanation) {
       return interaction.editReply(
-        fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)]
+        fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)],
       );
     }
 
-    return interaction.editReply(`${emoji} **${randomResponse}**\n\n${explanation}`);
+    return interaction.editReply(
+      `${emoji} **${randomResponse}**\n\n${explanation}`,
+    );
   },
 };

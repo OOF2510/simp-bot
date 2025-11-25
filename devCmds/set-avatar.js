@@ -9,7 +9,7 @@ module.exports = {
       option
         .setName("avatar")
         .setDescription("The avatar to set")
-        .setRequired(true)
+        .setRequired(true),
     ),
   /**
    * Executes the command
@@ -24,7 +24,7 @@ module.exports = {
     if (!allowed.includes(msg.author.id))
       return msg.reply(
         `Only the developer & certian whitelisted users can use that command!`,
-        { ephemeral: true }
+        { ephemeral: true },
       );
     let avatar = interaction.options.getAttachment("avatar");
 

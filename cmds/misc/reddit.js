@@ -10,7 +10,7 @@ module.exports = {
       option
         .setName("subreddit")
         .setDescription("subreddit name (without 'r/')")
-        .setRequired(true)
+        .setRequired(true),
     ),
   /**
    * Executes the command
@@ -50,7 +50,7 @@ module.exports = {
           break;
         default:
           em.setDescription(
-            `${post.selftext ? post.selftext : "Error getting post content"}`
+            `${post.selftext ? post.selftext : "Error getting post content"}`,
           );
 
           msg.reply({ embeds: [em] });

@@ -19,7 +19,7 @@ module.exports = {
     if (!allowed.includes(msg.author.id))
       return msg.reply(
         `Only the developer & certian whitelisted users can use that command!`,
-        { ephemeral: true }
+        { ephemeral: true },
       );
 
     await msg.reply("restarting!", { ephemeral: true });

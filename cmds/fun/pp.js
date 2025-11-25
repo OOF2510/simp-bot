@@ -6,7 +6,7 @@ module.exports = {
     .setName("pp")
     .setDescription("pp size")
     .addUserOption((option) =>
-      option.setName("user").setDescription("description").setRequired(false)
+      option.setName("user").setDescription("description").setRequired(false),
     ),
   /**
    * Executes the command

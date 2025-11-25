@@ -22,7 +22,7 @@ module.exports = {
       option
         .setName("media")
         .setDescription("Image or video to overanalyze")
-        .setRequired(true)
+        .setRequired(true),
     ),
   /**
    * Executes the command
@@ -109,7 +109,9 @@ Keep everything PG-13 and avoid real-world hate or explicit material.
     }
 
     if (!response) {
-      return interaction.editReply("I couldn't come up with anything. Try again?");
+      return interaction.editReply(
+        "I couldn't come up with anything. Try again?",
+      );
     }
 
     // Discord supports Markdown already; trim to keep replies manageable.

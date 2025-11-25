@@ -11,7 +11,7 @@ module.exports = {
       option
         .setName("url")
         .setDescription("URL (link) to shorten")
-        .setRequired(true)
+        .setRequired(true),
     ),
   /**
    * Executes the command

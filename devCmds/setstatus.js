@@ -16,12 +16,12 @@ module.exports = {
           { name: "Listening to", value: "LISTENING" },
           { name: "Watching", value: "WATCHING" },
           { name: "Competing in", value: "COMPETING" },
-          { name: "Reset staus", value: "reset" }
+          { name: "Reset staus", value: "reset" },
         )
-        .setRequired(true)
+        .setRequired(true),
     )
     .addStringOption((option) =>
-      option.setName("content").setDescription("content").setRequired(true)
+      option.setName("content").setDescription("content").setRequired(true),
     ),
   /**
    * Executes the command
@@ -36,7 +36,7 @@ module.exports = {
     if (!allowed.includes(msg.author.id))
       return msg.reply(
         `Only the developer & certian whitelisted users can use that command!`,
-        { ephemeral: true }
+        { ephemeral: true },
       );
     let Type = interaction.options.getString("status-type");
     let content = interaction.options.getString("content");

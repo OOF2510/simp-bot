@@ -22,7 +22,7 @@ module.exports = {
       option
         .setName("user")
         .setDescription("user to propose to")
-        .setRequired(true)
+        .setRequired(true),
     ),
   /**
    * Executes the command
@@ -61,13 +61,13 @@ module.exports = {
     const married = await findMarriage(collections, serverId, authorId);
     if (married)
       return msg.reply(
-        `You're already married! You must divorce your current partner if you want to do that!`
+        `You're already married! You must divorce your current partner if you want to do that!`,
       );
 
     const userMarried = await findMarriage(collections, serverId, user.id);
     if (userMarried)
       return msg.reply(
-        `${user} is already married! They must get divorced for you to marry them!`
+        `${user} is already married! They must get divorced for you to marry them!`,
       );
 
     const pendingProposal = await collections.proposals.findOne({
@@ -83,7 +83,7 @@ module.exports = {
 
     if (pendingProposal) {
       return msg.reply(
-        "There's already a pending proposal involving one of you. Resolve that first."
+        "There's already a pending proposal involving one of you. Resolve that first.",
       );
     }
 
@@ -109,7 +109,7 @@ module.exports = {
       });
       await collections.proposals.updateOne(
         { _id: proposalId },
-        { $set: { status: "accepted", resolvedAt: new Date() } }
+        { $set: { status: "accepted", resolvedAt: new Date() } },
       );
       return msg.reply(`Congratulations! You are now married!`);
     }
@@ -122,7 +122,7 @@ module.exports = {
       new ButtonBuilder()
         .setCustomId(`marry-no-${proposalKey}`)
         .setLabel("No!")
-        .setStyle(ButtonStyle.Danger)
+        .setStyle(ButtonStyle.Danger),
     );
 
     let reply = await msg.reply({
@@ -135,15 +135,20 @@ module.exports = {
     });
 
     collector.on("collect", async (i) => {
-      if (i.user.id !== user.id) return i.reply({ content: "This isn't for you!", ephemeral: true });
+      if (i.user.id !== user.id)
+        return i.reply({ content: "This isn't for you!", ephemeral: true });
       await i.deferUpdate();
 
       const latestMarriage = await findMarriage(collections, serverId, user.id);
-      const authorMarriage = await findMarriage(collections, serverId, authorId);
+      const authorMarriage = await findMarriage(
+        collections,
+        serverId,
+        authorId,
+      );
       if (latestMarriage || authorMarriage) {
         await collections.proposals.updateOne(
           { _id: proposalId },
-          { $set: { status: "cancelled", resolvedAt: new Date() } }
+          { $set: { status: "cancelled", resolvedAt: new Date() } },
         );
         return i.editReply({
           content: `Someone is already married now. Proposal cancelled.`,
@@ -161,7 +166,7 @@ module.exports = {
         });
         await collections.proposals.updateOne(
           { _id: proposalId },
-          { $set: { status: "accepted", resolvedAt: new Date() } }
+          { $set: { status: "accepted", resolvedAt: new Date() } },
         );
         await i.editReply({
           content: `Congratulations! You are now married!`,
@@ -170,7 +175,7 @@ module.exports = {
       } else if (i.customId === `marry-no-${proposalKey}`) {
         await collections.proposals.updateOne(
           { _id: proposalId },
-          { $set: { status: "rejected", resolvedAt: new Date() } }
+          { $set: { status: "rejected", resolvedAt: new Date() } },
         );
         await i.editReply({ content: `Rejected!`, components: [] });
       }
@@ -180,7 +185,7 @@ module.exports = {
       if (collected.size === 0) {
         await collections.proposals.updateOne(
           { _id: proposalId },
-          { $set: { status: "expired", resolvedAt: new Date() } }
+          { $set: { status: "expired", resolvedAt: new Date() } },
         );
         await reply
           .edit({

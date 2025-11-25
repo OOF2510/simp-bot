@@ -10,7 +10,7 @@ module.exports = {
       option
         .setName("word")
         .setDescription("Word or phrase to search for")
-        .setRequired(true)
+        .setRequired(true),
     ),
   /**
    * Executes the command

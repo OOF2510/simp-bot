@@ -9,7 +9,7 @@ module.exports = {
       option
         .setName("user")
         .setDescription("User to get avatar of")
-        .setRequired(false)
+        .setRequired(false),
     ),
   /**
    * Executes the command

@@ -15,15 +15,15 @@ module.exports = {
         .setDescription("Enable or Disable?")
         .addChoices(
           { name: "Enable", value: "TRUE" },
-          { name: "Disable", value: "FALSE" }
+          { name: "Disable", value: "FALSE" },
         )
-        .setRequired(true)
+        .setRequired(true),
     )
     .addChannelOption((option) =>
       option
         .setName("channel")
         .setDescription("Logging channel")
-        .setRequired(true)
+        .setRequired(true),
     ),
   /**
    * Executes the command
@@ -72,10 +72,10 @@ module.exports = {
             channelId: channel.id,
           },
         },
-        { upsert: true }
+        { upsert: true },
       );
       msg.editReply(
-        `Deleted message log: ${status === "TRUE" ? "Enabled" : "Disabled"} in ${channel}`
+        `Deleted message log: ${status === "TRUE" ? "Enabled" : "Disabled"} in ${channel}`,
       );
     } catch (e) {
       msg.editReply({ content: `Error!`, ephemeral: true });

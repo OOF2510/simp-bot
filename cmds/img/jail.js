@@ -7,7 +7,7 @@ module.exports = {
     .setName("jail")
     .setDescription("[IMG] puts specified user in jail")
     .addUserOption((option) =>
-      option.setName("user").setDescription("user to jail").setRequired(true)
+      option.setName("user").setDescription("user to jail").setRequired(true),
     ),
   /**
    * Executes the command

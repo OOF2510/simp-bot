@@ -7,7 +7,10 @@ module.exports = {
     .setName("triggered")
     .setDescription("[IMG] TRIGGERED")
     .addUserOption((option) =>
-      option.setName("user").setDescription("user to trigger").setRequired(true)
+      option
+        .setName("user")
+        .setDescription("user to trigger")
+        .setRequired(true),
     ),
   /**
    * Executes the command

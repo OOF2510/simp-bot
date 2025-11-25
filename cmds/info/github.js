@@ -25,7 +25,7 @@ module.exports = {
       new ButtonBuilder()
         .setStyle(ButtonStyle.Link)
         .setLabel("GitHub")
-        .setURL("https://github.com/OOF2510/simp-bot")
+        .setURL("https://github.com/OOF2510/simp-bot"),
     );
 
     msg.reply({

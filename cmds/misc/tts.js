@@ -11,7 +11,7 @@ module.exports = {
     .setName("tts")
     .setDescription("Speaks given message in VC")
     .addStringOption((option) =>
-      option.setName("text").setDescription("Text to say").setRequired(true)
+      option.setName("text").setDescription("Text to say").setRequired(true),
     ),
   /**
    * Executes the command
@@ -63,7 +63,7 @@ module.exports = {
 
       player.on("error", (error) => {
         console.error(
-          `Error: ${error.message} with resource ${error.resource.metadata.title}`
+          `Error: ${error.message} with resource ${error.resource.metadata.title}`,
         );
         player.stop();
       });

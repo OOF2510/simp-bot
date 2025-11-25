@@ -10,7 +10,7 @@ module.exports = {
       option
         .setName("user")
         .setDescription("user to get info of")
-        .setRequired(false)
+        .setRequired(false),
     ),
   /**
    * Executes the command
@@ -72,7 +72,7 @@ module.exports = {
           inline: true,
         },
         { name: "Bot?", value: `${user.bot}`, inline: true },
-        { name: "Badges", value: `${badges}`, inline: true }
+        { name: "Badges", value: `${badges}`, inline: true },
       )
       .setTimestamp();
 

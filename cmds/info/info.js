@@ -48,8 +48,8 @@ module.exports = {
       ServerCreated = guild.createdAt,
       serverCreated = ServerCreated.toLocaleDateString("en-US", options),
       today = new Date();
-    (ServerAge = today.getTime() - ServerCreated.getTime()),
-      (serverAge = millisecondsToStr(ServerAge));
+    ((ServerAge = today.getTime() - ServerCreated.getTime()),
+      (serverAge = millisecondsToStr(ServerAge)));
 
     let serverOwner = await msg.guild.fetchOwner();
 
@@ -103,7 +103,7 @@ module.exports = {
         { name: `NodeJS Version`, value: "`" + nodeV + "`", inline: true },
         { name: `Discord.js Version`, value: "`" + djsV + "`", inline: true },
         { name: `System Uptime`, value: "`" + uptime + "`", inline: true },
-        { name: `Bot Uptime`, value: "`" + botUptime + "`", inline: true }
+        { name: `Bot Uptime`, value: "`" + botUptime + "`", inline: true },
       )
       .setThumbnail(guild.iconURL())
       .setColor(config.embedColor);

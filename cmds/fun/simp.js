@@ -9,7 +9,7 @@ module.exports = {
       option
         .setName("user")
         .setDescription("user to direct message at")
-        .setRequired(false)
+        .setRequired(false),
     ),
   /**
    * Executes the command

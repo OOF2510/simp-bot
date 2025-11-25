@@ -39,7 +39,7 @@ const client = new Discord.Client({ intents: intents });
 client.commands = new Discord.Collection();
 
 const cmdFiles = require("./util/getAllFiles")("./cmds/").filter((file) =>
-  file.endsWith(".js")
+  file.endsWith(".js"),
 );
 
 for (const file of cmdFiles) {
@@ -48,7 +48,7 @@ for (const file of cmdFiles) {
 }
 
 const devCmdFiles = require("./util/getAllFiles")("./devCmds/").filter((file) =>
-  file.endsWith(".js")
+  file.endsWith(".js"),
 );
 
 for (const file of devCmdFiles) {
@@ -57,7 +57,7 @@ for (const file of devCmdFiles) {
 }
 
 const menuCmdFiles = require("./util/getAllFiles")("./contextMenu/").filter(
-  (file) => file.endsWith(".js")
+  (file) => file.endsWith(".js"),
 );
 
 for (const file of menuCmdFiles) {
@@ -150,7 +150,7 @@ client.on("ready", () => {
       await rest.put(Routes.applicationCommands(clientId), { body: commands });
       await rest.put(
         Routes.applicationGuildCommands(clientId, "786722539250516007"),
-        { body: commands }
+        { body: commands },
       );
       await rest.put(Routes.applicationGuildCommands(clientId, sbservID), {
         body: devCmds,
@@ -192,7 +192,7 @@ client.on("interactionCreate", async (interaction) => {
           let bugChannel = client.channels.cache.get(chid);
           if (!bugChannel) return;
           bugChannel.send(
-            `An error occured when **${interaction.author.tag}** tried to run **${commandName}**: \`\`\`${error}\`\`\``
+            `An error occured when **${interaction.author.tag}** tried to run **${commandName}**: \`\`\`${error}\`\`\``,
           );
         });
         try {
@@ -223,7 +223,7 @@ client.on("interactionCreate", async (interaction) => {
       let bugChannel = client.channels.cache.get(chid);
       if (!bugChannel) return;
       bugChannel.send(
-        `An error occured when **${interaction.author.tag}** tried to run **${commandName}**: \`\`\`${error}\`\`\``
+        `An error occured when **${interaction.author.tag}** tried to run **${commandName}**: \`\`\`${error}\`\`\``,
       );
     });
     await interaction.reply({
@@ -258,14 +258,18 @@ client.on("interactionCreate", async (interaction) => {
 
     default:
       try {
-        await logCommandUsage(commandName, interaction.guildId, interaction.user?.id);
+        await logCommandUsage(
+          commandName,
+          interaction.guildId,
+          interaction.user?.id,
+        );
       } catch (e) {
         console.log(`errror with command usage stats ${e}`);
       }
       break;
   }
 });
-  
+
 client.on("messageCreate", async (msg) => {
   try {
     if (!msg.guild) return;
@@ -290,7 +294,7 @@ client.on("messageCreate", async (msg) => {
     if (msg.content.toLowerCase().startsWith(`s!${cmdName}`)) {
       try {
         return msg.reply(
-          `Text commands are no longer supported! Please use slash commands! If you don't see any when you type \`/\`, re-auth the bot (or ask admins to) with this link: https://discord.com/api/oauth2/authorize?client_id=${config.clientID}&permissions=8&scope=bot%20applications.commands`
+          `Text commands are no longer supported! Please use slash commands! If you don't see any when you type \`/\`, re-auth the bot (or ask admins to) with this link: https://discord.com/api/oauth2/authorize?client_id=${config.clientID}&permissions=8&scope=bot%20applications.commands`,
         );
       } catch (e) {
         return;

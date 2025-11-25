@@ -1,5 +1,9 @@
 const { ChatOpenAI } = require("@langchain/openai");
-const { HumanMessage, AIMessage, SystemMessage } = require("@langchain/core/messages");
+const {
+  HumanMessage,
+  AIMessage,
+  SystemMessage,
+} = require("@langchain/core/messages");
 const Groq = require("groq-sdk");
 const { MongoClient } = require("mongodb");
 const config = require("../config.json");
@@ -51,7 +55,11 @@ class AiMemoryStore {
         const db = this.client.db(this.dbName);
         this.collection = db.collection(this.collectionName);
         if (!this.indexEnsured) {
-          await this.collection.createIndex({ scope: 1, chatId: 1, createdAt: 1 });
+          await this.collection.createIndex({
+            scope: 1,
+            chatId: 1,
+            createdAt: 1,
+          });
           this.indexEnsured = true;
         }
         return this.collection;
@@ -109,7 +117,12 @@ class AiMemoryStore {
    * @returns {Promise<void>}
    */
   async appendMessages(chatId, scope, messages = []) {
-    if (!chatId || !scope || !Array.isArray(messages) || messages.length === 0) {
+    if (
+      !chatId ||
+      !scope ||
+      !Array.isArray(messages) ||
+      messages.length === 0
+    ) {
       return;
     }
     const collection = await this.connect();
@@ -181,10 +194,10 @@ class Ai {
    * @param {{
    *  model?: string,
    *  fallbackModels?: string[],
-     *  temperature?: number,
-     *  maxTokens?: number,
-     *  defaultHeaders?: Record<string, string>,
-     *  requestTimeoutMs?: number
+   *  temperature?: number,
+   *  maxTokens?: number,
+   *  defaultHeaders?: Record<string, string>,
+   *  requestTimeoutMs?: number
    * }} [options]
    */
   constructor({
@@ -194,17 +207,17 @@ class Ai {
     maxTokens = 512,
     defaultHeaders = {},
     requestTimeoutMs = 20000,
-    } = {}) {
+  } = {}) {
     this.models = [model, ...fallbackModels].filter(Boolean);
     this.temperature = temperature;
     this.maxTokens = maxTokens;
     this.defaultHeaders = { ...DEFAULT_HEADERS, ...defaultHeaders };
     this.clientCache = new Map();
     this.lastUsedModel = null;
-      // Per-request timeout (ms) used when invoking each model. If a model
-      // doesn't respond within this window we try the next configured model.
-      // Default: 20000ms (20s). A value of 0 disables the timeout.
-      this.requestTimeoutMs = Number(requestTimeoutMs) || 0;
+    // Per-request timeout (ms) used when invoking each model. If a model
+    // doesn't respond within this window we try the next configured model.
+    // Default: 20000ms (20s). A value of 0 disables the timeout.
+    this.requestTimeoutMs = Number(requestTimeoutMs) || 0;
   }
 
   /**
@@ -322,7 +335,9 @@ class Ai {
    */
   buildUserMessagePayload({ user, attachments = [] } = {}) {
     const normalizedAttachments = Array.isArray(attachments)
-      ? attachments.map((attachment) => this.normalizeAttachment(attachment)).filter(Boolean)
+      ? attachments
+          .map((attachment) => this.normalizeAttachment(attachment))
+          .filter(Boolean)
       : [];
 
     if (user instanceof HumanMessage) {
@@ -351,7 +366,12 @@ class Ai {
       };
     }
 
-    if (user && typeof user === "object" && user !== null && "content" in user) {
+    if (
+      user &&
+      typeof user === "object" &&
+      user !== null &&
+      "content" in user
+    ) {
       const baseContent = this.ensureContentArray(user.content).concat(
         normalizedAttachments,
       );
@@ -476,22 +496,29 @@ class Ai {
       try {
         const client = this.getClient(model);
         // Build messages once for this invocation
-        const builtMessages = this.buildMessages({ system, user, messages, attachments });
+        const builtMessages = this.buildMessages({
+          system,
+          user,
+          messages,
+          attachments,
+        });
 
         // If a request timeout is configured (>0) race the invoke against a timer
         let response;
         if (this.requestTimeoutMs > 0) {
           let timer;
-          const work = client
-            .invoke(builtMessages)
-            .then((res) => {
-              if (timer) clearTimeout(timer);
-              return res;
-            });
+          const work = client.invoke(builtMessages).then((res) => {
+            if (timer) clearTimeout(timer);
+            return res;
+          });
 
           const timeoutPromise = new Promise((_, reject) => {
             timer = setTimeout(() => {
-              reject(new Error(`Model ${model} timed out after ${this.requestTimeoutMs}ms`));
+              reject(
+                new Error(
+                  `Model ${model} timed out after ${this.requestTimeoutMs}ms`,
+                ),
+              );
             }, this.requestTimeoutMs);
           });
 
@@ -649,10 +676,10 @@ class GroqAi {
 
   async ask({ system, user, messages = [], attachments = [] } = {}) {
     if (!this.models.length) throw new Error("No Groq models configured");
-  
+
     const groqMessages = [];
     if (system) groqMessages.push({ role: "system", content: system });
-    
+
     if (messages.length) {
       groqMessages.push(
         ...messages.map((m) => {
@@ -660,14 +687,20 @@ class GroqAi {
           if (m.role && m.content) {
             return {
               role: m.role,
-              content: typeof m.content === "string" ? m.content : JSON.stringify(m.content),
+              content:
+                typeof m.content === "string"
+                  ? m.content
+                  : JSON.stringify(m.content),
             };
           }
           // Handle LangChain message objects
           if (typeof m._getType === "function") {
             return {
               role: m._getType() === "ai" ? "assistant" : "user",
-              content: typeof m.content === "string" ? m.content : JSON.stringify(m.content),
+              content:
+                typeof m.content === "string"
+                  ? m.content
+                  : JSON.stringify(m.content),
             };
           }
           // Fallback for unknown format
@@ -675,20 +708,20 @@ class GroqAi {
             role: "user",
             content: JSON.stringify(m),
           };
-        })
+        }),
       );
     }
-    
+
     if (user) {
       const u =
         typeof user === "string"
           ? user
           : typeof user?.content === "string"
-          ? user.content
-          : JSON.stringify(user);
+            ? user.content
+            : JSON.stringify(user);
       groqMessages.push({ role: "user", content: u });
     }
-  
+
     let lastError;
     for (const model of this.models) {
       try {
@@ -698,7 +731,7 @@ class GroqAi {
           temperature: this.temperature,
           max_tokens: this.maxTokens,
         });
-  
+
         const resp =
           this.requestTimeoutMs > 0
             ? await Promise.race([
@@ -707,17 +740,19 @@ class GroqAi {
                   setTimeout(
                     () =>
                       reject(
-                        new Error(`Model ${model} timed out after ${this.requestTimeoutMs}ms`)
+                        new Error(
+                          `Model ${model} timed out after ${this.requestTimeoutMs}ms`,
+                        ),
                       ),
-                    this.requestTimeoutMs
-                  )
+                    this.requestTimeoutMs,
+                  ),
                 ),
               ])
             : await work;
-  
+
         const text = this.extractText(resp);
         if (!text) throw new Error(`Empty response from ${model}`);
-  
+
         this.lastUsedModel = model;
         return text;
       } catch (err) {
@@ -725,10 +760,10 @@ class GroqAi {
         console.error(`[GroqAI] ${model} failed:`, err?.message || err);
       }
     }
-  
+
     throw lastError || new Error("All Groq models failed");
   }
-  
+
   /**
    * Transcribes an audio file using Groq Whisper.
    * @param {Object} options
@@ -768,9 +803,14 @@ class GroqAi {
               work,
               new Promise((_, reject) =>
                 setTimeout(
-                  () => reject(new Error(`Groq transcription timed out after ${this.requestTimeoutMs}ms`)),
-                  this.requestTimeoutMs
-                )
+                  () =>
+                    reject(
+                      new Error(
+                        `Groq transcription timed out after ${this.requestTimeoutMs}ms`,
+                      ),
+                    ),
+                  this.requestTimeoutMs,
+                ),
               ),
             ])
           : await work;
@@ -784,7 +824,6 @@ class GroqAi {
       throw err;
     }
   }
-
 }
 
 /**
@@ -818,7 +857,7 @@ class GroqAiWithHistory extends GroqAi {
     const history = await this.memoryStore.getHistory(
       chatId,
       this.memoryScope,
-      this.historyLimit
+      this.historyLimit,
     );
 
     const formattedHistory = history.map((entry) => ({
@@ -830,8 +869,8 @@ class GroqAiWithHistory extends GroqAi {
       typeof user === "string"
         ? user
         : typeof user?.content === "string"
-        ? user.content
-        : JSON.stringify(user);
+          ? user.content
+          : JSON.stringify(user);
 
     const response = await super.ask({
       system,
@@ -848,9 +887,11 @@ class GroqAiWithHistory extends GroqAi {
     }
 
     if (toPersist.length) {
-      this.memoryStore.appendMessages(chatId, this.memoryScope, toPersist).catch((e) => {
-        console.error("[Groq Memory] Failed to persist:", e);
-      });
+      this.memoryStore
+        .appendMessages(chatId, this.memoryScope, toPersist)
+        .catch((e) => {
+          console.error("[Groq Memory] Failed to persist:", e);
+        });
     }
 
     return response;

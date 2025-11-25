@@ -25,8 +25,8 @@ module.exports = {
           "/../../",
           "util",
           "/",
-          "gibberish.py"
-        )}`
+          "gibberish.py",
+        )}`,
       ),
       gibberish = Gibberish.stdout.trim();
 

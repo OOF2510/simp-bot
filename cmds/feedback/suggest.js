@@ -9,7 +9,7 @@ module.exports = {
       option
         .setName("suggestion")
         .setDescription("Your suggestion for simp bot")
-        .setRequired(true)
+        .setRequired(true),
     ),
   /**
    * Executes the command
@@ -42,7 +42,7 @@ module.exports = {
     });
 
     msg.reply(
-      `I have sent your suggestion, queen! Join our server to see when it's responded to! https://discord.gg/zHtfa8GdPx`
+      `I have sent your suggestion, queen! Join our server to see when it's responded to! https://discord.gg/zHtfa8GdPx`,
     );
   },
 };

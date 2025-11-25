@@ -12,13 +12,13 @@ module.exports = {
     .setDescription("Warn a user")
     .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers)
     .addUserOption((option) =>
-      option.setName("user").setDescription("User to warn").setRequired(true)
+      option.setName("user").setDescription("User to warn").setRequired(true),
     )
     .addStringOption((option) =>
       option
         .setName("reason")
         .setDescription("Reason for warn")
-        .setRequired(false)
+        .setRequired(false),
     ),
   /**
    * Executes the command
@@ -64,25 +64,25 @@ module.exports = {
     if (reason) {
       try {
         await user.send(
-          `You have been warned in **${msg.guild}** by **${msg.author.tag}** for \`${reason}\``
+          `You have been warned in **${msg.guild}** by **${msg.author.tag}** for \`${reason}\``,
         );
         await addToDB(user, msg.guild, reason);
         msg.editReply(`\`${user.tag}\` has been warned!`);
       } catch (e) {
         return msg.editReply(
-          "Cannot warn this user! They probably have me blocked :("
+          "Cannot warn this user! They probably have me blocked :(",
         );
       }
     } else if (!reason) {
       try {
         await user.send(
-          `You have been warned in **${msg.guild}** by **${msg.author.tag}`
+          `You have been warned in **${msg.guild}** by **${msg.author.tag}`,
         );
         await addToDB(user, msg.guild);
         msg.editReply(`${user.tag} has been warned!`);
       } catch (e) {
         return msg.editReply(
-          "Cannot warn this user! They probably have me blocked :("
+          "Cannot warn this user! They probably have me blocked :(",
         );
       }
     }

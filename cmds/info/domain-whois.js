@@ -20,7 +20,7 @@ module.exports = {
       option
         .setName("domain")
         .setDescription("domain to get info of")
-        .setRequired(true)
+        .setRequired(true),
     ),
   /**
    * Executes the command
@@ -64,7 +64,7 @@ module.exports = {
         { name: `Registered`, value: `${registered}`, inline: true },
         { name: `Expiry Date`, value: `${expiryDate}`, inline: true },
         { name: `Registrar Abuse Email`, value: `${abuseEmail}`, inline: true },
-        { name: `Registrant Organization`, value: `${regOrg}`, inline: true }
+        { name: `Registrant Organization`, value: `${regOrg}`, inline: true },
       )
       .setTimestamp();
 

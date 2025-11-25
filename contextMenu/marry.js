@@ -18,6 +18,12 @@ module.exports = {
    * @param {Array} allowed
    */
   async execute(interaction, client, config, dbContext, allowed) {
-    return marryCommand.execute(interaction, client, config, dbContext, allowed);
+    return marryCommand.execute(
+      interaction,
+      client,
+      config,
+      dbContext,
+      allowed,
+    );
   },
 };

@@ -7,7 +7,7 @@ module.exports = {
     .setName("delete")
     .setDescription("[IMG] delete specified user")
     .addUserOption((option) =>
-      option.setName("user").setDescription("user to delete").setRequired(true)
+      option.setName("user").setDescription("user to delete").setRequired(true),
     ),
   /**
    * Executes the command

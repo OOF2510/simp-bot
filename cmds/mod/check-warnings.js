@@ -15,7 +15,7 @@ module.exports = {
       option
         .setName("user")
         .setDescription("User to check warnings for")
-        .setRequired(true)
+        .setRequired(true),
     ),
   /**
    * Executes the command

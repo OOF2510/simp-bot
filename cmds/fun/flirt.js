@@ -10,7 +10,7 @@ module.exports = {
       option
         .setName("user")
         .setDescription("user to direct pick up line at")
-        .setRequired(false)
+        .setRequired(false),
     ),
   /**
    * Executes the command

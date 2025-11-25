@@ -13,9 +13,9 @@ module.exports = {
         .addChoices(
           { name: "Animal", value: "animal" },
           { name: "Character", value: "character" },
-          { name: "Object", value: "object" }
+          { name: "Object", value: "object" },
         )
-        .setRequired(false)
+        .setRequired(false),
     ),
   /**
    * Executes the command

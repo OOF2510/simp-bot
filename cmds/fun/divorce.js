@@ -35,7 +35,7 @@ module.exports = {
     });
     if (!married)
       return msg.editReply(
-        `You're not married! You can't end a marriage that doesn't exist!`
+        `You're not married! You can't end a marriage that doesn't exist!`,
       );
 
     await collections.marriages.deleteOne({ _id: married._id });

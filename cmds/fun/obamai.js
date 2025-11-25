@@ -18,13 +18,13 @@ module.exports = {
       option
         .setName("message")
         .setDescription("What do you want to ask Obama?")
-        .setRequired(true)
+        .setRequired(true),
     )
     .addBooleanOption((option) =>
       option
         .setName("clear_history")
         .setDescription("Reset Obama's memory for this server")
-        .setRequired(false)
+        .setRequired(false),
     ),
   /**
    * Executes the command
@@ -36,7 +36,8 @@ module.exports = {
    */
   async execute(interaction, client, config, dbContext, allowed) {
     const message = interaction.options.getString("message", true);
-    const clearHistory = interaction.options.getBoolean("clear_history") || false;
+    const clearHistory =
+      interaction.options.getBoolean("clear_history") || false;
     const chatId = interaction.guildId || interaction.user.id;
 
     await interaction.deferReply();

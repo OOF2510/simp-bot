@@ -137,13 +137,13 @@ module.exports = {
       option
         .setName("message-id")
         .setDescription("ID of message to translate")
-        .setRequired(true)
+        .setRequired(true),
     )
     .addStringOption((option) =>
       option
         .setName("result-lang")
         .setDescription("Language to translate to")
-        .setRequired(true)
+        .setRequired(true),
     ),
   /**
    * Executes the command
@@ -183,7 +183,7 @@ module.exports = {
         return msg.reply({
           content: `Please use a supported language code:\n\`${langstring.replaceAll(
             ",",
-            `\n`
+            `\n`,
           )}\``,
           ephemeral: true,
         });

@@ -9,7 +9,7 @@ module.exports = {
       option
         .setName("bug")
         .setDescription("Description of the bug")
-        .setRequired(true)
+        .setRequired(true),
     ),
   /**
    * Executes the command
@@ -42,7 +42,7 @@ module.exports = {
     });
 
     msg.reply(
-      `I have sent your bug report, queen! Join our server to see when it's responded to! https://discord.gg/zHtfa8GdPx`
+      `I have sent your bug report, queen! Join our server to see when it's responded to! https://discord.gg/zHtfa8GdPx`,
     );
   },
 };

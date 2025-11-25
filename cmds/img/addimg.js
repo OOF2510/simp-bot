@@ -20,7 +20,7 @@ async function skel(image, type) {
     canvas.width / 2 - 50,
     canvas.height / 2,
     canvas.width,
-    canvas.height
+    canvas.height,
   );
   return canvas.encode("png");
 }
@@ -30,7 +30,7 @@ module.exports = {
     .setName("add-image")
     .setDescription("[IMG] puts the chosen image on a user's pfp")
     .addUserOption((option) =>
-      option.setName("user").setDescription("who?").setRequired(true)
+      option.setName("user").setDescription("who?").setRequired(true),
     )
     .addStringOption((option) =>
       option
@@ -61,9 +61,9 @@ module.exports = {
             name: "mtndew",
             value:
               "https://cdn.discordapp.com/attachments/1021763955099717664/1031692772354297887/dew.png",
-          }
+          },
         )
-        .setRequired(true)
+        .setRequired(true),
     ),
   /**
    * Executes the command

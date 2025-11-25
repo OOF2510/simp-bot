@@ -10,7 +10,7 @@ module.exports = {
       option
         .setName("user")
         .setDescription("user to turn gay")
-        .setRequired(true)
+        .setRequired(true),
     ),
   /**
    * Executes the command

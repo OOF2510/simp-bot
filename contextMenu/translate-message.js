@@ -189,7 +189,7 @@ module.exports = {
           return int.reply({
             content: `Please use a supported language code:\n\`${langstring.replaceAll(
               ",",
-              `\n`
+              `\n`,
             )}\``,
             ephemeral: true,
           });

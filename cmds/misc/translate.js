@@ -137,19 +137,19 @@ module.exports = {
       option
         .setName("text")
         .setDescription("Text to translate")
-        .setRequired(true)
+        .setRequired(true),
     )
     .addStringOption((option) =>
       option
         .setName("base-lang")
         .setDescription("Language to translate from")
-        .setRequired(true)
+        .setRequired(true),
     )
     .addStringOption((option) =>
       option
         .setName("result-lang")
         .setDescription("Language to translate to")
-        .setRequired(true)
+        .setRequired(true),
     ),
   /**
    * Executes the command
@@ -171,7 +171,7 @@ module.exports = {
       return msg.reply({
         content: `Please use a supported language code:\n\`${langstring.replaceAll(
           ",",
-          `\n`
+          `\n`,
         )}\``,
         ephemeral: true,
       });

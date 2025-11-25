@@ -39,7 +39,7 @@ module.exports = {
     let spouse = msg.guild.members.cache.get(married.spouseId);
     if (!user || !spouse) {
       return msg.editReply(
-        `It seems that the user you were married to is no longer in this server, you might wanna divorce...`
+        `It seems that the user you were married to is no longer in this server, you might wanna divorce...`,
       );
     }
     if (user.id === author.id)

@@ -32,7 +32,7 @@ module.exports = {
       .setTitle(`Pong UwU!`)
       .addFields(
         { name: `Bot Ping`, value: `\`${client.ws.ping}ms\``, inline: true },
-        { name: `Database Ping`, value: `\`${dbPingText}\``, inline: true }
+        { name: `Database Ping`, value: `\`${dbPingText}\``, inline: true },
       )
       .setColor(config.embedColor);
 
