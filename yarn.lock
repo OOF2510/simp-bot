@@ -417,6 +417,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@oof2510/geoapi@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@oof2510/geoapi@npm:1.1.1"
+  dependencies:
+    axios: "npm:^1.13.2"
+  checksum: 10c0/79ddb69a0642cbab0166432a3fb0d3efc51e74f37ef6473b44f49e5c4dfce5fbee5213bbeb477919149f194f11475cbfeb702cf58869a820425e884731dc7358
+  languageName: node
+  linkType: hard
+
 "@sapphire/async-queue@npm:^1.5.0":
   version: 1.5.0
   resolution: "@sapphire/async-queue@npm:1.5.0"
@@ -833,7 +842,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.7.9":
+"axios@npm:^1.13.2, axios@npm:^1.7.9":
   version: 1.13.2
   resolution: "axios@npm:1.13.2"
   dependencies:
@@ -1929,6 +1938,15 @@ __metadata:
   dependencies:
     function-bind: "npm:^1.1.2"
   checksum: 10c0/3769d434703b8ac66b209a4cca0737519925bbdb61dd887f93a16372b14694c63ff4e797686d87c90f08168e81082248b9b028bad60d4da9e0d1148766f56eb9
+  languageName: node
+  linkType: hard
+
+"he@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "he@npm:1.2.0"
+  bin:
+    he: bin/he
+  checksum: 10c0/a27d478befe3c8192f006cdd0639a66798979dfa6e2125c6ac582a19a5ebfec62ad83e8382e6036170d873f46e4536a7e795bf8b95bf7c247f4cc0825ccc8c17
   languageName: node
   linkType: hard
 
@@ -3227,12 +3245,14 @@ __metadata:
     "@langchain/core": "npm:^1.0.4"
     "@langchain/openai": "npm:^1.1.0"
     "@napi-rs/canvas": "npm:^0.1.55"
+    "@oof2510/geoapi": "npm:^1.1.1"
     axios: "npm:^1.7.9"
     canvacord: "npm:^5.4.8"
     discord-api-types: "npm:^0.37.99"
     discord.js: "npm:^14.16.3"
     discord.js-akinator: "https://github.com/OOF2510/Discord.js-Akinator#yes"
     groq-sdk: "npm:^0.36.0"
+    he: "npm:^1.2.0"
     libsodium-wrappers: "npm:^0.7.14"
     mongodb: "npm:^6.20.0"
     node-url-shortener: "npm:^2.0.3"
@@ -3244,6 +3264,7 @@ __metadata:
     relevant-urban: "npm:^2.0.0"
     say: "npm:^0.16.0"
     translate-google: "npm:^1.5.0"
+    undici: "npm:^7.16.0"
     whois-light: "npm:^1.1.7"
   languageName: unknown
   linkType: soft
@@ -3605,6 +3626,13 @@ __metadata:
   dependencies:
     busboy: "npm:^1.6.0"
   checksum: 10c0/7e56f782ec25319a2bb711046a736a8ad0c0ce3ff217afd8e7dc9e264ee043c9d2abfe922d3d3dc0c4f3f8f67dac84eae354787bdb006c227ae0ebe720bb4bae
+  languageName: node
+  linkType: hard
+
+"undici@npm:^7.16.0":
+  version: 7.16.0
+  resolution: "undici@npm:7.16.0"
+  checksum: 10c0/efd867792e9f233facf9efa0a087e2d9c3e4415c0b234061b9b40307ca4fa01d945fee4d43c7b564e1b80e0d519bcc682f9f6e0de13c717146c00a80e2f1fb0f
   languageName: node
   linkType: hard
 

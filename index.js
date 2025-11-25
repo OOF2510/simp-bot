@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const { existsSync } = require("fs");
 const { MongoClient } = require("mongodb");
+const GameSessionStore = require("./util/game_session_store");
 
 let config;
 var startupArgs = process.argv.slice(2);
@@ -31,6 +32,11 @@ const normalizedEmbedColor = normalizeColor(config.embedColor);
 if (normalizedEmbedColor !== null) {
   config.embedColor = normalizedEmbedColor;
 }
+
+// Load interactive command handlers that need button/modal routing
+const akinatorCommand = require("./cmds/fun/akinator");
+const geoGuessCommand = require("./cmds/fun/geoguess");
+const triviaCommand = require("./cmds/fun/trivia");
 
 // NORMAL + MESSAGE CONTENT
 const intents = new Discord.IntentsBitField(3276541);
@@ -68,6 +74,7 @@ for (const file of menuCmdFiles) {
 let mongoClient;
 let db;
 let collections = {};
+let gameSessionStore;
 
 async function initDatabase() {
   const mongoCfg = config.mongodb || {};
@@ -78,6 +85,7 @@ async function initDatabase() {
   mongoClient = new MongoClient(mongoCfg.url);
   await mongoClient.connect();
   db = mongoClient.db(mongoCfg.database);
+  gameSessionStore = new GameSessionStore({ client: mongoClient, db });
   collections = {
     autopub: db.collection("autopublish"),
     dellog: db.collection("dellog"),
@@ -169,6 +177,22 @@ client.on("ready", () => {
 });
 
 client.on("interactionCreate", async (interaction) => {
+  if (interaction.isButton() || interaction.isStringSelectMenu() || interaction.isModalSubmit()) {
+    const customId = interaction.customId || "";
+    if (customId.startsWith("aki|")) {
+      return akinatorCommand.handleComponent?.(interaction, { client, gameSessionStore, db, collections });
+    }
+    if (customId.startsWith("geo|")) {
+      return geoGuessCommand.handleComponent?.(interaction, { client, gameSessionStore, db, collections });
+    }
+    if (customId.startsWith("triv|")) {
+      if (interaction.isModalSubmit() && typeof triviaCommand.handleModal === "function") {
+        return triviaCommand.handleModal(interaction, { client, gameSessionStore, db, collections });
+      }
+      return triviaCommand.handleComponent?.(interaction, { client, gameSessionStore, db, collections });
+    }
+  }
+
   if (interaction.type != Discord.InteractionType.ApplicationCommand) return;
   const { commandName } = interaction;
   const command = client.commands.get(commandName);
@@ -179,7 +203,7 @@ client.on("interactionCreate", async (interaction) => {
   interaction.send = interaction.reply;
 
   try {
-    const dbContext = { db, collections, client: mongoClient };
+    const dbContext = { db, collections, client: mongoClient, gameSessionStore };
     await command
       .execute(interaction, client, config, dbContext, allowed)
       .catch(async (error) => {
@@ -330,6 +354,17 @@ client.on("messageDelete", async (msg) => {
 async function start() {
   try {
     await initDatabase();
+    client.gameSessionStore = gameSessionStore;
+    // Initialize long-lived game stores
+    if (typeof akinatorCommand.init === "function") {
+      await akinatorCommand.init({ client, gameSessionStore });
+    }
+    if (typeof geoGuessCommand.init === "function") {
+      await geoGuessCommand.init({ client, gameSessionStore });
+    }
+    if (typeof triviaCommand.init === "function") {
+      await triviaCommand.init({ client, gameSessionStore });
+    }
   } catch (error) {
     console.error("Failed to connect to MongoDB:", error);
     process.exit(1);
@@ -343,6 +378,9 @@ async function shutdown() {
   try {
     if (mongoClient) {
       await mongoClient.close();
+    }
+    if (gameSessionStore) {
+      await gameSessionStore.disconnect();
     }
   } catch (error) {
     console.error("Error closing Mongo connection:", error);

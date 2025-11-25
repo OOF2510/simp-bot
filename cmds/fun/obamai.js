@@ -13,7 +13,7 @@ const obamaAi = new GroqAiWithHistory({
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("obamai")
-    .setDescription("Chat with presidential Obama (PG-13)")
+    .setDescription("Talk to AI Obama")
     .addStringOption((option) =>
       option
         .setName("message")

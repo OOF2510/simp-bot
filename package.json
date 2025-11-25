@@ -23,12 +23,14 @@
     "@langchain/core": "^1.0.4",
     "@langchain/openai": "^1.1.0",
     "@napi-rs/canvas": "^0.1.55",
+    "@oof2510/geoapi": "^1.1.1",
     "axios": "^1.7.9",
     "canvacord": "^5.4.8",
     "discord-api-types": "^0.37.99",
     "discord.js": "^14.16.3",
     "discord.js-akinator": "https://github.com/OOF2510/Discord.js-Akinator#yes",
     "groq-sdk": "^0.36.0",
+    "he": "^1.2.0",
     "libsodium-wrappers": "^0.7.14",
     "mongodb": "^6.20.0",
     "node-url-shortener": "^2.0.3",
@@ -38,6 +40,7 @@
     "relevant-urban": "^2.0.0",
     "say": "^0.16.0",
     "translate-google": "^1.5.0",
+    "undici": "^7.16.0",
     "whois-light": "^1.1.7"
   }
 }
