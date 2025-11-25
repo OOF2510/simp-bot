@@ -218,7 +218,7 @@ async function loadSessions(store, client) {
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("geoguess")
+    .setName("geofinder")
     .setDescription("Sends a random place image; guess the country!"),
   async execute(interaction, client, config, dbContext) {
     const { gameSessionStore } = dbContext;

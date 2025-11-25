@@ -21,8 +21,10 @@ const MODES = {
 };
 const QUESTION_COUNTS = [1, 5, 10, 15, 20];
 const QUESTION_TIMER_OPTIONS = [10, 20, 30, 45, 60];
+const DEFAULT_TIME_LIMIT = 45 * 1000;
 
 const sessions = new Map(); // sessionId -> session
+const sessionsByChannel = new Map(); // channelId -> sessionId
 const timers = new Map(); // sessionId -> timeout
 
 const decodeText = (value = "") => {
@@ -74,16 +76,23 @@ async function fetchCategories() {
 async function fetchQuestions({ categorySlug, count }) {
   const params = { limit: count };
   if (categorySlug) params.categories = categorySlug;
-  const { data } = await axios.get(QUESTION_ENDPOINT, { params });
-  return (data || []).map((q) => ({
-    question: decodeText(q.question),
-    correctAnswer: decodeText(q.correctAnswer),
-    incorrectAnswers: Array.isArray(q.incorrectAnswers)
+  const { data } = await axios.get(QUESTION_ENDPOINT, { params, timeout: 10000 });
+  return (data || []).map((q) => {
+    const prompt = decodeText(q.question);
+    const correctAnswer = decodeText(q.correctAnswer);
+    const incorrectAnswers = Array.isArray(q.incorrectAnswers)
       ? q.incorrectAnswers.map(decodeText)
-      : [],
-    category: decodeText(q.category),
-    type: q.type,
-  }));
+      : [];
+    const options = shuffleArray([correctAnswer, ...incorrectAnswers]).slice(0, 4);
+    return {
+      prompt,
+      correctAnswer,
+      incorrectAnswers,
+      options,
+      category: decodeText(q.category),
+      type: q.type,
+    };
+  });
 }
 
 const makeCategorySelect = (sessionId, categories) => {
@@ -92,7 +101,15 @@ const makeCategorySelect = (sessionId, categories) => {
     .setCustomId(`triv|${sessionId}|category`)
     .setPlaceholder("Select a category")
     .addOptions(options);
-  return [new ActionRowBuilder().addComponents(menu)];
+  return [
+    new ActionRowBuilder().addComponents(menu),
+    new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId(`triv|${sessionId}|cancel`)
+        .setLabel("Cancel")
+        .setStyle(ButtonStyle.Danger),
+    ),
+  ];
 };
 
 const makeCountSelect = (sessionId) => {
@@ -100,9 +117,24 @@ const makeCountSelect = (sessionId) => {
     .setCustomId(`triv|${sessionId}|count`)
     .setPlaceholder("How many questions?")
     .addOptions(
-      QUESTION_COUNTS.map((c) => ({ label: `${c} question${c > 1 ? "s" : ""}`, value: String(c) })),
+      QUESTION_COUNTS.map((c) => ({
+        label: `${c} question${c > 1 ? "s" : ""}`,
+        value: String(c),
+      })),
     );
-  return [new ActionRowBuilder().addComponents(menu)];
+  return [
+    new ActionRowBuilder().addComponents(menu),
+    new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId(`triv|${sessionId}|back|category`)
+        .setLabel("Back")
+        .setStyle(ButtonStyle.Secondary),
+      new ButtonBuilder()
+        .setCustomId(`triv|${sessionId}|cancel`)
+        .setLabel("Cancel")
+        .setStyle(ButtonStyle.Danger),
+    ),
+  ];
 };
 
 const makeModeSelect = (sessionId) => {
@@ -121,7 +153,19 @@ const makeModeSelect = (sessionId) => {
         description: "Type your answer",
       },
     );
-  return [new ActionRowBuilder().addComponents(menu)];
+  return [
+    new ActionRowBuilder().addComponents(menu),
+    new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId(`triv|${sessionId}|back|count`)
+        .setLabel("Back")
+        .setStyle(ButtonStyle.Secondary),
+      new ButtonBuilder()
+        .setCustomId(`triv|${sessionId}|cancel`)
+        .setLabel("Cancel")
+        .setStyle(ButtonStyle.Danger),
+    ),
+  ];
 };
 
 const makeTimerSelect = (sessionId) => {
@@ -134,7 +178,19 @@ const makeTimerSelect = (sessionId) => {
         value: String(sec),
       })),
     );
-  return [new ActionRowBuilder().addComponents(menu)];
+  return [
+    new ActionRowBuilder().addComponents(menu),
+    new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId(`triv|${sessionId}|back|mode`)
+        .setLabel("Back")
+        .setStyle(ButtonStyle.Secondary),
+      new ButtonBuilder()
+        .setCustomId(`triv|${sessionId}|cancel`)
+        .setLabel("Cancel")
+        .setStyle(ButtonStyle.Danger),
+    ),
+  ];
 };
 
 const makeAnswerButtons = (sessionId, answers) => {
@@ -147,12 +203,6 @@ const makeAnswerButtons = (sessionId, answers) => {
         .setStyle(ButtonStyle.Primary),
     );
   });
-  row.addComponents(
-    new ButtonBuilder()
-      .setCustomId(`triv|${sessionId}|skip`)
-      .setLabel("Skip")
-      .setStyle(ButtonStyle.Secondary),
-  );
   return [row];
 };
 
@@ -162,31 +212,105 @@ const makeOpenAnswerButtons = (sessionId) => [
       .setCustomId(`triv|${sessionId}|open`)
       .setLabel("Answer")
       .setStyle(ButtonStyle.Primary),
-    new ButtonBuilder()
-      .setCustomId(`triv|${sessionId}|skip`)
-      .setLabel("Skip")
-      .setStyle(ButtonStyle.Secondary),
   ),
 ];
 
 const formatScoreboard = (scoreboard) => {
-  const entries = Object.entries(scoreboard || {}).sort((a, b) => b[1] - a[1]);
+  const entries = Object.entries(scoreboard || {}).sort((a, b) => b[1].correct - a[1].correct);
   if (!entries.length) return "No points yet.";
-  return entries.map(([userId, score]) => `<@${userId}>: **${score}**`).join("\n");
+  return entries.map(([userId, entry]) => `<@${userId}>: **${entry.correct}**`).join("\n");
 };
 
-const questionEmbed = (session, question) => {
+const formatAnswers = (session, questionIndex) => {
+  const answers = Object.values(session.answers?.[questionIndex] || {});
+  if (!answers.length) return "Nobody yet.";
+  const sorted = answers
+    .slice()
+    .sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
+  return sorted
+    .map((entry) => {
+      const cleaned =
+        typeof entry.answer === "string"
+          ? entry.answer.replace(/\s+/g, " ").trim()
+          : `${entry.answer}`;
+      const label =
+        session.mode === MODES.MULTIPLE_CHOICE
+          ? `locked in ${cleaned || "(blank)"}`
+          : `answered "${cleaned || "(blank)"}"`;
+      return `• ${entry.displayName} ${label}`;
+    })
+    .join("\n");
+};
+
+const questionEmbed = (session, questionIndex) => {
+  const question = session.questions[questionIndex];
   const embed = new EmbedBuilder()
-    .setTitle(`Trivia (${session.currentQuestionIndex + 1}/${session.questions.length})`)
-    .setDescription(question.question)
+    .setTitle(`Trivia (${questionIndex + 1}/${session.questions.length})`)
+    .setDescription(question.prompt)
     .setColor(0x9b59b6);
-  if (question.category) {
-    embed.addFields({ name: "Category", value: question.category, inline: true });
+
+  const timeLimitSeconds = Math.max(
+    1,
+    Math.round((session.questionTimeLimitMs || DEFAULT_TIME_LIMIT) / 1000),
+  );
+
+  embed.addFields(
+    {
+      name: "Category",
+      value: question.category || "General",
+      inline: true,
+    },
+    {
+      name: "Mode",
+      value: session.mode === MODES.MULTIPLE_CHOICE ? "Multiple choice" : "Open ended",
+      inline: true,
+    },
+    {
+      name: "Time",
+      value: `${timeLimitSeconds}s`,
+      inline: true,
+    },
+    {
+      name: "Scoreboard",
+      value: formatScoreboard(session.scoreboard),
+    },
+    {
+      name: "Answers so far",
+      value: formatAnswers(session, questionIndex),
+    },
+  );
+
+  return embed;
+};
+
+const summaryEmbed = (session, questionIndex, reason) => {
+  const question = session.questions[questionIndex];
+  const answers = Object.values(session.answers?.[questionIndex] || {});
+  const winners = answers.filter((entry) => entry.isCorrect);
+
+  const embed = new EmbedBuilder()
+    .setTitle(`Q${questionIndex + 1} Results (${session.mode === MODES.MULTIPLE_CHOICE ? "Multiple choice" : "Open ended"})`)
+    .setDescription(
+      `${reason === "timeout" ? "⏱️ Time's up!" : "🎉 Round ended!"}\nCorrect answer: **${question.correctAnswer}**`,
+    )
+    .setColor(winners.length ? 0x2ecc71 : 0xe67e22);
+
+  if (answers.length) {
+    embed.addFields({
+      name: "Guesses",
+      value: answers
+        .map(
+          (entry) =>
+            `${entry.isCorrect ? "✅" : "❌"} ${entry.displayName}: ${entry.answer || "(blank)"}`,
+        )
+        .join("\n")
+        .slice(0, 1024),
+    });
+  } else {
+    embed.addFields({ name: "Guesses", value: "Nobody answered." });
   }
-  embed.addFields({
-    name: "Scoreboard",
-    value: formatScoreboard(session.scoreboard),
-  });
+
+  embed.addFields({ name: "Scoreboard", value: formatScoreboard(session.scoreboard) });
   return embed;
 };
 
@@ -202,90 +326,209 @@ async function persistSession(store, session) {
 }
 
 async function removeSession(store, sessionId) {
+  const session = sessions.get(sessionId);
   sessions.delete(sessionId);
   clearTimer(sessionId);
+  if (session?.channelId) {
+    sessionsByChannel.delete(session.channelId);
+  }
   if (store?.enabled) {
     await store.deleteTriviaSession(sessionId);
   }
 }
 
-async function askQuestion(interaction, session, store) {
-  clearTimer(session.sessionId);
-  const question = session.questions[session.currentQuestionIndex];
-  if (!question) {
-    await finishGame(interaction, session, store);
-    return;
-  }
-
-  const embed = questionEmbed(session, question);
-  if (session.mode === MODES.MULTIPLE_CHOICE) {
-    const answers = shuffleArray([
-      question.correctAnswer,
-      ...(question.incorrectAnswers || []),
-    ]).slice(0, 4);
-    session.currentAnswers = answers;
-    const msg = await interaction.editReply({
-      embeds: [embed],
-      components: makeAnswerButtons(session.sessionId, answers),
-    });
-    session.activeMessageId = msg.id;
-  } else {
-    session.currentAnswers = null;
-    const msg = await interaction.editReply({
-      embeds: [embed],
-      components: makeOpenAnswerButtons(session.sessionId),
-    });
-    session.activeMessageId = msg.id;
-  }
-
-  if (session.questionTimeLimitMs) {
-    const timeout = setTimeout(async () => {
-      try {
-        await interaction.followUp({
-          content: `⏲️ Time's up for question ${session.currentQuestionIndex + 1}!`,
-        });
-        await handleSkip(interaction, session, store, true);
-      } catch (e) {
-        console.error("Trivia timer error:", e);
-      }
-    }, session.questionTimeLimitMs);
-    timers.set(session.sessionId, timeout);
-  }
-
-  await persistSession(store, session);
-}
-
-async function finishGame(interaction, session, store) {
+async function finishGame(client, session, store) {
   clearTimer(session.sessionId);
   const embed = new EmbedBuilder()
     .setTitle("Trivia Finished!")
-    .setDescription("Thanks for playing.")
+    .setDescription(
+      `Category: ${session.categoryName}\nMode: ${
+        session.mode === MODES.MULTIPLE_CHOICE ? "Multiple choice" : "Open ended"
+      }`,
+    )
     .addFields({ name: "Final Scores", value: formatScoreboard(session.scoreboard) })
     .setColor(0x2ecc71);
-  await interaction.editReply({ embeds: [embed], components: [] });
+
+  try {
+    const channel = await client.channels.fetch(session.channelId);
+    await channel.send({ embeds: [embed] });
+  } catch (error) {
+    console.error("Failed to send trivia summary:", error);
+  }
+
   await removeSession(store, session.sessionId);
 }
 
-async function handleCorrect(interaction, session, userId) {
+async function scheduleTimer(client, session, store) {
   clearTimer(session.sessionId);
-  session.scoreboard[userId] = (session.scoreboard[userId] || 0) + 1;
-  session.currentQuestionIndex += 1;
-  await persistSession(interaction.client.gameSessionStore, session);
-  await interaction.followUp({ content: `<@${userId}> got it right! 🎉` });
-  await askQuestion(interaction, session, interaction.client.gameSessionStore);
+  const limit = session.questionTimeLimitMs || DEFAULT_TIME_LIMIT;
+  session.questionDeadline = Date.now() + limit;
+  const timeout = setTimeout(() => {
+    finalizeQuestion(client, session.sessionId, store, "timeout").catch((e) =>
+      console.error("Trivia timer error:", e),
+    );
+  }, limit);
+  timers.set(session.sessionId, timeout);
 }
 
-async function handleSkip(interaction, session, store, fromTimer = false) {
-  clearTimer(session.sessionId);
-  session.currentQuestionIndex += 1;
-  if (!fromTimer) {
-    await interaction.reply({ content: "Skipped.", ephemeral: true }).catch(() => {});
+async function updateQuestionMessage(client, session) {
+  const questionIndex = session.currentQuestionIndex;
+  if (questionIndex < 0 || !session.questions[questionIndex]) return;
+  if (!session.activeMessageId) return;
+  try {
+    const channel = await client.channels.fetch(session.channelId);
+    const components =
+      session.mode === MODES.MULTIPLE_CHOICE
+        ? makeAnswerButtons(session.sessionId, session.questions[questionIndex].options)
+        : makeOpenAnswerButtons(session.sessionId);
+    await channel.messages.edit(session.activeMessageId, {
+      embeds: [questionEmbed(session, questionIndex)],
+      components,
+    });
+  } catch (error) {
+    console.error("Failed to refresh trivia question message:", error);
   }
-  await askQuestion(interaction, session, store);
 }
 
-async function handleAnswer(interaction, session, answerText) {
-  const store = interaction.client.gameSessionStore;
+async function finalizeQuestion(client, sessionId, store, reason = "timeout") {
+  const session = sessions.get(sessionId);
+  if (!session) return;
+  if (session.currentQuestionIndex < 0) return;
+
+  clearTimer(sessionId);
+
+  const questionIndex = session.currentQuestionIndex;
+  const answers = session.answers?.[questionIndex] || {};
+  const answerList = Object.values(answers);
+  const winners = answerList.filter((entry) => entry.isCorrect);
+
+  winners.forEach((entry) => {
+    const existing = session.scoreboard[entry.userId] || { correct: 0, name: entry.displayName };
+    existing.correct += 1;
+    existing.name = entry.displayName;
+    session.scoreboard[entry.userId] = existing;
+  });
+
+  try {
+    const channel = await client.channels.fetch(session.channelId);
+    await channel.messages.edit(session.activeMessageId, {
+      embeds: [summaryEmbed(session, questionIndex, reason)],
+      components: [],
+    });
+  } catch (error) {
+    console.error("Failed to edit trivia message with summary:", error);
+  }
+
+  await persistSession(store, session);
+
+  setTimeout(() => {
+    askNextQuestion(client, session, store).catch((err) =>
+      console.error("Failed to ask next trivia question:", err),
+    );
+  }, 1500).unref?.();
+}
+
+async function askNextQuestion(client, session, store, options = {}) {
+  clearTimer(session.sessionId);
+
+  session.currentQuestionIndex += 1;
+  const questionIndex = session.currentQuestionIndex;
+
+  if (questionIndex >= session.questions.length) {
+    await finishGame(client, session, store);
+    return;
+  }
+
+  session.answers[questionIndex] = {};
+  const question = session.questions[questionIndex];
+  const components =
+    session.mode === MODES.MULTIPLE_CHOICE
+      ? makeAnswerButtons(session.sessionId, question.options)
+      : makeOpenAnswerButtons(session.sessionId);
+
+  try {
+    let msg;
+    if (options.initialInteraction) {
+      msg = await options.initialInteraction.followUp({
+        embeds: [questionEmbed(session, questionIndex)],
+        components,
+      });
+    } else {
+      const channel = await client.channels.fetch(session.channelId);
+      msg = await channel.send({
+        embeds: [questionEmbed(session, questionIndex)],
+        components,
+      });
+    }
+    session.activeMessageId = msg.id;
+    session.stage = "asking";
+    await persistSession(store, session);
+    await scheduleTimer(client, session, store);
+  } catch (error) {
+    console.error("Failed to send trivia question:", error);
+    await removeSession(store, session.sessionId);
+  }
+}
+
+async function loadSessions(store, client) {
+  if (!store?.enabled) return;
+  const saved = await store.listTriviaSessions();
+  saved.forEach((doc) => {
+    if (!doc.sessionId || !doc.channelId) return;
+    const session = {
+      ...doc,
+      sessionId: doc.sessionId,
+      channelId: doc.channelId,
+      guildId: doc.guildId,
+      userId: doc.userId,
+      stage: doc.stage || "awaiting_category",
+      scoreboard: doc.scoreboard || {},
+      answers: doc.answers || {},
+      questions: Array.isArray(doc.questions) ? doc.questions : [],
+      currentQuestionIndex:
+        typeof doc.currentQuestionIndex === "number" ? doc.currentQuestionIndex : -1,
+      questionTimeLimitMs: doc.questionTimeLimitMs || DEFAULT_TIME_LIMIT,
+      questionDeadline: doc.questionDeadline
+        ? new Date(doc.questionDeadline).getTime()
+        : null,
+      activeMessageId:
+        typeof doc.activeMessageId === "string" ? doc.activeMessageId : doc.activeMessageId || null,
+      selectionMessageId: doc.selectionMessageId || null,
+    };
+    sessions.set(session.sessionId, session);
+    sessionsByChannel.set(session.channelId, session.sessionId);
+  });
+
+  for (const session of sessions.values()) {
+    if (session.stage === "asking" && session.questions.length) {
+      session.currentQuestionIndex = Math.max(
+        Math.min(session.currentQuestionIndex, session.questions.length - 1) - 1,
+        -1,
+      );
+      session.answers = {};
+      session.activeMessageId = null;
+      session.questionDeadline = null;
+      try {
+        const channel = await client.channels.fetch(session.channelId);
+        await channel
+          .send("♻️ Trivia game resumed after restart. Replaying the current question.")
+          .catch(() => {});
+      } catch (error) {
+        console.error("Failed to notify trivia resume:", error);
+      }
+      await askNextQuestion(client, session, store, { resume: true });
+    } else if (
+      session.stage === "awaiting_category" ||
+      session.stage === "awaiting_count" ||
+      session.stage === "awaiting_mode" ||
+      session.stage === "awaiting_timer"
+    ) {
+      await removeSession(store, session.sessionId);
+    }
+  }
+}
+
+async function handleAnswer(interaction, session, store, answerText) {
   const question = session.questions[session.currentQuestionIndex];
   if (!question) {
     await interaction.reply({ content: "Game already ended.", ephemeral: true });
@@ -293,62 +536,81 @@ async function handleAnswer(interaction, session, answerText) {
     return;
   }
 
+  if (session.stage !== "asking" || session.currentQuestionIndex < 0) {
+    return interaction.reply({ content: "This round isn't accepting answers right now.", ephemeral: true });
+  }
+
+  if (session.activeMessageId && interaction.message?.id && interaction.message.id !== session.activeMessageId) {
+    return interaction.reply({ content: "That question already moved on.", ephemeral: true });
+  }
+
+  const questionIndex = session.currentQuestionIndex;
+  const userId = interaction.user.id;
+
+  session.answers[questionIndex] = session.answers[questionIndex] || {};
+  if (session.answers[questionIndex][userId]) {
+    return interaction.reply({ content: "You already answered this one.", ephemeral: true });
+  }
+
+  const entry = {
+    userId,
+    displayName: interaction.member?.displayName || interaction.user.username,
+    answer: answerText,
+    optionIndex: null,
+    isCorrect: false,
+    timestamp: new Date().toISOString(),
+  };
+
   if (session.mode === MODES.MULTIPLE_CHOICE) {
     const idx = Number.parseInt(answerText, 10);
-    const choice = session.currentAnswers?.[idx];
+    const choice = question.options?.[idx];
     if (!choice) {
       return interaction.reply({ content: "Invalid choice.", ephemeral: true });
     }
-    const correct = normalizeAnswer(choice) === normalizeAnswer(question.correctAnswer);
-    if (correct) {
-      await interaction.update({ components: [] });
-      await handleCorrect(interaction, session, interaction.user.id);
-    } else {
-      await interaction.reply({ content: "Nope!", ephemeral: true });
-    }
+    entry.answer = choice;
+    entry.optionIndex = idx;
+    entry.isCorrect = normalizeAnswer(choice) === normalizeAnswer(question.correctAnswer);
+    session.answers[questionIndex][userId] = entry;
+    await interaction.reply({ content: "Answer locked in!", ephemeral: true });
+    await persistSession(store, session);
+    await updateQuestionMessage(interaction.client, session);
     return;
   }
 
-  // Open ended
   const cleaned = normalizeAnswer(answerText);
-  const correct = cleaned === normalizeAnswer(question.correctAnswer);
-  if (correct) {
-    await interaction.reply({ content: "Correct! 🎉" });
-    await handleCorrect(interaction, session, interaction.user.id);
-  } else {
-    await interaction.reply({ content: "Nope, try again!", ephemeral: true });
-  }
-}
-
-async function loadSessions(store) {
-  if (!store?.enabled) return;
-  const saved = await store.listTriviaSessions();
-  saved.forEach((doc) => {
-    if (!doc.sessionId || !doc.channelId) return;
-    sessions.set(doc.sessionId, {
-      ...doc,
-      channelId: doc.channelId,
-      guildId: doc.guildId,
-      userId: doc.userId,
-      scoreboard: doc.scoreboard || {},
-      answers: doc.answers || {},
-      questions: Array.isArray(doc.questions) ? doc.questions : [],
-      currentQuestionIndex:
-        typeof doc.currentQuestionIndex === "number" ? doc.currentQuestionIndex : -1,
-      questionTimeLimitMs: doc.questionTimeLimitMs || null,
-    });
-  });
-  if (saved.length) {
-    console.log(`Restored ${saved.length} Trivia sessions`);
-  }
+  const correct = normalizeAnswer(question.correctAnswer);
+  entry.isCorrect =
+    cleaned === correct || (cleaned.length >= 4 && correct.includes(cleaned));
+  session.answers[questionIndex][userId] = entry;
+  await interaction.reply({ content: entry.isCorrect ? "Correct! 🎉" : "Locked in.", ephemeral: true });
+  await persistSession(store, session);
+  await updateQuestionMessage(interaction.client, session);
 }
 
 module.exports = {
   data: new SlashCommandBuilder().setName("trivia").setDescription("Play trivia together"),
   async execute(interaction, client, config, dbContext) {
     const { gameSessionStore } = dbContext;
+    const existingId = sessionsByChannel.get(interaction.channelId);
+    if (existingId) {
+      const existing = sessions.get(existingId);
+      if (existing && existing.stage === "asking") {
+        return interaction.reply({
+          content: "There's already a trivia game here. Finish that one first.",
+          ephemeral: true,
+        });
+      }
+    }
+
     const sessionId = randomUUID();
-    const categories = await fetchCategories().catch(() => new Map());
+    const categories = await fetchCategories().catch(() => null);
+    if (!categories) {
+      return interaction.reply({
+        content: "Could not load categories. Try again later.",
+        ephemeral: true,
+      });
+    }
+
     const session = {
       sessionId,
       channelId: interaction.channelId,
@@ -357,16 +619,20 @@ module.exports = {
       stage: "awaiting_category",
       scoreboard: {},
       questions: [],
+      answers: {},
       currentQuestionIndex: -1,
-      questionTimeLimitMs: null,
+      questionTimeLimitMs: DEFAULT_TIME_LIMIT,
     };
-    sessions.set(sessionId, session);
 
-    await interaction.reply({
+    sessions.set(sessionId, session);
+    sessionsByChannel.set(interaction.channelId, sessionId);
+
+    const msg = await interaction.reply({
       content: "Select a category to start Trivia.",
       components: makeCategorySelect(sessionId, categories),
     });
 
+    session.selectionMessageId = msg.id;
     await persistSession(gameSessionStore, session);
   },
   async handleComponent(interaction, { gameSessionStore }) {
@@ -374,6 +640,7 @@ module.exports = {
     if (parts[0] !== "triv") return;
     const sessionId = parts[1];
     const action = parts[2];
+    const extra = parts[3];
     const session = sessions.get(sessionId);
     if (!session) {
       return interaction.reply({ content: "This trivia game ended.", ephemeral: true });
@@ -386,16 +653,73 @@ module.exports = {
     }
     const isOwner = interaction.user.id === session.userId;
 
-    if (["category", "count", "mode", "timer"].includes(action) && !isOwner) {
+    if (
+      ["category", "count", "mode", "timer", "back", "cancel"].includes(action) &&
+      !isOwner
+    ) {
       return interaction.reply({
         content: "Only the host can configure the game.",
         ephemeral: true,
       });
     }
 
+    if (action === "cancel") {
+      await interaction.update({
+        content: "Trivia cancelled.",
+        components: [],
+      });
+      await removeSession(gameSessionStore, sessionId);
+      return;
+    }
+
+    if (action === "back") {
+      if (extra === "category") {
+        session.stage = "awaiting_category";
+        session.categorySlug = null;
+        session.categoryName = null;
+        session.questionCount = null;
+        session.mode = null;
+        session.questionTimeLimitMs = DEFAULT_TIME_LIMIT;
+        const categories = await fetchCategories().catch(() => new Map());
+        await interaction.update({
+          content: "Select a category to start Trivia.",
+          components: makeCategorySelect(sessionId, categories),
+        });
+        await persistSession(gameSessionStore, session);
+        return;
+      }
+      if (extra === "count") {
+        session.stage = "awaiting_count";
+        session.questionCount = null;
+        session.mode = null;
+        session.questionTimeLimitMs = DEFAULT_TIME_LIMIT;
+        await interaction.update({
+          content: `Category: **${session.categoryName}**\nHow many questions?`,
+          components: makeCountSelect(sessionId),
+        });
+        await persistSession(gameSessionStore, session);
+        return;
+      }
+      if (extra === "mode") {
+        session.stage = "awaiting_mode";
+        session.mode = null;
+        session.questionTimeLimitMs = DEFAULT_TIME_LIMIT;
+        await interaction.update({
+          content: `Count: **${session.questionCount}**\nPick a mode.`,
+          components: makeModeSelect(sessionId),
+        });
+        await persistSession(gameSessionStore, session);
+        return;
+      }
+    }
+
     if (action === "category" && interaction.isStringSelectMenu()) {
-      session.categorySlug = interaction.values[0];
-      session.categoryName = interaction.values[0];
+      const selectedValue = interaction.values[0];
+      const selectedOption = interaction.component?.options?.find(
+        (opt) => opt.value === selectedValue,
+      );
+      session.categorySlug = selectedValue;
+      session.categoryName = selectedOption?.label || selectedValue;
       session.stage = "awaiting_count";
       await interaction.update({
         content: `Category selected: **${session.categoryName}**\nPick a question count.`,
@@ -429,8 +753,13 @@ module.exports = {
 
     if (action === "timer" && interaction.isStringSelectMenu()) {
       session.questionTimeLimitMs =
-        Number.parseInt(interaction.values[0], 10) * 1000 || null;
+        Number.parseInt(interaction.values[0], 10) * 1000 || DEFAULT_TIME_LIMIT;
       session.stage = "asking";
+
+      await interaction.update({
+        content: "Fetching questions...",
+        components: [],
+      });
 
       try {
         session.questions = await fetchQuestions({
@@ -439,7 +768,7 @@ module.exports = {
         });
       } catch (error) {
         console.error("Trivia fetch failed:", error);
-        await interaction.update({
+        await interaction.editReply({
           content: "Could not fetch questions. Try again later.",
           components: [],
         });
@@ -448,7 +777,7 @@ module.exports = {
       }
 
       if (!session.questions.length) {
-        await interaction.update({
+        await interaction.editReply({
           content: "No questions found. Try a different category.",
           components: [],
         });
@@ -456,18 +785,38 @@ module.exports = {
         return;
       }
 
-      session.currentQuestionIndex = 0;
-      await interaction.update({ content: "Starting trivia...", components: [] });
-      await askQuestion(interaction, session, gameSessionStore);
+      session.currentQuestionIndex = -1;
+      session.answers = {};
+      await persistSession(gameSessionStore, session);
+
+      await interaction.editReply({
+        content: "Starting trivia...",
+        components: [],
+      });
+      await askNextQuestion(interaction.client, session, gameSessionStore, {
+        initialInteraction: interaction,
+      });
       return;
     }
 
     if (action === "answer") {
-      await handleAnswer(interaction, session, parts[3]);
+      await handleAnswer(interaction, session, gameSessionStore, parts[3]);
       return;
     }
 
     if (action === "open") {
+      if (session.stage !== "asking" || session.currentQuestionIndex < 0) {
+        return interaction.reply({
+          content: "This trivia round isn't accepting answers right now.",
+          ephemeral: true,
+        });
+      }
+      if (session.activeMessageId && interaction.message?.id && interaction.message.id !== session.activeMessageId) {
+        return interaction.reply({
+          content: "That question already moved on.",
+          ephemeral: true,
+        });
+      }
       const modal = new ModalBuilder()
         .setCustomId(`triv|${sessionId}|modal`)
         .setTitle("Trivia Answer");
@@ -478,11 +827,6 @@ module.exports = {
         .setRequired(true);
       modal.addComponents(new ActionRowBuilder().addComponents(input));
       return interaction.showModal(modal);
-    }
-
-    if (action === "skip") {
-      await handleSkip(interaction, session, gameSessionStore);
-      return;
     }
   },
   async handleModal(interaction, { gameSessionStore }) {
@@ -495,10 +839,16 @@ module.exports = {
     if (!session) {
       return interaction.reply({ content: "This trivia game ended.", ephemeral: true });
     }
+    if (session.stage !== "asking" || session.currentQuestionIndex < 0) {
+      return interaction.reply({
+        content: "This trivia round isn't accepting answers right now.",
+        ephemeral: true,
+      });
+    }
     const answer = interaction.fields.getTextInputValue("answer");
-    await handleAnswer(interaction, session, answer);
+    await handleAnswer(interaction, session, gameSessionStore, answer);
   },
-  async init({ gameSessionStore }) {
-    await loadSessions(gameSessionStore);
+  async init({ gameSessionStore, client }) {
+    await loadSessions(gameSessionStore, client);
   },
 };

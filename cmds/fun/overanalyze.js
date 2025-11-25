@@ -17,7 +17,7 @@ const overanalyzer = new Ai({
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("overanalyze")
-    .setDescription("Overanalyze an image or short video (PG-13)")
+    .setDescription("Overanalyze an image or short video")
     .addAttachmentOption((option) =>
       option
         .setName("media")
