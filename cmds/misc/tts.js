@@ -93,6 +93,22 @@ module.exports = {
         adapterCreator: Channel.guild.voiceAdapterCreator,
       });
 
+      try {
+        await voice.entersState(
+          connection,
+          voice.VoiceConnectionStatus.Ready,
+          30_000,
+        );
+      } catch (error) {
+        console.error("Voice connection failed to become ready:", error);
+        connection.destroy();
+        unlink(filename).catch(() => {});
+        await msg.editReply(
+          "Unable to join your voice channel in time to play audio.",
+        );
+        return;
+      }
+
       const resource = voice.createAudioResource(filename);
       player.play(resource);
 
