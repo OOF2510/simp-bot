@@ -231,6 +231,9 @@ async function sendDailyCommandSummary() {
     const topList = formatList(topCommands);
     const leastList = formatList(leastCommands);
 
+    // Convert Eastern time to Unix timestamp for Discord
+    const unixTimestamp = Math.floor(easternNow.getTime() / 1000);
+
     let existingMessage;
     try {
       const summaryRecord = await collections.usageSummaries.findOne({
@@ -249,7 +252,7 @@ async function sendDailyCommandSummary() {
       .addFields(
         {
           name: "Updated at",
-          value: `<t:${Math.floor(easternNow.getTime() / 1000)}:f>`,
+          value: `<t:${unixTimestamp}:f>`,
         },
         {
           name: "Commands Ran Today",
@@ -257,15 +260,13 @@ async function sendDailyCommandSummary() {
             totalCount === 0
               ? "No commands used today yet."
               : dailyList,
-          inline: true,
         },
         {
           name: "Nerd Stats",
           value: `**3 most used commands!**\n${topList}\n\n**3 least used commands!**\n${leastList}`,
-          inline: true,
         },
       )
-      .setFooter({ text: `Total commands today: ${totalCount}` })
+      .setFooter({ text: `Total commands today: ${totalCount} | Today at ${Math.floor(Date.now() / 1000)}` })
       .setTimestamp(new Date());
 
     let message;
@@ -317,6 +318,7 @@ function scheduleUsageSummary() {
     },
     { timezone: "America/New_York" },
   );
+  console.log("Usage summary scheduled to run every hour at the top of the hour (Eastern Time)");
 }
 
 client.on("ready", () => {
@@ -460,7 +462,7 @@ client.on("interactionCreate", async (interaction) => {
       await interaction.reply({
         content:
           "There was an error while executing this command! Join the support server to get help! https://discord.gg/FDBBHvJBTh",
-        ephemeral: true,
+          ephemeral: true,
       });
     } catch (e) {
       try {

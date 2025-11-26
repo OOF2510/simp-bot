@@ -111,7 +111,12 @@ class GameSessionStore {
 
   async upsertGeoSession(session) {
     if (!this.enabled) return null;
-    if (!session || typeof session.photoMessageId !== "number") {
+    const photoMessageId = session?.photoMessageId;
+    const isValidPhotoId =
+      typeof photoMessageId === "number" ||
+      (typeof photoMessageId === "string" && photoMessageId.trim().length > 0);
+
+    if (!isValidPhotoId) {
       throw new Error("Invalid GeoGuess session payload");
     }
 
