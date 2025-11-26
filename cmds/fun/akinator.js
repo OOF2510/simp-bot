@@ -17,22 +17,31 @@ const sessionsByChannel = new Map(); // channelId -> sessionId
 const answerEmojis = ["✅", "❌", "❓", "👍", "👎"];
 
 const makeAnswerButtons = (sessionId, answers = []) => {
-  const row = new ActionRowBuilder();
+  const rows = [];
+
+  const answerRow = new ActionRowBuilder();
   answers.slice(0, 5).forEach((label, idx) => {
-    row.addComponents(
+    answerRow.addComponents(
       new ButtonBuilder()
         .setCustomId(`aki|${sessionId}|answer|${idx}`)
         .setLabel(`${answerEmojis[idx] || "➡️"} ${label}`)
         .setStyle(ButtonStyle.Primary),
     );
   });
-  row.addComponents(
-    new ButtonBuilder()
-      .setCustomId(`aki|${sessionId}|stop`)
-      .setLabel("Stop")
-      .setStyle(ButtonStyle.Danger),
+  if (answerRow.components.length) {
+    rows.push(answerRow);
+  }
+
+  rows.push(
+    new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId(`aki|${sessionId}|stop`)
+        .setLabel("Stop")
+        .setStyle(ButtonStyle.Danger),
+    ),
   );
-  return [row];
+
+  return rows;
 };
 
 const makeConfirmButtons = (sessionId) => [
