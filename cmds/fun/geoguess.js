@@ -101,9 +101,9 @@ async function fetchGeoImage() {
     if (isValidGeoPayload(primaryPayload)) {
       return primaryPayload;
     }
-    console.warn("GeoGuess invalid payload from GeoApi client");
+    console.warn("GeoFinder invalid payload from GeoApi client");
   } catch (primaryError) {
-    console.warn("GeoGuess GeoApi client failed, retrying with fetch", primaryError?.message);
+    console.warn("GeoFinder GeoApi client failed, retrying with fetch", primaryError?.message);
   }
 
   const proxyUrl = process.env.https_proxy || process.env.HTTPS_PROXY || null;
@@ -134,7 +134,7 @@ async function downloadImageStream(url) {
   const res = await axios.get(url, {
     responseType: "stream",
     timeout: 15000,
-    headers: { "User-Agent": "simp-bot/1.0 (geoguess command)" },
+    headers: { "User-Agent": "simp-bot/1.0 (GeoFinder command)" },
   });
   return res.data;
 }
@@ -154,7 +154,7 @@ function buildSessionEmbed(session, showAnswer = false) {
     ? incorrect.map((g) => `❌ ${g}`).join("\n")
     : "No wrong guesses yet.";
   const base = new EmbedBuilder()
-    .setTitle("🌍 GeoGuess")
+    .setTitle("🌍 GeoFinder")
     .setDescription(
       showAnswer
         ? `Game ended! It was **${session.displayName || "Unknown"}** ${
@@ -212,7 +212,7 @@ async function loadSessions(store, client) {
     });
   }
   if (saved.length) {
-    console.log(`Restored ${saved.length} GeoGuess sessions`);
+    console.log(`Restored ${saved.length} GeoFinder sessions`);
   }
 }
 
@@ -228,7 +228,7 @@ module.exports = {
     try {
       payload = await fetchGeoImage();
     } catch (error) {
-      console.error("GeoGuess fetch failed", error);
+      console.error("GeoFinder fetch failed", error);
       return interaction.editReply(
         "❌ Could not fetch a random image right now. Please try again.",
       );
@@ -240,7 +240,7 @@ module.exports = {
     const sessionId = randomUUID();
 
     const embed = new EmbedBuilder()
-      .setTitle("🌍 GeoGuess")
+      .setTitle("🌍 GeoFinder")
       .setDescription(`Guess the country! (Guess 1/${MAX_GUESSES})\nUse the button to submit.`)
       .setImage(imageUrl)
       .setColor(0x3498db);
@@ -289,7 +289,7 @@ module.exports = {
     if (action === "guess") {
       const modal = new ModalBuilder()
         .setCustomId(`geo|${sessionId}|modal`)
-        .setTitle("GeoGuess - Your Guess");
+        .setTitle("GeoFinder - Your Guess");
       const input = new TextInputBuilder()
         .setCustomId("guess")
         .setLabel("Country name or code")
