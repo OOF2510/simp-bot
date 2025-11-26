@@ -125,6 +125,7 @@ async function logCommandUsage(commandName, guildId) {
 }
 
 function getEasternDateInfo(date = new Date()) {
+  // Compute current date/time in US Eastern and normalize the offset
   const formatter = new Intl.DateTimeFormat("en-US", {
     timeZone: "America/New_York",
     year: "numeric",
@@ -148,9 +149,33 @@ function getEasternDateInfo(date = new Date()) {
     .formatToParts(date)
     .find((p) => p.type === "timeZoneName");
 
-  const offset = (offsetPart?.value || "GMT-05:00").replace("GMT", "");
+  // Examples: "GMT-5", "GMT-04:00", "UTC-5"
+  let offset = (offsetPart?.value || "GMT-05:00")
+    .replace("GMT", "")
+    .replace("UTC", "");
+
+  // Normalize to "+/-HH:MM"
+  if (/^[+-]\d{1,2}$/.test(offset)) {
+    // "-5" -> "-05:00"
+    const sign = offset[0];
+    let hours = offset.slice(1);
+    if (hours.length === 1) hours = "0" + hours;
+    offset = `${sign}${hours}:00`;
+  } else if (/^[+-]\d{4}$/.test(offset)) {
+    // "-0500" -> "-05:00"
+    const sign = offset[0];
+    const hours = offset.slice(1, 3);
+    const minutes = offset.slice(3);
+    offset = `${sign}${hours}:${minutes}`;
+  } else if (!/^[+-]\d{2}:\d{2}$/.test(offset)) {
+    // Fallback if something weird comes back
+    offset = "-05:00";
+  }
+
   const isoBase = `${parts.year}-${parts.month}-${parts.day}`;
-  const easternNow = new Date(`${isoBase}T${parts.hour}:${parts.minute}:${parts.second}${offset}`);
+  const easternNow = new Date(
+    `${isoBase}T${parts.hour}:${parts.minute}:${parts.second}${offset}`,
+  );
   const startOfDay = new Date(`${isoBase}T00:00:00${offset}`);
 
   return { easternNow, startOfDay, offset };
@@ -266,8 +291,9 @@ async function sendDailyCommandSummary() {
           value: `**3 most used commands!**\n${topList}\n\n**3 least used commands!**\n${leastList}`,
         },
       )
-      .setFooter({ text: `Total commands today: ${totalCount} | Today at ${Math.floor(Date.now() / 1000)}` })
-      .setTimestamp(new Date());
+      .setFooter({ text: `Total commands today: ${totalCount}` })
+      .setTimestamp(easternNow);
+
 
     let message;
     try {
