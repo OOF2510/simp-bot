@@ -183,14 +183,11 @@ Every response should feel like a headline and bring a smile to everyone reading
 
     const embed = new EmbedBuilder()
       .setTitle("Obama AI")
+      .setDescription(safeResponse)
       .addFields(
         {
           name: "Question",
           value: message.slice(0, 1024) || "None provided.",
-        },
-        {
-          name: "Response",
-          value: safeResponse.slice(0, 1024),
         },
       )
       .setColor(embedColor);
