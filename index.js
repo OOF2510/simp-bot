@@ -162,9 +162,10 @@ async function sendDailyCommandSummary() {
   if (!collections.commandLogs) return;
 
   const { easternNow, startOfDay } = getEasternDateInfo(new Date());
+  const endOfDay = new Date(startOfDay.getTime() + 24 * 60 * 60 * 1000);
 
   const dailyMatch = {
-    timestamp: { $gte: startOfDay, $lte: new Date() },
+    timestamp: { $gte: startOfDay, $lt: endOfDay },
     command: { $ne: null },
   };
   const allTimeMatch = { command: { $ne: null } };
@@ -248,11 +249,7 @@ async function sendDailyCommandSummary() {
       .addFields(
         {
           name: "Updated at",
-          value: easternNow.toLocaleString("en-US", {
-            timeZone: "America/New_York",
-            dateStyle: "medium",
-            timeStyle: "short",
-          }),
+          value: `<t:${Math.floor(easternNow.getTime() / 1000)}:f>`,
         },
         {
           name: "Commands Ran Today",
