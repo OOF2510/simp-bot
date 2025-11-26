@@ -33,6 +33,7 @@
     "he": "^1.2.0",
     "libsodium-wrappers": "^0.7.14",
     "mongodb": "^6.20.0",
+    "node-cron": "^3.0.3",
     "node-url-shortener": "^2.0.3",
     "opusscript": "^0.1.1",
     "random-reddit": "^2.0.3",

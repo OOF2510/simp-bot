@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const { existsSync } = require("fs");
 const { MongoClient } = require("mongodb");
 const GameSessionStore = require("./util/game_session_store");
+const cron = require("node-cron");
 
 let config;
 var startupArgs = process.argv.slice(2);
@@ -75,6 +76,7 @@ let mongoClient;
 let db;
 let collections = {};
 let gameSessionStore;
+let usageSummaryJob;
 
 async function initDatabase() {
   const mongoCfg = config.mongodb || {};
@@ -93,6 +95,7 @@ async function initDatabase() {
     marriages: db.collection("marriages"),
     proposals: db.collection("proposals"),
     commandLogs: db.collection("command_logs"),
+    usageSummaries: db.collection("usage_summaries"),
   };
 
   await Promise.all([
@@ -103,22 +106,220 @@ async function initDatabase() {
     collections.marriages.createIndex({ serverId: 1, spouseId: 1 }),
     collections.proposals.createIndex({ serverId: 1, proposerId: 1 }),
     collections.commandLogs.createIndex({ timestamp: 1 }),
+    collections.usageSummaries.createIndex({ channelId: 1 }, { unique: true }),
   ]);
   console.log("Connected to MongoDB");
 }
 
-async function logCommandUsage(commandName, guildId, userId) {
+async function logCommandUsage(commandName, guildId) {
   if (!collections.commandLogs) return;
   try {
     await collections.commandLogs.insertOne({
       command: commandName,
       guildId: guildId ? String(guildId) : null,
-      userId: userId ? String(userId) : null,
       timestamp: new Date(),
     });
   } catch (error) {
     console.error("Failed to log command usage:", error);
   }
+}
+
+function getEasternDateInfo(date = new Date()) {
+  const formatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  });
+
+  const parts = formatter.formatToParts(date).reduce((acc, part) => {
+    if (part.type !== "literal") acc[part.type] = part.value;
+    return acc;
+  }, {});
+
+  const offsetPart = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    timeZoneName: "shortOffset",
+  })
+    .formatToParts(date)
+    .find((p) => p.type === "timeZoneName");
+
+  const offset = (offsetPart?.value || "GMT-05:00").replace("GMT", "");
+  const isoBase = `${parts.year}-${parts.month}-${parts.day}`;
+  const easternNow = new Date(`${isoBase}T${parts.hour}:${parts.minute}:${parts.second}${offset}`);
+  const startOfDay = new Date(`${isoBase}T00:00:00${offset}`);
+
+  return { easternNow, startOfDay, offset };
+}
+
+async function sendDailyCommandSummary() {
+  const channelId = config.usageSummaryChannelId;
+  if (!channelId) return;
+  if (!collections.commandLogs) return;
+
+  const { easternNow, startOfDay } = getEasternDateInfo(new Date());
+
+  const dailyMatch = {
+    timestamp: { $gte: startOfDay, $lte: new Date() },
+    command: { $ne: null },
+  };
+  const allTimeMatch = { command: { $ne: null } };
+
+  let channel;
+  try {
+    channel = await client.channels.fetch(channelId);
+  } catch (error) {
+    console.error("Unable to fetch usage summary channel:", error);
+    return;
+  }
+
+  try {
+    const [dailySummary, totalCount, topCommands, leastCommands] =
+      await Promise.all([
+        collections.commandLogs
+          .aggregate([
+            { $match: dailyMatch },
+            {
+              $group: {
+                _id: { command: "$command" },
+                count: { $sum: 1 },
+              },
+            },
+            { $sort: { count: -1 } },
+          ])
+          .toArray(),
+        collections.commandLogs.countDocuments(dailyMatch),
+        collections.commandLogs
+          .aggregate([
+            { $match: allTimeMatch },
+            {
+              $group: {
+                _id: { command: "$command" },
+                count: { $sum: 1 },
+              },
+            },
+            { $sort: { count: -1 } },
+            { $limit: 3 },
+          ])
+          .toArray(),
+        collections.commandLogs
+          .aggregate([
+            { $match: allTimeMatch },
+            {
+              $group: {
+                _id: { command: "$command" },
+                count: { $sum: 1 },
+              },
+            },
+            { $sort: { count: 1 } },
+            { $limit: 3 },
+          ])
+          .toArray(),
+      ]);
+
+    const formatList = (items) =>
+      items
+        .map((item) => `${item._id.command || "unknown"} - ${item.count}`)
+        .join("\n") || "No data";
+
+    const dailyList = formatList(dailySummary);
+    const topList = formatList(topCommands);
+    const leastList = formatList(leastCommands);
+
+    let existingMessage;
+    try {
+      const summaryRecord = await collections.usageSummaries.findOne({
+        channelId,
+      });
+      if (summaryRecord?.messageId) {
+        existingMessage = await channel.messages.fetch(summaryRecord.messageId);
+      }
+    } catch (fetchError) {
+      console.warn("Unable to fetch previous usage summary message:", fetchError);
+    }
+
+    const embed = new Discord.EmbedBuilder()
+      .setColor(config.embedColor || Discord.Colors.Blurple)
+      .setTitle(`${client.user?.tag || "Bot"} Command Summary`)
+      .addFields(
+        {
+          name: "Updated at",
+          value: easternNow.toLocaleString("en-US", {
+            timeZone: "America/New_York",
+            dateStyle: "medium",
+            timeStyle: "short",
+          }),
+        },
+        {
+          name: "Commands Ran Today",
+          value:
+            totalCount === 0
+              ? "No commands used today yet."
+              : dailyList,
+          inline: true,
+        },
+        {
+          name: "Nerd Stats",
+          value: `**3 most used commands!**\n${topList}\n\n**3 least used commands!**\n${leastList}`,
+          inline: true,
+        },
+      )
+      .setFooter({ text: `Total commands today: ${totalCount}` })
+      .setTimestamp(new Date());
+
+    let message;
+    try {
+      if (existingMessage) {
+        message = await existingMessage.edit({ embeds: [embed] });
+      } else {
+        message = await channel.send({ embeds: [embed] });
+      }
+    } catch (sendError) {
+      console.error("Error sending or updating usage summary message, retrying with new message:", sendError);
+      try {
+        message = await channel.send({ embeds: [embed] });
+      } catch (retryError) {
+        console.error("Retry failed for usage summary message:", retryError);
+        return;
+      }
+    }
+
+    try {
+      await collections.usageSummaries.updateOne(
+        { channelId },
+        {
+          $set: {
+            channelId,
+            messageId: message.id,
+            updatedAt: new Date(),
+          },
+        },
+        { upsert: true },
+      );
+    } catch (recordError) {
+      console.error("Failed to persist usage summary message reference:", recordError);
+    }
+
+    console.log("Usage summary updated");
+  } catch (error) {
+    console.error("Error sending daily command usage summary:", error);
+  }
+}
+
+function scheduleUsageSummary() {
+  if (usageSummaryJob || !config.usageSummaryChannelId) return;
+  usageSummaryJob = cron.schedule(
+    "0 * * * *",
+    () => {
+      if (!client.isReady()) return;
+      sendDailyCommandSummary();
+    },
+    { timezone: "America/New_York" },
+  );
 }
 
 client.on("ready", () => {
@@ -130,6 +331,9 @@ client.on("ready", () => {
     client.user.setActivity(`${client.guilds.cache.size} servers!`, {
       type: Discord.ActivityType.Watching,
     });
+
+  scheduleUsageSummary();
+  sendDailyCommandSummary();
 
   // start loadin them slash commands
   const { REST } = require("@discordjs/rest");
@@ -282,11 +486,7 @@ client.on("interactionCreate", async (interaction) => {
 
     default:
       try {
-        await logCommandUsage(
-          commandName,
-          interaction.guildId,
-          interaction.user?.id,
-        );
+        await logCommandUsage(commandName, interaction.guildId);
       } catch (e) {
         console.log(`errror with command usage stats ${e}`);
       }
@@ -381,6 +581,9 @@ async function shutdown() {
     }
     if (gameSessionStore) {
       await gameSessionStore.disconnect();
+    }
+    if (usageSummaryJob) {
+      usageSummaryJob.stop();
     }
   } catch (error) {
     console.error("Error closing Mongo connection:", error);
