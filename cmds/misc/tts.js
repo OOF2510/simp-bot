@@ -109,10 +109,25 @@ module.exports = {
         return;
       }
 
+      connection.subscribe(player);
+
       const resource = voice.createAudioResource(filename);
       player.play(resource);
 
-      connection.subscribe(player);
+      try {
+        await voice.entersState(
+          player,
+          voice.AudioPlayerStatus.Playing,
+          5_000,
+        );
+      } catch (error) {
+        console.error("Audio player failed to start:", error);
+        await msg.editReply("Playback failed to start.");
+        player.stop();
+        unlink(filename).catch(() => {});
+        connection.destroy();
+        return;
+      }
 
       player.on("error", async (error) => {
         console.error("TTS playback error:", error);
