@@ -106,7 +106,7 @@ const systemPrompt = `
     Keep it under 350 words, ideally 2 or 3 paragraphs.
     Formatting: plain text with optional bold, italics, and code if it actually adds punch. No links/hashtags.`;
 
-    const prompt = `You are an AI 8-ball that has just given the answer "${randomResponse}" to the question: "${userQuestion}".
+    const prompt = `You are an AI 8-ball that has just given the answer "${randomResponse}" to the question: "${question}".
             ${
               isPositive
                 ? `Give a borderline unrealistic, funny, over-the-top explanation for why this answer is absolutely correct. Make it sound like you know everything and can predict impossible futures. Be dramatic, slightly unhinged, and absolutely convinced you're right. Keep it PG-13 appropriate.`
