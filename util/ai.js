@@ -824,6 +824,50 @@ class GroqAi {
       throw err;
     }
   }
+
+  async tts(text, options = {}) {
+    const voice = options.voice || "Fritz-PlayAI";
+    const responseFormat = options.responseFormat || "wav";
+
+    if (!text) throw new Error("text is required for GroqAi.tts");
+
+    try {
+      const work = this.client.audio.speech.create({
+        model: "playai-tts",
+        input: text,
+        voice,
+        response_format: responseFormat,
+      });
+
+      const resp =
+        this.requestTimeoutMs > 0
+          ? await Promise.race([
+              work,
+              new Promise((_, reject) =>
+                setTimeout(
+                  () =>
+                    reject(
+                      new Error(
+                        `Groq TTS timed out after ${this.requestTimeoutMs}ms`,
+                      ),
+                    ),
+                  this.requestTimeoutMs,
+                ),
+              ),
+            ])
+          : await work;
+
+      if (!resp || typeof resp.arrayBuffer !== "function") {
+        throw new Error("Groq TTS returned an unexpected response");
+      }
+
+      const arrayBuffer = await resp.arrayBuffer();
+      return Buffer.from(arrayBuffer);
+    } catch (err) {
+      console.error("[GroqAI] TTS failed:", err?.message || err);
+      throw err;
+    }
+  }
 }
 
 /**

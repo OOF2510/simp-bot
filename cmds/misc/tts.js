@@ -1,10 +1,33 @@
 const { SlashCommandBuilder } = require("discord.js");
 const { CommandInteraction, Client } = require("discord.js");
 const { existsSync, mkdirSync } = require("fs");
-const { promisify } = require("util");
-const exec = promisify(require("child_process").exec);
+const { writeFile, unlink } = require("fs/promises");
 const voice = require("@discordjs/voice");
-const say = require("say");
+const { GroqAi } = require("../../util/ai");
+
+const ttsClient = new GroqAi({ requestTimeoutMs: 20000 });
+
+const VOICE_CHOICES = [
+  "Arista-PlayAI",
+  "Atlas-PlayAI",
+  "Basil-PlayAI",
+  "Briggs-PlayAI",
+  "Calum-PlayAI",
+  "Celeste-PlayAI",
+  "Cheyenne-PlayAI",
+  "Chip-PlayAI",
+  "Cillian-PlayAI",
+  "Deedee-PlayAI",
+  "Fritz-PlayAI",
+  "Gail-PlayAI",
+  "Indigo-PlayAI",
+  "Mamaw-PlayAI",
+  "Mason-PlayAI",
+  "Mikail-PlayAI",
+  "Mitch-PlayAI",
+  "Quinn-PlayAI",
+  "Thunder-PlayAI",
+];
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -12,6 +35,14 @@ module.exports = {
     .setDescription("Speaks given message in VC")
     .addStringOption((option) =>
       option.setName("text").setDescription("Text to say").setRequired(true),
+    )
+    .addStringOption((option) =>
+      option
+        .setName("voice")
+        .setDescription("Pick a PlayAI voice")
+        .addChoices(
+          ...VOICE_CHOICES.map((name) => ({ name, value: name })),
+        ),
     ),
   /**
    * Executes the command
@@ -24,6 +55,8 @@ module.exports = {
   async execute(interaction, client, config, db, allowed) {
     let msg = interaction;
     let message = interaction.options.getString("text");
+    const selectedVoice =
+      interaction.options.getString("voice") || "Fritz-PlayAI";
     let guild = interaction.guild;
 
     if (!msg.member.voice.channel)
@@ -40,11 +73,15 @@ module.exports = {
 
     await msg.deferReply({ ephemeral: true });
 
-    say.export(message, null, 1.0, filename, async (err) => {
-      if (err) {
-        console.error(err);
-        return msg.editReply("Error occurred while generating audio.");
-      }
+    try {
+      const audioBuffer = await ttsClient.tts(message, {
+        voice: selectedVoice,
+      });
+
+      await writeFile(filename, audioBuffer);
+      console.log(
+        `[TTS] Generated audio for guild ${guild?.id || guild?.name} using ${selectedVoice}`,
+      );
 
       const channelID = msg.member.voice.channelId;
       const Channel = client.channels.cache.get(channelID);
@@ -61,17 +98,23 @@ module.exports = {
 
       connection.subscribe(player);
 
-      player.on("error", (error) => {
-        console.error(
-          `Error: ${error.message} with resource ${error.resource.metadata.title}`,
-        );
+      player.on("error", async (error) => {
+        console.error("TTS playback error:", error);
         player.stop();
+        await msg.editReply("Error occurred while playing audio.");
+        unlink(filename).catch(() => {});
+        connection.destroy();
       });
 
       player.on(voice.AudioPlayerStatus.Idle, async () => {
         player.stop();
-        msg.editReply("I have spoken!");
+        await msg.editReply("I have spoken!");
+        unlink(filename).catch(() => {});
+        connection.destroy();
       });
-    });
+    } catch (error) {
+      console.error("TTS generation failed:", error);
+      await msg.editReply("Error occurred while generating audio.");
+    }
   },
 };
