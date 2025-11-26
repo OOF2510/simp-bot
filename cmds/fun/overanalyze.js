@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { Ai } = require("../util/ai");
+const { Ai } = require("../../util/ai");
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
