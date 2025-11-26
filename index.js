@@ -423,14 +423,14 @@ client.on("interactionCreate", async (interaction) => {
         try {
           await interaction.reply({
             content:
-              "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
+              "There was an error while executing this command! Join the support server to get help! https://discord.gg/FDBBHvJBTh",
             ephemeral: true,
           });
         } catch (e) {
           try {
             await interaction.editReply({
               content:
-                "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
+                "There was an error while executing this command! Join the support server to get help! https://discord.gg/FDBBHvJBTh",
               ephemeral: true,
             });
           } catch (e) {
@@ -453,20 +453,20 @@ client.on("interactionCreate", async (interaction) => {
     });
     await interaction.reply({
       content:
-        "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
+        "There was an error while executing this command! Join the support server to get help! https://discord.gg/FDBBHvJBTh",
       ephemeral: true,
     });
     try {
       await interaction.reply({
         content:
-          "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
+          "There was an error while executing this command! Join the support server to get help! https://discord.gg/FDBBHvJBTh",
         ephemeral: true,
       });
     } catch (e) {
       try {
         await interaction.editReply({
           content:
-            "There was an error while executing this command! Join the support server to get help! https://discord.gg/zHtfa8GdPx",
+            "There was an error while executing this command! Join the support server to get help! https://discord.gg/FDBBHvJBTh",
           ephemeral: true,
         });
       } catch (e) {

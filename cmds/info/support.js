@@ -18,7 +18,7 @@ module.exports = {
 
     let supEm = new EmbedBuilder()
       .setTitle(`Join Simp Bot Support!`)
-      .setURL("https://discord.gg/zHtfa8GdPx")
+      .setURL("https://discord.gg/FDBBHvJBTh")
       .setTimestamp();
 
     msg.reply({ embeds: [supEm] });
