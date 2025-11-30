@@ -2,8 +2,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const { AiWithHistory } = require("../../util/ai");
 
 const modelA = new AiWithHistory({
-  model: "mistralai/mistral-small-3.2-24b-instruct:free",
-  fallbackModels: ["mistralai/mistral-nemo:free", "google/gemma-3-27b-it:free", "openrouter/bert-nebulon-alpha", "deepseek/deepseek-chat-v3-0324:free"],
+  model: "openrouter/bert-nebulon-alpha",
+  fallbackModels: ["mistralai/mistral-small-3.1-24b-instruct:free", "tngtech/deepseek-r1t-chimera:free", "google/gemma-3-27b-it:free", "meta-llama/llama-3.2-3b-instruct:free"],
   temperature: 0.66,
   maxTokens: 700,
   historyLimit: 6,
@@ -15,8 +15,8 @@ const modelA = new AiWithHistory({
 });
 
 const modelB = new AiWithHistory({
-  model: "deepseek/deepseek-r1-distill-llama-70b:free",
-  fallbackModels: ["meta-llama/llama-3.3-70b-instruct:free", "tngtech/deepseek-r1t2-chimera:free", "z-ai/glm-4.5-air:free", "microsoft/mai-ds-r1:free"],
+  model: "meta-llama/llama-3.2-3b-instruct:free",
+  fallbackModels: ["nousresearch/hermes-3-llama-3.1-405b:free", "meta-llama/llama-3.3-70b-instruct:free", "tngtech/deepseek-r1t2-chimera:free", "z-ai/glm-4.5-air:free"],
   temperature: 0.66,
   maxTokens: 700,
   historyLimit: 6,

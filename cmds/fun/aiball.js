@@ -2,11 +2,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const { AiWithHistory } = require("../../util/ai");
 
 const aiClient = new AiWithHistory({
-  model: "tngtech/deepseek-r1t2-chimera:free",
-  fallbackModels: [
-    "mistralai/mistral-7b-instruct:free",
-    "nvidia/nemotron-nano-12b-v2-vl:free",
-  ],
+  model: "nousresearch/hermes-3-llama-3.1-405b:free",
+  fallbackModels: ["tngtech/deepseek-r1t2-chimera:free", "mistralai/mistral-7b-instruct:free", "nvidia/nemotron-nano-12b-v2-vl:free"],
   temperature: 0.72,
   maxTokens: 900,
   historyLimit: 8,

@@ -9,7 +9,7 @@ const overanalyzer = new Ai({
   model: "google/gemma-3-27b-it:free",
   fallbackModels: [
     "nvidia/nemotron-nano-12b-v2-vl:free",
-    "qwen/qwen2.5-vl-32b-instruct:free",
+    "google/gemini-2.0-flash-exp:free",
   ],
   temperature: 0.66,
   maxTokens: 1000,
