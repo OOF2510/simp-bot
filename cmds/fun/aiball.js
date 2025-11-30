@@ -3,7 +3,12 @@ const { AiWithHistory } = require("../../util/ai");
 
 const aiClient = new AiWithHistory({
   model: "nousresearch/hermes-3-llama-3.1-405b:free",
-  fallbackModels: ["tngtech/deepseek-r1t2-chimera:free", "mistralai/mistral-7b-instruct:free", "nvidia/nemotron-nano-12b-v2-vl:free"],
+  fallbackModels: [
+    "tngtech/tng-r1t-chimera:free",
+    "google/gemma-3-12b-it:free",
+    "mistralai/mistral-7b-instruct:free",
+    "nvidia/nemotron-nano-12b-v2-vl:free",
+  ],
   temperature: 0.72,
   maxTokens: 900,
   historyLimit: 8,
