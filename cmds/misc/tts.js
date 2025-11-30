@@ -40,9 +40,7 @@ module.exports = {
       option
         .setName("voice")
         .setDescription("Pick a PlayAI voice")
-        .addChoices(
-          ...VOICE_CHOICES.map((name) => ({ name, value: name })),
-        ),
+        .addChoices(...VOICE_CHOICES.map((name) => ({ name, value: name }))),
     ),
   /**
    * Executes the command
@@ -115,11 +113,7 @@ module.exports = {
       player.play(resource);
 
       try {
-        await voice.entersState(
-          player,
-          voice.AudioPlayerStatus.Playing,
-          5_000,
-        );
+        await voice.entersState(player, voice.AudioPlayerStatus.Playing, 5_000);
       } catch (error) {
         console.error("Audio player failed to start:", error);
         await msg.editReply("Playback failed to start.");

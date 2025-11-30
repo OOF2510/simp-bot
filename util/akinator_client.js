@@ -170,7 +170,9 @@ class AkinatorWebClient {
           description: decodeHtml(
             response.description_proposition || response.description || "",
           ),
-          confidence: normalizeConfidence(response.proba || response.probability),
+          confidence: normalizeConfidence(
+            response.proba || response.probability,
+          ),
           image: response.photo || response.photo_path || null,
         },
       };

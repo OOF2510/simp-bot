@@ -12,29 +12,33 @@ const sanitizeTriviaAnswers = (answers) => {
       return questionAcc;
     }
 
-    const userEntries = Object.entries(value).reduce((userAcc, [userKey, entry]) => {
-      if (entry && typeof entry === "object") {
-        userAcc[userKey] = {
-          userId: entry.userId ?? userKey,
-          displayName: entry.displayName ?? null,
-          answer: entry.answer ?? null,
-          isCorrect: entry.isCorrect === true,
-          timestamp:
-            entry.timestamp instanceof Date
-              ? entry.timestamp.toISOString()
-              : typeof entry.timestamp === "string"
-              ? entry.timestamp
-              : null,
-          optionIndex:
-            typeof entry.optionIndex === "number" && Number.isFinite(entry.optionIndex)
-              ? entry.optionIndex
-              : entry.optionIndex === null
-              ? null
-              : undefined,
-        };
-      }
-      return userAcc;
-    }, {});
+    const userEntries = Object.entries(value).reduce(
+      (userAcc, [userKey, entry]) => {
+        if (entry && typeof entry === "object") {
+          userAcc[userKey] = {
+            userId: entry.userId ?? userKey,
+            displayName: entry.displayName ?? null,
+            answer: entry.answer ?? null,
+            isCorrect: entry.isCorrect === true,
+            timestamp:
+              entry.timestamp instanceof Date
+                ? entry.timestamp.toISOString()
+                : typeof entry.timestamp === "string"
+                  ? entry.timestamp
+                  : null,
+            optionIndex:
+              typeof entry.optionIndex === "number" &&
+              Number.isFinite(entry.optionIndex)
+                ? entry.optionIndex
+                : entry.optionIndex === null
+                  ? null
+                  : undefined,
+          };
+        }
+        return userAcc;
+      },
+      {},
+    );
 
     questionAcc[questionKey] = userEntries;
     return questionAcc;
@@ -222,7 +226,9 @@ class GameSessionStore {
         categoryName: session.categoryName || null,
         categoryQuery: session.categoryQuery || null,
         questionCount:
-          typeof session.questionCount === "number" ? session.questionCount : null,
+          typeof session.questionCount === "number"
+            ? session.questionCount
+            : null,
         mode: session.mode || null,
         questions: Array.isArray(session.questions) ? session.questions : [],
         currentQuestionIndex:

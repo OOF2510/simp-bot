@@ -3,7 +3,12 @@ const { AiWithHistory } = require("../../util/ai");
 
 const modelA = new AiWithHistory({
   model: "openrouter/bert-nebulon-alpha",
-  fallbackModels: ["mistralai/mistral-small-3.1-24b-instruct:free", "tngtech/deepseek-r1t-chimera:free", "google/gemma-3-27b-it:free", "meta-llama/llama-3.2-3b-instruct:free"],
+  fallbackModels: [
+    "mistralai/mistral-small-3.1-24b-instruct:free",
+    "tngtech/tng-r1t-chimera:free",
+    "google/gemma-3-27b-it:free",
+    "meta-llama/llama-3.2-3b-instruct:free",
+  ],
   temperature: 0.66,
   maxTokens: 700,
   historyLimit: 6,
@@ -16,7 +21,12 @@ const modelA = new AiWithHistory({
 
 const modelB = new AiWithHistory({
   model: "meta-llama/llama-3.2-3b-instruct:free",
-  fallbackModels: ["nousresearch/hermes-3-llama-3.1-405b:free", "meta-llama/llama-3.3-70b-instruct:free", "tngtech/deepseek-r1t2-chimera:free", "z-ai/glm-4.5-air:free"],
+  fallbackModels: [
+    "nousresearch/hermes-3-llama-3.1-405b:free",
+    "meta-llama/llama-3.3-70b-instruct:free",
+    "tngtech/deepseek-r1t2-chimera:free",
+    "z-ai/glm-4.5-air:free",
+  ],
   temperature: 0.66,
   maxTokens: 700,
   historyLimit: 6,
@@ -30,7 +40,8 @@ const modelB = new AiWithHistory({
 const formatTranscript = (topic, transcript) => {
   const header = `🔥 AI Argument: ${topic}`;
   const lines = transcript.map(
-    (entry) => `**${entry.who} (${entry.model || "unknown model"})**: ${entry.text}`,
+    (entry) =>
+      `**${entry.who} (${entry.model || "unknown model"})**: ${entry.text}`,
   );
   return `${header}\n\n${lines.join("\n\n")}`;
 };
@@ -119,7 +130,10 @@ CRITICAL: Debate the TOPIC. Attack their POSITION, not their delivery.
       const embed = new EmbedBuilder()
         .setTitle(`AI Argument`)
         .setDescription(description || "…thinking…")
-        .addFields({ name: "Topic", value: topic.slice(0, 1024) || "Unknown topic" })
+        .addFields({
+          name: "Topic",
+          value: topic.slice(0, 1024) || "Unknown topic",
+        })
         .setColor(embedColor);
       if (footerText) {
         embed.setFooter({ text: footerText });
@@ -129,7 +143,8 @@ CRITICAL: Debate the TOPIC. Attack their POSITION, not their delivery.
 
     try {
       for (let round = 1; round <= 3; round += 1) {
-        const lastB = transcript.filter((t) => t.who === "Model B").at(-1)?.text || "";
+        const lastB =
+          transcript.filter((t) => t.who === "Model B").at(-1)?.text || "";
 
         const aPrompt =
           round === 1
@@ -141,7 +156,11 @@ CRITICAL: Debate the TOPIC. Attack their POSITION, not their delivery.
           user: aPrompt,
         });
 
-        transcript.push({ who: "Model A", model: modelA.lastUsedModel, text: aText });
+        transcript.push({
+          who: "Model A",
+          model: modelA.lastUsedModel,
+          text: aText,
+        });
         await sendTranscript();
 
         const bText = await modelB.ask(interaction.channelId, {
@@ -149,14 +168,20 @@ CRITICAL: Debate the TOPIC. Attack their POSITION, not their delivery.
           user: `Topic: "${topic}"\nModel A just said: "${aText}"\n\nCounter their argument about the TOPIC. Take the opposite stance and fight back. 2-3 sentences. Be chaotic but stay on topic.`,
         });
 
-        transcript.push({ who: "Model B", model: modelB.lastUsedModel, text: bText });
+        transcript.push({
+          who: "Model B",
+          model: modelB.lastUsedModel,
+          text: bText,
+        });
         await sendTranscript();
       }
 
       return sendTranscript("🏁 Argument over.");
     } catch (error) {
       console.error("[aiargument] AI request failed:", error);
-      return interaction.editReply("The debate fizzled out. Try again in a bit.");
+      return interaction.editReply(
+        "The debate fizzled out. Try again in a bit.",
+      );
     }
   },
 };

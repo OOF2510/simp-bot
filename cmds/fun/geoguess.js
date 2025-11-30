@@ -19,7 +19,8 @@ const MAX_GUESSES = 3;
 
 const sessions = new Map(); // sessionId -> session
 
-const isFiniteNumber = (value) => typeof value === "number" && Number.isFinite(value);
+const isFiniteNumber = (value) =>
+  typeof value === "number" && Number.isFinite(value);
 const normalizeCoordinates = (lat, lon) =>
   isFiniteNumber(lat) && isFiniteNumber(lon) ? { lat, lon } : null;
 const normalizeCountry = (t) =>
@@ -103,7 +104,10 @@ async function fetchGeoImage() {
     }
     console.warn("GeoFinder invalid payload from GeoApi client");
   } catch (primaryError) {
-    console.warn("GeoFinder GeoApi client failed, retrying with fetch", primaryError?.message);
+    console.warn(
+      "GeoFinder GeoApi client failed, retrying with fetch",
+      primaryError?.message,
+    );
   }
 
   const proxyUrl = process.env.https_proxy || process.env.HTTPS_PROXY || null;
@@ -158,7 +162,9 @@ function buildSessionEmbed(session, showAnswer = false) {
     .setDescription(
       showAnswer
         ? `Game ended! It was **${session.displayName || "Unknown"}** ${
-            session.coord ? `(${session.coord.lat.toFixed(4)}, ${session.coord.lon.toFixed(4)})` : ""
+            session.coord
+              ? `(${session.coord.lat.toFixed(4)}, ${session.coord.lon.toFixed(4)})`
+              : ""
           }`
         : `Guess the country! (Guess ${session.guessCount + 1}/${MAX_GUESSES})`,
     )
@@ -208,7 +214,9 @@ async function loadSessions(store, client) {
       displayName: s.displayName,
       coord: s.coord,
       guessCount: s.guessCount || 0,
-      incorrectGuesses: Array.isArray(s.incorrectGuesses) ? s.incorrectGuesses : [],
+      incorrectGuesses: Array.isArray(s.incorrectGuesses)
+        ? s.incorrectGuesses
+        : [],
     });
   }
   if (saved.length) {
@@ -241,7 +249,9 @@ module.exports = {
 
     const embed = new EmbedBuilder()
       .setTitle("🌍 GeoFinder")
-      .setDescription(`Guess the country! (Guess 1/${MAX_GUESSES})\nUse the button to submit.`)
+      .setDescription(
+        `Guess the country! (Guess 1/${MAX_GUESSES})\nUse the button to submit.`,
+      )
       .setImage(imageUrl)
       .setColor(0x3498db);
 
@@ -252,7 +262,10 @@ module.exports = {
         .setStyle(ButtonStyle.Primary),
     );
 
-    const sent = await interaction.editReply({ embeds: [embed], components: [row] });
+    const sent = await interaction.editReply({
+      embeds: [embed],
+      components: [row],
+    });
 
     const session = {
       sessionId,
@@ -277,7 +290,10 @@ module.exports = {
     const action = parts[2];
     const session = sessions.get(sessionId);
     if (!session) {
-      return interaction.reply({ content: "This game has ended.", ephemeral: true });
+      return interaction.reply({
+        content: "This game has ended.",
+        ephemeral: true,
+      });
     }
     if (session.channelId !== interaction.channelId) {
       return interaction.reply({
@@ -313,7 +329,10 @@ module.exports = {
         return;
       }
 
-      session.incorrectGuesses = [...(session.incorrectGuesses || []), guessRaw];
+      session.incorrectGuesses = [
+        ...(session.incorrectGuesses || []),
+        guessRaw,
+      ];
 
       if (session.guessCount >= MAX_GUESSES) {
         const embed = buildSessionEmbed(session, true);
@@ -323,7 +342,10 @@ module.exports = {
       }
 
       const embed = buildSessionEmbed(session, false);
-      await interaction.update({ embeds: [embed], components: interaction.message.components });
+      await interaction.update({
+        embeds: [embed],
+        components: interaction.message.components,
+      });
       await persistSession(gameSessionStore, session);
       return;
     }

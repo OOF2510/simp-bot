@@ -29,7 +29,10 @@ const ALLOWED_EXT = [
 const MAX_SIZE_BYTES = 19.5 * 1024 * 1024; // Groq Whisper limit
 
 const getExtension = (attachment) => {
-  const fromName = path.extname(attachment.name || "").replace(".", "").toLowerCase();
+  const fromName = path
+    .extname(attachment.name || "")
+    .replace(".", "")
+    .toLowerCase();
   if (fromName) return fromName;
   const contentType = (attachment.contentType || "").toLowerCase();
   if (contentType.includes("audio/")) {

@@ -18,11 +18,19 @@ const overanalyzer = new Ai({
   },
 });
 
-async function buildVideoFrameAttachments(fileUrl, interactionId, durationSeconds = 30, maxFrames = 3) {
+async function buildVideoFrameAttachments(
+  fileUrl,
+  interactionId,
+  durationSeconds = 30,
+  maxFrames = 3,
+) {
   if (!fileUrl || !durationSeconds || durationSeconds <= 0) return [];
 
   const tmpDir = os.tmpdir();
-  const prefix = path.join(tmpDir, `overanalyze_${String(interactionId)}_${Date.now()}`);
+  const prefix = path.join(
+    tmpDir,
+    `overanalyze_${String(interactionId)}_${Date.now()}`,
+  );
   const framePattern = `${prefix}_%02d.jpg`;
   const fps = Math.max(maxFrames / durationSeconds, 0.25);
 
@@ -43,7 +51,11 @@ async function buildVideoFrameAttachments(fileUrl, interactionId, durationSecond
     await new Promise((resolve, reject) => {
       const ff = spawn("ffmpeg", args);
       ff.on("error", reject);
-      ff.on("close", (code) => code === 0 ? resolve() : reject(new Error(`ffmpeg exited with code ${code}`)));
+      ff.on("close", (code) =>
+        code === 0
+          ? resolve()
+          : reject(new Error(`ffmpeg exited with code ${code}`)),
+      );
     });
 
     for (let i = 1; i <= maxFrames; i++) {
@@ -83,13 +95,13 @@ module.exports = {
       option
         .setName("media")
         .setDescription("Image or video to overanalyze")
-        .setRequired(false)
+        .setRequired(false),
     )
     .addUserOption((option) =>
       option
         .setName("target")
         .setDescription("User's media to overanalyze")
-        .setRequired(false)
+        .setRequired(false),
     ),
   async execute(interaction, client, config, dbContext, allowed) {
     const sysPrompt = `
@@ -152,38 +164,53 @@ GENERAL RULES:
 
     if (attachment) {
       mediaUrl = attachment.url;
-      mediaType = attachment.contentType?.startsWith("video/") ? "video" : "image";
+      mediaType = attachment.contentType?.startsWith("video/")
+        ? "video"
+        : "image";
     } else if (targetUser) {
       try {
-        const messages = await interaction.channel.messages.fetch({ limit: 50 });
-        const userMessage = messages.find(msg => 
-          msg.author.id === targetUser.id && 
-          (msg.attachments.size > 0 || msg.embeds.length > 0)
+        const messages = await interaction.channel.messages.fetch({
+          limit: 50,
+        });
+        const userMessage = messages.find(
+          (msg) =>
+            msg.author.id === targetUser.id &&
+            (msg.attachments.size > 0 || msg.embeds.length > 0),
         );
-        
+
         if (userMessage) {
           const attachment = userMessage.attachments.first();
           if (attachment) {
             mediaUrl = attachment.url;
-            mediaType = attachment.contentType?.startsWith("video/") ? "video" : "image";
+            mediaType = attachment.contentType?.startsWith("video/")
+              ? "video"
+              : "image";
           }
         }
       } catch (error) {
-        console.error("[overanalyze] Failed to fetch target user messages:", error);
+        console.error(
+          "[overanalyze] Failed to fetch target user messages:",
+          error,
+        );
       }
     } else {
       try {
-        const messages = await interaction.channel.messages.fetch({ limit: 50 });
-        const userMessage = messages.find(msg => 
-          msg.author.id === interaction.user.id && 
-          (msg.attachments.size > 0 || msg.embeds.length > 0)
+        const messages = await interaction.channel.messages.fetch({
+          limit: 50,
+        });
+        const userMessage = messages.find(
+          (msg) =>
+            msg.author.id === interaction.user.id &&
+            (msg.attachments.size > 0 || msg.embeds.length > 0),
         );
-        
+
         if (userMessage) {
           const attachment = userMessage.attachments.first();
           if (attachment) {
             mediaUrl = attachment.url;
-            mediaType = attachment.contentType?.startsWith("video/") ? "video" : "image";
+            mediaType = attachment.contentType?.startsWith("video/")
+              ? "video"
+              : "image";
           }
         }
       } catch (error) {
@@ -193,12 +220,13 @@ GENERAL RULES:
 
     if (!mediaUrl) {
       await interaction.reply({
-        content: "Please provide an image or video attachment, or specify a target user whose media you want to overanalyze.",
-        ephemeral: true
+        content:
+          "Please provide an image or video attachment, or specify a target user whose media you want to overanalyze.",
+        ephemeral: true,
       });
       return;
     }
-    
+
     const prompt = `
 Analyze this ${mediaType} and OVERTHINK IT COMPLETELY.
 
@@ -221,7 +249,7 @@ Stay fictional, funny, dramatic, and treat multiple visual inputs as one coheren
           mediaUrl,
           interaction.id,
           30,
-          4
+          4,
         );
         if (videoAttachments.length > 0) {
           attachments = videoAttachments;
@@ -265,8 +293,10 @@ Stay fictional, funny, dramatic, and treat multiple visual inputs as one coheren
       return;
     }
 
-    const embedColor = typeof config?.embedColor === "number" ? config.embedColor : 0x5865f2;
-    const fileLabel = mediaType === "video" ? "Attached video" : "Attached image";
+    const embedColor =
+      typeof config?.embedColor === "number" ? config.embedColor : 0x5865f2;
+    const fileLabel =
+      mediaType === "video" ? "Attached video" : "Attached image";
 
     const embed = new EmbedBuilder()
       .setTitle("Overanalysis Complete")
@@ -286,7 +316,9 @@ Stay fictional, funny, dramatic, and treat multiple visual inputs as one coheren
       await interaction.editReply({ embeds: [embed] });
     } catch (error) {
       console.error("[overanalyze] Failed to send response:", error);
-      await interaction.editReply("Error! The analysis was completed but couldn't be sent.");
+      await interaction.editReply(
+        "Error! The analysis was completed but couldn't be sent.",
+      );
     }
   },
 };

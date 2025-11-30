@@ -76,14 +76,20 @@ async function fetchCategories() {
 async function fetchQuestions({ categorySlug, count }) {
   const params = { limit: count };
   if (categorySlug) params.categories = categorySlug;
-  const { data } = await axios.get(QUESTION_ENDPOINT, { params, timeout: 10000 });
+  const { data } = await axios.get(QUESTION_ENDPOINT, {
+    params,
+    timeout: 10000,
+  });
   return (data || []).map((q) => {
     const prompt = decodeText(q.question);
     const correctAnswer = decodeText(q.correctAnswer);
     const incorrectAnswers = Array.isArray(q.incorrectAnswers)
       ? q.incorrectAnswers.map(decodeText)
       : [];
-    const options = shuffleArray([correctAnswer, ...incorrectAnswers]).slice(0, 4);
+    const options = shuffleArray([correctAnswer, ...incorrectAnswers]).slice(
+      0,
+      4,
+    );
     return {
       prompt,
       correctAnswer,
@@ -216,9 +222,13 @@ const makeOpenAnswerButtons = (sessionId) => [
 ];
 
 const formatScoreboard = (scoreboard) => {
-  const entries = Object.entries(scoreboard || {}).sort((a, b) => b[1].correct - a[1].correct);
+  const entries = Object.entries(scoreboard || {}).sort(
+    (a, b) => b[1].correct - a[1].correct,
+  );
   if (!entries.length) return "No points yet.";
-  return entries.map(([userId, entry]) => `<@${userId}>: **${entry.correct}**`).join("\n");
+  return entries
+    .map(([userId, entry]) => `<@${userId}>: **${entry.correct}**`)
+    .join("\n");
 };
 
 const formatAnswers = (session, questionIndex) => {
@@ -226,7 +236,10 @@ const formatAnswers = (session, questionIndex) => {
   if (!answers.length) return "Nobody yet.";
   const sorted = answers
     .slice()
-    .sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
+    .sort(
+      (a, b) =>
+        new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime(),
+    );
   return sorted
     .map((entry) => {
       const cleaned =
@@ -262,7 +275,10 @@ const questionEmbed = (session, questionIndex) => {
     },
     {
       name: "Mode",
-      value: session.mode === MODES.MULTIPLE_CHOICE ? "Multiple choice" : "Open ended",
+      value:
+        session.mode === MODES.MULTIPLE_CHOICE
+          ? "Multiple choice"
+          : "Open ended",
       inline: true,
     },
     {
@@ -289,7 +305,9 @@ const summaryEmbed = (session, questionIndex, reason) => {
   const winners = answers.filter((entry) => entry.isCorrect);
 
   const embed = new EmbedBuilder()
-    .setTitle(`Q${questionIndex + 1} Results (${session.mode === MODES.MULTIPLE_CHOICE ? "Multiple choice" : "Open ended"})`)
+    .setTitle(
+      `Q${questionIndex + 1} Results (${session.mode === MODES.MULTIPLE_CHOICE ? "Multiple choice" : "Open ended"})`,
+    )
     .setDescription(
       `${reason === "timeout" ? "⏱️ Time's up!" : "🎉 Round ended!"}\nCorrect answer: **${question.correctAnswer}**`,
     )
@@ -310,7 +328,10 @@ const summaryEmbed = (session, questionIndex, reason) => {
     embed.addFields({ name: "Guesses", value: "Nobody answered." });
   }
 
-  embed.addFields({ name: "Scoreboard", value: formatScoreboard(session.scoreboard) });
+  embed.addFields({
+    name: "Scoreboard",
+    value: formatScoreboard(session.scoreboard),
+  });
   return embed;
 };
 
@@ -343,10 +364,15 @@ async function finishGame(client, session, store) {
     .setTitle("Trivia Finished!")
     .setDescription(
       `Category: ${session.categoryName}\nMode: ${
-        session.mode === MODES.MULTIPLE_CHOICE ? "Multiple choice" : "Open ended"
+        session.mode === MODES.MULTIPLE_CHOICE
+          ? "Multiple choice"
+          : "Open ended"
       }`,
     )
-    .addFields({ name: "Final Scores", value: formatScoreboard(session.scoreboard) })
+    .addFields({
+      name: "Final Scores",
+      value: formatScoreboard(session.scoreboard),
+    })
     .setColor(0x2ecc71);
 
   try {
@@ -379,7 +405,10 @@ async function updateQuestionMessage(client, session) {
     const channel = await client.channels.fetch(session.channelId);
     const components =
       session.mode === MODES.MULTIPLE_CHOICE
-        ? makeAnswerButtons(session.sessionId, session.questions[questionIndex].options)
+        ? makeAnswerButtons(
+            session.sessionId,
+            session.questions[questionIndex].options,
+          )
         : makeOpenAnswerButtons(session.sessionId);
     await channel.messages.edit(session.activeMessageId, {
       embeds: [questionEmbed(session, questionIndex)],
@@ -403,7 +432,10 @@ async function finalizeQuestion(client, sessionId, store, reason = "timeout") {
   const winners = answerList.filter((entry) => entry.isCorrect);
 
   winners.forEach((entry) => {
-    const existing = session.scoreboard[entry.userId] || { correct: 0, name: entry.displayName };
+    const existing = session.scoreboard[entry.userId] || {
+      correct: 0,
+      name: entry.displayName,
+    };
     existing.correct += 1;
     existing.name = entry.displayName;
     session.scoreboard[entry.userId] = existing;
@@ -486,13 +518,17 @@ async function loadSessions(store, client) {
       answers: doc.answers || {},
       questions: Array.isArray(doc.questions) ? doc.questions : [],
       currentQuestionIndex:
-        typeof doc.currentQuestionIndex === "number" ? doc.currentQuestionIndex : -1,
+        typeof doc.currentQuestionIndex === "number"
+          ? doc.currentQuestionIndex
+          : -1,
       questionTimeLimitMs: doc.questionTimeLimitMs || DEFAULT_TIME_LIMIT,
       questionDeadline: doc.questionDeadline
         ? new Date(doc.questionDeadline).getTime()
         : null,
       activeMessageId:
-        typeof doc.activeMessageId === "string" ? doc.activeMessageId : doc.activeMessageId || null,
+        typeof doc.activeMessageId === "string"
+          ? doc.activeMessageId
+          : doc.activeMessageId || null,
       selectionMessageId: doc.selectionMessageId || null,
     };
     sessions.set(session.sessionId, session);
@@ -502,7 +538,8 @@ async function loadSessions(store, client) {
   for (const session of sessions.values()) {
     if (session.stage === "asking" && session.questions.length) {
       session.currentQuestionIndex = Math.max(
-        Math.min(session.currentQuestionIndex, session.questions.length - 1) - 1,
+        Math.min(session.currentQuestionIndex, session.questions.length - 1) -
+          1,
         -1,
       );
       session.answers = {};
@@ -511,7 +548,9 @@ async function loadSessions(store, client) {
       try {
         const channel = await client.channels.fetch(session.channelId);
         await channel
-          .send("♻️ Trivia game resumed after restart. Replaying the current question.")
+          .send(
+            "♻️ Trivia game resumed after restart. Replaying the current question.",
+          )
           .catch(() => {});
       } catch (error) {
         console.error("Failed to notify trivia resume:", error);
@@ -531,17 +570,30 @@ async function loadSessions(store, client) {
 async function handleAnswer(interaction, session, store, answerText) {
   const question = session.questions[session.currentQuestionIndex];
   if (!question) {
-    await interaction.reply({ content: "Game already ended.", ephemeral: true });
+    await interaction.reply({
+      content: "Game already ended.",
+      ephemeral: true,
+    });
     await removeSession(store, session.sessionId);
     return;
   }
 
   if (session.stage !== "asking" || session.currentQuestionIndex < 0) {
-    return interaction.reply({ content: "This round isn't accepting answers right now.", ephemeral: true });
+    return interaction.reply({
+      content: "This round isn't accepting answers right now.",
+      ephemeral: true,
+    });
   }
 
-  if (session.activeMessageId && interaction.message?.id && interaction.message.id !== session.activeMessageId) {
-    return interaction.reply({ content: "That question already moved on.", ephemeral: true });
+  if (
+    session.activeMessageId &&
+    interaction.message?.id &&
+    interaction.message.id !== session.activeMessageId
+  ) {
+    return interaction.reply({
+      content: "That question already moved on.",
+      ephemeral: true,
+    });
   }
 
   const questionIndex = session.currentQuestionIndex;
@@ -549,7 +601,10 @@ async function handleAnswer(interaction, session, store, answerText) {
 
   session.answers[questionIndex] = session.answers[questionIndex] || {};
   if (session.answers[questionIndex][userId]) {
-    return interaction.reply({ content: "You already answered this one.", ephemeral: true });
+    return interaction.reply({
+      content: "You already answered this one.",
+      ephemeral: true,
+    });
   }
 
   const entry = {
@@ -569,7 +624,8 @@ async function handleAnswer(interaction, session, store, answerText) {
     }
     entry.answer = choice;
     entry.optionIndex = idx;
-    entry.isCorrect = normalizeAnswer(choice) === normalizeAnswer(question.correctAnswer);
+    entry.isCorrect =
+      normalizeAnswer(choice) === normalizeAnswer(question.correctAnswer);
     session.answers[questionIndex][userId] = entry;
     await interaction.reply({ content: "Answer locked in!", ephemeral: true });
     await persistSession(store, session);
@@ -582,13 +638,18 @@ async function handleAnswer(interaction, session, store, answerText) {
   entry.isCorrect =
     cleaned === correct || (cleaned.length >= 4 && correct.includes(cleaned));
   session.answers[questionIndex][userId] = entry;
-  await interaction.reply({ content: entry.isCorrect ? "Correct! 🎉" : "Locked in.", ephemeral: true });
+  await interaction.reply({
+    content: entry.isCorrect ? "Correct! 🎉" : "Locked in.",
+    ephemeral: true,
+  });
   await persistSession(store, session);
   await updateQuestionMessage(interaction.client, session);
 }
 
 module.exports = {
-  data: new SlashCommandBuilder().setName("trivia").setDescription("Play trivia together"),
+  data: new SlashCommandBuilder()
+    .setName("trivia")
+    .setDescription("Play trivia together"),
   async execute(interaction, client, config, dbContext) {
     const { gameSessionStore } = dbContext;
     const existingId = sessionsByChannel.get(interaction.channelId);
@@ -643,7 +704,10 @@ module.exports = {
     const extra = parts[3];
     const session = sessions.get(sessionId);
     if (!session) {
-      return interaction.reply({ content: "This trivia game ended.", ephemeral: true });
+      return interaction.reply({
+        content: "This trivia game ended.",
+        ephemeral: true,
+      });
     }
     if (session.channelId !== interaction.channelId) {
       return interaction.reply({
@@ -654,7 +718,9 @@ module.exports = {
     const isOwner = interaction.user.id === session.userId;
 
     if (
-      ["category", "count", "mode", "timer", "back", "cancel"].includes(action) &&
+      ["category", "count", "mode", "timer", "back", "cancel"].includes(
+        action,
+      ) &&
       !isOwner
     ) {
       return interaction.reply({
@@ -811,7 +877,11 @@ module.exports = {
           ephemeral: true,
         });
       }
-      if (session.activeMessageId && interaction.message?.id && interaction.message.id !== session.activeMessageId) {
+      if (
+        session.activeMessageId &&
+        interaction.message?.id &&
+        interaction.message.id !== session.activeMessageId
+      ) {
         return interaction.reply({
           content: "That question already moved on.",
           ephemeral: true,
@@ -837,7 +907,10 @@ module.exports = {
     if (action !== "modal") return;
     const session = sessions.get(sessionId);
     if (!session) {
-      return interaction.reply({ content: "This trivia game ended.", ephemeral: true });
+      return interaction.reply({
+        content: "This trivia game ended.",
+        ephemeral: true,
+      });
     }
     if (session.stage !== "asking" || session.currentQuestionIndex < 0) {
       return interaction.reply({

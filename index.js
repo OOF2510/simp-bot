@@ -268,7 +268,10 @@ async function sendDailyCommandSummary() {
         existingMessage = await channel.messages.fetch(summaryRecord.messageId);
       }
     } catch (fetchError) {
-      console.warn("Unable to fetch previous usage summary message:", fetchError);
+      console.warn(
+        "Unable to fetch previous usage summary message:",
+        fetchError,
+      );
     }
 
     const embed = new Discord.EmbedBuilder()
@@ -281,10 +284,7 @@ async function sendDailyCommandSummary() {
         },
         {
           name: "Commands Ran Today",
-          value:
-            totalCount === 0
-              ? "No commands used today yet."
-              : dailyList,
+          value: totalCount === 0 ? "No commands used today yet." : dailyList,
         },
         {
           name: "Nerd Stats",
@@ -294,7 +294,6 @@ async function sendDailyCommandSummary() {
       .setFooter({ text: `Total commands today: ${totalCount}` })
       .setTimestamp(easternNow);
 
-
     let message;
     try {
       if (existingMessage) {
@@ -303,7 +302,10 @@ async function sendDailyCommandSummary() {
         message = await channel.send({ embeds: [embed] });
       }
     } catch (sendError) {
-      console.error("Error sending or updating usage summary message, retrying with new message:", sendError);
+      console.error(
+        "Error sending or updating usage summary message, retrying with new message:",
+        sendError,
+      );
       try {
         message = await channel.send({ embeds: [embed] });
       } catch (retryError) {
@@ -325,7 +327,10 @@ async function sendDailyCommandSummary() {
         { upsert: true },
       );
     } catch (recordError) {
-      console.error("Failed to persist usage summary message reference:", recordError);
+      console.error(
+        "Failed to persist usage summary message reference:",
+        recordError,
+      );
     }
 
     console.log("Usage summary updated");
@@ -344,7 +349,9 @@ function scheduleUsageSummary() {
     },
     { timezone: "America/New_York" },
   );
-  console.log("Usage summary scheduled to run every hour at the top of the hour (Eastern Time)");
+  console.log(
+    "Usage summary scheduled to run every hour at the top of the hour (Eastern Time)",
+  );
 }
 
 client.on("ready", () => {
@@ -406,19 +413,46 @@ client.on("ready", () => {
 });
 
 client.on("interactionCreate", async (interaction) => {
-  if (interaction.isButton() || interaction.isStringSelectMenu() || interaction.isModalSubmit()) {
+  if (
+    interaction.isButton() ||
+    interaction.isStringSelectMenu() ||
+    interaction.isModalSubmit()
+  ) {
     const customId = interaction.customId || "";
     if (customId.startsWith("aki|")) {
-      return akinatorCommand.handleComponent?.(interaction, { client, gameSessionStore, db, collections });
+      return akinatorCommand.handleComponent?.(interaction, {
+        client,
+        gameSessionStore,
+        db,
+        collections,
+      });
     }
     if (customId.startsWith("geo|")) {
-      return geoGuessCommand.handleComponent?.(interaction, { client, gameSessionStore, db, collections });
+      return geoGuessCommand.handleComponent?.(interaction, {
+        client,
+        gameSessionStore,
+        db,
+        collections,
+      });
     }
     if (customId.startsWith("triv|")) {
-      if (interaction.isModalSubmit() && typeof triviaCommand.handleModal === "function") {
-        return triviaCommand.handleModal(interaction, { client, gameSessionStore, db, collections });
+      if (
+        interaction.isModalSubmit() &&
+        typeof triviaCommand.handleModal === "function"
+      ) {
+        return triviaCommand.handleModal(interaction, {
+          client,
+          gameSessionStore,
+          db,
+          collections,
+        });
       }
-      return triviaCommand.handleComponent?.(interaction, { client, gameSessionStore, db, collections });
+      return triviaCommand.handleComponent?.(interaction, {
+        client,
+        gameSessionStore,
+        db,
+        collections,
+      });
     }
   }
 
@@ -432,7 +466,12 @@ client.on("interactionCreate", async (interaction) => {
   interaction.send = interaction.reply;
 
   try {
-    const dbContext = { db, collections, client: mongoClient, gameSessionStore };
+    const dbContext = {
+      db,
+      collections,
+      client: mongoClient,
+      gameSessionStore,
+    };
     await command
       .execute(interaction, client, config, dbContext, allowed)
       .catch(async (error) => {
@@ -488,7 +527,7 @@ client.on("interactionCreate", async (interaction) => {
       await interaction.reply({
         content:
           "There was an error while executing this command! Join the support server to get help! https://discord.gg/FDBBHvJBTh",
-          ephemeral: true,
+        ephemeral: true,
       });
     } catch (e) {
       try {

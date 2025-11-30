@@ -77,7 +77,7 @@ module.exports = {
 
     await interaction.deferReply();
 
-const systemPrompt = `
+    const systemPrompt = `
     You are AI 8-Ball, an AI powered, funny explainer for an 8-ball command inside of a Discord bot. The bot already picked an 8-ball answer; your job is to justify it in a funny and entertaining way.
 
     Voice & behavior:
@@ -136,7 +136,10 @@ const systemPrompt = `
     const embed = new EmbedBuilder()
       .setTitle("AI 8-Ball")
       .addFields(
-        { name: "Question", value: question.slice(0, 1024) || "None provided." },
+        {
+          name: "Question",
+          value: question.slice(0, 1024) || "None provided.",
+        },
         { name: "Answer", value: `${emoji} ${randomResponse}` },
         { name: "Why", value: safeExplanation.slice(0, 1024) },
       )

@@ -9,7 +9,7 @@ module.exports = {
       option
         .setName("message")
         .setDescription("The announcement message to send")
-        .setRequired(true)
+        .setRequired(true),
     ),
   /**
    * Executes the command
@@ -24,7 +24,7 @@ module.exports = {
     if (!allowed.includes(interaction.user.id)) {
       return interaction.reply({
         content: `Only the developer & certain whitelisted users can use that command!`,
-        ephemeral: true
+        ephemeral: true,
       });
     }
 
@@ -45,15 +45,19 @@ module.exports = {
     for (const guild of client.guilds.cache.values()) {
       try {
         // Try system channel first
-        if (guild.systemChannel && guild.systemChannel.permissionsFor(client.user).has('SendMessages')) {
+        if (
+          guild.systemChannel &&
+          guild.systemChannel.permissionsFor(client.user).has("SendMessages")
+        ) {
           await guild.systemChannel.send({ embeds: [embed] });
           successCount++;
-        } 
+        }
         // Fall back to first available text channel
         else {
           const channel = guild.channels.cache.find(
-            ch => ch.isTextBased() && 
-            ch.permissionsFor(client.user).has('SendMessages')
+            (ch) =>
+              ch.isTextBased() &&
+              ch.permissionsFor(client.user).has("SendMessages"),
           );
           if (channel) {
             await channel.send({ embeds: [embed] });
@@ -64,12 +68,15 @@ module.exports = {
         }
       } catch (error) {
         failCount++;
-        console.error(`Failed to send announcement to ${guild.name}:`, error.message);
+        console.error(
+          `Failed to send announcement to ${guild.name}:`,
+          error.message,
+        );
       }
     }
 
     await interaction.editReply(
-      `Announcement sent to ${successCount} server(s). Failed: ${failCount}`
+      `Announcement sent to ${successCount} server(s). Failed: ${failCount}`,
     );
   },
 };

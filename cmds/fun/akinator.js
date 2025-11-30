@@ -80,9 +80,11 @@ const hydrateClient = (session) => {
   client.question = state.question || "";
   client.answers = Array.isArray(state.answers) ? state.answers.slice() : [];
   client.progress = typeof state.progress === "number" ? state.progress : 0;
-  client.currentStep = typeof state.currentStep === "number" ? state.currentStep : 0;
+  client.currentStep =
+    typeof state.currentStep === "number" ? state.currentStep : 0;
   client.lastPropositionId = state.lastPropositionId || "";
-  client.guessCount = typeof state.guessCount === "number" ? state.guessCount : 0;
+  client.guessCount =
+    typeof state.guessCount === "number" ? state.guessCount : 0;
   if (state.baseUrl) {
     client.baseUrl = state.baseUrl;
   }
@@ -108,8 +110,8 @@ const formatGuessEmbed = (guess, state, user) => {
   const rawConfidence = Number.isFinite(guess.confidence)
     ? guess.confidence
     : Number.isFinite(state?.progress)
-    ? state.progress
-    : null;
+      ? state.progress
+      : null;
   const confidenceText =
     rawConfidence === null
       ? "Unknown"
@@ -178,19 +180,23 @@ module.exports = {
       const session = activeSessions.get(existingSessionId);
       if (session && session.status === SESSION_STATUS_CONFIRMATION) {
         return interaction.reply({
-          content: "Still waiting on your confirmation for the last guess. Finish that first.",
+          content:
+            "Still waiting on your confirmation for the last guess. Finish that first.",
           ephemeral: true,
         });
       }
       return interaction.reply({
-        content: "Akinator is already running in this channel. Finish that round first.",
+        content:
+          "Akinator is already running in this channel. Finish that round first.",
         ephemeral: true,
       });
     }
 
     await interaction.deferReply();
 
-    const region = (interaction.options.getString("region") || "en").trim().toLowerCase();
+    const region = (interaction.options.getString("region") || "en")
+      .trim()
+      .toLowerCase();
     const childMode = interaction.options.getBoolean("child_mode") || false;
     const akinator = new AkinatorWebClient({ region, childMode });
 
@@ -240,7 +246,10 @@ module.exports = {
     const arg = parts[3];
     const session = activeSessions.get(sessionId);
     if (!session) {
-      return interaction.reply({ content: "That round already ended.", ephemeral: true });
+      return interaction.reply({
+        content: "That round already ended.",
+        ephemeral: true,
+      });
     }
     if (session.channelId !== interaction.channelId) {
       return interaction.reply({
@@ -261,7 +270,9 @@ module.exports = {
       await interaction.update({
         components: [],
       });
-      await interaction.followUp("Game stopped. Start a new one with /akinator.");
+      await interaction.followUp(
+        "Game stopped. Start a new one with /akinator.",
+      );
       await removeSession(gameSessionStore, sessionId);
       return;
     }
@@ -273,7 +284,10 @@ module.exports = {
           ephemeral: true,
         });
       }
-      if (session.status !== SESSION_STATUS_CONFIRMATION || !session.confirmation) {
+      if (
+        session.status !== SESSION_STATUS_CONFIRMATION ||
+        !session.confirmation
+      ) {
         return interaction.reply({
           content: "This round isn't waiting for confirmation.",
           ephemeral: true,
@@ -292,8 +306,15 @@ module.exports = {
 
     if (action === "answer") {
       const answerIndex = Number.parseInt(arg, 10);
-      if (!Number.isInteger(answerIndex) || answerIndex < 0 || answerIndex > 4) {
-        return interaction.reply({ content: "Invalid answer.", ephemeral: true });
+      if (
+        !Number.isInteger(answerIndex) ||
+        answerIndex < 0 ||
+        answerIndex > 4
+      ) {
+        return interaction.reply({
+          content: "Invalid answer.",
+          ephemeral: true,
+        });
       }
 
       const akinator = hydrateClient(session);
@@ -316,7 +337,11 @@ module.exports = {
 
       if (stepResult?.guess) {
         session.status = SESSION_STATUS_CONFIRMATION;
-        const embed = formatGuessEmbed(stepResult.guess, session.akinatorState, interaction.user);
+        const embed = formatGuessEmbed(
+          stepResult.guess,
+          session.akinatorState,
+          interaction.user,
+        );
         await interaction.update({
           embeds: [embed],
           components: makeConfirmButtons(sessionId),
