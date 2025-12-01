@@ -1,9 +1,18 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { Ai } = require("../../util/ai");
+const { Ai, GroqAi } = require("../../util/ai");
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
 const { spawn } = require("child_process");
+
+const groqOveranalyzer = new GroqAi({
+  model: "meta-llama/llama-4-scout-17b-16e-instruct",
+  temperature: 0.66,
+  maxTokens: 1000,
+  defaultHeaders: {
+    "X-Title": "Discord Overanalyze",
+  },
+});
 
 const overanalyzer = new Ai({
   model: "google/gemma-3-27b-it:free",
@@ -16,6 +25,7 @@ const overanalyzer = new Ai({
   defaultHeaders: {
     "X-Title": "Discord Overanalyze",
   },
+  requestTimeoutMs: 30000,
 });
 
 async function buildVideoFrameAttachments(
@@ -282,11 +292,19 @@ Stay fictional, funny, dramatic, and treat multiple visual inputs as one coheren
     let response;
 
     try {
-      response = await overanalyzer.ask({
-        system: sysPrompt,
-        user: prompt,
-        attachments,
-      });
+      try {
+        response = await groqOveranalyzer.ask({
+          system: sysPrompt,
+          user: prompt,
+          attachments,
+        });
+      } catch (e) {
+        response = await overanalyzer.ask({
+          system: sysPrompt,
+          user: prompt,
+          attachments,
+        });
+      }
     } catch (err) {
       console.error("[overanalyze] AI request failed:", err);
       await interaction.editReply("Error while overanalyzing media.");
