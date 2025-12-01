@@ -5,6 +5,7 @@ const {
   SystemMessage,
 } = require("@langchain/core/messages");
 const Groq = require("groq-sdk");
+const { Mistral } = require("@mistralai/mistralai");
 const { MongoClient } = require("mongodb");
 const config = require("../config.json");
 
@@ -946,4 +947,252 @@ class GroqAiWithHistory extends GroqAi {
   }
 }
 
-module.exports = { Ai, AiWithHistory, GroqAi, GroqAiWithHistory };
+/**
+ * Mistral version of the Ai class.
+ * Same constructor shape, same ask() behavior, fallbacks included.
+ */
+class MistralAi {
+  constructor({
+    model = "mistral-small-latest",
+    fallbackModels = [],
+    temperature = 0.7,
+    maxTokens = 512,
+    requestTimeoutMs = 20000,
+    apiKey = config.mistralKey || config.mistral_key,
+  } = {}) {
+    this.models = [model, ...fallbackModels].filter(Boolean);
+    this.temperature = temperature;
+    this.maxTokens = maxTokens;
+    this.requestTimeoutMs = Number(requestTimeoutMs) || 0;
+    this.client = new Mistral({ apiKey });
+    this.lastUsedModel = null;
+  }
+
+  extractText(resp) {
+    try {
+      return resp.choices?.[0]?.message?.content?.trim() || "";
+    } catch {
+      return "";
+    }
+  }
+
+  async ask({ system, user, messages = [], attachments = [] } = {}) {
+    if (!this.models.length) throw new Error("No Mistral models configured");
+
+    const mistralMessages = [];
+    if (system) mistralMessages.push({ role: "system", content: system });
+
+    if (messages.length) {
+      mistralMessages.push(
+        ...messages.map((m) => {
+          // Handle plain objects that already have role/content
+          if (m.role && m.content) {
+            return {
+              role: m.role,
+              content:
+                typeof m.content === "string"
+                  ? m.content
+                  : JSON.stringify(m.content),
+            };
+          }
+          // Handle LangChain message objects
+          if (typeof m._getType === "function") {
+            return {
+              role: m._getType() === "ai" ? "assistant" : "user",
+              content:
+                typeof m.content === "string"
+                  ? m.content
+                  : JSON.stringify(m.content),
+            };
+          }
+          // Fallback for unknown format
+          return {
+            role: "user",
+            content: JSON.stringify(m),
+          };
+        }),
+      );
+    }
+
+    if (user) {
+      const u =
+        typeof user === "string"
+          ? user
+          : typeof user?.content === "string"
+            ? user.content
+            : JSON.stringify(user);
+      mistralMessages.push({ role: "user", content: u });
+    }
+
+    let lastError;
+    for (const model of this.models) {
+      try {
+        const work = this.client.chat.complete({
+          model,
+          messages: mistralMessages,
+          temperature: this.temperature,
+          maxTokens: this.maxTokens,
+        });
+
+        const resp =
+          this.requestTimeoutMs > 0
+            ? await Promise.race([
+                work,
+                new Promise((_, reject) =>
+                  setTimeout(
+                    () =>
+                      reject(
+                        new Error(
+                          `Model ${model} timed out after ${this.requestTimeoutMs}ms`,
+                        ),
+                      ),
+                    this.requestTimeoutMs,
+                  ),
+                ),
+              ])
+            : await work;
+
+        const text = this.extractText(resp);
+        if (!text) throw new Error(`Empty response from ${model}`);
+
+        this.lastUsedModel = model;
+        return text;
+      } catch (err) {
+        lastError = err;
+        console.error(`[MistralAI] ${model} failed:`, err?.message || err);
+      }
+    }
+
+    throw lastError || new Error("All Mistral models failed");
+  }
+
+  async classify(
+    inputs,
+    { model = "mistral-moderation-latest", requestTimeoutMs } = {},
+  ) {
+    if (
+      inputs == null ||
+      (Array.isArray(inputs) && inputs.length === 0)
+    ) {
+      throw new Error("inputs is required for classify()");
+    }
+
+    const isArrayInput = Array.isArray(inputs);
+    const normalizedInputs = isArrayInput ? inputs : [inputs];
+
+    const timeout =
+      requestTimeoutMs !== undefined
+        ? Number(requestTimeoutMs)
+        : Number(this.requestTimeoutMs) || 0;
+
+    const work = this.client.classifiers.moderate({
+      model,
+      inputs: normalizedInputs,
+    });
+
+    const resp =
+      timeout > 0
+        ? await Promise.race([
+            work,
+            new Promise((_, reject) =>
+              setTimeout(
+                () =>
+                  reject(
+                    new Error(
+                      `Moderation model ${model} timed out after ${timeout}ms`,
+                    ),
+                  ),
+                timeout,
+              ),
+            ),
+          ])
+        : await work;
+
+    const mapped = (resp.results || []).map((r) => ({
+      categories: r.categories || {},
+      scores: r.category_scores || {},
+    }));
+
+    // Single input → first item, multi-input → whole array
+    return isArrayInput ? mapped : mapped[0] || { categories: {}, scores: {} };
+  }
+
+}
+
+/**
+ * Mistral version of AiWithHistory
+ * Same API: ask(chatId, {...}), clear()
+ */
+class MistralAiWithHistory extends MistralAi {
+  constructor({
+    memoryStore = sharedMemoryStore,
+    memoryScope = "default",
+    historyLimit = 10,
+    ...options
+  } = {}) {
+    super(options);
+    this.memoryStore = memoryStore;
+    this.memoryScope = memoryScope;
+    this.historyLimit = historyLimit;
+  }
+
+  formatStoredContent(content) {
+    if (Array.isArray(content)) return content.join("\n");
+    if (typeof content === "object" && content !== null) {
+      return JSON.stringify(content);
+    }
+    return content;
+  }
+
+  async ask(chatId, { system, user } = {}) {
+    if (!chatId) throw new Error("chatId is required for MistralAiWithHistory");
+
+    const history = await this.memoryStore.getHistory(
+      chatId,
+      this.memoryScope,
+      this.historyLimit,
+    );
+
+    const formattedHistory = history.map((entry) => ({
+      role: entry.role === "assistant" ? "assistant" : "user",
+      content: this.formatStoredContent(entry.content),
+    }));
+
+    const userContent =
+      typeof user === "string"
+        ? user
+        : typeof user?.content === "string"
+          ? user.content
+          : JSON.stringify(user);
+
+    const response = await super.ask({
+      system,
+      user: userContent,
+      messages: formattedHistory,
+    });
+
+    const toPersist = [];
+    if (userContent) {
+      toPersist.push({ role: "user", content: userContent });
+    }
+    if (response) {
+      toPersist.push({ role: "assistant", content: response });
+    }
+
+    if (toPersist.length) {
+      this.memoryStore
+        .appendMessages(chatId, this.memoryScope, toPersist)
+        .catch((e) => {
+          console.error("[Mistral Memory] Failed to persist:", e);
+        });
+    }
+
+    return response;
+  }
+
+  async clear(chatId) {
+    await this.memoryStore.clearHistory(chatId, this.memoryScope);
+  }
+}
+
+module.exports = { Ai, AiWithHistory, GroqAi, GroqAiWithHistory, MistralAi, MistralAiWithHistory };

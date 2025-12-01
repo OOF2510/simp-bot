@@ -3,6 +3,7 @@ const { existsSync } = require("fs");
 const { MongoClient } = require("mongodb");
 const GameSessionStore = require("./util/game_session_store");
 const cron = require("node-cron");
+const { MistralAi } = require("./util/ai")
 
 let config;
 var startupArgs = process.argv.slice(2);
@@ -96,6 +97,7 @@ async function initDatabase() {
     proposals: db.collection("proposals"),
     commandLogs: db.collection("command_logs"),
     usageSummaries: db.collection("usage_summaries"),
+    automod: db.collection("automod"),
   };
 
   await Promise.all([
@@ -107,6 +109,7 @@ async function initDatabase() {
     collections.proposals.createIndex({ serverId: 1, proposerId: 1 }),
     collections.commandLogs.createIndex({ timestamp: 1 }),
     collections.usageSummaries.createIndex({ channelId: 1 }, { unique: true }),
+    collections.automod.createIndex({ serverId: 1 }, { unique: true }),
   ]);
   console.log("Connected to MongoDB");
 }
@@ -454,6 +457,27 @@ client.on("interactionCreate", async (interaction) => {
         collections,
       });
     }
+    if (customId.startsWith("automod|")) {
+      if (interaction.isButton()) {
+        const automodCommand = client.commands.get("automod");
+        if (automodCommand && typeof automodCommand.handleComponent === "function") {
+          return automodCommand.handleComponent(interaction, {
+            client,
+            db,
+            collections,
+          });
+        }
+      } else if (interaction.isModalSubmit()) {
+        const automodCommand = client.commands.get("automod");
+        if (automodCommand && typeof automodCommand.handleModalSubmit === "function") {
+          return automodCommand.handleModalSubmit(interaction, {
+            client,
+            db,
+            collections,
+          });
+        }
+      }
+    }
   }
 
   if (interaction.type != Discord.InteractionType.ApplicationCommand) return;
@@ -576,6 +600,10 @@ client.on("messageCreate", async (msg) => {
   }
 });
 
+const automod = new MistralAi({
+  model: "mistral-moderation-latest",
+});
+
 client.on("messageCreate", async (msg) => {
   let cmdsArray = Array.from(client.commands.keys());
   cmdsArray.forEach(async (cmdName) => {
@@ -589,6 +617,61 @@ client.on("messageCreate", async (msg) => {
       }
     }
   });
+
+  const collection = db?.collection("automod");
+
+  if (!collection) return;
+  
+  const guildSettings = await collection.findOne({
+    serverId: String(msg.guild.id),
+    status: true,
+  });
+  if (!guildSettings) return;
+
+  const channel = msg.guild.channels.cache.get(guildSettings.channelId);
+  if (!channel) return;
+
+  try {
+    const response = await automod.classify(msg.content);
+    const categories = response.categories;
+    const limits = JSON.parse(guildSettings.limits);
+
+    let flagged = false;
+    for (const category in categories) {
+      if (
+        categories[category] &&
+        limits[category] !== undefined &&
+        categories[category] >= limits[category]
+      ) {
+        flagged = true;
+        break;
+      }
+    }
+
+    if (flagged) {
+      let em = new Discord.EmbedBuilder()
+        .setTitle(`Automod Flagged Message`)
+        .setDescription(
+          `A message by **${msg.author.tag}** was flagged by automod in <#${msg.channel.id}>.`,
+        )
+        .addFields(
+          { name: "Message Content", value: msg.content || "No content" },
+          { name: "Classifiers", value: JSON.stringify(categories) },
+          { name: "Author ID", value: msg.author.id },
+          { name: "Message ID", value: msg.id },
+          { name: "Channel ID", value: msg.channel.id },
+        )
+        .setColor(Discord.Colors.Red)
+        .setTimestamp();
+
+      channel.send({ embeds: [em] }).catch((e) => {
+        return;
+      });
+    }
+  } catch (e) {
+    return;
+  }
+
 });
 
 client.on("messageDelete", async (msg) => {
