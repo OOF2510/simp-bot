@@ -290,6 +290,7 @@ Stay fictional, funny, dramatic, and treat multiple visual inputs as one coheren
     }
 
     let response;
+    let model;
 
     try {
       try {
@@ -298,12 +299,14 @@ Stay fictional, funny, dramatic, and treat multiple visual inputs as one coheren
           user: prompt,
           attachments,
         });
+        model = groqOveranalyzer.lastUsedModel;
       } catch (e) {
         response = await overanalyzer.ask({
           system: sysPrompt,
           user: prompt,
           attachments,
         });
+        model = overanalyzer.lastUsedModel;
       }
     } catch (err) {
       console.error("[overanalyze] AI request failed:", err);
@@ -317,10 +320,10 @@ Stay fictional, funny, dramatic, and treat multiple visual inputs as one coheren
       mediaType === "video" ? "Attached video" : "Attached image";
 
     const embed = new EmbedBuilder()
-      .setTitle("Overanalysis Complete")
+      .setTitle(`Analysis by ${model}`)
+      .setDescription(`**Analysis:**\n${response.trim()}`)
       .addFields(
-        { name: "File", value: `[${fileLabel}](${mediaUrl})` },
-        { name: "Analysis", value: response.trim().slice(0, 1024) },
+        { name: "File", value: `[${fileLabel}](${mediaUrl})` }
       )
       .setColor(embedColor);
 
