@@ -1,7 +1,10 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { AiWithHistory } = require("../../util/ai");
+const { AiWithHistory, AiMemoryStore } = require("@oof2510/llmjs");
+const config = require("../../config.json");
 
 const modelA = new AiWithHistory({
+  apiKey: require("../../config.json").openrouterKey,
+  memoryStore: require("../util/memorystore").aiMemory,
   model: "openrouter/bert-nebulon-alpha",
   fallbackModels: [
     "mistralai/mistral-small-3.1-24b-instruct:free",
@@ -20,6 +23,8 @@ const modelA = new AiWithHistory({
 });
 
 const modelB = new AiWithHistory({
+  apiKey: require("../../config.json").openrouterKey,
+  memoryStore: require("../util/memorystore").aiMemory,
   model: "meta-llama/llama-3.2-3b-instruct:free",
   fallbackModels: [
     "nousresearch/hermes-3-llama-3.1-405b:free",

@@ -1,11 +1,12 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { Ai, GroqAi } = require("../../util/ai");
+const { Ai, GroqAi } = require("@oof2510/llmjs");
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
 const { spawn } = require("child_process");
 
 const groqOveranalyzer = new GroqAi({
+  apiKey: require("../../config.json").groqKey,
   model: "meta-llama/llama-4-scout-17b-16e-instruct",
   temperature: 0.66,
   maxTokens: 1000,
@@ -15,6 +16,7 @@ const groqOveranalyzer = new GroqAi({
 });
 
 const overanalyzer = new Ai({
+  apiKey: require("../../config.json").openrouterKey,
   model: "google/gemma-3-27b-it:free",
   fallbackModels: [
     "nvidia/nemotron-nano-12b-v2-vl:free",

@@ -4,6 +4,7 @@ const { MongoClient } = require("mongodb");
 const GameSessionStore = require("./util/game_session_store");
 const cron = require("node-cron");
 const { MistralAi } = require("./util/ai")
+const { AiMemoryStore } = require("@oof2510/llmjs");
 
 let config;
 var startupArgs = process.argv.slice(2);

@@ -1,7 +1,9 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { AiWithHistory } = require("../../util/ai");
+const { AiWithHistory } = require("@oof2510/llmjs");
 
 const aiClient = new AiWithHistory({
+  apiKey: require("../../config.json").openrouterKey,
+  memoryStore: require("../util/memorystore").aiMemory,
   model: "nousresearch/hermes-3-llama-3.1-405b:free",
   fallbackModels: [
     "tngtech/tng-r1t-chimera:free",

@@ -24,6 +24,7 @@
     "@langchain/openai": "^1.1.0",
     "@napi-rs/canvas": "^0.1.55",
     "@oof2510/geoapi": "^1.1.1",
+    "@oof2510/llmjs": "^1.0.1",
     "axios": "^1.7.9",
     "canvacord": "^5.4.8",
     "discord-api-types": "^0.37.99",

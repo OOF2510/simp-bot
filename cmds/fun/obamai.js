@@ -1,7 +1,9 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { GroqAiWithHistory } = require("../../util/ai");
+const { GroqAiWithHistory } = require("@oof2510/llmjs");
 
 const obamaAi = new GroqAiWithHistory({
+  apiKey: require("../../config.json").openrouterKey,
+  memoryStore: require("../util/memorystore").aiMemory,
   model: "llama-3.3-70b-versatile",
   fallbackModels: ["llama-3.1-8b-instant", "openai/gpt-oss-120b"],
   temperature: 0.66,
