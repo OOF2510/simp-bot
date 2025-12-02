@@ -27,7 +27,6 @@ const modelB = new AiWithHistory({
   memoryStore: require("../../util/memorystore").aiMemory,
   model: "meta-llama/llama-3.2-3b-instruct:free",
   fallbackModels: [
-    "nousresearch/hermes-3-llama-3.1-405b:free",
     "meta-llama/llama-3.3-70b-instruct:free",
     "tngtech/deepseek-r1t2-chimera:free",
     "z-ai/glm-4.5-air:free",

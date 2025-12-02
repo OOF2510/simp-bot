@@ -2,9 +2,20 @@ const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const axios = require("axios");
 const fs = require("fs");
 const path = require("path");
-const { GroqAi } = require("../../util/ai");
+const { GroqAi, MistralAi } = require("@oof2510/llmjs");
+
+const mstt = new MistralAi({
+  apiKey: require('../../config.json').mistralKey,
+  model: "voxtral-mini-latest",
+  temperature: 0,
+  maxTokens: 2048,
+  defaultHeaders: {
+    "X-Title": "SimpBot Transcribe",
+  },
+});
 
 const stt = new GroqAi({
+  apiKey: require('../../config.json').groqKey,
   model: "whisper-large-v3-turbo",
   fallbackModels: ["whisper-large-v3"],
   temperature: 0,
@@ -47,7 +58,7 @@ const getExtension = (attachment) => {
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("transcribe")
-    .setDescription("Transcribe an audio/voice/video file using Whisper")
+    .setDescription("Transcribe an audio/voice/video file using Voxtral")
     .addAttachmentOption((option) =>
       option
         .setName("file")
@@ -88,9 +99,16 @@ module.exports = {
       });
       fs.writeFileSync(tmpPath, response.data);
 
-      const text = await stt.transcribe({
-        file: fs.createReadStream(tmpPath),
-      });
+      let text;
+      try {
+        text = await mstt.transcribe({
+            file: tmpPath,
+          });
+      } catch (error) {
+        text = await stt.transcribe({
+            file: fs.createReadStream(tmpPath),
+          });
+      }
 
       if (!text || !text.trim()) {
         return interaction.editReply("Groq returned an empty transcription.");
