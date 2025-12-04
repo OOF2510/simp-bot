@@ -5,7 +5,7 @@ const config = require("../../config.json");
 const modelA = new AiWithHistory({
   apiKey: require("../../config.json").openrouterKey,
   memoryStore: require("../../util/memorystore").aiMemory,
-  model: "openrouter/bert-nebulon-alpha",
+  model: "amazon/nova-2-lite-v1:free",
   fallbackModels: [
     "mistralai/mistral-small-3.1-24b-instruct:free",
     "tngtech/tng-r1t-chimera:free",
@@ -25,9 +25,9 @@ const modelA = new AiWithHistory({
 const modelB = new AiWithHistory({
   apiKey: require("../../config.json").openrouterKey,
   memoryStore: require("../../util/memorystore").aiMemory,
-  model: "meta-llama/llama-3.2-3b-instruct:free",
+  model: "google/gemini-2.0-flash-exp:free",
   fallbackModels: [
-    "meta-llama/llama-3.3-70b-instruct:free",
+    "meta-llama/llama-3.3-3b-instruct:free",
     "tngtech/deepseek-r1t2-chimera:free",
     "z-ai/glm-4.5-air:free",
   ],

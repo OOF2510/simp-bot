@@ -5,20 +5,21 @@ const os = require("os");
 const path = require("path");
 const { spawn } = require("child_process");
 
-const groqOveranalyzer = new GroqAi({
-  apiKey: require("../../config.json").groqKey,
-  model: "meta-llama/llama-4-scout-17b-16e-instruct",
-  temperature: 0.66,
-  maxTokens: 1000,
-  defaultHeaders: {
-    "X-Title": "Discord Overanalyze",
-  },
-});
+// const groqOveranalyzer = new GroqAi({
+//   apiKey: require("../../config.json").groqKey,
+//   model: "meta-llama/llama-4-scout-17b-16e-instruct",
+//   temperature: 0.66,
+//   maxTokens: 1000,
+//   defaultHeaders: {
+//     "X-Title": "Discord Overanalyze",
+//   },
+// });
 
 const overanalyzer = new Ai({
   apiKey: require("../../config.json").openrouterKey,
-  model: "google/gemma-3-27b-it:free",
+  model: "amazon/nova-2-lite-v1:free",
   fallbackModels: [
+    "google/gemma-3-27b-it:free",
     "nvidia/nemotron-nano-12b-v2-vl:free",
     "google/gemini-2.0-flash-exp:free",
   ],
@@ -262,10 +263,15 @@ Stay fictional, funny, dramatic, and treat multiple visual inputs as one coheren
           mediaUrl,
           interaction.id,
           30,
-          4,
+          3,
         );
         if (videoAttachments.length > 0) {
-          attachments = videoAttachments;
+          attachments = videoAttachments.concat([
+            {
+              type: "video",
+              url: mediaUrl,
+            },
+          ]);
         } else {
           attachments = [
             {
@@ -296,21 +302,21 @@ Stay fictional, funny, dramatic, and treat multiple visual inputs as one coheren
     let model;
 
     try {
-      try {
-        response = await groqOveranalyzer.ask({
-          system: sysPrompt,
-          user: prompt,
-          attachments,
-        });
-        model = groqOveranalyzer.lastUsedModel;
-      } catch (e) {
-        response = await overanalyzer.ask({
-          system: sysPrompt,
-          user: prompt,
-          attachments,
-        });
-        model = overanalyzer.lastUsedModel;
-      }
+      // try {
+      //   response = await groqOveranalyzer.ask({
+      //     system: sysPrompt,
+      //     user: prompt,
+      //     attachments,
+      //   });
+      //   model = groqOveranalyzer.lastUsedModel;
+      // } catch (e) {
+      response = await overanalyzer.ask({
+        system: sysPrompt,
+        user: prompt,
+        attachments,
+      });
+      model = overanalyzer.lastUsedModel;
+      // }
     } catch (err) {
       console.error("[overanalyze] AI request failed:", err);
       await interaction.editReply("Error while overanalyzing media.");
