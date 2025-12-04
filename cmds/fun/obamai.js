@@ -52,6 +52,19 @@ module.exports = {
         return interaction.editReply("Cleared Obama's memory for this server.");
       }
     }
+    
+    try {
+      const classification = await moderator.classify(message)
+      console.log(`[obamai] classification for message "${message}"\n${JSON.stringify(classification)}`)
+      if (classification.scores.hate_and_discrimination > 0.5) {
+        return interaction.reply({
+          content: `Your message has been flagged as hate speech. Please do not use hate speech (confidence: ${classification.scores.hate_and_discrimination.toFixed(2)}).`,
+          ephemeral: true,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
 
     const systemPrompt = `
 

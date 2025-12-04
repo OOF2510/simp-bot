@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { AiWithHistory, AiMemoryStore } = require("@oof2510/llmjs");
+const { AiWithHistory, AiMemoryStore, MistralAi } = require("@oof2510/llmjs");
 const config = require("../../config.json");
 
 const modelA = new AiWithHistory({
@@ -41,6 +41,16 @@ const modelB = new AiWithHistory({
   requestTimeoutMs: 15000,
 });
 
+const moderator = new MistralAi({
+  apiKey: require("../../config.json").mistralKey,
+  model: "mistral-moderation-latest",
+  temperature: 0,
+  defaultHeaders: {
+    "X-Title": "SimpBot AI Argument Moderator",
+  },
+  requestTimeoutMs: 15000,
+});
+
 const formatTranscript = (topic, transcript) => {
   const header = `🔥 AI Argument: ${topic}`;
   const lines = transcript.map(
@@ -69,8 +79,21 @@ module.exports = {
         ephemeral: true,
       });
     }
-
     await interaction.deferReply();
+    
+    try {
+      const classification = await moderator.classify(topic)
+      console.log(`[aiargument] classification for topic "${topic}"\n${JSON.stringify(classification)}`)
+      if (classification.scores.hate_and_discrimination > 0.5) {
+        return interaction.reply({
+          content: `Your topic has been flagged as hate speech. Please do not use hate speech (confidence: ${classification.scores.hate_and_discrimination.toFixed(2)}).`,
+          ephemeral: true,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    
     const embedColor =
       typeof config?.embedColor === "number" ? config.embedColor : 0x5865f2;
 
