@@ -67,7 +67,7 @@ module.exports = {
       const classification = await moderator.classify(message)
       console.log(`[obamai] classification for message "${message}"\n${JSON.stringify(classification)}`)
       if (classification.categories.hate_and_discrimination === true) {
-        return interaction.reply({
+        return interaction.editReply({
           content: `Your message has been flagged as hate speech. Please do not use hate speech.`,
           ephemeral: true,
         });
