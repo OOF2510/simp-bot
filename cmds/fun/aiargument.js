@@ -84,9 +84,9 @@ module.exports = {
     try {
       const classification = await moderator.classify(topic)
       console.log(`[aiargument] classification for topic "${topic}"\n${JSON.stringify(classification)}`)
-      if (classification.scores.hate_and_discrimination > 0.5) {
+      if (classification.categories.hate_and_discrimination === true) {
         return interaction.reply({
-          content: `Your topic has been flagged as hate speech. Please do not use hate speech (confidence: ${classification.scores.hate_and_discrimination.toFixed(2)}).`,
+          content: `Your topic has been flagged as hate speech. Please do not use hate speech.`,
           ephemeral: true,
         });
       }
