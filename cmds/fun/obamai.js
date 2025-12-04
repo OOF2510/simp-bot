@@ -1,8 +1,8 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { GroqAiWithHistory } = require("@oof2510/llmjs");
+const { GroqAiWithHistory, MistralAi } = require("@oof2510/llmjs");
 
 const obamaAi = new GroqAiWithHistory({
-  apiKey: require("../../config.json").openrouterKey,
+  apiKey: require("../../config.json").groqKey,
   memoryStore: require("../../util/memorystore").aiMemory,
   model: "llama-3.3-70b-versatile",
   fallbackModels: ["llama-3.1-8b-instant", "openai/gpt-oss-120b"],
@@ -10,6 +10,16 @@ const obamaAi = new GroqAiWithHistory({
   maxTokens: 900,
   historyLimit: 12,
   memoryScope: "obamai",
+});
+
+const moderator = new MistralAi({
+  apiKey: require("../../config.json").mistralKey,
+  model: "mistral-moderation-latest",
+  temperature: 0,
+  defaultHeaders: {
+    "X-Title": "SimpBot AI Argument Moderator",
+  },
+  requestTimeoutMs: 15000,
 });
 
 module.exports = {
