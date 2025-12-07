@@ -4,8 +4,9 @@ const { AiWithHistory } = require("@oof2510/llmjs");
 const aiClient = new AiWithHistory({
   apiKey: require("../../config.json").openrouterKey,
   memoryStore: require("../../util/memorystore").aiMemory,
-  model: "tngtech/tng-r1t-chimera:free",
+  model: "moonshotai/kimi-k2:free",
   fallbackModels: [
+    "tngtech/tng-r1t-chimera:free",
     "google/gemma-3-12b-it:free",
     "mistralai/mistral-7b-instruct:free",
     "nvidia/nemotron-nano-12b-v2-vl:free",
