@@ -19,7 +19,7 @@ const modelA = new AiWithHistory({
   defaultHeaders: {
     "X-Title": "SimpBot AI Argument",
   },
-  requestTimeoutMs: 12000,
+  requestTimeoutMs: 11000,
 });
 
 const modelB = new AiWithHistory({
@@ -39,7 +39,7 @@ const modelB = new AiWithHistory({
   defaultHeaders: {
     "X-Title": "SimpBot AI Argument",
   },
-  requestTimeoutMs: 15000,
+  requestTimeoutMs: 11000,
 });
 
 const moderator = new MistralAi({
